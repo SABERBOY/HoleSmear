@@ -17,10 +17,10 @@ namespace SDK
         {
             //设置是否获取用户信息的开关,此方法需要在SDK初始化之前调用。
             //1为允许，0为拒绝
-            Mintegral.setConsentStatusInfoType(0);
+            /* Mintegral.setConsentStatusInfoType(0);
             Debug.Log("userPrivateInfo ConsentStatus : " + Mintegral.getConsentStatusInfoType());
 
-            Mintegral.initMTGSDK(MTGSDKAppID, MTGSDKAppKey);
+            Mintegral.initMTGSDK(MTGSDKAppID, MTGSDKAppKey); */
 
 
             rewardedVideo = new MTGSDKRewardedVideo();

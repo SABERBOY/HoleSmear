@@ -14,16 +14,16 @@ namespace SDK
         {
 
             string[] rewardVideoUnits = new string[1] { m_adUnitId };
-            Mintegral.loadRewardedVideoPluginsForAdUnits(rewardVideoUnits);
+            /*  Mintegral.loadRewardedVideoPluginsForAdUnits(rewardVideoUnits);
 
-            MintegralManager.onRewardedVideoLoadSuccessEvent += onRewardedVideoLoadSuccessEvent;
-            MintegralManager.onRewardedVideoLoadedEvent += onRewardedVideoLoadedEvent;
-            MintegralManager.onRewardedVideoFailedEvent += onRewardedVideoFailedEvent;
-            MintegralManager.onRewardedVideoShownFailedEvent += onRewardedVideoShownFailedEvent;
-            MintegralManager.onRewardedVideoShownEvent += onRewardedVideoShownEvent;
-            MintegralManager.onRewardedVideoClickedEvent += onRewardedVideoClickedEvent;
-            MintegralManager.onRewardedVideoClosedEvent += onRewardedVideoClosedEvent;
-            MintegralManager.onRewardedVideoPlayCompletedEvent += onRewardedVideoPlayCompletedEvent;
+             MintegralManager.onRewardedVideoLoadSuccessEvent += onRewardedVideoLoadSuccessEvent;
+             MintegralManager.onRewardedVideoLoadedEvent += onRewardedVideoLoadedEvent;
+             MintegralManager.onRewardedVideoFailedEvent += onRewardedVideoFailedEvent;
+             MintegralManager.onRewardedVideoShownFailedEvent += onRewardedVideoShownFailedEvent;
+             MintegralManager.onRewardedVideoShownEvent += onRewardedVideoShownEvent;
+             MintegralManager.onRewardedVideoClickedEvent += onRewardedVideoClickedEvent;
+             MintegralManager.onRewardedVideoClosedEvent += onRewardedVideoClosedEvent;
+             MintegralManager.onRewardedVideoPlayCompletedEvent += onRewardedVideoPlayCompletedEvent; */
 
             Request();
         }
@@ -32,13 +32,13 @@ namespace SDK
         private void Request()
         {
             Debug.Log("请求激励视频广告: " + m_adUnitId);
-            Mintegral.requestRewardedVideo(m_adUnitId);
+            /* Mintegral.requestRewardedVideo(m_adUnitId); */
         }
 
 
         public void Show()
         {
-            Mintegral.showRewardedVideo(m_adUnitId);
+            /* Mintegral.showRewardedVideo(m_adUnitId); */
         }
 
 
@@ -46,7 +46,7 @@ namespace SDK
         {
             get
             {
-                return Mintegral.isVideoReadyToPlay(m_adUnitId);
+                return false; /* Mintegral.isVideoReadyToPlay(m_adUnitId); */
             }
         }
 
@@ -110,7 +110,7 @@ namespace SDK
         /// 广告关闭的回调，播放视频页面关闭以后，您需要判断MTGRewardData的对象的convert属性，来决定是否给用户奖励
         /// </summary>
         /// <param name="rewardData"></param>
-        void onRewardedVideoClosedEvent(MintegralManager.MTGRewardData rewardData)
+        /* void onRewardedVideoClosedEvent(MintegralManager.MTGRewardData rewardData)
         {
             if (rewardData.converted)
             {
@@ -124,7 +124,7 @@ namespace SDK
             }
 
             Request();
-        }
+        } */
 
 
         /// <summary>

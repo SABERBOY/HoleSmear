@@ -1,4 +1,4 @@
-﻿using Firebase.Analytics;
+﻿// using Firebase.Analytics;
 using System;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace SDK
 
         public void Initialize()
         {
-            Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+            /* Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
                 var dependencyStatus = task.Result;
 
@@ -30,7 +30,7 @@ namespace SDK
                     // Firebase Unity SDK is not safe to use here.
 
                 }
-            });
+            }); */
         }
 
 
@@ -40,22 +40,22 @@ namespace SDK
         private void FireBaseInit()
         {
 
-            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            /*  FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
 
-            // 设置用户的注册方法
-            FirebaseAnalytics.SetUserProperty(
-                FirebaseAnalytics.UserPropertySignUpMethod,
-                "Google");
+             // 设置用户的注册方法
+             FirebaseAnalytics.SetUserProperty(
+                 FirebaseAnalytics.UserPropertySignUpMethod,
+                 "Google");
 
-            // 设置用户ID
-            string USER_ID = SystemInfo.deviceUniqueIdentifier;
-            FirebaseAnalytics.SetUserId(USER_ID);
-            // Set default session duration values.
+             // 设置用户ID
+             string USER_ID = SystemInfo.deviceUniqueIdentifier;
+             FirebaseAnalytics.SetUserId(USER_ID);
+             // Set default session duration values.
 
-            //FirebaseAnalytics.SetMinimumSessionDuration(new TimeSpan(0, 0, 10));
-            FirebaseAnalytics.SetSessionTimeoutDuration(new TimeSpan(0, 30, 0));
+             //FirebaseAnalytics.SetMinimumSessionDuration(new TimeSpan(0, 0, 10));
+             FirebaseAnalytics.SetSessionTimeoutDuration(new TimeSpan(0, 30, 0));
 
-            AnalyticsLogin();
+             AnalyticsLogin(); */
 
         }
 
@@ -65,7 +65,7 @@ namespace SDK
         private void AnalyticsLogin()
         {
             // 记录一个没有参数的事件
-            FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLogin);
+            /*  FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLogin); */
         }
 
         /// <summary>

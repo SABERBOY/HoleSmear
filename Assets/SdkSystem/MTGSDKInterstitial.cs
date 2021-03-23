@@ -12,7 +12,7 @@ namespace SDK
         public void Initialize()
         {
 
-            MTGInterstitialVideoInfo[] interstitialVideoAdInfos = new MTGInterstitialVideoInfo[1];
+            /* MTGInterstitialVideoInfo[] interstitialVideoAdInfos = new MTGInterstitialVideoInfo[1];
             MTGInterstitialVideoInfo info;
 
             info.adUnitId = m_adUnitId;
@@ -24,7 +24,7 @@ namespace SDK
             MintegralManager.onInterstitialVideoLoadedEvent += onInterstitialVideoLoadedEvent;
             MintegralManager.onInterstitialVideoFailedEvent += onInterstitialVideoFailedEvent;
             MintegralManager.onInterstitialVideoShownFailedEvent += onInterstitialVideoShownFailedEvent;
-            MintegralManager.onInterstitialVideoShownEvent += onInterstitialVideoShownEvent;
+            MintegralManager.onInterstitialVideoShownEvent += onInterstitialVideoShownEvent; */
 
             Request();
         }
@@ -32,14 +32,14 @@ namespace SDK
 
         private void Request()
         {
-            Mintegral.requestInterstitialVideoAd(m_adUnitId);
+            /*  Mintegral.requestInterstitialVideoAd(m_adUnitId); */
 
         }
 
         public void Show()
         {
             //展示Interstitial Video
-            Mintegral.showInterstitialVideoAd(m_adUnitId);
+            /*  Mintegral.showInterstitialVideoAd(m_adUnitId); */
 
         }
 
@@ -48,7 +48,7 @@ namespace SDK
         {
             get
             {
-                return Mintegral.isVideoReadyToPlay(m_adUnitId);
+                return false; /* Mintegral.isVideoReadyToPlay(m_adUnitId); */
             }
         }
 

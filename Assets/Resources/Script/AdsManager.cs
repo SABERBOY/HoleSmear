@@ -57,21 +57,21 @@ public class AdsManager : MonoBehaviour
 
     private void Start()
     {
-        Mintegral.requestRewardedVideo(_adUnitDict[RewardVideo][Random.Range(0, 2)]);
-        Mintegral.requestInterstitialAd(_adUnitDict[Interstitial][0]);
+        /* Mintegral.requestRewardedVideo(_adUnitDict[RewardVideo][Random.Range(0, 2)]);
+        Mintegral.requestInterstitialAd(_adUnitDict[Interstitial][0]); */
     }
 
     private void initMTGSDK()
     {
-        Mintegral.setConsentStatusInfoType(GDPR_ON);
+        /* Mintegral.setConsentStatusInfoType(GDPR_ON);
         mtgLog("userPrivateInfo ConsentStatus : " + Mintegral.getConsentStatusInfoType());
-        Mintegral.initMTGSDK(MTGSDKAppIDForAndroid, MTGSDKApiKeyForAndroid);
+        Mintegral.initMTGSDK(MTGSDKAppIDForAndroid, MTGSDKApiKeyForAndroid); */
     }
 
     private void initAllAds()
     {
         //Interstitial
-        var interstitialUnits = _adUnitDict.ContainsKey(Interstitial) ? _adUnitDict[Interstitial] : null;
+        /* var interstitialUnits = _adUnitDict.ContainsKey(Interstitial) ? _adUnitDict[Interstitial] : null;
         var interstitialAdInfos = new MTGInterstitialInfo[interstitialUnits.Length];
         for (var i = 0; i < interstitialUnits.Length; i++)
         {
@@ -85,7 +85,7 @@ public class AdsManager : MonoBehaviour
         Mintegral.loadInterstitialPluginsForAdUnits(interstitialAdInfos);
         //RewardVideo
         var rewardVideoUnits = _adUnitDict.ContainsKey(RewardVideo) ? _adUnitDict[RewardVideo] : null;
-        Mintegral.loadRewardedVideoPluginsForAdUnits(rewardVideoUnits);
+        Mintegral.loadRewardedVideoPluginsForAdUnits(rewardVideoUnits); */
     }
 
     // Update is called once per frame
@@ -95,14 +95,14 @@ public class AdsManager : MonoBehaviour
 
     public static void ShowRewardVideo() //展示激励视频
     {
-        var index = Random.Range(0, 2);
+        /* var index = Random.Range(0, 2);
         if (Mintegral.isVideoReadyToPlay(_adUnitDict[RewardVideo][index]))
-            Mintegral.showRewardedVideo(_adUnitDict[RewardVideo][index]);
+            Mintegral.showRewardedVideo(_adUnitDict[RewardVideo][index]); */
     }
 
     public static void ShowInterstitial() //插屏广告
     {
-        Mintegral.showInterstitialAd(_adUnitDict[Interstitial][0]);
+        /* Mintegral.showInterstitialAd(_adUnitDict[Interstitial][0]); */
     }
 
     private void mtgLog(string log)
@@ -161,13 +161,13 @@ public class AdsManager : MonoBehaviour
     }
 
     //广告关闭的回调，播放视频页面关闭以后，您需要判断MTGRewardData的对象的convert属性，来决定是否给用户奖励。    
-    private void onRewardedVideoClosedEvent(MintegralManager.MTGRewardData rewardData)
-    {
-        if (rewardData.converted)
-            mtgLog("onRewardedVideoClosedEvent: " + rewardData);
-        else
-            mtgLog("onRewardedVideoClosedEvent: No Reward");
-    }
+    /*  private void onRewardedVideoClosedEvent(MintegralManager.MTGRewardData rewardData)
+     {
+         if (rewardData.converted)
+             mtgLog("onRewardedVideoClosedEvent: " + rewardData);
+         else
+             mtgLog("onRewardedVideoClosedEvent: No Reward");
+     } */
 
     #endregion
 }

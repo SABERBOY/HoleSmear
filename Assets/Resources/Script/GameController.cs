@@ -164,7 +164,7 @@ public class GameController : Base
 
     private void Awake()
     {
-        NativeConnect.Connect.Init();
+        // NativeConnect.Connect.Init();
         //PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 30;
         instance = this;
