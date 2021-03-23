@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "996473840257",
+    "firebase_url": "https://amazeroller2.firebaseio.com",
+    "project_id": "amazeroller2",
+    "storage_bucket": "amazeroller2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996473840257:android:dbd4fe7702faea472d2380",
+        "android_client_info": {
+          "package_name": "com.imbaads.test12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996473840257-mno8hrvdrf03daqg3lslt6udpbmrfiqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfY4enmPZf2NTJKQysPvs1Vahzr6gajMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996473840257-mno8hrvdrf03daqg3lslt6udpbmrfiqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996473840257:android:748e8308097962d12d2380",
+        "android_client_info": {
+          "package_name": "com.imbaads.test2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996473840257-mno8hrvdrf03daqg3lslt6udpbmrfiqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfY4enmPZf2NTJKQysPvs1Vahzr6gajMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996473840257-mno8hrvdrf03daqg3lslt6udpbmrfiqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996473840257:android:0210488840460cd62d2380",
+        "android_client_info": {
+          "package_name": "com.imbaads.test7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996473840257-mno8hrvdrf03daqg3lslt6udpbmrfiqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfY4enmPZf2NTJKQysPvs1Vahzr6gajMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996473840257-mno8hrvdrf03daqg3lslt6udpbmrfiqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
