@@ -25,8 +25,8 @@
         private SdkSystem() { }
 
 
-        private MTGSDKController tGSDKController;
-        private FireBaseContorl fireBaseContorl;
+        // private MTGSDKController tGSDKController;
+        // private FireBaseContorl fireBaseContorl;
 
 
         /// <summary>
@@ -35,11 +35,11 @@
         public void Initialize()
         {
 
-            fireBaseContorl = new FireBaseContorl();
+            /* fireBaseContorl = new FireBaseContorl();
             fireBaseContorl.Initialize();
 
             tGSDKController = new MTGSDKController();
-            tGSDKController.Initialize();
+            tGSDKController.Initialize(); */
         }
 
 
@@ -49,7 +49,7 @@
         /// <returns></returns>
         public bool IsRewardAdLoaded()
         {
-            return tGSDKController.IsRewardAdLoaded();
+            return false;
         }
 
 
@@ -59,7 +59,7 @@
         /// <returns></returns>
         public bool IsInterstitialLoaded()
         {
-            return tGSDKController.IsInterstitialLoaded();
+            return false;
         }
 
 
@@ -68,7 +68,7 @@
         /// </summary>
         public void ShowRewardVideoAd()
         {
-            tGSDKController.ShowRewardVideoAd();
+            /* tGSDKController.ShowRewardVideoAd(); */
         }
 
 
@@ -77,7 +77,7 @@
         /// </summary>
         public void ShowInterstitial()
         {
-            tGSDKController.ShowRewardVideoAd();
+            /* tGSDKController.ShowRewardVideoAd(); */
         }
 
     }
