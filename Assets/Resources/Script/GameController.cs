@@ -96,6 +96,10 @@ public class GameController : Base
             {
                 ShowBlock();
             }
+            else
+            {
+                isWin = true;
+            }
             /*if (DataController.sceneNum % 3 == 2 && DataController.bigLevel > 2 &&
                 (DataController.bigLevel + 1) % 3 != 0)
             else
