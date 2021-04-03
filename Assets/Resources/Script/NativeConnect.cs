@@ -13,9 +13,11 @@ public class NativeConnect : Base
     void Start()
     {
     }
+
     #region 单例
 
     private static NativeConnect _connect;
+    private bool inited = false;
 
     public static NativeConnect Connect
     {
@@ -27,6 +29,7 @@ public class NativeConnect : Base
                 go.name = "NativeConnect";
                 _connect = go.AddComponent<NativeConnect>();
                 DontDestroyOnLoad(go);
+                _connect.Init();
             }
 
             return _connect;
@@ -42,15 +45,15 @@ public class NativeConnect : Base
     #region 安卓类名
 
 #if UNITY_ANDROID
-	/// <summary>
-	///     安卓sdk连接类名字
-	/// </summary>
-	private const string AndroidConnectClassName = "com.collapse.sdk.AdsManager";
+    /// <summary>
+    ///     安卓sdk连接类名字
+    /// </summary>
+    private const string AndroidConnectClassName = "com.collapse.sdk.AdsManager";
 
-	/// <summary>
-	///     安卓设备原生类
-	/// </summary>
-	private const string AndroidDeviceClassName = "com.topfun.androiddevicelib.UnityConnect";
+    /// <summary>
+    ///     安卓设备原生类
+    /// </summary>
+    private const string AndroidDeviceClassName = "com.topfun.androiddevicelib.UnityConnect";
 
 
     #region 初始化
@@ -60,7 +63,11 @@ public class NativeConnect : Base
     /// </summary>
     public void Init()
     {
-        SdkSystem.Instance.Initialize();
+        if (!inited)
+        {
+            inited = true;
+            SdkSystem.Instance.Initialize();
+        }
     }
 
     #endregion
@@ -111,11 +118,11 @@ public class NativeConnect : Base
 
     #endregion
 
-    #region  参数获取
+    #region 参数获取
 
     #endregion
 
-    #region  原生功能
+    #region 原生功能
 
     /// <summary>
     ///     显示Toast
@@ -223,7 +230,8 @@ public class NativeConnect : Base
 		InvokeEvent("Block");
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
         InvokeEvent("Block");
-		SdkSystem.Instance.ShowInterstitial();
+		// SdkSystem.Instance.ShowInterstitial();
+        SdkSystem.Instance.ShowInterstitial((() => callBackBlock(String.Empty)), null);
 #else
         InvokeEvent("Block");
 #endif
@@ -257,7 +265,8 @@ public class NativeConnect : Base
 #if TEST
 		InvokeEvent("Video|True");
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
-	   SdkSystem.Instance.ShowRewardVideoAd();
+	   // SdkSystem.Instance.ShowRewardVideoAd();
+        SdkSystem.Instance.ShowRewardVideoAd((() => callBackVideo("True")), (() => callBackVideo("False")));
 #else
         InvokeEvent("Video|False");
 #endif

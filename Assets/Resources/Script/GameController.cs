@@ -92,11 +92,14 @@ public class GameController : Base
     {
         if (Shape.shapeList.Count == 0 && isWin == false && isDie == false)
         {
-            if (DataController.sceneNum % 3 == 2 && DataController.bigLevel > 2 &&
-                (DataController.bigLevel + 1) % 3 != 0)
+            if (DataController.sceneNum % 3 == 2)
+            {
                 ShowBlock();
+            }
+            /*if (DataController.sceneNum % 3 == 2 && DataController.bigLevel > 2 &&
+                (DataController.bigLevel + 1) % 3 != 0)
             else
-                isWin = true;
+                isWin = true;*/
         }
     }
 
@@ -311,11 +314,12 @@ public class GameController : Base
     public void ShowBlock()
     {
         Hole.instance.StopMove();
-        if (NativeConnect.Connect.InterstitialState)
+        NativeConnect.Connect.showBlock(delegate { isWin = true; });
+        /*if (NativeConnect.Connect.InterstitialState)
             NativeConnect.Connect.showBlock(delegate { isWin = true; });
         else
             //插屏广告未加载完成
-            isWin = true;
+            isWin = true;*/
     }
 
     /// <summary>
