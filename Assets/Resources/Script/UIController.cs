@@ -203,6 +203,7 @@ public class UIController : Base
     /// </summary>
     public void OpenSetPanel()
     {
+        NativeConnect.Connect.showBlock(s => { });
         Hole.instance.enabled = false;
         setPanel.SetActive(true);
     }
@@ -263,6 +264,7 @@ public class UIController : Base
     /// </summary>
     public void OpenSkinPanel()
     {
+        NativeConnect.Connect.showBlock(s => { });
         skinMoney.text = moneyText.text;
         Hole.instance.enabled = false;
         skinPanel.SetActive(true);

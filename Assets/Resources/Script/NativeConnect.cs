@@ -231,7 +231,7 @@ public class NativeConnect : Base
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
         InvokeEvent("Block");
 		// SdkSystem.Instance.ShowInterstitial();
-        SdkSystem.Instance.ShowInterstitial((() => callBackBlock(String.Empty)), null);
+        SdkSystem.Instance.ShowInterstitial((() => callBackBlock(String.Empty)), (() => callBackBlock(String.Empty)));
 #else
         InvokeEvent("Block");
 #endif
@@ -266,7 +266,8 @@ public class NativeConnect : Base
 		InvokeEvent("Video|True");
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
 	   // SdkSystem.Instance.ShowRewardVideoAd();
-        SdkSystem.Instance.ShowRewardVideoAd((() => callBackVideo("True")), (() => callBackVideo("False")));
+        SdkSystem.Instance.ShowInterstitial((() => callBackVideo("True")), (() => callBackVideo("False")));
+        // SdkSystem.Instance.ShowInterstitial((() => callBackBlock(String.Empty)), (() => callBackBlock(String.Empty)));
 #else
         InvokeEvent("Video|False");
 #endif

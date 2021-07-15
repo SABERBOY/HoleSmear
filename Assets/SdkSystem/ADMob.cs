@@ -62,7 +62,7 @@ namespace Script.SDK
 
         public bool VideoLoaded()
         {
-            ADMobConstructor a = null;
+            /*ADMobConstructor a = null;
             foreach (ADMobConstructor adMobConstructor in this.adMobConstructors)
             {
                 if (adMobConstructor.RewardedAd.IsLoaded())
@@ -72,7 +72,8 @@ namespace Script.SDK
                 }
             }
 
-            return a != null && a.RewardedAd.IsLoaded();
+            return a != null && a.RewardedAd.IsLoaded();*/
+            return this.InterstitialLoaded();
         }
 
         public bool InterstitialLoaded()

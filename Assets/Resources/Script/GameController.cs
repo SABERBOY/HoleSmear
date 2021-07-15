@@ -92,14 +92,15 @@ public class GameController : Base
     {
         if (Shape.shapeList.Count == 0 && isWin == false && isDie == false)
         {
-            if (DataController.sceneNum % 3 == 2)
-            {
+            ShowBlock();
+            /*if (DataController.sceneNum % 3 == 2)
+            {u
                 ShowBlock();
             }
             else
             {
                 isWin = true;
-            }
+            }*/
             /*if (DataController.sceneNum % 3 == 2 && DataController.bigLevel > 2 &&
                 (DataController.bigLevel + 1) % 3 != 0)
             else
