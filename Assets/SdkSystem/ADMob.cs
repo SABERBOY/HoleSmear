@@ -24,12 +24,12 @@ namespace Script.SDK
 
         private List<string> rewardId = new List<string>()
         {
-            "ca-app-pub-2270136017335510/9262363840"
+            "ca-app-pub-2270136017335510/7816721475"
         };
 
         private List<string> interstitialId = new List<string>()
         {
-            "ca-app-pub-2270136017335510/3469135203"
+            "ca-app-pub-2270136017335510/1487757471"
         };
 
         //ca-app-pub-2898660159223218/4601696319//测试广告id
