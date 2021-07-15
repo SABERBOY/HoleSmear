@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  rsKeyList:
+  - metadata:
+      entityId: 460c8c36-4680-4a47-ac9c-7ef8af6fb02a
+    rs:
+      key: IsMagic
+      type: bool
+      value: false
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: 460c8c36-4680-4a47-ac9c-7ef8af6fb02a
+    rs:
+      key: IsMagic
+      type: bool
+      value: false
+  configId: 14a15bb4-4e0d-4810-b77d-e2767f91e832
+  currentEnvironmentId: 54059310-2308-4793-9b96-be3556b70153
+  environments:
+  - id: be13f817-375c-454c-9e6f-7a88b9021a79
+    appId: 
+    name: Production (Default)
+    description: 
+    createdAt: 2021-06-15T08:53:58Z
+    updatedAt: 2021-06-15T08:53:58Z
+  - id: 00f27bd8-3149-4585-94f2-0d08aa5ba06a
+    appId: 
+    name: TestRemote
+    description: 
+    createdAt: 2021-06-15T08:54:31Z
+    updatedAt: 2021-06-15T08:54:31Z
+  - id: 54059310-2308-4793-9b96-be3556b70153
+    appId: 
+    name: HoleSmear
+    description: 
+    createdAt: 2021-07-15T08:18:28Z
+    updatedAt: 2021-07-15T08:18:28Z
+  rulesList: []
+  lastCachedRulesList: []
+  addedRulesIDs: []
+  updatedRulesIDs: []
+  deletedRulesIDs: []
