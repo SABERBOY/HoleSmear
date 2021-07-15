@@ -12,43 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  rsKeyList:
-  - metadata:
-      entityId: 460c8c36-4680-4a47-ac9c-7ef8af6fb02a
-    rs:
-      key: IsMagic
-      type: bool
-      value: false
-  rsLastCachedKeyList:
-  - metadata:
-      entityId: 460c8c36-4680-4a47-ac9c-7ef8af6fb02a
-    rs:
-      key: IsMagic
-      type: bool
-      value: false
-  configId: 14a15bb4-4e0d-4810-b77d-e2767f91e832
-  currentEnvironmentId: 54059310-2308-4793-9b96-be3556b70153
-  environments:
-  - id: be13f817-375c-454c-9e6f-7a88b9021a79
-    appId: 
-    name: Production (Default)
-    description: 
-    createdAt: 2021-06-15T08:53:58Z
-    updatedAt: 2021-06-15T08:53:58Z
-  - id: 00f27bd8-3149-4585-94f2-0d08aa5ba06a
-    appId: 
-    name: TestRemote
-    description: 
-    createdAt: 2021-06-15T08:54:31Z
-    updatedAt: 2021-06-15T08:54:31Z
-  - id: 54059310-2308-4793-9b96-be3556b70153
-    appId: 
-    name: HoleSmear
-    description: 
-    createdAt: 2021-07-15T08:18:28Z
-    updatedAt: 2021-07-15T08:18:28Z
-  rulesList: []
-  lastCachedRulesList: []
-  addedRulesIDs: []
-  updatedRulesIDs: []
-  deletedRulesIDs: []
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
+    \"value\": false\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
+    \"value\": false\r\n    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
+    \"name\": \"Production\",\r\n    \"id\": \"be13f817-375c-454c-9e6f-7a88b9021a79\",\r\n   
+    \"createdAt\": \"2021-06-15T08:53:58Z\",\r\n    \"updatedAt\": \"2021-06-15T08:53:58Z\",\r\n   
+    \"isDefault\": true\r\n  },\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
+    \"name\": \"TestRemote\",\r\n    \"id\": \"00f27bd8-3149-4585-94f2-0d08aa5ba06a\",\r\n   
+    \"createdAt\": \"2021-06-15T08:54:31Z\",\r\n    \"updatedAt\": \"2021-06-15T08:54:31Z\",\r\n   
+    \"isDefault\": false\r\n  },\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
+    \"name\": \"HoleSmear\",\r\n    \"id\": \"54059310-2308-4793-9b96-be3556b70153\",\r\n   
+    \"createdAt\": \"2021-07-15T08:18:28Z\",\r\n    \"updatedAt\": \"2021-07-15T08:18:28Z\",\r\n   
+    \"isDefault\": false\r\n  }\r\n]"
+  _rulesList: "[\r\n  {\r\n    \"id\": \"4b1ec700-ee82-4d12-9cd7-31e54a4c5b57\",\r\n   
+    \"name\": \"Level\",\r\n    \"type\": \"variant\",\r\n    \"condition\": \"true\",\r\n   
+    \"rolloutPercentage\": 100,\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n   
+    \"priority\": 1000,\r\n    \"enabled\": true,\r\n    \"value\": [\r\n      {\r\n       
+    \"id\": \"Variant 1\",\r\n        \"weight\": null,\r\n        \"values\": [\r\n         
+    {\r\n            \"metadata\": {\r\n              \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n           
+    },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
+    \"type\": \"bool\",\r\n              \"value\": true\r\n            }\r\n         
+    }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ]\r\n  }\r\n]"
+  _lastCachedRulesList: "[\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
+    \"environmentId\": \"54059310-2308-4793-9b96-be3556b70153\",\r\n    \"configId\":
+    \"14a15bb4-4e0d-4810-b77d-e2767f91e832\",\r\n    \"name\": \"Level\",\r\n   
+    \"enabled\": true,\r\n    \"condition\": \"true\",\r\n    \"rolloutPercentage\":
+    100,\r\n    \"value\": [\r\n      {\r\n        \"id\": \"Variant 1\",\r\n       
+    \"weight\": null,\r\n        \"values\": [\r\n          {\r\n            \"metadata\":
+    {\r\n              \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n           
+    },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
+    \"type\": \"bool\",\r\n              \"value\": true\r\n            }\r\n         
+    }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ],\r\n   
+    \"id\": \"4b1ec700-ee82-4d12-9cd7-31e54a4c5b57\",\r\n    \"priority\": 1000,\r\n   
+    \"type\": \"variant\",\r\n    \"version\": \"69df56ec-eaff-4d20-9a33-75f6f45738f8\",\r\n   
+    \"startDate\": null,\r\n    \"endDate\": null,\r\n    \"metadata\": null,\r\n   
+    \"audience\": [],\r\n    \"kpi\": null,\r\n    \"createdAt\": \"2021-07-15T10:15:32Z\",\r\n   
+    \"updatedAt\": \"2021-07-15T10:43:15Z\"\r\n  }\r\n]"
