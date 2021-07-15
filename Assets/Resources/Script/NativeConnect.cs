@@ -261,12 +261,11 @@ public class NativeConnect : Base
     public void showVideo(string str, Action<string> callBackVideo)
     {
         if (callBackVideo != null) addListener("Video", callBackVideo);
-
 #if TEST
 		InvokeEvent("Video|True");
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
-	   // SdkSystem.Instance.ShowRewardVideoAd();
-        SdkSystem.Instance.ShowInterstitial((() => callBackVideo("True")), (() => callBackVideo("False")));
+        SdkSystem.Instance.ShowRewardVideoAd((() => callBackVideo("True")), (() => callBackVideo("False")));
+        // SdkSystem.Instance.ShowInterstitial((() => callBackVideo("True")), (() => callBackVideo("False")));
         // SdkSystem.Instance.ShowInterstitial((() => callBackBlock(String.Empty)), (() => callBackBlock(String.Empty)));
 #else
         InvokeEvent("Video|False");

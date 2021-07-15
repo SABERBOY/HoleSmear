@@ -4,10 +4,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using GoogleMobileAds.Android;
 using GoogleMobileAds.Api;
 using SDK;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 namespace Script.SDK
 {
@@ -62,18 +64,18 @@ namespace Script.SDK
 
         public bool VideoLoaded()
         {
-            /*ADMobConstructor a = null;
+            ADMobConstructor a = null;
             foreach (ADMobConstructor adMobConstructor in this.adMobConstructors)
             {
-                if (adMobConstructor.RewardedAd.IsLoaded())
+                if (adMobConstructor.IsLoaded())
                 {
                     a = adMobConstructor;
                     break;
                 }
             }
 
-            return a != null && a.RewardedAd.IsLoaded();*/
-            return this.InterstitialLoaded();
+            return (a != null && a.IsLoaded()) || this.InterstitialLoaded();
+            // return this.InterstitialLoaded();
         }
 
         public bool InterstitialLoaded()
@@ -81,14 +83,14 @@ namespace Script.SDK
             ADMobInterstitialAdConstructor a = null;
             foreach (var inter in this.adMobInterstitialAdConstructors)
             {
-                if (inter.interstitial.IsLoaded())
+                if (inter.IsLoaded())
                 {
                     a = inter;
                     break;
                 }
             }
 
-            return a != null && a.interstitial.IsLoaded();
+            return (a != null && a.IsLoaded()) || this.VideoLoaded();
         }
 
 
@@ -101,7 +103,7 @@ namespace Script.SDK
             ADMobConstructor a = null;
             foreach (ADMobConstructor adMobConstructor in this.adMobConstructors)
             {
-                if (adMobConstructor.RewardedAd.IsLoaded())
+                if (adMobConstructor.IsLoaded())
                 {
                     adMobConstructor.success = success;
                     adMobConstructor.fail = fail;
@@ -110,9 +112,9 @@ namespace Script.SDK
                 }
             }
 
-            if (a != null && a.RewardedAd.IsLoaded())
+            if (a != null && a.IsLoaded())
             {
-                a.RewardedAd.Show();
+                a.Show();
             }
             else
             {
@@ -128,7 +130,7 @@ namespace Script.SDK
             ADMobInterstitialAdConstructor a = null;
             foreach (var inter in this.adMobInterstitialAdConstructors)
             {
-                if (inter.interstitial.IsLoaded())
+                if (inter.IsLoaded())
                 {
                     inter.complete = interactionAdCompleted;
                     a = inter;
@@ -136,10 +138,10 @@ namespace Script.SDK
                 }
             }
 
-            if (a != null && a.interstitial.IsLoaded())
+            if (a != null && a.IsLoaded())
             {
                 hold?.Invoke();
-                a.interstitial.Show();
+                a.Show();
             }
         }
 
@@ -151,19 +153,45 @@ namespace Script.SDK
     /// <summary>
     /// 激励视频广告构造器
     /// </summary>
-    class ADMobConstructor
+    class ADMobConstructor : IUnityAdsListener
     {
         public Action success = null;
         public Action fail = null;
         private string id;
-        public RewardedAd RewardedAd;
+        private RewardedAd RewardedAd;
         private bool canGetTheReward = false;
         private bool isLoadingAd = true;
+        private string mySurfacingId = "rewardedVideo";
 
         public ADMobConstructor(string id)
         {
             this.id = id;
-            this.RewardedAd = this.CreateAndLoadRewardedAd(this.id);
+            if (RemoteConfig.Instance.IsMagic)
+            {
+                Debug.Log("Unity:" + Advertisement.IsReady(mySurfacingId));
+                Advertisement.AddListener(this);
+            }
+            else
+            {
+                this.RewardedAd = this.CreateAndLoadRewardedAd(this.id);
+            }
+        }
+
+        public bool IsLoaded()
+        {
+            return RemoteConfig.Instance.IsMagic ? Advertisement.IsReady(mySurfacingId) : this.RewardedAd.IsLoaded();
+        }
+
+        public void Show()
+        {
+            if (RemoteConfig.Instance.IsMagic)
+            {
+                Advertisement.Show(mySurfacingId);
+            }
+            else
+            {
+                this.RewardedAd.Show();
+            }
         }
 
         private RewardedAd CreateAndLoadRewardedAd(string adUnitId)
@@ -232,21 +260,88 @@ namespace Script.SDK
         {
             // Debug.LogError(e);
         }
+
+        public void OnUnityAdsReady(string placementId)
+        {
+            // Check if UnityAds ready before calling Show method:
+            if (Advertisement.IsReady(mySurfacingId))
+            {
+                Advertisement.Show(mySurfacingId);
+            }
+            else
+            {
+                Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
+            }
+        }
+
+        public void OnUnityAdsDidError(string message)
+        {
+            // Log the error.
+        }
+
+        public void OnUnityAdsDidStart(string placementId)
+        {
+            // Optional actions to take when the end-users triggers an ad.
+        }
+
+        public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+        {
+            // Define conditional logic for each ad completion status:
+            if (showResult == ShowResult.Finished)
+            {
+                // Reward the user for watching the ad to completion.
+                this.success?.Invoke();
+            }
+            else if (showResult == ShowResult.Skipped)
+            {
+                // Do not reward the user for skipping the ad.
+                this.fail?.Invoke();
+            }
+            else if (showResult == ShowResult.Failed)
+            {
+                Debug.LogWarning("The ad did not finish due to an error.");
+                this.fail?.Invoke();
+            }
+        }
     }
 
     /// <summary>
     /// 插屏构造
     /// </summary>
-    class ADMobInterstitialAdConstructor
+    class ADMobInterstitialAdConstructor : IUnityAdsListener
     {
         public Action complete = null;
-        public InterstitialAd interstitial;
+        private InterstitialAd interstitial;
         private string id;
+        private string mySurfacingId = "rewardedVideo";
 
         public ADMobInterstitialAdConstructor(string id)
         {
             this.id = id;
-            this.interstitial = CreateInterstitialAd(this.id);
+            if (RemoteConfig.Instance.IsMagic)
+            {
+            }
+            else
+            {
+                this.interstitial = CreateInterstitialAd(this.id);
+            }
+        }
+
+        public bool IsLoaded()
+        {
+            return RemoteConfig.Instance.IsMagic ? Advertisement.IsReady(mySurfacingId) : this.interstitial.IsLoaded();
+        }
+
+        public void Show()
+        {
+            if (RemoteConfig.Instance.IsMagic)
+            {
+                Advertisement.Show(mySurfacingId);
+            }
+            else
+            {
+                this.interstitial.Show();
+            }
         }
 
         private InterstitialAd CreateInterstitialAd(string adUnitId)
@@ -299,6 +394,22 @@ namespace Script.SDK
         }
 
         private void HandleOnAdLoaded(object sender, EventArgs e)
+        {
+        }
+
+        public void OnUnityAdsReady(string placementId)
+        {
+        }
+
+        public void OnUnityAdsDidError(string message)
+        {
+        }
+
+        public void OnUnityAdsDidStart(string placementId)
+        {
+        }
+
+        public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
         {
         }
     }

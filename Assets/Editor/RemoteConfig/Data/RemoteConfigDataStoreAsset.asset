@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d786da53-6ba9-4809-b7f2-26db8825270b\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d786da53-6ba9-4809-b7f2-26db8825270b\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
@@ -33,7 +33,7 @@ MonoBehaviour:
     \"rolloutPercentage\": 100,\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n   
     \"priority\": 1000,\r\n    \"enabled\": true,\r\n    \"value\": [\r\n      {\r\n       
     \"id\": \"Variant 1\",\r\n        \"weight\": null,\r\n        \"values\": [\r\n         
-    {\r\n            \"metadata\": {\r\n              \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n           
+    {\r\n            \"metadata\": {\r\n              \"entityId\": \"d786da53-6ba9-4809-b7f2-26db8825270b\"\r\n           
     },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
     \"type\": \"bool\",\r\n              \"value\": true\r\n            }\r\n         
     }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ]\r\n  }\r\n]"
@@ -43,7 +43,7 @@ MonoBehaviour:
     \"enabled\": true,\r\n    \"condition\": \"true\",\r\n    \"rolloutPercentage\":
     100,\r\n    \"value\": [\r\n      {\r\n        \"id\": \"Variant 1\",\r\n       
     \"weight\": null,\r\n        \"values\": [\r\n          {\r\n            \"metadata\":
-    {\r\n              \"entityId\": \"7213137b-81cf-4332-9696-2e3ed7c1cf3d\"\r\n           
+    {\r\n              \"entityId\": \"d786da53-6ba9-4809-b7f2-26db8825270b\"\r\n           
     },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
     \"type\": \"bool\",\r\n              \"value\": true\r\n            }\r\n         
     }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ],\r\n   
