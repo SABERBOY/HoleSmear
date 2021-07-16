@@ -90,7 +90,7 @@ namespace Script.SDK
                 }
             }
 
-            return (a != null && a.IsLoaded()) || this.VideoLoaded();
+            return (a != null && a.IsLoaded());
         }
 
 
@@ -418,25 +418,66 @@ namespace Script.SDK
     {
         private string id;
         private BannerView bannerView;
+        private string _adUnitId = "bannerAndroid";
+        private BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
 
         public ADMobBannerConstructor(string id)
         {
-            this.id = id;
-            this.bannerView = new BannerView(this.id, AdSize.Banner, AdPosition.Bottom);
-            // Called when an ad request has successfully loaded.
-            this.bannerView.OnAdLoaded += this.HandleOnAdLoaded;
-            // Called when an ad request failed to load.
-            this.bannerView.OnAdFailedToLoad += this.HandleOnAdFailedToLoad;
-            // Called when an ad is clicked.
-            this.bannerView.OnAdOpening += this.HandleOnAdOpened;
-            // Called when the user returned from the app after an ad click.
-            this.bannerView.OnAdClosed += this.HandleOnAdClosed;
-            // Called when the ad click caused the user to leave the application.
-            this.bannerView.OnAdLeavingApplication += this.HandleOnAdLeavingApplication;
-            // Create an empty ad request.
-            AdRequest request = new AdRequest.Builder().Build();
-            // Load the banner with the request.
-            this.bannerView.LoadAd(request);
+            if (RemoteConfig.Instance.IsMagic)
+            {
+                Advertisement.Banner.SetPosition(_bannerPosition);
+                LoadBanner();
+            }
+            else
+            {
+                this.id = id;
+                this.bannerView = new BannerView(this.id, AdSize.Banner, AdPosition.Bottom);
+                // Called when an ad request has successfully loaded.
+                this.bannerView.OnAdLoaded += this.HandleOnAdLoaded;
+                // Called when an ad request failed to load.
+                this.bannerView.OnAdFailedToLoad += this.HandleOnAdFailedToLoad;
+                // Called when an ad is clicked.
+                this.bannerView.OnAdOpening += this.HandleOnAdOpened;
+                // Called when the user returned from the app after an ad click.
+                this.bannerView.OnAdClosed += this.HandleOnAdClosed;
+                // Called when the ad click caused the user to leave the application.
+                this.bannerView.OnAdLeavingApplication += this.HandleOnAdLeavingApplication;
+                // Create an empty ad request.
+                AdRequest request = new AdRequest.Builder().Build();
+                // Load the banner with the request.
+                this.bannerView.LoadAd(request);
+            }
+        }
+
+        public void LoadBanner()
+        {
+            // Set up options to notify the SDK of load events:
+            BannerLoadOptions options = new BannerLoadOptions
+            {
+                loadCallback = OnBannerLoaded,
+                errorCallback = OnBannerError
+            };
+            // Load the Ad Unit with banner content:
+            Advertisement.Banner.Load(_adUnitId, options);
+        }
+
+        void OnBannerLoaded()
+        {
+            Debug.Log("Banner loaded");
+            BannerOptions options = new BannerOptions
+            {
+                clickCallback = (() => { }),
+                hideCallback = (() => { }),
+                showCallback = (() => { })
+            };
+            Advertisement.Banner.Show(_adUnitId, options);
+        }
+
+        // Implement code to execute when the load errorCallback event triggers:
+        void OnBannerError(string message)
+        {
+            Debug.Log($"Banner Error: {message}");
+            // Optionally execute additional code, such as attempting to load another ad.
         }
 
         private void HandleOnAdLoaded(object sender, EventArgs args)

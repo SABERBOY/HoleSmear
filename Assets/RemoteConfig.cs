@@ -7,10 +7,11 @@ using UnityEngine.Analytics;
 
 namespace DefaultNamespace
 {
-    public class RemoteConfig : MonoBehaviour
+    public class RemoteConfig : MonoBehaviour, IUnityAdsInitializationListener
     {
         private static RemoteConfig _instance = null;
         [NonSerialized] private bool isMagic = false;
+        private IUnityAdsInitializationListener _unityAdsInitializationListenerImplementation;
 
         public bool IsMagic => isMagic;
 
@@ -46,16 +47,22 @@ namespace DefaultNamespace
             // Fetch configuration setting from the remote service:
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
             AnalyticsEvent.GameStart(new Dictionary<string, object> {{"PS", "PS"}});
+            NativeConnect.Connect.showBanner();
             if (Advertisement.isSupported)
             {
-                Advertisement.Initialize("3199470", true);
+                Advertisement.Initialize("3199470", true ,true,this);
             }
-            Invoke(nameof(ShowInterstitialAd),3);
+
+            // Invoke(nameof(ShowInterstitialAd), 3);
         }
 
-        public void ShowInterstitialAd() {
+        private string _adUnitId = "bannerAndroid";
+        private BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
+
+        public void ShowInterstitialAd()
+        {
             // Check if UnityAds ready before calling Show method:
-            Debug.Log("Ready:"+Advertisement.IsReady());
+            /*Debug.Log("Ready:"+Advertisement.IsReady());
             if (Advertisement.IsReady("video")) {
                 // Advertisement.Show("video");
                 Advertisement.Show("video");
@@ -63,7 +70,31 @@ namespace DefaultNamespace
             }
             else {
                 Debug.Log("Interstitial ad not ready at the moment! Please try again later!");
-            }
+            }*/
+            Advertisement.Banner.SetPosition(_bannerPosition);
+            LoadBanner();
+        }
+
+        public void LoadBanner()
+        {
+            // Set up options to notify the SDK of load events:
+            BannerLoadOptions options = new BannerLoadOptions
+            {
+                loadCallback = (() =>
+                {
+                    Debug.Log("Banner loaded");
+                    BannerOptions options1 = new BannerOptions
+                    {
+                        clickCallback = (() => { }),
+                        hideCallback = (() => { }),
+                        showCallback = (() => { })
+                    };
+                    Advertisement.Banner.Show(_adUnitId, options1);
+                }),
+                errorCallback = (message => { Debug.Log(message); })
+            };
+            // Load the Ad Unit with banner content:
+            Advertisement.Banner.Load(_adUnitId, options);
         }
 
         void ApplyRemoteSettings(ConfigResponse configResponse)
@@ -74,9 +105,11 @@ namespace DefaultNamespace
                 case ConfigOrigin.Default:
                     // Debug.Log ("No settings loaded this session; using default values.");
                     // Debug.Log(ConfigManager.appConfig);
+                    NativeConnect.Connect.Init();
                     break;
                 case ConfigOrigin.Cached:
                     // Debug.Log ("No settings loaded this session; using cached values from a previous session.");
+                    NativeConnect.Connect.Init();
                     break;
                 case ConfigOrigin.Remote:
                     this.isMagic = ConfigManager.appConfig.GetBool("IsMagic");
@@ -86,8 +119,20 @@ namespace DefaultNamespace
                     // enemyHealth = ConfigManager.appConfig.GetInt ("enemyHealth");
                     // enemyDamage = ConfigManager.appConfig.GetFloat ("enemyDamage");
                     // assignmentId = ConfigManager.appConfig.assignmentID;
+                    NativeConnect.Connect.Init();
+                    // ShowInterstitialAd();
                     break;
             }
+        }
+
+        public void OnInitializationComplete()
+        {
+            Debug.Log("OnInitializationComplete");
+        }
+
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        {
+            Debug.Log($"OnInitializationFailed:{error}: {message}");
         }
     }
 }

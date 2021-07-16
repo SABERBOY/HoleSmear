@@ -29,7 +29,7 @@ public class NativeConnect : Base
                 go.name = "NativeConnect";
                 _connect = go.AddComponent<NativeConnect>();
                 DontDestroyOnLoad(go);
-                _connect.Init();
+                // _connect.Init();
             }
 
             return _connect;
