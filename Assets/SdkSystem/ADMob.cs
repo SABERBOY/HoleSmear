@@ -42,9 +42,7 @@ namespace Script.SDK
             // RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("83C0EECDFE32F56622BF2A7B4C6A0AEF")) to get test ads on this device.
             // MobileAdsClient.Instance.GetRequestConfiguration().ToBuilder()
             //     .SetTestDeviceIds(new List<string>() {"83C0EECDFE32F56622BF2A7B4C6A0AEF"});
-            MobileAds.SetRequestConfiguration(MobileAds.GetRequestConfiguration().ToBuilder()
-                .SetTestDeviceIds(new List<string>() {"83C0EECDFE32F56622BF2A7B4C6A0AEF"}).build());
-            MobileAds.Initialize(initStatus =>
+            if (RemoteConfig.Instance.IsMagic)
             {
                 foreach (var s in this.rewardId)
                 {
@@ -57,9 +55,28 @@ namespace Script.SDK
                 }
 
                 this.adMobBannerConstructor = new ADMobBannerConstructor("ca-app-pub-2270136017335510/9155742009");
+                Debug.Log("ADMob");
+            }
+            else
+            {
+                MobileAds.SetRequestConfiguration(MobileAds.GetRequestConfiguration().ToBuilder()
+                    .SetTestDeviceIds(new List<string>() {"83C0EECDFE32F56622BF2A7B4C6A0AEF"}).build());
+                MobileAds.Initialize(initStatus =>
+                {
+                    foreach (var s in this.rewardId)
+                    {
+                        this.adMobConstructors.Add(new ADMobConstructor(s));
+                    }
 
-                Debug.Log(initStatus.getAdapterStatusMap() + "ADMob");
-            });
+                    foreach (var s in interstitialId)
+                    {
+                        this.adMobInterstitialAdConstructors.Add(new ADMobInterstitialAdConstructor(s));
+                    }
+
+                    this.adMobBannerConstructor = new ADMobBannerConstructor("ca-app-pub-2270136017335510/9155742009");
+                    Debug.Log("ADMob");
+                });
+            }
         }
 
         public bool VideoLoaded()
@@ -272,20 +289,25 @@ namespace Script.SDK
             {
                 Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
             }
+
+            Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
         }
 
         public void OnUnityAdsDidError(string message)
         {
             // Log the error.
+            Debug.Log($"{nameof(OnUnityAdsDidError)}:{message}");
         }
 
         public void OnUnityAdsDidStart(string placementId)
         {
             // Optional actions to take when the end-users triggers an ad.
+            Debug.Log($"{nameof(OnUnityAdsDidStart)}:{placementId}");
         }
 
         public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
         {
+            Debug.Log($"{nameof(OnUnityAdsDidFinish)}:{placementId}:{showResult}");
             // Define conditional logic for each ad completion status:
             if (showResult == ShowResult.Finished)
             {

@@ -48,11 +48,6 @@ namespace DefaultNamespace
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
             AnalyticsEvent.GameStart(new Dictionary<string, object> {{"PS", "PS"}});
             NativeConnect.Connect.showBanner();
-            if (Advertisement.isSupported)
-            {
-                Advertisement.Initialize("3199470", true ,true,this);
-            }
-
             // Invoke(nameof(ShowInterstitialAd), 3);
         }
 
@@ -113,13 +108,18 @@ namespace DefaultNamespace
                     break;
                 case ConfigOrigin.Remote:
                     this.isMagic = ConfigManager.appConfig.GetBool("IsMagic");
-                    // Debug.Log ("New settings loaded this session; update values accordingly.");
-                    Debug.Log("isMagic:" + this.isMagic);
-                    // enemyVolume = ConfigManager.appConfig.GetInt ("enemyVolume");
-                    // enemyHealth = ConfigManager.appConfig.GetInt ("enemyHealth");
-                    // enemyDamage = ConfigManager.appConfig.GetFloat ("enemyDamage");
-                    // assignmentId = ConfigManager.appConfig.assignmentID;
-                    NativeConnect.Connect.Init();
+                    if (this.isMagic)
+                    {
+                        if (Advertisement.isSupported)
+                        {
+                            Advertisement.Initialize("3199470", false, false, this);
+                        }
+                    }
+                    else
+                    {
+                        NativeConnect.Connect.Init();
+                    }
+
                     // ShowInterstitialAd();
                     break;
             }
@@ -128,6 +128,7 @@ namespace DefaultNamespace
         public void OnInitializationComplete()
         {
             Debug.Log("OnInitializationComplete");
+            NativeConnect.Connect.Init();
         }
 
         public void OnInitializationFailed(UnityAdsInitializationError error, string message)
