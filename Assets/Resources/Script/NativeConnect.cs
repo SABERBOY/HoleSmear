@@ -212,7 +212,7 @@ public class NativeConnect : Base
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
 		 return  SdkSystem.Instance.IsInterstitialLoaded();
 #else
-            return false;
+            return SdkSystem.Instance.IsInterstitialLoaded();;
 #endif
         }
     }
@@ -249,7 +249,7 @@ public class NativeConnect : Base
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
 		  return SdkSystem.Instance.IsRewardAdLoaded();
 #else
-            return false;
+            return SdkSystem.Instance.IsRewardAdLoaded();;
 #endif
         }
     }

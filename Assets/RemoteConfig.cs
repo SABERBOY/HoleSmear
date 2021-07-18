@@ -7,14 +7,14 @@ using UnityEngine.Analytics;
 
 namespace DefaultNamespace
 {
-    public class RemoteConfig : MonoBehaviour, IUnityAdsInitializationListener
+    public class RemoteConfig : MonoBehaviour
     {
         private static RemoteConfig _instance = null;
         [NonSerialized] private bool isMagic = false;
-        private IUnityAdsInitializationListener _unityAdsInitializationListenerImplementation;
 
         public bool IsMagic => isMagic;
-
+        public Action RewardSuccessAction = null;
+        public Action RewardFailAction = null;
         public static RemoteConfig Instance => _instance;
 
         public struct userAttributes
@@ -39,10 +39,10 @@ namespace DefaultNamespace
             ConfigManager.FetchCompleted += ApplyRemoteSettings;
 
             // Set the user’s unique ID:
-            ConfigManager.SetCustomUserID("HoleSmear");
+            ConfigManager.SetCustomUserID("HoleSenearGooglePlay");
 
             // Set the environment ID:
-            ConfigManager.SetEnvironmentID("54059310-2308-4793-9b96-be3556b70153");
+            ConfigManager.SetEnvironmentID("02be422f-7b37-4595-b2d5-c8d0b6791682");
 
             // Fetch configuration setting from the remote service:
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
@@ -108,11 +108,13 @@ namespace DefaultNamespace
                     break;
                 case ConfigOrigin.Remote:
                     this.isMagic = ConfigManager.appConfig.GetBool("IsMagic");
+                    Debug.Log($"remote:{ConfigManager.appConfig.config.ToString()}");
                     if (this.isMagic)
                     {
                         if (Advertisement.isSupported)
                         {
-                            Advertisement.Initialize("3199470", false, false, this);
+                            Advertisement.Initialize("4221351", true);
+                            this.OnInitializationComplete();
                         }
                     }
                     else
@@ -131,9 +133,16 @@ namespace DefaultNamespace
             NativeConnect.Connect.Init();
         }
 
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        public void RewardSuccess()
         {
-            Debug.Log($"OnInitializationFailed:{error}: {message}");
+            this.RewardSuccessAction?.Invoke();
+            this.RewardSuccessAction = null;
         }
+        public void RewardFail()
+        {
+            this.RewardFailAction?.Invoke();
+            this.RewardFailAction = null;
+        }
+
     }
 }

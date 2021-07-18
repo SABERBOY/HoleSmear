@@ -1,5 +1,7 @@
 ﻿using System;
+#if ADMOB
 using Firebase;
+#endif
 using Script.SDK;
 
 namespace SDK
@@ -41,6 +43,7 @@ namespace SDK
 
             tGSDKController = new MTGSDKController();
             tGSDKController.Initialize(); */
+#if ADMOB
             Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
                 var dependencyStatus = task.Result;
@@ -58,10 +61,11 @@ namespace SDK
                     // Firebase Unity SDK is not safe to use here.
                 }
             });
+#endif
 
 #if UNITY_EDITOR
-            // this._sdk = new EditorSDK();
-            // this._sdk.Init();
+            this._sdk = new ADMob();
+            this._sdk.Init();
 #elif UNITY_ANDROID
         this._sdk = new ADMob();
         this._sdk.Init();
@@ -108,7 +112,7 @@ namespace SDK
         public void ShowInterstitial(Action interactionAdCompleted, Action hold)
         {
             /* tGSDKController.ShowRewardVideoAd(); */
-            this._sdk.ShowInterstitialAd(interactionAdCompleted,hold);
+            this._sdk.ShowInterstitialAd(interactionAdCompleted, hold);
         }
     }
 }

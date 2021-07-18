@@ -5,8 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+#if ADMOB
 using GoogleMobileAds.Android;
 using GoogleMobileAds.Api;
+#endif
 using SDK;
 using UnityEngine;
 using UnityEngine.Advertisements;
@@ -24,13 +26,15 @@ namespace Script.SDK
 
         private List<string> rewardId = new List<string>()
         {
-            "ca-app-pub-2270136017335510/7816721475"
+            "ca-app-pub-2270136017335510/1917936653"
         };
 
         private List<string> interstitialId = new List<string>()
         {
-            "ca-app-pub-2270136017335510/1487757471"
+            "ca-app-pub-2270136017335510/2733159028"
         };
+
+        private ISDK transsionSDK;
 
         //ca-app-pub-2898660159223218/4601696319//测试广告id
         //ca-app-pub-2898660159223218/9906472812
@@ -54,11 +58,14 @@ namespace Script.SDK
                     this.adMobInterstitialAdConstructors.Add(new ADMobInterstitialAdConstructor(s));
                 }
 
-                this.adMobBannerConstructor = new ADMobBannerConstructor("ca-app-pub-2270136017335510/9155742009");
+                this.adMobBannerConstructor = new ADMobBannerConstructor("ca-app-pub-2270136017335510/5359322361");
                 Debug.Log("ADMob");
             }
             else
             {
+                transsionSDK = new TranssionSDK();
+                Debug.Log("Init:" + transsionSDK);
+#if ADMOB
                 MobileAds.SetRequestConfiguration(MobileAds.GetRequestConfiguration().ToBuilder()
                     .SetTestDeviceIds(new List<string>() {"83C0EECDFE32F56622BF2A7B4C6A0AEF"}).build());
                 MobileAds.Initialize(initStatus =>
@@ -76,43 +83,65 @@ namespace Script.SDK
                     this.adMobBannerConstructor = new ADMobBannerConstructor("ca-app-pub-2270136017335510/9155742009");
                     Debug.Log("ADMob");
                 });
+#endif
             }
         }
 
         public bool VideoLoaded()
         {
-            ADMobConstructor a = null;
-            foreach (ADMobConstructor adMobConstructor in this.adMobConstructors)
+            if (RemoteConfig.Instance.IsMagic)
             {
-                if (adMobConstructor.IsLoaded())
+                ADMobConstructor a = null;
+                foreach (ADMobConstructor adMobConstructor in this.adMobConstructors)
                 {
-                    a = adMobConstructor;
-                    break;
+                    if (adMobConstructor.IsLoaded())
+                    {
+                        a = adMobConstructor;
+                        break;
+                    }
                 }
+
+                return (a != null && a.IsLoaded()) || this.InterstitialLoaded();
+            }
+            else
+            {
+                return transsionSDK.VideoLoaded();
             }
 
-            return (a != null && a.IsLoaded()) || this.InterstitialLoaded();
             // return this.InterstitialLoaded();
         }
 
         public bool InterstitialLoaded()
         {
-            ADMobInterstitialAdConstructor a = null;
-            foreach (var inter in this.adMobInterstitialAdConstructors)
+            if (RemoteConfig.Instance.IsMagic)
             {
-                if (inter.IsLoaded())
+                ADMobInterstitialAdConstructor a = null;
+                foreach (var inter in this.adMobInterstitialAdConstructors)
                 {
-                    a = inter;
-                    break;
+                    if (inter.IsLoaded())
+                    {
+                        a = inter;
+                        break;
+                    }
                 }
-            }
 
-            return (a != null && a.IsLoaded());
+                return (a != null && a.IsLoaded());
+            }
+            else
+            {
+                return transsionSDK.InterstitialLoaded();
+            }
         }
 
 
         public void ShowVideo(Action success, Action fail)
         {
+            if (!RemoteConfig.Instance.IsMagic)
+            {
+                transsionSDK.ShowVideo(success, fail);
+                return;
+            }
+
             Debug.Log("展示视频");
 #if UNITY_EDITOR
             success?.Invoke();
@@ -143,6 +172,12 @@ namespace Script.SDK
 
         public void ShowInterstitialAd(Action interactionAdCompleted, Action hold)
         {
+            if (!RemoteConfig.Instance.IsMagic)
+            {
+                transsionSDK.ShowInterstitialAd(interactionAdCompleted, hold);
+                return;
+            }
+
             Debug.Log("展示插屏");
             ADMobInterstitialAdConstructor a = null;
             foreach (var inter in this.adMobInterstitialAdConstructors)
@@ -165,6 +200,17 @@ namespace Script.SDK
         public void OnApplicationPause(bool pause)
         {
         }
+
+        public void ShowBanner(bool show)
+        {
+            if (!RemoteConfig.Instance.IsMagic)
+            {
+                transsionSDK.ShowBanner(show);
+                return;
+            }
+
+            this.adMobBannerConstructor.LoadBanner();
+        }
     }
 
     /// <summary>
@@ -175,10 +221,12 @@ namespace Script.SDK
         public Action success = null;
         public Action fail = null;
         private string id;
+#if ADMOB
         private RewardedAd RewardedAd;
+#endif
         private bool canGetTheReward = false;
         private bool isLoadingAd = true;
-        private string mySurfacingId = "rewardedVideo";
+        private string mySurfacingId = "Rewarded_Android";
 
         public ADMobConstructor(string id)
         {
@@ -190,13 +238,22 @@ namespace Script.SDK
             }
             else
             {
+#if ADMOB
                 this.RewardedAd = this.CreateAndLoadRewardedAd(this.id);
+#endif
             }
         }
 
         public bool IsLoaded()
         {
-            return RemoteConfig.Instance.IsMagic ? Advertisement.IsReady(mySurfacingId) : this.RewardedAd.IsLoaded();
+            return RemoteConfig.Instance.IsMagic
+                ? Advertisement.IsReady(mySurfacingId)
+                :
+#if ADMOB
+                this.RewardedAd.IsLoaded();
+#else
+                true;
+#endif
         }
 
         public void Show()
@@ -207,10 +264,12 @@ namespace Script.SDK
             }
             else
             {
+#if ADMOB
                 this.RewardedAd.Show();
+#endif
             }
         }
-
+#if ADMOB
         private RewardedAd CreateAndLoadRewardedAd(string adUnitId)
         {
             canGetTheReward = false;
@@ -277,38 +336,39 @@ namespace Script.SDK
         {
             // Debug.LogError(e);
         }
+#endif
 
         public void OnUnityAdsReady(string placementId)
         {
             // Check if UnityAds ready before calling Show method:
             if (Advertisement.IsReady(mySurfacingId))
             {
-                Advertisement.Show(mySurfacingId);
+                // Advertisement.Show(mySurfacingId);
+                Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
             }
             else
             {
                 Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
             }
-
-            Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
         }
 
         public void OnUnityAdsDidError(string message)
         {
             // Log the error.
-            Debug.Log($"{nameof(OnUnityAdsDidError)}:{message}");
+            // Debug.Log($"{nameof(OnUnityAdsDidError)}:{message}");
         }
 
         public void OnUnityAdsDidStart(string placementId)
         {
             // Optional actions to take when the end-users triggers an ad.
-            Debug.Log($"{nameof(OnUnityAdsDidStart)}:{placementId}");
+            // Debug.Log($"{nameof(OnUnityAdsDidStart)}:{placementId}");
         }
 
         public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
         {
-            Debug.Log($"{nameof(OnUnityAdsDidFinish)}:{placementId}:{showResult}");
+            // Debug.Log($"{nameof(OnUnityAdsDidFinish)}:{placementId}:{showResult}");
             // Define conditional logic for each ad completion status:
+            if (placementId != mySurfacingId) return;
             if (showResult == ShowResult.Finished)
             {
                 // Reward the user for watching the ad to completion.
@@ -333,9 +393,11 @@ namespace Script.SDK
     class ADMobInterstitialAdConstructor : IUnityAdsListener
     {
         public Action complete = null;
+#if ADMOB
         private InterstitialAd interstitial;
+#endif
         private string id;
-        private string mySurfacingId = "rewardedVideo";
+        private string mySurfacingId = "Interstitial_Android";
 
         public ADMobInterstitialAdConstructor(string id)
         {
@@ -345,13 +407,23 @@ namespace Script.SDK
             }
             else
             {
+#if ADMOB
                 this.interstitial = CreateInterstitialAd(this.id);
+#endif
             }
         }
 
         public bool IsLoaded()
         {
-            return RemoteConfig.Instance.IsMagic ? Advertisement.IsReady(mySurfacingId) : this.interstitial.IsLoaded();
+            return RemoteConfig.Instance.IsMagic
+                    ? Advertisement.IsReady(mySurfacingId)
+                    :
+#if ADMOB
+                this.interstitial.IsLoaded()
+#else
+                    true
+#endif
+                ;
         }
 
         public void Show()
@@ -362,10 +434,12 @@ namespace Script.SDK
             }
             else
             {
+#if ADMOB
                 this.interstitial.Show();
+#endif
             }
         }
-
+#if ADMOB
         private InterstitialAd CreateInterstitialAd(string adUnitId)
         {
             var interstitial = new InterstitialAd(adUnitId);
@@ -418,9 +492,11 @@ namespace Script.SDK
         private void HandleOnAdLoaded(object sender, EventArgs e)
         {
         }
+#endif
 
         public void OnUnityAdsReady(string placementId)
         {
+            Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
         }
 
         public void OnUnityAdsDidError(string message)
@@ -436,11 +512,13 @@ namespace Script.SDK
         }
     }
 
-    class ADMobBannerConstructor
+    class ADMobBannerConstructor : IUnityAdsListener
     {
         private string id;
+#if ADMOB
         private BannerView bannerView;
-        private string _adUnitId = "bannerAndroid";
+#endif
+        private string _adUnitId = "Banner_Android";
         private BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
 
         public ADMobBannerConstructor(string id)
@@ -452,6 +530,7 @@ namespace Script.SDK
             }
             else
             {
+#if ADMOB
                 this.id = id;
                 this.bannerView = new BannerView(this.id, AdSize.Banner, AdPosition.Bottom);
                 // Called when an ad request has successfully loaded.
@@ -468,40 +547,19 @@ namespace Script.SDK
                 AdRequest request = new AdRequest.Builder().Build();
                 // Load the banner with the request.
                 this.bannerView.LoadAd(request);
+#endif
             }
         }
 
         public void LoadBanner()
         {
-            // Set up options to notify the SDK of load events:
-            BannerLoadOptions options = new BannerLoadOptions
-            {
-                loadCallback = OnBannerLoaded,
-                errorCallback = OnBannerError
-            };
             // Load the Ad Unit with banner content:
-            Advertisement.Banner.Load(_adUnitId, options);
+            Advertisement.Banner.SetPosition(_bannerPosition);
+            Advertisement.Banner.Load(_adUnitId);
+            Advertisement.Banner.Hide();
+            Advertisement.Banner.Show(_adUnitId);
         }
-
-        void OnBannerLoaded()
-        {
-            Debug.Log("Banner loaded");
-            BannerOptions options = new BannerOptions
-            {
-                clickCallback = (() => { }),
-                hideCallback = (() => { }),
-                showCallback = (() => { })
-            };
-            Advertisement.Banner.Show(_adUnitId, options);
-        }
-
-        // Implement code to execute when the load errorCallback event triggers:
-        void OnBannerError(string message)
-        {
-            Debug.Log($"Banner Error: {message}");
-            // Optionally execute additional code, such as attempting to load another ad.
-        }
-
+#if ADMOB
         private void HandleOnAdLoaded(object sender, EventArgs args)
         {
             MonoBehaviour.print("HandleAdLoaded event received");
@@ -526,6 +584,28 @@ namespace Script.SDK
         private void HandleOnAdLeavingApplication(object sender, EventArgs args)
         {
             MonoBehaviour.print("HandleAdLeavingApplication event received");
+        }
+#endif
+        public void OnUnityAdsReady(string placementId)
+        {
+            if (placementId == _adUnitId)
+            {
+                Debug.Log("Banner load :" + placementId);
+                // Advertisement.Banner.SetPosition(_bannerPosition);
+                // Advertisement.Banner.Show(_adUnitId);
+            }
+        }
+
+        public void OnUnityAdsDidError(string message)
+        {
+        }
+
+        public void OnUnityAdsDidStart(string placementId)
+        {
+        }
+
+        public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+        {
         }
     }
 }

@@ -106,6 +106,7 @@ public class GameController : Base
             else
                 isWin = true;*/
         }
+        NativeConnect.Connect.showBanner();
     }
 
     /// <summary>

@@ -12,43 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b8c8011a-d6e9-4071-a0b9-28c42f3fbff8\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": false\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b8c8011a-d6e9-4071-a0b9-28c42f3fbff8\"\r\n   
+    \"value\": true\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": false\r\n    }\r\n  }\r\n]"
-  _environments: "[\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
-    \"name\": \"Production\",\r\n    \"id\": \"be13f817-375c-454c-9e6f-7a88b9021a79\",\r\n   
-    \"createdAt\": \"2021-06-15T08:53:58Z\",\r\n    \"updatedAt\": \"2021-06-15T08:53:58Z\",\r\n   
-    \"isDefault\": true\r\n  },\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
-    \"name\": \"TestRemote\",\r\n    \"id\": \"00f27bd8-3149-4585-94f2-0d08aa5ba06a\",\r\n   
-    \"createdAt\": \"2021-06-15T08:54:31Z\",\r\n    \"updatedAt\": \"2021-06-15T08:54:31Z\",\r\n   
-    \"isDefault\": false\r\n  },\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
-    \"name\": \"HoleSmear\",\r\n    \"id\": \"54059310-2308-4793-9b96-be3556b70153\",\r\n   
-    \"createdAt\": \"2021-07-15T08:18:28Z\",\r\n    \"updatedAt\": \"2021-07-15T08:18:28Z\",\r\n   
+    \"value\": true\r\n    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"ed5575ae-9970-44ee-b8c9-99c076874c03\",\r\n   
+    \"name\": \"Production\",\r\n    \"id\": \"a24f496f-2cd1-47c4-8cf6-5eaec05d39d2\",\r\n   
+    \"createdAt\": \"2021-07-17T07:05:11Z\",\r\n    \"updatedAt\": \"2021-07-17T07:05:11Z\",\r\n   
+    \"isDefault\": true\r\n  },\r\n  {\r\n    \"projectId\": \"ed5575ae-9970-44ee-b8c9-99c076874c03\",\r\n   
+    \"name\": \"HoleSenearGooglePlay\",\r\n    \"id\": \"02be422f-7b37-4595-b2d5-c8d0b6791682\",\r\n   
+    \"createdAt\": \"2021-07-17T07:08:09Z\",\r\n    \"updatedAt\": \"2021-07-17T07:08:09Z\",\r\n   
     \"isDefault\": false\r\n  }\r\n]"
-  _rulesList: "[\r\n  {\r\n    \"id\": \"4b1ec700-ee82-4d12-9cd7-31e54a4c5b57\",\r\n   
+  _rulesList: "[\r\n  {\r\n    \"id\": \"51048dd9-20b8-440e-ad43-794f4ef95ee5\",\r\n   
     \"name\": \"Level\",\r\n    \"type\": \"variant\",\r\n    \"condition\": \"true\",\r\n   
     \"rolloutPercentage\": 100,\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n   
-    \"priority\": 1000,\r\n    \"enabled\": true,\r\n    \"value\": [\r\n      {\r\n       
+    \"priority\": 500,\r\n    \"enabled\": true,\r\n    \"value\": [\r\n      {\r\n       
     \"id\": \"Variant 1\",\r\n        \"weight\": null,\r\n        \"values\": [\r\n         
-    {\r\n            \"metadata\": {\r\n              \"entityId\": \"b8c8011a-d6e9-4071-a0b9-28c42f3fbff8\"\r\n           
+    {\r\n            \"metadata\": {\r\n              \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n           
     },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
     \"type\": \"bool\",\r\n              \"value\": false\r\n            }\r\n         
     }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ]\r\n  }\r\n]"
-  _lastCachedRulesList: "[\r\n  {\r\n    \"projectId\": \"922cb4d0-2241-4508-ba92-b912b2100f5b\",\r\n   
-    \"environmentId\": \"54059310-2308-4793-9b96-be3556b70153\",\r\n    \"configId\":
-    \"14a15bb4-4e0d-4810-b77d-e2767f91e832\",\r\n    \"name\": \"Level\",\r\n   
-    \"enabled\": true,\r\n    \"condition\": \"true\",\r\n    \"rolloutPercentage\":
-    100,\r\n    \"value\": [\r\n      {\r\n        \"id\": \"Variant 1\",\r\n       
-    \"weight\": null,\r\n        \"values\": [\r\n          {\r\n            \"metadata\":
-    {\r\n              \"entityId\": \"b8c8011a-d6e9-4071-a0b9-28c42f3fbff8\"\r\n           
+  _lastCachedRulesList: "[\r\n  {\r\n    \"id\": \"51048dd9-20b8-440e-ad43-794f4ef95ee5\",\r\n   
+    \"name\": \"Level\",\r\n    \"type\": \"variant\",\r\n    \"condition\": \"true\",\r\n   
+    \"rolloutPercentage\": 100,\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n   
+    \"priority\": 500,\r\n    \"enabled\": true,\r\n    \"value\": [\r\n      {\r\n       
+    \"id\": \"Variant 1\",\r\n        \"weight\": null,\r\n        \"values\": [\r\n         
+    {\r\n            \"metadata\": {\r\n              \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n           
     },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
     \"type\": \"bool\",\r\n              \"value\": false\r\n            }\r\n         
-    }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ],\r\n   
-    \"id\": \"4b1ec700-ee82-4d12-9cd7-31e54a4c5b57\",\r\n    \"priority\": 1000,\r\n   
-    \"type\": \"variant\",\r\n    \"version\": \"552f6eca-d6d4-48ad-b31b-d07640e59bd7\",\r\n   
-    \"startDate\": null,\r\n    \"endDate\": null,\r\n    \"metadata\": null,\r\n   
-    \"audience\": null,\r\n    \"kpi\": null,\r\n    \"createdAt\": \"2021-07-15T10:15:32Z\",\r\n   
-    \"updatedAt\": \"2021-07-16T19:08:43Z\"\r\n  }\r\n]"
+    }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ]\r\n  }\r\n]"

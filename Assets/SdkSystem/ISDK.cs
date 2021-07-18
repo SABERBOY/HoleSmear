@@ -36,5 +36,8 @@ namespace Script.SDK
         void ShowInterstitialAd(Action interactionAdCompleted, Action hold);
 
         void OnApplicationPause(bool pause);
+
+        void ShowBanner(bool show);
+
     }
 }
