@@ -404,6 +404,7 @@ namespace Script.SDK
             this.id = id;
             if (RemoteConfig.Instance.IsMagic)
             {
+                Advertisement.AddListener(this);
             }
             else
             {
@@ -525,6 +526,7 @@ namespace Script.SDK
         {
             if (RemoteConfig.Instance.IsMagic)
             {
+                Advertisement.AddListener(this);
                 Advertisement.Banner.SetPosition(_bannerPosition);
                 LoadBanner();
             }
@@ -593,6 +595,7 @@ namespace Script.SDK
                 Debug.Log("Banner load :" + placementId);
                 // Advertisement.Banner.SetPosition(_bannerPosition);
                 // Advertisement.Banner.Show(_adUnitId);
+                LoadBanner();
             }
         }
 
