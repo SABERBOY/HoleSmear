@@ -1,0 +1,31 @@
+{
+    "test": {
+        "appkey": "3202082",
+        "BannerUnitId": "ca-app-pub-8877546902434790/4737171496",
+        "InterstitialUnitId": "ca-app-pub-8877546902434790/9440308614",
+        "RewardUnitId": "ca-app-pub-8877546902434790/3996410244"
+    },
+    "online": {
+        "appkey": "3167840",
+        "channel": [
+            {
+                "name":"aha",
+                "BannerUnitId": "ca-app-pub-2270136017335510/9155742009",
+                "InterstitialUnitId": "ca-app-pub-2270136017335510/3469135203",
+                "RewardUnitId": "ca-app-pub-2270136017335510/9262363840"
+            },
+            {
+                "name":"palm",
+                "BannerUnitId": "ca-app-pub-2270136017335510/5526647200",
+                "InterstitialUnitId": "ca-app-pub-2270136017335510/9837427300",
+                "RewardUnitId": "ca-app-pub-2270136017335510/1587402192"
+            },
+            {
+                "name":"gp",
+                "BannerUnitId": "ca-app-pub-2270136017335510/7961238855",
+                "InterstitialUnitId": "ca-app-pub-2270136017335510/3307199049",
+                "RewardUnitId": "ca-app-pub-2270136017335510/1994117378"
+            }
+        ]
+    }
+}

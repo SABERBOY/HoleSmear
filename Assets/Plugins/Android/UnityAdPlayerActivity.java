@@ -2,14 +2,18 @@ package com.unity3d.player;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 
 import com.transsion.gamead.AdHelper;
-import com.transsion.gamead.GameAdListener;
+import com.transsion.gamead.GameAdBannerListener;
+import com.transsion.gamead.GameAdLoadListener;
+import com.transsion.gamead.GameAdRewardShowListener;
+import com.transsion.gamead.GameAdShowListener;
 import com.transsion.gamead.GameRewardItem;
-import com.transsion.gamead.GameRewardedAdCallback;
-import com.transsion.gamead.GameRewardedAdLoadCallback;
 
 class UnityAdPlayerActivity {
     private Activity unityActivity = null;
@@ -30,26 +34,39 @@ class UnityAdPlayerActivity {
     private boolean rewardLoaded = false;
 
     public void LoadInterstitial() {
-        Activity self = unityActivity;
-        AdHelper.loadInterstitial(unityActivity, new GameAdListener() {
+        Activity activity = unityActivity;
+        AdHelper.loadInterstitial(activity, new GameAdLoadListener() {
             @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                interstitialLoaded = true;
-//                AdHelper.showInterstitial(self);
+            public void onAdFailedToLoad(int code, String message) {
+                Log.i("ADTest", "Interstitial onAdFailedToLoad " + code + " " + message);
             }
 
             @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
+            public void onAdLoaded() {
+                Log.i("ADTest", "Interstitial onAdLoaded");
+                interstitialLoaded = true;
             }
-            //您可以点击进入GameAdListener类，查看更多您需要的回调，并重写对应的方法
         });
     }
 
     public void ShowInterstitial() {
         if (interstitialLoaded) {
-            AdHelper.showInterstitial(unityActivity);
+            AdHelper.showInterstitial(unityActivity, new GameAdShowListener() {
+                @Override
+                public void onShow() {
+                    Log.i("ADTest", "Interstitial show");
+                }
+
+                @Override
+                public void onClose() {
+                    Log.i("ADTest", "Interstitial close");
+                }
+
+                @Override
+                public void onShowFailed(int code, String message) {
+                    Log.i("ADTest", "Interstitial show fail " + code + " " + message);
+                }
+            });
             interstitialLoaded = false;
         } else {
             LoadInterstitial();
@@ -57,47 +74,49 @@ class UnityAdPlayerActivity {
     }
 
     public void LoadReward() {
-        Activity self = unityActivity;
+        Activity activity = unityActivity;
 
-        AdHelper.loadReward(unityActivity, new GameRewardedAdLoadCallback() {
+        AdHelper.loadReward(activity, new GameAdLoadListener() {
+            @Override
+            public void onAdFailedToLoad(int code, String message) {
+                Log.i("ADTest", "Reward onRewardedAdFailedToLoad " + code + " " + message);
+            }
 
             @Override
-            public void onRewardedAdLoaded() {
-                super.onRewardedAdLoaded();
+            public void onAdLoaded() {
+                Log.i("ADTest", "Reward onRewardedAdLoaded");
                 rewardLoaded = true;
-//                AdHelper.showReward(self);
-            }
-
-            @Override
-            public void onRewardedAdFailedToLoad(int i) {
-                super.onRewardedAdFailedToLoad(i);
-            }
-
-        }, new GameRewardedAdCallback() {
-
-            public void onRewardedAdOpened() {
-                //激励广告被打开
-            }
-
-            public void onRewardedAdClosed() {
-                //激励广告被关闭
-            }
-
-            public void onUserEarnedReward(@NonNull GameRewardItem gameRewardItem) {
-                //激励广告播放完成
-                UnityPlayer.UnitySendMessage("PS", "RewardSuccess", "");
-            }
-
-            public void onRewardedAdFailedToShow(int reason) {
-                //激励广告展示失败
-                UnityPlayer.UnitySendMessage("PS", "RewardFail", "");
             }
         });
     }
 
     public void ShowReward() {
         if (rewardLoaded) {
-            AdHelper.showReward(unityActivity);
+
+            AdHelper.showReward(unityActivity, new GameAdRewardShowListener() {
+                @Override
+                public void onShow() {
+                    Log.i("ADTest", "Reward show");
+                }
+
+                @Override
+                public void onClose() {
+                    Log.i("ADTest", "Reward close");
+                }
+
+                @Override
+                public void onShowFailed(int code, String message) {
+                    Log.i("ADTest", "Reward show fail " + code + " " + message);
+                    UnityPlayer.UnitySendMessage("PS", "RewardFail", "");
+                }
+
+                @Override
+                public void onUserEarnedReward(GameRewardItem rewardItem) {
+                    Log.i("ADTest", "Reward onUserEarnedReward " + rewardItem.getType() + " " +
+                            rewardItem.getAmount());
+                    UnityPlayer.UnitySendMessage("PS", "RewardSuccess", "");
+                }
+            });
             rewardLoaded = false;
         } else {
             LoadReward();
@@ -117,19 +136,81 @@ class UnityAdPlayerActivity {
 //        layoutParams.bottomMargin = 400;
         layoutParams.setMarginStart(32);
         layoutParams.setMarginEnd(32);
-        AdHelper.showBanner(unityActivity, layoutParams, new GameAdListener() {
+        AdHelper.showBanner(self, layoutParams, new GameAdBannerListener() {
+            @Override
+            public void onAdFailedToLoad(int code, String message) {
+                Log.i("ADTest", "Banner onAdFailedToLoad " + code + " " + message);
+            }
+
+            @Override
+            public void onAdOpened() {
+                Log.i("ADTest", "Banner onAdOpened");
+            }
+
+            @Override
+            public void onAdImpression() {
+                Log.i("ADTest", "Banner onAdImpression");
+            }
+
             @Override
             public void onAdLoaded() {
-                super.onAdLoaded();
-                AdHelper.showBanner(self);
-
+                Log.i("ADTest", "Banner onAdLoaded");
             }
 
             @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
+            public void onAdClosed() {
+                Log.i("ADTest", "Banner onAdClosed");
             }
-            //您可以点击进入GameAdListener类，查看更多您需要的回调，并重写对应的方法
         });
+
+    }
+
+    public void LoadFloat() {
+        Activity activity = unityActivity;
+        AdHelper.loadFloat(activity, new GameAdLoadListener() {
+            @Override
+            public void onAdFailedToLoad(int code, String message) {
+                Log.i("ADTest", "Float onAdFailedToLoad " + code + " " + message);
+            }
+
+            @Override
+            public void onAdLoaded() {
+                Log.i("ADTest", "Float onAdLoaded");
+            }
+        });
+    }
+
+    public void SetFloatActive(boolean active) {
+        Activity activity = unityActivity;
+        if (active) {
+            int width = FrameLayout.LayoutParams.WRAP_CONTENT;
+            int height = FrameLayout.LayoutParams.WRAP_CONTENT;
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
+            layoutParams.gravity = Gravity.BOTTOM;
+            DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+            layoutParams.bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
+                    , 100f, displayMetrics);
+            int dp16 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f, displayMetrics);
+            layoutParams.setMarginStart(dp16);
+            layoutParams.setMarginEnd(dp16);
+            AdHelper.showFloat(activity, layoutParams, new GameAdShowListener() {
+                @Override
+                public void onShow() {
+                    Log.i("ADTest", "Float show");
+                }
+
+                @Override
+                public void onClose() {
+                    Log.i("ADTest", "Float close");
+                }
+
+                @Override
+                public void onShowFailed(int code, String message) {
+                    Log.i("ADTest", "Float show fail " + code + " " + message);
+                }
+            });
+        } else {
+            AdHelper.closeFloat(activity);
+        }
     }
 }

@@ -16,7 +16,7 @@ allprojects {
             // To specify a custom Gradle version in Unity, go do "Preferences > External Tools", uncheck "Gradle Installed with Unity (recommended)" and specify a path to a custom Gradle version
             classpath 'com.android.tools.build:gradle:3.4.0'
             **BUILD_SCRIPT_DEPS**
-            classpath 'com.google.gms:google-services:4.3.4'
+            classpath 'com.google.gms:google-services:4.3.5'
         }
     }
 
@@ -26,8 +26,6 @@ allprojects {
         flatDir {
             dirs "${project(':unityLibrary').projectDir}/libs"
         }
-        maven { url 'https://mvn.shalltry.com/repository/maven-public/' }
-        maven { url 'https://mvn.shalltry.com/repository/game-releases/' }
     }
 }
 
