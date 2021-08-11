@@ -76,5 +76,10 @@ namespace SDK
                 this.unityAdPlayerActivity.Call("ShowBanner");
             }
         }
+
+        public void ShowFloatingWindow(bool show)
+        {
+            this.unityAdPlayerActivity.Call("ShowBanner",show);
+        }
     }
 }

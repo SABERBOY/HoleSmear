@@ -303,4 +303,9 @@ public class NativeConnect : Base
             bo = false;
         });
     }
+
+    public void ShowFloatingWindow(bool show)
+    {
+        SdkSystem.Instance.ShowFloatingWindow(show);
+    }
 }

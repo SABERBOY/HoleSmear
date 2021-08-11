@@ -92,7 +92,6 @@ class UnityAdPlayerActivity {
 
     public void ShowReward() {
         if (rewardLoaded) {
-
             AdHelper.showReward(unityActivity, new GameAdRewardShowListener() {
                 @Override
                 public void onShow() {
@@ -108,6 +107,7 @@ class UnityAdPlayerActivity {
                 public void onShowFailed(int code, String message) {
                     Log.i("ADTest", "Reward show fail " + code + " " + message);
                     UnityPlayer.UnitySendMessage("PS", "RewardFail", "");
+                    LoadReward();
                 }
 
                 @Override
@@ -115,6 +115,7 @@ class UnityAdPlayerActivity {
                     Log.i("ADTest", "Reward onUserEarnedReward " + rewardItem.getType() + " " +
                             rewardItem.getAmount());
                     UnityPlayer.UnitySendMessage("PS", "RewardSuccess", "");
+                    LoadReward();
                 }
             });
             rewardLoaded = false;
@@ -186,7 +187,7 @@ class UnityAdPlayerActivity {
             int width = FrameLayout.LayoutParams.WRAP_CONTENT;
             int height = FrameLayout.LayoutParams.WRAP_CONTENT;
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
-            layoutParams.gravity = Gravity.BOTTOM;
+            layoutParams.gravity = Gravity.LEFT;
             DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
             layoutParams.bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
                     , 100f, displayMetrics);

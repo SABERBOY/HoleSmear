@@ -2,6 +2,7 @@ package com.unity3d.player;
 
 
 import android.app.Application;
+import android.support.multidex.BuildConfig;
 
 import com.transsion.game.analytics.GameAnalytics;
 import com.transsion.gamead.AdInitializer;
@@ -19,7 +20,7 @@ public class UnityApplication extends Application {
                 new AdInitializer.Builder(this)
                         //开启debuggable 展示测试广告
                         //请在正式上线环境下，设为false
-                        .setDebuggable(true)
+                        .setDebuggable(false)
                         //开启debug，展示的是admob的测试服务器广告
                         //如果你需要调试线上真实广告，你需要把debuggable设为false
                         //并输入你的设备ID，如何获取设备ID见 第6点广告测试的问题QA

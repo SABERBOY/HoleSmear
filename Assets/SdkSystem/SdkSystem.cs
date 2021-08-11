@@ -114,5 +114,13 @@ namespace SDK
             /* tGSDKController.ShowRewardVideoAd(); */
             this._sdk.ShowInterstitialAd(interactionAdCompleted, hold);
         }
+
+        public void ShowFloatingWindow(bool show)
+        {
+            if (this._sdk is TranssionSDK)
+            {
+                ((TranssionSDK)this._sdk)?.ShowFloatingWindow(show);
+            }
+        }
     }
 }

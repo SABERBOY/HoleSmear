@@ -107,6 +107,7 @@ public class GameController : Base
                 isWin = true;*/
         }
         NativeConnect.Connect.showBanner();
+        NativeConnect.Connect.ShowFloatingWindow(true);
     }
 
     /// <summary>
