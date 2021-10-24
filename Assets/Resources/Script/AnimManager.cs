@@ -190,8 +190,10 @@ public class AnimManager : Base
     /// </summary>
     public void SetAndSkinButtonMove()
     {
-        setButton.DOMoveX(setButton.position.x - setButton.sizeDelta.x, 0.5f);
-        skinButton.DOMoveX(skinButton.position.x + skinButton.sizeDelta.x, 0.5f);
+        setButton.gameObject.SetActive(false);
+        skinButton.gameObject.SetActive(false);
+        // setButton.DOMoveX(setButton.position.x - setButton.sizeDelta.x, 0.5f);
+        // skinButton.DOMoveX(skinButton.position.x + skinButton.sizeDelta.x, 0.5f);
     }
 
     /// <summary>
@@ -199,8 +201,10 @@ public class AnimManager : Base
     /// </summary>
     public void SetAndSkinButtonCome()
     {
-        setButton.DOMoveX(setButton.position.x + setButton.sizeDelta.x, 0.5f);
-        skinButton.DOMoveX(skinButton.position.x - skinButton.sizeDelta.x, 0.5f);
+        setButton.gameObject.SetActive(true);
+        skinButton.gameObject.SetActive(true);
+        // setButton.DOMoveX(setButton.position.x + setButton.sizeDelta.x, 0.5f);
+        // skinButton.DOMoveX(skinButton.position.x - skinButton.sizeDelta.x, 0.5f);
     }
 
     /// <summary>
@@ -220,10 +224,10 @@ public class AnimManager : Base
     /// </summary>
     public void CloseSpinPanel()
     {
-        UI.winPanel.SetActive(false);
+        // UI.winPanel.SetActive(false);
         Tweener a = spinPanel.transform.DOMoveY(startY, 0.5f);
         spinPanel.gameObject.SetActive(false);
-        a.onComplete = gameCon.WinSpinNextLevel;
+        // a.onComplete = gameCon.WinSpinNextLevel;
         bar.fillAmount = 0;
         vdieoButton.gameObject.SetActive(true);
         giftButton2.gameObject.SetActive(false);
@@ -278,6 +282,7 @@ public class AnimManager : Base
         giftButton2.enabled = false;
         if (NativeConnect.Connect.VideoState)
         {
+            Debug.Log($"SPIN:{DataController.sceneNum % 3 == 2}");
             NativeConnect.Connect.showVideo("Rvdoublediamond", delegate(string str)
             {
                 if (str.Equals("True"))

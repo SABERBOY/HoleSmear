@@ -1,7 +1,7 @@
 package com.unity3d.player;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+//import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;

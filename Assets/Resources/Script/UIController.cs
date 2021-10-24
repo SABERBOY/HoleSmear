@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using SDK;
 using UnityEngine;
@@ -30,11 +31,14 @@ public class UIController : Base
     public Toggle shockSwitch;
     public Text skinMoney;
     public GameObject skinPanel;
+    public List<GameObject> SkinGameObjects;
     public Text starText;
     public GameObject startPanel;
     public GameObject tick;
     public Button winButton;
     public GameObject winPanel;
+
+    private List<int> skinNeedMoney = new List<int>() { (int)(1000*1.5F), (int)(2000*2F), (int)(3000*2.6F), (int)(4000*3.5F), (int)(5000*4.5F) };
 
     public int moneyTextNum
     {
@@ -278,6 +282,12 @@ public class UIController : Base
         NativeConnect.Connect.showBlock(s => { });
         skinMoney.text = moneyText.text;
         Hole.instance.enabled = false;
+        for (var i = 0; i < this.SkinGameObjects.Count; i++)
+        {
+            var o = this.SkinGameObjects[i];
+            o.GetComponentInChildren<Text>().text = this.skinNeedMoney[i].ToString();
+        }
+
         skinPanel.SetActive(true);
         var go = GameObject.Find("S" + SceneData.skinID);
         var str = PlayerPrefs.GetString(SceneData.skinState);
@@ -297,7 +307,7 @@ public class UIController : Base
         }
 
         var pos = tick.transform.localPosition;
-        tick.transform.parent = go.transform;
+        tick.transform.SetParent(go.transform,false);
         tick.transform.localPosition = pos;
     }
 
@@ -319,7 +329,8 @@ public class UIController : Base
         var num = int.Parse(go.name[1].ToString());
         if (image.color != Color.white)
         {
-            gameCon.skinMoneyNum = num * 500;
+            gameCon.skinMoneyNum = this.skinNeedMoney[num-1];
+            Debug.Log(gameCon.skinMoneyNum);
             if (moneyTextNum < gameCon.skinMoneyNum)
             {
                 anim.ShowHints(anim.moneyHintsText);
@@ -337,7 +348,7 @@ public class UIController : Base
 
         ChangeSkin(num);
         var pos = tick.transform.localPosition;
-        tick.transform.parent = go;
+        tick.transform.SetParent(go, false);
         tick.transform.localPosition = pos;
     }
 

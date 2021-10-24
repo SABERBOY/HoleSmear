@@ -82,6 +82,7 @@ public class GameController : Base
     /// </summary>
     public void WinLiZiPanel()
     {
+        anim.SpinShowVideo();
         UI.winPanel.gameObject.SetActive(true);
         UI.starTextNum = addMoneyNum;
         anim.WinTextMove();
@@ -95,7 +96,7 @@ public class GameController : Base
     {
         if (Shape.shapeList.Count == 0 && isWin == false && isDie == false)
         {
-            ShowBlock();
+            ShowBlock(DataController.sceneNum % 3 != 2);
             /*if (DataController.sceneNum % 3 == 2)
             {u
                 ShowBlock();
@@ -323,10 +324,18 @@ public class GameController : Base
     /// <summary>
     ///     显示插屏广告
     /// </summary>
-    public void ShowBlock()
+    /// <param name="need"></param>
+    public void ShowBlock(bool need)
     {
         Hole.instance.StopMove();
-        NativeConnect.Connect.showBlock(delegate { isWin = true; });
+        if (need)
+        {
+            NativeConnect.Connect.showBlock(delegate { isWin = true; });
+        }
+        else
+        {
+            isWin = true;
+        }
         /*if (NativeConnect.Connect.InterstitialState)
             NativeConnect.Connect.showBlock(delegate { isWin = true; });
         else
