@@ -26,6 +26,7 @@ public class GameController : Base
             {
                 Hole.instance.StopMove();
                 anim.DieSnake();
+                NativeConnect.Connect.ShowFloatingWindow(true);
             }
             else
             {
@@ -63,6 +64,8 @@ public class GameController : Base
                         StartCoroutine("IEHoleBigger");
                         break;
                 }
+
+                NativeConnect.Connect.ShowFloatingWindow(true);
             }
             else
             {
@@ -105,9 +108,8 @@ public class GameController : Base
                 (DataController.bigLevel + 1) % 3 != 0)
             else
                 isWin = true;*/
+            NativeConnect.Connect.showBanner();
         }
-        NativeConnect.Connect.showBanner();
-        NativeConnect.Connect.ShowFloatingWindow(true);
     }
 
     /// <summary>
@@ -161,11 +163,12 @@ public class GameController : Base
                 Hole.instance.lizi.Stop();
                 if (DataController.sceneNum % 3 == 0)
                 {
-                    UI.startPanel.SetActive(true);
                     Hole.instance.StopMove();
                     anim.SetAndSkinButtonCome();
                     Hole.instance.enabled = false;
                 }
+
+                UI.startPanel.SetActive(true);
             }
 
             yield return new WaitForSeconds(0.02f);
@@ -237,6 +240,7 @@ public class GameController : Base
         DataController.sceneNum -= DataController.sceneNum % 3;
         Hole.instance.ResetPos();
         UI.StopCountDown();
+        UI.startPanel.SetActive(true);
     }
 
     /// <summary>
@@ -247,6 +251,7 @@ public class GameController : Base
         isDie = false;
         Hole.instance.ResetPos();
         UI.StopCountDown();
+        UI.startPanel.SetActive(true);
     }
 
     /// <summary>

@@ -59,12 +59,12 @@ namespace Script.SDK
                 }
 
                 this.adMobBannerConstructor = new ADMobBannerConstructor("ca-app-pub-2270136017335510/5359322361");
-                Debug.Log("ADMob");
+                // Debug.Log("ADMob");
             }
             else
             {
                 transsionSDK = new TranssionSDK();
-                Debug.Log("Init:" + transsionSDK);
+                // Debug.Log("Init:" + transsionSDK);
 #if ADMOB
                 MobileAds.SetRequestConfiguration(MobileAds.GetRequestConfiguration().ToBuilder()
                     .SetTestDeviceIds(new List<string>() {"83C0EECDFE32F56622BF2A7B4C6A0AEF"}).build());
@@ -105,7 +105,7 @@ namespace Script.SDK
             }
             else
             {
-                return transsionSDK.VideoLoaded();
+                return transsionSDK.VideoLoaded() || transsionSDK.InterstitialLoaded();
             }
 
             // return this.InterstitialLoaded();
@@ -129,7 +129,7 @@ namespace Script.SDK
             }
             else
             {
-                return transsionSDK.InterstitialLoaded();
+                return transsionSDK.InterstitialLoaded() || transsionSDK.VideoLoaded();
             }
         }
 
@@ -138,11 +138,19 @@ namespace Script.SDK
         {
             if (!RemoteConfig.Instance.IsMagic)
             {
-                transsionSDK.ShowVideo(success, fail);
+                if (transsionSDK.VideoLoaded())
+                {
+                    transsionSDK.ShowVideo(success, fail);
+                }
+                else if (transsionSDK.InterstitialLoaded())
+                {
+                    transsionSDK.ShowInterstitialAd(success, fail);
+                }
+
                 return;
             }
 
-            Debug.Log("展示视频");
+            // Debug.Log("展示视频");
 #if UNITY_EDITOR
             success?.Invoke();
 #elif UNITY_ANDROID
@@ -174,11 +182,19 @@ namespace Script.SDK
         {
             if (!RemoteConfig.Instance.IsMagic)
             {
-                transsionSDK.ShowInterstitialAd(interactionAdCompleted, hold);
+                if (transsionSDK.VideoLoaded())
+                {
+                    transsionSDK.ShowVideo(interactionAdCompleted, hold);
+                }
+                else if (transsionSDK.InterstitialLoaded())
+                {
+                    transsionSDK.ShowInterstitialAd(interactionAdCompleted, hold);
+                }
+
                 return;
             }
 
-            Debug.Log("展示插屏");
+            // Debug.Log("展示插屏");
             ADMobInterstitialAdConstructor a = null;
             foreach (var inter in this.adMobInterstitialAdConstructors)
             {
@@ -211,6 +227,17 @@ namespace Script.SDK
 
             this.adMobBannerConstructor.LoadBanner();
         }
+
+        public void ShowFloatingWindow(bool show, int hight)
+        {
+            if (!RemoteConfig.Instance.IsMagic)
+            {
+                if (this.transsionSDK is TranssionSDK sdk)
+                {
+                    sdk.ShowFloatingWindow(show, hight);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -233,7 +260,7 @@ namespace Script.SDK
             this.id = id;
             if (RemoteConfig.Instance.IsMagic)
             {
-                Debug.Log("Unity:" + Advertisement.IsReady(mySurfacingId));
+                // Debug.Log("Unity:" + Advertisement.IsReady(mySurfacingId));
                 Advertisement.AddListener(this);
             }
             else
@@ -341,7 +368,7 @@ namespace Script.SDK
         public void OnUnityAdsReady(string placementId)
         {
             // Check if UnityAds ready before calling Show method:
-            if (Advertisement.IsReady(mySurfacingId))
+            /*if (Advertisement.IsReady(mySurfacingId))
             {
                 // Advertisement.Show(mySurfacingId);
                 Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
@@ -349,7 +376,7 @@ namespace Script.SDK
             else
             {
                 Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
-            }
+            }*/
         }
 
         public void OnUnityAdsDidError(string message)
@@ -381,7 +408,7 @@ namespace Script.SDK
             }
             else if (showResult == ShowResult.Failed)
             {
-                Debug.LogWarning("The ad did not finish due to an error.");
+                // Debug.LogWarning("The ad did not finish due to an error.");
                 this.fail?.Invoke();
             }
         }
@@ -497,7 +524,7 @@ namespace Script.SDK
 
         public void OnUnityAdsReady(string placementId)
         {
-            Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
+            // Debug.Log($"{nameof(OnUnityAdsReady)}:{placementId}");
         }
 
         public void OnUnityAdsDidError(string message)
@@ -592,7 +619,7 @@ namespace Script.SDK
         {
             if (placementId == _adUnitId)
             {
-                Debug.Log("Banner load :" + placementId);
+                // Debug.Log("Banner load :" + placementId);
                 // Advertisement.Banner.SetPosition(_bannerPosition);
                 // Advertisement.Banner.Show(_adUnitId);
                 LoadBanner();

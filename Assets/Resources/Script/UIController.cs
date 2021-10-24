@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
+using SDK;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -68,7 +69,17 @@ public class UIController : Base
     {
         StartCoroutine("IEFPS");
         anim.RotaImage();
-        crr = new[] {'0', '0', '0', '0', '0', '0'};
+        crr = new[] { '0', '0', '0', '0', '0', '0' };
+        EventTrigger trigger = this.startPanel.GetComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerDown;
+        entry.callback.AddListener((data) =>
+        {
+            // Debug.Log("Entering");
+            NativeConnect.Connect.ShowFloatingWindow(false);
+            this.StartGame();
+        });
+        trigger.triggers.Add(entry);
     }
 
     private void Update()
@@ -175,7 +186,7 @@ public class UIController : Base
             if (dieTimeNum <= 0) gameCon.DieNewGame();
             dieTimeNum -= Time.deltaTime;
             dieTimeImage.fillAmount = dieTimeNum / 10;
-            dieTimeText.text = ((int) (dieTimeNum + 1)).ToString();
+            dieTimeText.text = ((int)(dieTimeNum + 1)).ToString();
             yield return new WaitForSeconds(0.02f);
         }
     }

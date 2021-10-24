@@ -209,6 +209,7 @@ public class AnimManager : Base
     public void OpenSpinPanel()
     {
         for (var i = 0; i < spinTexts.Length; i++) spinTexts[i].text = (gameCon.addMoneyNum * spinTimes[i]).ToString();
+        spinPanel.gameObject.SetActive(true);
         Tweener a = spinPanel.transform.DOLocalMoveY(0, 0.5f);
         a.SetEase(Ease.OutBack);
         a.onComplete = RotSpin;
@@ -221,6 +222,7 @@ public class AnimManager : Base
     {
         UI.winPanel.SetActive(false);
         Tweener a = spinPanel.transform.DOMoveY(startY, 0.5f);
+        spinPanel.gameObject.SetActive(false);
         a.onComplete = gameCon.WinSpinNextLevel;
         bar.fillAmount = 0;
         vdieoButton.gameObject.SetActive(true);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class DataController : MonoBehaviour
 {
@@ -86,11 +87,15 @@ public class DataController : MonoBehaviour
                 }
 
                 GetLevelNum(bigLevel, smallLevel);
+                AnalyticsEvent.LevelUp(value,
+                    new Dictionary<string, object>() { { "bigLevel", bigLevel }, { "smallLevel", smallLevel } });
                 return;
             }
 
             smallLevel = value % 3;
             GetLevelNum(bigLevel, smallLevel);
+            AnalyticsEvent.LevelUp(value,
+                new Dictionary<string, object>() { { "bigLevel", bigLevel }, { "smallLevel", smallLevel } });
             PlayerPrefs.SetString(SceneData.level, sceneNum.ToString());
         }
     }
@@ -106,7 +111,7 @@ public class DataController : MonoBehaviour
         GetAllBigLevelData();
         GetAllSmallLevelData();
 
-        listBig = new List<int> {-1, -1, -1, -1, -1};
+        listBig = new List<int> { -1, -1, -1, -1, -1 };
     }
 
     /// <summary>

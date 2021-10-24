@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": true\r\n    }\r\n  }\r\n]"
+  _rsKeyList: '[]'
   _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"IsMagic\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": true\r\n    }\r\n  }\r\n]"
@@ -25,15 +23,7 @@ MonoBehaviour:
     \"name\": \"HoleSenearGooglePlay\",\r\n    \"id\": \"02be422f-7b37-4595-b2d5-c8d0b6791682\",\r\n   
     \"createdAt\": \"2021-07-17T07:08:09Z\",\r\n    \"updatedAt\": \"2021-07-17T07:08:09Z\",\r\n   
     \"isDefault\": false\r\n  }\r\n]"
-  _rulesList: "[\r\n  {\r\n    \"id\": \"51048dd9-20b8-440e-ad43-794f4ef95ee5\",\r\n   
-    \"name\": \"Level\",\r\n    \"type\": \"variant\",\r\n    \"condition\": \"true\",\r\n   
-    \"rolloutPercentage\": 100,\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n   
-    \"priority\": 500,\r\n    \"enabled\": true,\r\n    \"value\": [\r\n      {\r\n       
-    \"id\": \"Variant 1\",\r\n        \"weight\": null,\r\n        \"values\": [\r\n         
-    {\r\n            \"metadata\": {\r\n              \"entityId\": \"322420d6-5235-41fb-9dbe-4d9f5897e59a\"\r\n           
-    },\r\n            \"rs\": {\r\n              \"key\": \"IsMagic\",\r\n             
-    \"type\": \"bool\",\r\n              \"value\": false\r\n            }\r\n         
-    }\r\n        ],\r\n        \"type\": \"variant\"\r\n      }\r\n    ]\r\n  }\r\n]"
+  _rulesList: '[]'
   _lastCachedRulesList: "[\r\n  {\r\n    \"id\": \"51048dd9-20b8-440e-ad43-794f4ef95ee5\",\r\n   
     \"name\": \"Level\",\r\n    \"type\": \"variant\",\r\n    \"condition\": \"true\",\r\n   
     \"rolloutPercentage\": 100,\r\n    \"startDate\": \"\",\r\n    \"endDate\": \"\",\r\n   

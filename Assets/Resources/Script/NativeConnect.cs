@@ -198,6 +198,7 @@ public class NativeConnect : Base
 
     public void showBanner(string info = "")
     {
+        SdkSystem.Instance.ShowBanner(true);
     }
 
     /// <summary>
@@ -268,7 +269,7 @@ public class NativeConnect : Base
         // SdkSystem.Instance.ShowInterstitial((() => callBackVideo("True")), (() => callBackVideo("False")));
         // SdkSystem.Instance.ShowInterstitial((() => callBackBlock(String.Empty)), (() => callBackBlock(String.Empty)));
 #else
-        InvokeEvent("Video|False");
+        InvokeEvent("Video|True");
 #endif
     }
 
@@ -304,8 +305,27 @@ public class NativeConnect : Base
         });
     }
 
-    public void ShowFloatingWindow(bool show)
+    public void ShowFloatingWindow(bool show,RectTransform rectTrans=null)
     {
-        SdkSystem.Instance.ShowFloatingWindow(show);
+        var adPos = Vector2.zero;
+        if (rectTrans)
+        {
+            var cam = rectTrans.root.GetComponentInChildren<Canvas>().worldCamera;
+            var corners = new Vector3[4];
+            rectTrans.GetLocalCorners(corners);
+            var left_top =
+                RectTransformUtility.WorldToScreenPoint(cam, rectTrans.localToWorldMatrix.MultiplyPoint(corners[1]));
+            var right_bottom =
+                RectTransformUtility.WorldToScreenPoint(cam, rectTrans.localToWorldMatrix.MultiplyPoint(corners[3]));
+            var adSize = new Vector2(right_bottom.x - left_top.x, left_top.y - right_bottom.y);
+             adPos = left_top;
+        }
+
+        var hight = 200;
+        if (adPos.y != 0)
+        {
+            hight = (int)(Screen.height - adPos.y);
+        }
+        SdkSystem.Instance.ShowFloatingWindow(show,hight);
     }
 }

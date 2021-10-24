@@ -26,7 +26,7 @@ public class Hole : Base
 
     private void Start()
     {
-        NativeConnect.Connect.showBanner();
+        // NativeConnect.Connect.showBanner();
         //StartCoroutine("IEShockTime");
     }
 

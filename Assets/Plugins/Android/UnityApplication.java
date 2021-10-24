@@ -14,7 +14,7 @@ public class UnityApplication extends Application {
     public void onCreate() {
         super.onCreate();
         GameAnalytics.init(new GameAnalytics.Builder(this)
-                .setTest(BuildConfig.DEBUG)
+                .setTest(false)
         );
         AdInitializer.Builder builder =//appKey是我们提供给您的一串数值
                 new AdInitializer.Builder(this)
@@ -34,9 +34,7 @@ public class UnityApplication extends Application {
                         //.setMainThreadHandler(handler)
                         //广告开关，不传默认开启
                         .setTotalSwitch(true);
-        if (BuildConfig.DEBUG) {
-            builder.setTestDeviceIds(Collections.singletonList("83C0EECDFE32F56622BF2A7B4C6A0AEF"));
-        }
+        builder.setTestDeviceIds(Collections.singletonList("83C0EECDFE32F56622BF2A7B4C6A0AEF"));
         AdInitializer.init(builder);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 #if ADMOB
 using Firebase;
 #endif
 using Script.SDK;
+using UnityEngine.Analytics;
 
 namespace SDK
 {
@@ -82,7 +84,9 @@ namespace SDK
         /// <returns></returns>
         public bool IsRewardAdLoaded()
         {
-            return this._sdk.VideoLoaded();
+            var adLoaded = this._sdk.VideoLoaded();
+            AnalyticsEvent.Custom("Reward", new Dictionary<string, object> { { "IsRewardAdLoaded", adLoaded } });
+            return adLoaded;
         }
 
 
@@ -92,6 +96,9 @@ namespace SDK
         /// <returns></returns>
         public bool IsInterstitialLoaded()
         {
+            var adLoaded = this._sdk.InterstitialLoaded();
+            AnalyticsEvent.Custom("Interstitial",
+                new Dictionary<string, object> { { "IsInterstitialLoaded", adLoaded } });
             return this._sdk.InterstitialLoaded();
         }
 
@@ -101,8 +108,17 @@ namespace SDK
         /// </summary>
         public void ShowRewardVideoAd(Action success, Action fail)
         {
+            AnalyticsEvent.AdStart(false, AdvertisingNetwork.UnityAds, "ShowRewardVideoAd");
             /* tGSDKController.ShowRewardVideoAd(); */
-            this._sdk.ShowVideo(success, fail);
+            this._sdk.ShowVideo((() =>
+            {
+                success?.Invoke();
+                AnalyticsEvent.AdComplete(true, AdvertisingNetwork.UnityAds, "ShowRewardVideoAd");
+            }), (() =>
+            {
+                fail?.Invoke();
+                AnalyticsEvent.AdComplete(false, AdvertisingNetwork.UnityAds, "ShowRewardVideoAd");
+            }));
         }
 
 
@@ -112,15 +128,29 @@ namespace SDK
         public void ShowInterstitial(Action interactionAdCompleted, Action hold)
         {
             /* tGSDKController.ShowRewardVideoAd(); */
-            this._sdk.ShowInterstitialAd(interactionAdCompleted, hold);
+            AnalyticsEvent.AdStart(false, AdvertisingNetwork.UnityAds, "ShowInterstitial");
+            this._sdk.ShowInterstitialAd((() =>
+            {
+                interactionAdCompleted?.Invoke();
+                AnalyticsEvent.AdStart(true, AdvertisingNetwork.UnityAds, "ShowInterstitial");
+            }), (() =>
+            {
+                hold?.Invoke();
+                AnalyticsEvent.AdStart(false, AdvertisingNetwork.UnityAds, "ShowInterstitial");
+            }));
         }
 
-        public void ShowFloatingWindow(bool show)
+        public void ShowFloatingWindow(bool show, int hight)
         {
-            if (this._sdk is TranssionSDK)
+            if (this._sdk is ADMob sdk)
             {
-                ((TranssionSDK)this._sdk)?.ShowFloatingWindow(show);
+                sdk?.ShowFloatingWindow(show, hight);
             }
+        }
+
+        public void ShowBanner(bool active)
+        {
+            this._sdk.ShowBanner(active);
         }
     }
 }

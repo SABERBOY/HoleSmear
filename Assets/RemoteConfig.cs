@@ -36,7 +36,7 @@ namespace DefaultNamespace
             DontDestroyOnLoad(this);
             _instance = this;
             // Add a listener to apply settings when successfully retrieved:
-            ConfigManager.FetchCompleted += ApplyRemoteSettings;
+            // ConfigManager.FetchCompleted += ApplyRemoteSettings;
 
             // Set the user’s unique ID:
             ConfigManager.SetCustomUserID("HoleSenearGooglePlay");
@@ -47,8 +47,8 @@ namespace DefaultNamespace
             // Fetch configuration setting from the remote service:
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
             AnalyticsEvent.GameStart(new Dictionary<string, object> {{"PS", "PS"}});
-            NativeConnect.Connect.showBanner();
             // Invoke(nameof(ShowInterstitialAd), 3);
+            this.OnInitializationComplete();
         }
 
         private string _adUnitId = "bannerAndroid";
@@ -77,7 +77,6 @@ namespace DefaultNamespace
             {
                 loadCallback = (() =>
                 {
-                    Debug.Log("Banner loaded");
                     BannerOptions options1 = new BannerOptions
                     {
                         clickCallback = (() => { }),
@@ -125,11 +124,12 @@ namespace DefaultNamespace
                     // ShowInterstitialAd();
                     break;
             }
+            NativeConnect.Connect.showBanner();
         }
 
         public void OnInitializationComplete()
         {
-            Debug.Log("OnInitializationComplete");
+            // Debug.Log("OnInitializationComplete");
             NativeConnect.Connect.Init();
         }
 
