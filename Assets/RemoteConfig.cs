@@ -46,14 +46,15 @@ namespace DefaultNamespace
 
             // Fetch configuration setting from the remote service:
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
-            AnalyticsEvent.GameStart(new Dictionary<string, object> {{"PS", "PS"}});
+            AnalyticsEvent.GameStart(new Dictionary<string, object> { { "PS", "PS" } });
             // Invoke(nameof(ShowInterstitialAd), 3);
             this.OnInitializationComplete();
         }
 
         private string _adUnitId = "bannerAndroid";
+#if UNITY_ADS // If Unity Ads is supported...
         private BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
-
+#endif
         public void ShowInterstitialAd()
         {
             // Check if UnityAds ready before calling Show method:
@@ -66,12 +67,15 @@ namespace DefaultNamespace
             else {
                 Debug.Log("Interstitial ad not ready at the moment! Please try again later!");
             }*/
+#if UNITY_ADS // If Unity Ads is supported...
             Advertisement.Banner.SetPosition(_bannerPosition);
+#endif
             LoadBanner();
         }
 
         public void LoadBanner()
         {
+#if UNITY_ADS // If Unity Ads is supported...
             // Set up options to notify the SDK of load events:
             BannerLoadOptions options = new BannerLoadOptions
             {
@@ -89,6 +93,7 @@ namespace DefaultNamespace
             };
             // Load the Ad Unit with banner content:
             Advertisement.Banner.Load(_adUnitId, options);
+#endif
         }
 
         void ApplyRemoteSettings(ConfigResponse configResponse)
@@ -106,7 +111,7 @@ namespace DefaultNamespace
                     NativeConnect.Connect.Init();
                     break;
                 case ConfigOrigin.Remote:
-                    this.isMagic = ConfigManager.appConfig.GetBool("IsMagic");
+                    /*this.isMagic = ConfigManager.appConfig.GetBool("IsMagic");
                     Debug.Log($"remote:{ConfigManager.appConfig.config.ToString()}");
                     if (this.isMagic)
                     {
@@ -119,12 +124,13 @@ namespace DefaultNamespace
                     else
                     {
                         NativeConnect.Connect.Init();
-                    }
+                    }*/
 
                     // ShowInterstitialAd();
                     break;
             }
-            NativeConnect.Connect.showBanner();
+
+            // NativeConnect.Connect.showBanner();
         }
 
         public void OnInitializationComplete()
@@ -138,11 +144,11 @@ namespace DefaultNamespace
             this.RewardSuccessAction?.Invoke();
             this.RewardSuccessAction = null;
         }
+
         public void RewardFail()
         {
             this.RewardFailAction?.Invoke();
             this.RewardFailAction = null;
         }
-
     }
 }

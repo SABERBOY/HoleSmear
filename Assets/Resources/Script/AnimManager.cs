@@ -280,7 +280,7 @@ public class AnimManager : Base
     {
         giftButton1.enabled = false;
         giftButton2.enabled = false;
-        if (NativeConnect.Connect.VideoState)
+        // if (NativeConnect.Connect.VideoState)
         {
             Debug.Log($"SPIN:{DataController.sceneNum % 3 == 2}");
             NativeConnect.Connect.showVideo("Rvdoublediamond", delegate(string str)

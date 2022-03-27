@@ -1,6 +1,7 @@
 using System;
 using DefaultNamespace;
 using Script.SDK;
+using Transsion.UtilitiesCrowd;
 using UnityEngine;
 
 namespace SDK
@@ -16,13 +17,13 @@ namespace SDK
         public TranssionSDK()
         {
 #if UNITY_ANDROID&& !UNITY_EDITOR
-            AndroidJavaClass clsUnityPlayer = new AndroidJavaClass(unityPlayerClassName);
-            AndroidJavaObject objActivity = clsUnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-            unityPlayerActivity = objActivity;
-            AndroidJavaObject adUnityPlayer = new AndroidJavaObject(unityAdPlayerActivityClassName);
-            Debug.Log(" :" + adUnityPlayer);
-            adUnityPlayer.Call("Init", unityPlayerActivity);
-            unityAdPlayerActivity = adUnityPlayer;
+            // AndroidJavaClass clsUnityPlayer = new AndroidJavaClass(unityPlayerClassName);
+            // AndroidJavaObject objActivity = clsUnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            // unityPlayerActivity = objActivity;
+            // AndroidJavaObject adUnityPlayer = new AndroidJavaObject(unityAdPlayerActivityClassName);
+            // Debug.Log(" :" + adUnityPlayer);
+            // adUnityPlayer.Call("Init", unityPlayerActivity);
+            // unityAdPlayerActivity = adUnityPlayer;
 #endif
             this.Init();
         }
@@ -30,41 +31,46 @@ namespace SDK
         public void Init()
         {
             Debug.Log($"{nameof(TranssionSDK)} Init");
+            TranssionAdMain.Init();
+            this.ShowBanner(true);
 #if UNITY_EDITOR
 #else
-            if (this.unityAdPlayerActivity != null)
-            {
-                this.unityAdPlayerActivity.Call("LoadInterstitial");
-                this.unityAdPlayerActivity.Call("LoadReward");
-                this.unityAdPlayerActivity.Call("LoadFloat");
-                this.ShowBanner(true);
-                // Debug.Log(this.unityAdPlayerActivity.Call<bool>("isRewardLoaded"));
-                // Debug.Log(this.unityAdPlayerActivity.Call<bool>("isInterstitialLoaded"));
-            }
+            // if (this.unityAdPlayerActivity != null)
+            // {
+            //     this.unityAdPlayerActivity.Call("LoadInterstitial");
+            //     this.unityAdPlayerActivity.Call("LoadReward");
+            //     this.unityAdPlayerActivity.Call("LoadFloat");
+            //     this.ShowBanner(true);
+            //     // Debug.Log(this.unityAdPlayerActivity.Call<bool>("isRewardLoaded"));
+            //     // Debug.Log(this.unityAdPlayerActivity.Call<bool>("isInterstitialLoaded"));
+            // }
 #endif
         }
 
         public bool VideoLoaded()
         {
-#if UNITY_EDITOR
+            return TranssionAdMain.RewardIsLoaded;
+/*#if UNITY_EDITOR
             return true;
 #else
             return this.unityAdPlayerActivity != null && this.unityAdPlayerActivity.Call<bool>("isRewardLoaded");
-#endif
+#endif*/
         }
 
         public bool InterstitialLoaded()
         {
-#if UNITY_EDITOR
+            return TranssionAdMain.InterstitialIsLoaded;
+/*#if UNITY_EDITOR
             return true;
 #else
             return this.unityAdPlayerActivity != null && this.unityAdPlayerActivity.Call<bool>("isInterstitialLoaded");
-#endif
+#endif*/
         }
 
         public void ShowVideo(Action success, Action fail)
         {
-            Debug.Log(nameof(ShowVideo));
+            TranssionAdMain.ShowReward(success, fail);
+            /*Debug.Log(nameof(ShowVideo));
 #if UNITY_EDITOR
             success?.Invoke();
 #else
@@ -74,12 +80,13 @@ namespace SDK
                 RemoteConfig.Instance.RewardFailAction = fail;
                 RemoteConfig.Instance.RewardSuccessAction = success;
             }
-#endif
+#endif*/
         }
 
         public void ShowInterstitialAd(Action interactionAdCompleted, Action hold)
         {
-            Debug.Log(nameof(ShowInterstitialAd));
+            TranssionAdMain.ShowInterstitial(interactionAdCompleted, hold);
+            /*Debug.Log(nameof(ShowInterstitialAd));
 #if UNITY_EDITOR
             interactionAdCompleted?.Invoke();
 #else
@@ -87,7 +94,7 @@ namespace SDK
             {
                 this.unityAdPlayerActivity.Call("ShowInterstitial");
             }
-#endif
+#endif*/
         }
 
         public void OnApplicationPause(bool pause)
@@ -96,18 +103,34 @@ namespace SDK
 
         public void ShowBanner(bool show)
         {
-            Debug.Log(nameof(ShowBanner));
+            /*Debug.Log(nameof(ShowBanner));
             if (this.unityAdPlayerActivity != null)
             {
                 this.unityAdPlayerActivity.Call("ShowBanner");
+            }*/
+            if (show)
+            {
+                TranssionAdMain.ShowBanner();
+            }
+            else
+            {
+                TranssionAdMain.CloseBanner();
             }
         }
 
-        public void ShowFloatingWindow(bool show, int hight)
+        public void ShowFloatingWindow(bool show, int startMargin=0, int endMargin=0, int bottomMargin=0)
         {
-            Debug.Log(nameof(ShowFloatingWindow));
+            /*Debug.Log(nameof(ShowFloatingWindow));
             var androidJavaObject = this.unityAdPlayerActivity;
-            androidJavaObject?.Call("SetFloatActive", show, hight);
+            androidJavaObject?.Call("SetFloatActive", show, hight);*/
+            if (show)
+            {
+                TranssionAdMain.ShowFloat(startMargin, endMargin, bottomMargin);
+            }
+            else
+            {
+                TranssionAdMain.HideFloat();
+            }
         }
     }
 }

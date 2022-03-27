@@ -17,6 +17,7 @@ namespace Script.SDK
 {
     public class ADMob : ISDK
     {
+#if UNITY_ADS // If Unity Ads is supported...
         private List<ADMobConstructor> adMobConstructors = new List<ADMobConstructor>();
 
         private List<ADMobInterstitialAdConstructor> adMobInterstitialAdConstructors =
@@ -33,6 +34,7 @@ namespace Script.SDK
         {
             "ca-app-pub-2270136017335510/2733159028"
         };
+#endif
 
         private ISDK transsionSDK;
 
@@ -41,6 +43,9 @@ namespace Script.SDK
         //插屏广告ca-app-pub-2898660159223218/9067425051
         public void Init()
         {
+            transsionSDK = new TranssionSDK();
+            return;
+#if UNITY_ADS // If Unity Ads is supported...
             // MobileAds.Initialize("ca-app-pub-2898660159223218~4793268009");
             // var builder = new RequestConfiguration();
             // RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("83C0EECDFE32F56622BF2A7B4C6A0AEF")) to get test ads on this device.
@@ -85,10 +90,12 @@ namespace Script.SDK
                 });
 #endif
             }
+#endif
         }
 
         public bool VideoLoaded()
         {
+#if UNITY_ADS // If Unity Ads is supported...
             if (RemoteConfig.Instance.IsMagic)
             {
                 ADMobConstructor a = null;
@@ -104,6 +111,7 @@ namespace Script.SDK
                 return (a != null && a.IsLoaded()) || this.InterstitialLoaded();
             }
             else
+#endif
             {
                 return transsionSDK.VideoLoaded() || transsionSDK.InterstitialLoaded();
             }
@@ -113,6 +121,7 @@ namespace Script.SDK
 
         public bool InterstitialLoaded()
         {
+#if UNITY_ADS // If Unity Ads is supported...
             if (RemoteConfig.Instance.IsMagic)
             {
                 ADMobInterstitialAdConstructor a = null;
@@ -128,6 +137,7 @@ namespace Script.SDK
                 return (a != null && a.IsLoaded());
             }
             else
+#endif
             {
                 return transsionSDK.InterstitialLoaded() || transsionSDK.VideoLoaded();
             }
@@ -149,7 +159,7 @@ namespace Script.SDK
 
                 return;
             }
-
+#if UNITY_ADS // If Unity Ads is supported...
             // Debug.Log("展示视频");
 #if UNITY_EDITOR
             success?.Invoke();
@@ -176,6 +186,7 @@ namespace Script.SDK
             }
 #elif UNITY_IOS
 #endif
+#endif
         }
 
         public void ShowInterstitialAd(Action interactionAdCompleted, Action hold)
@@ -193,7 +204,7 @@ namespace Script.SDK
 
                 return;
             }
-
+#if UNITY_ADS // If Unity Ads is supported...
             // Debug.Log("展示插屏");
             ADMobInterstitialAdConstructor a = null;
             foreach (var inter in this.adMobInterstitialAdConstructors)
@@ -211,6 +222,7 @@ namespace Script.SDK
                 hold?.Invoke();
                 a.Show();
             }
+#endif
         }
 
         public void OnApplicationPause(bool pause)
@@ -224,8 +236,9 @@ namespace Script.SDK
                 transsionSDK.ShowBanner(show);
                 return;
             }
-
+#if UNITY_ADS // If Unity Ads is supported...
             this.adMobBannerConstructor.LoadBanner();
+#endif
         }
 
         public void ShowFloatingWindow(bool show, int hight)
@@ -234,12 +247,12 @@ namespace Script.SDK
             {
                 if (this.transsionSDK is TranssionSDK sdk)
                 {
-                    sdk.ShowFloatingWindow(show, hight);
+                    sdk.ShowFloatingWindow(show, 0, 0, hight);
                 }
             }
         }
     }
-
+#if UNITY_ADS // If Unity Ads is supported...
     /// <summary>
     /// 激励视频广告构造器
     /// </summary>
@@ -638,5 +651,6 @@ namespace Script.SDK
         {
         }
     }
+#endif
 }
 #endif

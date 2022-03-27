@@ -1,0 +1,29 @@
+{
+  "test": {
+    "appkey": "3967840",
+    "hisavana_app_id": "test1001",
+    "HS_BannerUnitId": "test10022",
+    "HS_InterstitialUnitId": "test10011",
+    "HS_RewardUnitId": "test10041",
+    "HS_NativeUnitId": "test10031",
+    "HS_AppOpenUnitId": "test10001",
+    "tpush_appid": "ce302a7c74294e6aa5aa342ff2ecd5e3",
+    "tpush_appkey": "6155b4c4a8b342429c7cd01110484e36"
+  },
+  "online": {
+    "appkey": "3167840",
+    "hisavana_app_id": "220323gb9Wls9N",
+    "channel": [
+      {
+        "name": "aha",
+        "HS_BannerUnitId": "220323SU4J8Kk0",
+        "HS_InterstitialUnitId": "2203237q73PywZ",
+        "HS_RewardUnitId": "220323KcJt2RNJ",
+        "HS_NativeUnitId": "220323KbkSvxjJ",
+        "HS_AppOpenUnitId": "220323p2URfZE8",
+        "tpush_appid": "ce302a7c74294e6aa5aa342ff2ecd5e3",
+        "tpush_appkey": "6155b4c4a8b342429c7cd01110484e36"
+      }
+    ]
+  }
+}

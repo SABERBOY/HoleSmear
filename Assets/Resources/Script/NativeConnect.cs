@@ -196,9 +196,9 @@ public class NativeConnect : Base
 
     #region 广告
 
-    public void showBanner(string info = "")
+    public void showBanner(bool active = true)
     {
-        SdkSystem.Instance.ShowBanner(true);
+        SdkSystem.Instance.ShowBanner(active);
     }
 
     /// <summary>
