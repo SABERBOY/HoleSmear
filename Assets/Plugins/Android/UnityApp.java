@@ -41,8 +41,8 @@ public class UnityApp extends Application {
                 new AdInitializer.Builder(this)
                         // 开启debuggable，设置测试环境，展示测试广告
                         // 请在正式上线环境下，设为false,并且setEnv接口传参数为release
-//                         .setDebuggable(false).setEnv("release")
-        .setDebuggable(true).setEnv("test")
+                        .setDebuggable(false).setEnv("release")
+//         .setDebuggable(true).setEnv("test")
         // 开启debug，展示的是admob的测试服务器广告
         // 如果你需要调试线上真实广告，你需要把debuggable设为false
         // 并输入你的设备ID，如何获取设备ID见 第6点广告测试的问题QA

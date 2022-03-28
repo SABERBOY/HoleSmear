@@ -321,7 +321,7 @@ public class NativeConnect : Base
              adPos = left_top;
         }
 
-        var hight = 200;
+        var hight = 400;
         if (adPos.y != 0)
         {
             hight = (int)(Screen.height - adPos.y);
