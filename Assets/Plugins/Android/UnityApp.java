@@ -12,10 +12,10 @@ import com.transsion.game.analytics.GameAnalytics;
 import com.transsion.gamead.AdHelper;
 import com.transsion.gamead.AdInitializer;
 import com.transsion.gamead.GameAdLoadListener;
-import com.transsion.gamepay.core.PayInitializer;
+/* import com.transsion.gamepay.core.PayInitializer;
 import com.transsion.gamepay.core.PayParams;
 import com.transsion.gamepay.core.SupplementCallback;
-import com.transsion.gamepay.core.bean.OrderInfo;
+import com.transsion.gamepay.core.bean.OrderInfo; */
 import com.transsion.unityapi.AndroidLib;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,7 +72,7 @@ public class UnityApp extends Application {
             }
         });
         boolean debuggable = false;
-        PayInitializer.init(
+        /* PayInitializer.init(
                 new PayInitializer.Builder(this)
                         // sdk内部需要用到主线程 ，你可以传入你全局统一构建的Handler , //否则内部默认创建一个新的handler
                         // .setMainThreadHandler(handler)
@@ -105,7 +105,7 @@ public class UnityApp extends Application {
                                 // 如果是失败的情况 ，那么会提示用户进行补单 ，这里将告诉你补单情况的结果是失败 。
                                 // 这里不需要再发放道具
                             }
-                        }));
+                        })); */
         // AdInitializer.init(new
         // AdInitializer.Builder(this).setDebuggable(debuggable));
         GameAnalytics.init(new GameAnalytics.Builder(this));

@@ -10,7 +10,7 @@ dependencies {
      implementation 'com.transsion.game.unity:ad:3.3.3.1'
      implementation "com.transsion.game:ad:3.7.0.0"
 //      implementation "com.transsion.game:ad:3.3.3.2"
-     implementation"com.transsion.game:pay:3.3.3.2"
+//      implementation"com.transsion.game:pay:3.3.3.2"
      implementation"com.transsion.game:analytics:3.3.2.0"
     //广告SDK添加结束
     // firebase-messaging
