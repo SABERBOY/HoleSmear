@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Script.SDK
+namespace SDK
 {
     public interface ISDK
     {

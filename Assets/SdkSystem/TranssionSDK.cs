@@ -1,6 +1,6 @@
 using System;
 using DefaultNamespace;
-using Script.SDK;
+using SDK;
 using Transsion.UtilitiesCrowd;
 using UnityEngine;
 
@@ -30,9 +30,11 @@ namespace SDK
 
         public void Init()
         {
+#if TRANSSIONAD
             Debug.Log($"{nameof(TranssionSDK)} Init");
             TranssionAdMain.Init();
             this.ShowBanner(true);
+#endif
 #if UNITY_EDITOR
 #else
             // if (this.unityAdPlayerActivity != null)
@@ -49,27 +51,35 @@ namespace SDK
 
         public bool VideoLoaded()
         {
+#if TRANSSIONAD
             return TranssionAdMain.RewardIsLoaded;
+  #endif
 /*#if UNITY_EDITOR
             return true;
 #else
             return this.unityAdPlayerActivity != null && this.unityAdPlayerActivity.Call<bool>("isRewardLoaded");
 #endif*/
+            return false;
         }
 
         public bool InterstitialLoaded()
         {
+#if TRANSSIONAD
             return TranssionAdMain.InterstitialIsLoaded;
+#endif
 /*#if UNITY_EDITOR
             return true;
 #else
             return this.unityAdPlayerActivity != null && this.unityAdPlayerActivity.Call<bool>("isInterstitialLoaded");
 #endif*/
+return false;
         }
 
         public void ShowVideo(Action success, Action fail)
         {
+#if TRANSSIONAD
             TranssionAdMain.ShowReward(success, fail);
+#endif
             /*Debug.Log(nameof(ShowVideo));
 #if UNITY_EDITOR
             success?.Invoke();
@@ -85,7 +95,9 @@ namespace SDK
 
         public void ShowInterstitialAd(Action interactionAdCompleted, Action hold)
         {
+#if TRANSSIONAD
             TranssionAdMain.ShowInterstitial(interactionAdCompleted, hold);
+#endif
             /*Debug.Log(nameof(ShowInterstitialAd));
 #if UNITY_EDITOR
             interactionAdCompleted?.Invoke();
@@ -108,6 +120,7 @@ namespace SDK
             {
                 this.unityAdPlayerActivity.Call("ShowBanner");
             }*/
+#if TRANSSIONAD
             if (show)
             {
                 TranssionAdMain.ShowBanner();
@@ -116,13 +129,16 @@ namespace SDK
             {
                 TranssionAdMain.CloseBanner();
             }
+#endif
         }
 
-        public void ShowFloatingWindow(bool show, int startMargin=0, int endMargin=0, int bottomMargin=0)
+        public void ShowFloatingWindow(bool show, int startMargin = 0, int endMargin = 0, int bottomMargin = 0)
         {
             /*Debug.Log(nameof(ShowFloatingWindow));
             var androidJavaObject = this.unityAdPlayerActivity;
             androidJavaObject?.Call("SetFloatActive", show, hight);*/
+#if TRANSSIONAD
+
             if (show)
             {
                 TranssionAdMain.ShowFloat(startMargin, endMargin, bottomMargin);
@@ -131,6 +147,7 @@ namespace SDK
             {
                 TranssionAdMain.HideFloat();
             }
+#endif
         }
     }
 }

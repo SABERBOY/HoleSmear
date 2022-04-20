@@ -109,7 +109,9 @@
 #endif*/
                 if (_analytics==null)
                 {
+#if TRANSSIONAD
                     _analytics=new TranssionGameAnalytics();
+#endif
                 }
                 return _analytics;
             }

@@ -13,9 +13,7 @@ allprojects {
             // See official Gradle and Android Gradle Plugin compatibility table here https://developer.android.com/studio/releases/gradle-plugin#updating-gradle
             // To specify a custom Gradle version in Unity, go do "Preferences > External Tools", uncheck "Gradle Installed with Unity (recommended)" and specify a path to a custom Gradle version
             classpath 'com.android.tools.build:gradle:4.0.1'
-            //广告SDK添加开始
-            classpath 'com.google.gms:google-services:4.3.4' // Google Services plugin
-            //广告SDK添加结束
+
             **BUILD_SCRIPT_DEPS**
         }
     }
@@ -26,11 +24,6 @@ allprojects {
         flatDir {
             dirs "${project(':unityLibrary').projectDir}/libs"
         }
-        //广告SDK添加开始
-        maven { url 'https://mvn.shalltry.com/repository/maven-public/' }
-        maven { url 'https://mvn.shalltry.com/repository/game-releases/' }
-        maven { url 'https://mvn.shalltry.com/repository/game-snapshots/' }
-        //广告SDK添加结束
     }
 }
 

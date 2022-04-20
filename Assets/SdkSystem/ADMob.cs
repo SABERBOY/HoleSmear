@@ -13,7 +13,7 @@ using SDK;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-namespace Script.SDK
+namespace SDK
 {
     public class ADMob : ISDK
     {
@@ -43,7 +43,9 @@ namespace Script.SDK
         //插屏广告ca-app-pub-2898660159223218/9067425051
         public void Init()
         {
+#if TRANSITION
             transsionSDK = new TranssionSDK();
+#endif
             return;
 #if UNITY_ADS // If Unity Ads is supported...
             // MobileAds.Initialize("ca-app-pub-2898660159223218~4793268009");
@@ -243,6 +245,7 @@ namespace Script.SDK
 
         public void ShowFloatingWindow(bool show, int hight)
         {
+#if TRANSSIONAD
             if (!RemoteConfig.Instance.IsMagic)
             {
                 if (this.transsionSDK is TranssionSDK sdk)
@@ -250,6 +253,7 @@ namespace Script.SDK
                     sdk.ShowFloatingWindow(show, 0, 0, hight);
                 }
             }
+#endif
         }
     }
 #if UNITY_ADS // If Unity Ads is supported...
