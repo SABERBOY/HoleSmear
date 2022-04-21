@@ -39,8 +39,8 @@ namespace SDK
         public void Initialize()
         {
 #if UNITY_EDITOR
-            // this._sdk = new ADMob();
-            // this._sdk.Init();
+            this._sdk = new TopOnSdk();
+            this._sdk.Init();
 #elif UNITY_ANDROID
             this._sdk = new TopOnSdk();
             this._sdk.Init();

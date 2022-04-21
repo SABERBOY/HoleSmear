@@ -37,8 +37,10 @@ public class AnimManager : Base
 
     private void Start()
     {
+        giftButton1.interactable = true;
+        giftButton2.interactable = true;
         startY = spinPanel.transform.position.y;
-        spinTimes = new[] {2, 3, 4, 5, 6, 10};
+        spinTimes = new[] { 2, 3, 4, 5, 6, 10 };
         addDiasImage = addDias.GetComponentsInChildren<Image>();
         diaPathPos = new[]
         {
@@ -59,8 +61,14 @@ public class AnimManager : Base
     public void DieSnake()
     {
         var a = Camera.main.DOShakeRotation(1f, Vector3.forward * 1.5f);
-        a.onComplete = UI.OpenDiePanel;
+        // a.onComplete = UI.OpenDiePanel;
+        Invoke(nameof(OpenDiePanel), 1f);
         a.SetEase(Ease.InOutCubic);
+    }
+
+    private void OpenDiePanel()
+    {
+        UI.OpenDiePanel();
     }
 
     /// <summary>
@@ -72,7 +80,8 @@ public class AnimManager : Base
         Tweener w2 = winText2.transform.DOMove(winText2.transform.position + Vector3.right * 1000, 0.5f).From();
         w1.SetEase(Ease.OutExpo);
         w2.SetEase(Ease.OutExpo);
-        w2.onComplete = StarBigger;
+        // w2.onComplete = StarBigger;
+        Invoke(nameof(StarBigger), 0.5f);
     }
 
     /// <summary>
@@ -93,7 +102,8 @@ public class AnimManager : Base
         star.gameObject.SetActive(true);
         Tweener a = star.transform.DOScale(Vector3.zero, 0.5f).From();
         a.SetEase(Ease.OutBack);
-        a.onComplete = BarMove;
+        // a.onComplete = BarMove;
+        Invoke(nameof(BarMove), 0.5f);
     }
 
     /// <summary>
@@ -104,20 +114,23 @@ public class AnimManager : Base
         giftButton1.gameObject.SetActive(true);
         Tweener a = giftButton1.transform.DOScale(Vector3.zero, 0.5f).From();
         a.SetEase(Ease.OutBack);
-        a.OnComplete(delegate
+        // a.OnComplete(delegate { CheckFillAmount(); });
+        Invoke(nameof(CheckFillAmount), 0.5f);
+    }
+
+    private void CheckFillAmount()
+    {
+        AddBar();
+        if (bar.fillAmount == 1)
         {
-            AddBar();
-            if (bar.fillAmount == 1)
-            {
-                giftButton1.enabled = true;
-                giftButton2.enabled = true;
-                VideoAndSpinButton(giftButton2.transform);
-            }
-            else
-            {
-                VideoAndSpinButton(vdieoButton.transform);
-            }
-        });
+            giftButton1.enabled = true;
+            giftButton2.enabled = true;
+            VideoAndSpinButton(giftButton2.transform);
+        }
+        else
+        {
+            VideoAndSpinButton(vdieoButton.transform);
+        }
     }
 
     /// <summary>
@@ -128,14 +141,17 @@ public class AnimManager : Base
         var barNum = bar.fillAmount + SceneData.giftBarAddNum;
         Tweener a = bar.DOFillAmount(barNum, 1f);
         if (barNum >= 1)
-            a.OnComplete(delegate
-            {
-                vdieoButton.gameObject.SetActive(false);
-                giftButton1.enabled = true;
-                giftButton2.gameObject.SetActive(true);
-                giftButton2.enabled = true;
-                GiftButtonSnake();
-            });
+            // a.OnComplete(delegate { ShowGiftButtonSnake(); });
+            Invoke(nameof(ShowGiftButtonSnake), 1f);
+    }
+
+    private void ShowGiftButtonSnake()
+    {
+        vdieoButton.gameObject.SetActive(false);
+        giftButton1.enabled = true;
+        giftButton2.gameObject.SetActive(true);
+        giftButton2.enabled = true;
+        GiftButtonSnake();
     }
 
     /// <summary>
@@ -160,7 +176,8 @@ public class AnimManager : Base
         Tweener a = tran.DOScale(Vector3.one * 1.1f, 0.5f);
         a.SetEase(Ease.Linear);
         a.SetLoops(6, LoopType.Yoyo);
-        a.onComplete = NextLevelButton;
+        // a.onComplete = NextLevelButton;
+        Invoke(nameof(NextLevelButton), 0.5f);
     }
 
     /// <summary>
@@ -216,7 +233,8 @@ public class AnimManager : Base
         spinPanel.gameObject.SetActive(true);
         Tweener a = spinPanel.transform.DOLocalMoveY(0, 0.5f);
         a.SetEase(Ease.OutBack);
-        a.onComplete = RotSpin;
+        // a.onComplete = RotSpin;
+        Invoke(nameof(RotSpin), 0.5f);
     }
 
     /// <summary>
@@ -261,7 +279,7 @@ public class AnimManager : Base
 
         for (var i = 0; i < addDiasImage.Length; i++)
         {
-            Tweener a = addDiasImage[i].transform.DOLocalPath(new[] {diaPathPos[i], new Vector3(450, 530, 0)}, 1.5f);
+            Tweener a = addDiasImage[i].transform.DOLocalPath(new[] { diaPathPos[i], new Vector3(450, 530, 0) }, 1.5f);
             a.SetEase(Ease.InQuart);
             if (i == addDiasImage.Length - 1)
                 a.OnComplete(delegate
@@ -280,7 +298,7 @@ public class AnimManager : Base
     {
         giftButton1.enabled = false;
         giftButton2.enabled = false;
-        // if (NativeConnect.Connect.VideoState)
+        if (NativeConnect.Connect.VideoState)
         {
             Debug.Log($"SPIN:{DataController.sceneNum % 3 == 2}");
             NativeConnect.Connect.showVideo("Rvdoublediamond", delegate(string str)

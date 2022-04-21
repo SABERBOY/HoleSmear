@@ -52,7 +52,7 @@ public class GameController : Base
                 switch (a)
                 {
                     case 2:
-                        Invoke("WinLiZiPanel", 1f);
+                        Invoke(nameof(WinLiZiPanel), 1f);
                         break;
                     //case 1:
                     //    Invoke("WinLiZiPanel", 1f);
@@ -82,7 +82,7 @@ public class GameController : Base
     /// </summary>
     public void WinLiZiPanel()
     {
-        anim.SpinShowVideo();
+        // anim.SpinShowVideo();
         UI.winPanel.gameObject.SetActive(true);
         UI.starTextNum = addMoneyNum;
         anim.WinTextMove();

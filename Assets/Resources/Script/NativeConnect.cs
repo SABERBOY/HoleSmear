@@ -208,7 +208,7 @@ public class NativeConnect : Base
     {
         get
         {
-#if TEST
+#if UNITY_EDITOR
 			return true;
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
 		 return  SdkSystem.Instance.IsInterstitialLoaded();
@@ -227,7 +227,7 @@ public class NativeConnect : Base
     {
         if (callBackBlock != null) addListener("Block", callBackBlock);
 
-#if TEST
+#if UNITY_EDITOR
 		InvokeEvent("Block");
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
         InvokeEvent("Block");
@@ -245,7 +245,7 @@ public class NativeConnect : Base
     {
         get
         {
-#if TEST
+#if UNITY_EDITOR
 			return true;
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
 		  return SdkSystem.Instance.IsRewardAdLoaded();
@@ -262,7 +262,7 @@ public class NativeConnect : Base
     public void showVideo(string str, Action<string> callBackVideo)
     {
         if (callBackVideo != null) addListener("Video", callBackVideo);
-#if TEST
+#if UNITY_EDITOR
 		InvokeEvent("Video|True");
 #elif UNITY_ANDROID && USE_SDK && !UNITY_EDITOR
         SdkSystem.Instance.ShowRewardVideoAd((() => callBackVideo("True")), (() => callBackVideo("False")));
