@@ -4,8 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unity3d.player"
     xmlns:tools="http://schemas.android.com/tools">
-    <application android:name="com.unity3d.player.UnityApp">
+    <application>
         <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:exported="true"
                   android:theme="@style/UnityThemeSelector">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -13,19 +14,5 @@
             </intent-filter>
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
         </activity>
-        <service
-                android:name=".MyFirebaseMessagingService"
-                android:exported="false"
-                android:directBootAware="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <!--广告SDK添加开始-->
-        <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-2270136017335510~4782216874"
-                tools:replace="android:value"/>
-        <!--广告SDK添加结束-->
     </application>
 </manifest>
