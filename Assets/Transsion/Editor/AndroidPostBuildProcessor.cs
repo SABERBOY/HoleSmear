@@ -16,9 +16,7 @@ namespace Transsion.Editor
 
         void IPostGenerateGradleAndroidProject.OnPostGenerateGradleAndroidProject(string path)
         {
-#if !TRANSSIONAD
-            return;
-#endif
+
             Debug.Log("Bulid path : " + path);
 
             path = path.Replace("unityLibrary", "launcher");

@@ -144,7 +144,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2.0.1
+  bundleVersion: 2.0.2
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -190,7 +190,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.HoleSenear.beijinghutoujing.gp
   buildNumber: {}
-  AndroidBundleVersionCode: 201
+  AndroidBundleVersionCode: 202
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 32
   AndroidPreferredInstallLocation: 1
