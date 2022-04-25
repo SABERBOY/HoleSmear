@@ -104,11 +104,15 @@ namespace DefaultNamespace
                 case ConfigOrigin.Default:
                     // Debug.Log ("No settings loaded this session; using default values.");
                     // Debug.Log(ConfigManager.appConfig);
+#if !UNITY_WEBGL
                     NativeConnect.Connect.Init();
+#endif
                     break;
                 case ConfigOrigin.Cached:
                     // Debug.Log ("No settings loaded this session; using cached values from a previous session.");
+#if !UNITY_WEBGL
                     NativeConnect.Connect.Init();
+#endif
                     break;
                 case ConfigOrigin.Remote:
                     /*this.isMagic = ConfigManager.appConfig.GetBool("IsMagic");
@@ -136,7 +140,9 @@ namespace DefaultNamespace
         public void OnInitializationComplete()
         {
             // Debug.Log("OnInitializationComplete");
+#if !UNITY_WEBGL
             NativeConnect.Connect.Init();
+#endif
         }
 
         public void RewardSuccess()

@@ -122,11 +122,14 @@ namespace SDK
         public void loadAd()
         {
             Debug.Log("NativeBannerScene::loadAd");
+#if !UNITY_WEBGL
             ATNativeBannerAd.Instance.loadAd(mPlacementId_native_all, null);
+#endif
         }
 
         public void showAd()
         {
+#if !UNITY_WEBGL
             Debug.Log("NativeBannerScene::showAd");
             Debug.Log("Screen Width : " + Screen.width + ", Screen dpi: " + Screen.dpi);
             ATRect arpuRect = new ATRect(0, 100, 414, 200);
@@ -136,18 +139,23 @@ namespace SDK
                     { ATNativeBannerAdShowingExtra.kATNativeBannerAdShowingExtraBackgroundColor, "#FFFFFF" },
                     { ATNativeBannerAdShowingExtra.kATNativeBannerAdShowingExtraTitleColor, "#FF0000" }
                 });
+#endif
         }
 
         public void removeAd()
         {
+#if !UNITY_WEBGL
             Debug.Log("NativeBannerScene::removeAd");
             ATNativeBannerAd.Instance.removeAd(mPlacementId_native_all);
+#endif
         }
 
         public void adReady()
         {
+#if !UNITY_WEBGL
             Debug.Log("ATNativeBannerAdListener Developer NativeBannerScene::adReady:" +
                       (ATNativeBannerAd.Instance.adReady(mPlacementId_native_all) ? "yes" : "no"));
+#endif
         }
 
         public void onAdLoaded(string placementId)
@@ -256,9 +264,10 @@ namespace SDK
 
             // ATRewardedVideo.Instance.loadVideoAd(mPlacementId_rewardvideo_all, jsonmap);
 
-
+#if !UNITY_WEBGL
             ATRewardedAutoVideo.Instance.setListener(callbackListener);
             ATRewardedAutoVideo.Instance.addAutoLoadAdPlacementID(new[] { mPlacementId_rewardvideo_all });
+#endif
         }
 
         public void ShowVideo(Action onSuccess, Action onFail)
@@ -272,9 +281,11 @@ namespace SDK
                 callbackListener.failCallback = onFail;
                 callbackListener.successCallback = onSuccess;
                 ATRewardedVideo.Instance.showAd(mPlacementId_rewardvideo_all, jsonmap);*/
+#if !UNITY_WEBGL
                 callbackListener.failCallback = onFail;
                 callbackListener.successCallback = onSuccess;
                 ATRewardedAutoVideo.Instance.showAutoAd(mPlacementId_rewardvideo_all);
+#endif
             }
             else
             {
@@ -292,7 +303,10 @@ namespace SDK
             string adStatus = ATRewardedVideo.Instance.checkAdStatus(mPlacementId_rewardvideo_all);
             Debug.Log("Developer checkAdStatus video...." + adStatus);
             return b;*/
+#if !UNITY_WEBGL
             return ATRewardedAutoVideo.Instance.autoLoadRewardedVideoReadyForPlacementID(mPlacementId_rewardvideo_all);
+#endif
+            return true;
         }
 
         class ATCallbackListener : ATRewardedVideoListener
@@ -427,9 +441,10 @@ namespace SDK
             // //jsonmap.Add(AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL, AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL_YES);
             //
             // ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
-
+#if !UNITY_WEBGL
             ATInterstitialAutoAd.Instance.setListener(callback);
             ATInterstitialAutoAd.Instance.addAutoLoadAdPlacementID(new[] { mPlacementId_interstitial_all });
+#endif
         }
 
         public bool IsReady()
@@ -440,14 +455,18 @@ namespace SDK
             string adStatus = ATInterstitialAd.Instance.checkAdStatus(mPlacementId_interstitial_all);
             Debug.Log("Developer checkAdStatus interstitial...." + adStatus);
             return b;*/
+#if !UNITY_WEBGL
             return ATInterstitialAutoAd.Instance.autoLoadInterstitialAdReadyForPlacementID(
                 mPlacementId_interstitial_all);
+#endif
+            return true;
         }
 
         public void ShowInterstitialAd(Action showSuccess, Action showFailed)
         {
             if (IsReady())
             {
+#if !UNITY_WEBGL
                 Dictionary<string, string> jsonmap = new Dictionary<string, string>();
                 // jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
                 callback.successCallback = showSuccess;
@@ -455,6 +474,7 @@ namespace SDK
                 // ATInterstitialAd.Instance.showInterstitialAd(mPlacementId_interstitial_all, jsonmap);
                 ATInterstitialAutoAd.Instance.showAutoAd(mPlacementId_interstitial_all,
                     jsonmap);
+#endif
             }
             else
             {
@@ -630,11 +650,14 @@ namespace SDK
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraAdaptiveOrientation, ATBannerAdLoadingExtra.kATBannerAdLoadingExtraAdaptiveOrientationPortrait);
 
 #endif
+#if !UNITY_WEBGL
             ATBannerAd.Instance.loadBannerAd(mPlacementId_banner_all, jsonmap);
+#endif
         }
 
         public void showBannerAd()
         {
+#if !UNITY_WEBGL
             this.removeBannerAd();
             // Debug.Log("Developer is banner ready....");
             string adStatus = ATBannerAd.Instance.checkAdStatus(mPlacementId_banner_all);
@@ -653,16 +676,21 @@ namespace SDK
 //        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
 //        //ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all, arpuRect, jsonmap);
 //        ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionTop, jsonmap);
+#endif
         }
 
         public void removeBannerAd()
         {
+#if !UNITY_WEBGL
             ATBannerAd.Instance.cleanBannerAd(mPlacementId_banner_all);
+#endif
         }
 
         public void hideBannerAd()
         {
+#if !UNITY_WEBGL
             ATBannerAd.Instance.hideBannerAd(mPlacementId_banner_all);
+#endif
         }
 
         /*
@@ -670,7 +698,9 @@ namespace SDK
         */
         public void reshowBannerAd()
         {
+#if !UNITY_WEBGL
             ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all);
+#endif
         }
 
         class BannerCallback : ATBannerAdListener

@@ -115,10 +115,12 @@ namespace SDK
 
         public void ShowFloatingWindow(bool show, int hight)
         {
+#if !UNITY_WEBGL
             if (this._sdk is ADMob sdk)
             {
                 sdk?.ShowFloatingWindow(show, hight);
             }
+#endif
         }
 
         public void ShowBanner(bool active)
