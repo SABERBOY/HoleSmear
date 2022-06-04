@@ -15,7 +15,7 @@ namespace SDK
         public void Init()
         {
             //设置开启Debug日志（强烈建议测试阶段开启，方便排查问题）
-            ATSDKAPI.setLogDebug(true);
+            ATSDKAPI.setLogDebug(false);
             //（必须配置）SDK的初始化
             ATSDKAPI.initSDK("a625ea9d410d16", "b1b44444ff8e3638c963fd14133a642d",
                 this); //Use your own app_id & app_key here
@@ -672,10 +672,10 @@ namespace SDK
 
 
             //show with scenario
-//        Dictionary<string, string> jsonmap = new Dictionary<string, string>();
-//        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
-//        //ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all, arpuRect, jsonmap);
-//        ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionTop, jsonmap);
+            //        Dictionary<string, string> jsonmap = new Dictionary<string, string>();
+            //        jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
+            //        //ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all, arpuRect, jsonmap);
+            //        ATBannerAd.Instance.showBannerAd(mPlacementId_banner_all, ATBannerAdLoadingExtra.kATBannerAdShowingPisitionTop, jsonmap);
 #endif
         }
 

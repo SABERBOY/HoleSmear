@@ -34,6 +34,7 @@ namespace DefaultNamespace
         private void Awake()
         {
             DontDestroyOnLoad(this);
+            NativeConnect.Connect.Init();
             _instance = this;
             // Add a listener to apply settings when successfully retrieved:
             // ConfigManager.FetchCompleted += ApplyRemoteSettings;
@@ -105,13 +106,13 @@ namespace DefaultNamespace
                     // Debug.Log ("No settings loaded this session; using default values.");
                     // Debug.Log(ConfigManager.appConfig);
 #if !UNITY_WEBGL
-                    NativeConnect.Connect.Init();
+                    // NativeConnect.Connect.Init();
 #endif
                     break;
                 case ConfigOrigin.Cached:
                     // Debug.Log ("No settings loaded this session; using cached values from a previous session.");
 #if !UNITY_WEBGL
-                    NativeConnect.Connect.Init();
+                    // NativeConnect.Connect.Init();
 #endif
                     break;
                 case ConfigOrigin.Remote:
@@ -141,7 +142,7 @@ namespace DefaultNamespace
         {
             // Debug.Log("OnInitializationComplete");
 #if !UNITY_WEBGL
-            NativeConnect.Connect.Init();
+            // NativeConnect.Connect.Init();
 #endif
         }
 
