@@ -21,7 +21,7 @@ namespace AnyThinkAds.Api
             this.y = y;
             this.width = width;
             this.height = height;
-            this.usesPixel = false;
+            usesPixel = false;
         }
 
         public int x = 0;
@@ -29,7 +29,6 @@ namespace AnyThinkAds.Api
         public int width = 0;
         public int height = 0;
         public bool usesPixel = false;
-
     }
 
     public class ATSize
@@ -45,7 +44,7 @@ namespace AnyThinkAds.Api
         {
             this.width = width;
             this.height = height;
-            this.usesPixel = false;
+            usesPixel = false;
         }
 
         public int width = 0;

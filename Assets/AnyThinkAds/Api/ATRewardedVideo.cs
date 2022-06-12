@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System;
-
 using AnyThinkAds.Common;
 using AnyThinkAds.ThirdParty.LitJson;
 
@@ -20,24 +19,18 @@ namespace AnyThinkAds.Api
             client = GetATRewardedClient();
         }
 
-        public static ATRewardedVideo Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static ATRewardedVideo Instance => instance;
 
 
-		/***
+        /***
 		 * 
 		 */
-        public void loadVideoAd(string placementId, Dictionary<string,string> pairs)
+        public void loadVideoAd(string placementId, Dictionary<string, string> pairs)
         {
             client.loadVideoAd(placementId, JsonMapper.ToJson(pairs));
         }
 
-		public void setListener(ATRewardedVideoListener listener)
+        public void setListener(ATRewardedVideoListener listener)
         {
             client.setListener(listener);
         }
@@ -49,9 +42,9 @@ namespace AnyThinkAds.Api
 
         public void entryScenarioWithPlacementID(string placementId, string scenarioID)
         {
-            client.entryScenarioWithPlacementID(placementId,scenarioID);
+            client.entryScenarioWithPlacementID(placementId, scenarioID);
         }
-        
+
         public string checkAdStatus(string placementId)
         {
             return client.checkAdStatus(placementId);
@@ -71,13 +64,10 @@ namespace AnyThinkAds.Api
         {
             client.showAd(placementId, JsonMapper.ToJson(pairs));
         }
-                
+
         public IATRewardedVideoAdClient GetATRewardedClient()
         {
-            return AnyThinkAds.ATAdsClientFactory.BuildRewardedVideoAdClient();
+            return ATAdsClientFactory.BuildRewardedVideoAdClient();
         }
-
-
-
     }
 }

@@ -12,11 +12,13 @@ using UnityEditor;
 [CustomEditor(typeof(TCP2_ShaderUpdateUnityTime))]
 public class TCP2_ShaderUpdateUnityTime_Editor : Editor
 {
-	public override void OnInspectorGUI()
-	{
-		//base.OnInspectorGUI();
+    public override void OnInspectorGUI()
+    {
+        //base.OnInspectorGUI();
 
-		EditorGUILayout.HelpBox("This script will update the time value for water shaders that use the 'Custom Time' option.\n\n This allows:\n- getting the world height position of the wave with the TCP2_GetPosOnWater script\n- syncing to Unity's Time.timeScale value", MessageType.Info);
-		base.OnInspectorGUI();
-	}
+        EditorGUILayout.HelpBox(
+            "This script will update the time value for water shaders that use the 'Custom Time' option.\n\n This allows:\n- getting the world height position of the wave with the TCP2_GetPosOnWater script\n- syncing to Unity's Time.timeScale value",
+            MessageType.Info);
+        base.OnInspectorGUI();
+    }
 }

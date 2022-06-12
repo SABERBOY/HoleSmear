@@ -7,10 +7,10 @@ namespace SDK
 {
     public class TopOnSdk : ISDK, ATSDKInitListener
     {
-        VideoScenes mVideoScenes;
-        InterstitialScenes mInterstitialScenes;
-        BannerScenes mBannerScenes;
-        NativeBannerScene mNativeBannerScene;
+        private VideoScenes mVideoScenes;
+        private InterstitialScenes mInterstitialScenes;
+        private BannerScenes mBannerScenes;
+        private NativeBannerScene mNativeBannerScene;
 
         public void Init()
         {
@@ -26,7 +26,7 @@ namespace SDK
 #if UNITY_EDITOR
             return true;
 #endif
-            return this.mVideoScenes != null && this.mVideoScenes.IsReady();
+            return mVideoScenes != null && mVideoScenes.IsReady();
             // return this.mVideoScenes?IsReady();
         }
 
@@ -35,7 +35,7 @@ namespace SDK
 #if UNITY_EDITOR
             return true;
 #endif
-            return this.mInterstitialScenes != null && this.mInterstitialScenes.IsReady();
+            return mInterstitialScenes != null && mInterstitialScenes.IsReady();
             // return true;
         }
 
@@ -45,7 +45,7 @@ namespace SDK
             success?.Invoke();
             return;
 #endif
-            this.mVideoScenes.ShowVideo(success, fail);
+            mVideoScenes.ShowVideo(success, fail);
         }
 
         public void ShowInterstitialAd(Action interactionAdCompleted, Action hold)
@@ -54,7 +54,7 @@ namespace SDK
             interactionAdCompleted?.Invoke();
             return;
 #endif
-            this.mInterstitialScenes.ShowInterstitialAd(interactionAdCompleted, hold);
+            mInterstitialScenes.ShowInterstitialAd(interactionAdCompleted, hold);
         }
 
         public void OnApplicationPause(bool pause)
@@ -65,17 +65,11 @@ namespace SDK
         {
             if (show)
             {
-                if (this.mBannerScenes != null)
-                {
-                    this.mBannerScenes.showBannerAd();
-                }
+                if (mBannerScenes != null) mBannerScenes.showBannerAd();
             }
             else
             {
-                if (this.mBannerScenes != null)
-                {
-                    this.mBannerScenes.reshowBannerAd();
-                }
+                if (mBannerScenes != null) mBannerScenes.reshowBannerAd();
             }
         }
 
@@ -97,7 +91,7 @@ namespace SDK
     public class NativeBannerScene : ATNativeBannerAdListener
     {
 #if UNITY_ANDROID
-        static string mPlacementId_native_all = "b5aa1fa2cae775";
+        private static string mPlacementId_native_all = "b5aa1fa2cae775";
 
 #elif UNITY_IOS || UNITY_IPHONE
 		static string mPlacementId_native_all = "b5b0f555698607";
@@ -109,7 +103,7 @@ namespace SDK
         }
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             ATNativeBannerAd.Instance.setListener(this);
         }
@@ -132,7 +126,7 @@ namespace SDK
 #if !UNITY_WEBGL
             Debug.Log("NativeBannerScene::showAd");
             Debug.Log("Screen Width : " + Screen.width + ", Screen dpi: " + Screen.dpi);
-            ATRect arpuRect = new ATRect(0, 100, 414, 200);
+            var arpuRect = new ATRect(0, 100, 414, 200);
             ATNativeBannerAd.Instance.showAd(mPlacementId_native_all, arpuRect,
                 new Dictionary<string, string>
                 {
@@ -201,7 +195,7 @@ namespace SDK
     public class VideoScenes
     {
 #if UNITY_ANDROID
-        static string mPlacementId_rewardvideo_all = "b625eabbfcd7ca";
+        private static string mPlacementId_rewardvideo_all = "b625eabbfcd7ca";
         // static string showingScenario = "f5e71c46d1a28f";
 #elif UNITY_IOS || UNITY_IPHONE
     static string mPlacementId_rewardvideo_all = "b5b44a0f115321";//"b5b44a0f115321";
@@ -209,7 +203,7 @@ namespace SDK
 
 #endif
 
-        ATRewardedVideo rewardedVideo;
+        private ATRewardedVideo rewardedVideo;
 
         public VideoScenes()
         {
@@ -217,13 +211,13 @@ namespace SDK
         }
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             loadVideo();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
         }
 
@@ -242,16 +236,14 @@ namespace SDK
         }
 
 
-        static ATCallbackListener callbackListener;
+        private static ATCallbackListener callbackListener;
 
         public void loadVideo()
         {
             if (callbackListener == null)
-            {
                 callbackListener = new ATCallbackListener();
-                // Debug.Log("Developer init video....placementId:" + mPlacementId_rewardvideo_all);
-                // ATRewardedVideo.Instance.setListener(callbackListener);
-            }
+            // Debug.Log("Developer init video....placementId:" + mPlacementId_rewardvideo_all);
+            // ATRewardedVideo.Instance.setListener(callbackListener);
 
             // ATSDKAPI.setCustomDataForPlacementID(
             //     new Dictionary<string, string> { { "placement_custom_key", "placement_custom" } },
@@ -309,7 +301,7 @@ namespace SDK
             return true;
         }
 
-        class ATCallbackListener : ATRewardedVideoListener
+        private class ATCallbackListener : ATRewardedVideoListener
         {
             public Action successCallback;
             public Action failCallback;
@@ -405,7 +397,7 @@ namespace SDK
     public class InterstitialScenes
     {
 #if UNITY_ANDROID
-        static string mPlacementId_interstitial_all = "b625eabb0d4c3b";
+        private static string mPlacementId_interstitial_all = "b625eabb0d4c3b";
         // static string showingScenario = "f5e71c49060ab3";
 
 #elif UNITY_IOS || UNITY_IPHONE
@@ -420,20 +412,18 @@ namespace SDK
         }
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             loadInterstitialAd();
         }
 
-        static InterstitalCallback callback;
+        private static InterstitalCallback callback;
 
         public void loadInterstitialAd()
         {
             if (callback == null)
-            {
                 callback = new InterstitalCallback();
-                // ATInterstitialAd.Instance.setListener(callback);
-            }
+            // ATInterstitialAd.Instance.setListener(callback);
 
             // Dictionary<string, object> jsonmap = new Dictionary<string, object>();
             // jsonmap.Add(AnyThinkAds.Api.ATConst.USE_REWARDED_VIDEO_AS_INTERSTITIAL,
@@ -467,7 +457,7 @@ namespace SDK
             if (IsReady())
             {
 #if !UNITY_WEBGL
-                Dictionary<string, string> jsonmap = new Dictionary<string, string>();
+                var jsonmap = new Dictionary<string, string>();
                 // jsonmap.Add(AnyThinkAds.Api.ATConst.SCENARIO, showingScenario);
                 callback.successCallback = showSuccess;
                 callback.failCallback = showFailed;
@@ -482,7 +472,7 @@ namespace SDK
             }
         }
 
-        class InterstitalCallback : ATInterstitialAdListener
+        private class InterstitalCallback : ATInterstitialAdListener
         {
             public Action successCallback;
             public Action failCallback;
@@ -589,7 +579,7 @@ namespace SDK
     public class BannerScenes
     {
 #if UNITY_ANDROID
-        static string mPlacementId_banner_all = "b625eaaeeaf7e7";
+        private static string mPlacementId_banner_all = "b625eaaeeaf7e7";
         // static string showingScenario = "f600e6039e152c";
 
 #elif UNITY_IOS || UNITY_IPHONE
@@ -606,14 +596,14 @@ namespace SDK
         }
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
-            this.screenWidth = Screen.width;
+            screenWidth = Screen.width;
             loadBannerAd();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
         }
 
@@ -624,7 +614,7 @@ namespace SDK
             // SceneManager.LoadScene ("demoMainScenes");
         }
 
-        static BannerCallback bannerCallback;
+        private static BannerCallback bannerCallback;
 
         public void loadBannerAd()
         {
@@ -634,11 +624,11 @@ namespace SDK
                 ATBannerAd.Instance.setListener(bannerCallback);
             }
 
-            Dictionary<string, object> jsonmap = new Dictionary<string, object>();
+            var jsonmap = new Dictionary<string, object>();
 
 
 #if UNITY_ANDROID
-            ATSize bannerSize = new ATSize(960, 150, true);
+            var bannerSize = new ATSize(960, 150, true);
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct, bannerSize);
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraAdaptiveWidth, bannerSize.width);
             jsonmap.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraAdaptiveOrientation,
@@ -658,9 +648,9 @@ namespace SDK
         public void showBannerAd()
         {
 #if !UNITY_WEBGL
-            this.removeBannerAd();
+            removeBannerAd();
             // Debug.Log("Developer is banner ready....");
-            string adStatus = ATBannerAd.Instance.checkAdStatus(mPlacementId_banner_all);
+            var adStatus = ATBannerAd.Instance.checkAdStatus(mPlacementId_banner_all);
             // Debug.Log("Developer checkAdStatus banner...." + adStatus);
 
 
@@ -703,7 +693,7 @@ namespace SDK
 #endif
         }
 
-        class BannerCallback : ATBannerAdListener
+        private class BannerCallback : ATBannerAdListener
         {
             public void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo)
             {

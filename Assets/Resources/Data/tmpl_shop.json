@@ -1,72 +1,74 @@
-{"dataArray":[
-  {
-    "id": 1,
-    "name": "钻石",
-    "type": 1,
-    "obtain": "2",
-    "quality": 0
-  },
-  {
-    "id": 2,
-    "name": "hole_1",
-    "type": 2,
-    "obtain": "1",
-    "quality": 100
-  },
-  {
-    "id": 3,
-    "name": "hole_2",
-    "type": 2,
-    "obtain": "1",
-    "quality": 80
-  },
-  {
-    "id": 4,
-    "name": "hole_3",
-    "type": 2,
-    "obtain": "1",
-    "quality": 60
-  },
-  {
-    "id": 5,
-    "name": "hole_4",
-    "type": 2,
-    "obtain": "1",
-    "quality": 50
-  },
-  {
-    "id": 6,
-    "name": "hole_5",
-    "type": 2,
-    "obtain": "1",
-    "quality": 40
-  },
-  {
-    "id": 7,
-    "name": "hole_6",
-    "type": 2,
-    "obtain": "1",
-    "quality": 30
-  },
-  {
-    "id": 8,
-    "name": "hole_7",
-    "type": 2,
-    "obtain": "1",
-    "quality": 20
-  },
-  {
-    "id": 9,
-    "name": "hole_8",
-    "type": 2,
-    "obtain": "1",
-    "quality": 10
-  },
-  {
-    "id": 10,
-    "name": "hole_9",
-    "type": 2,
-    "obtain": "1",
-    "quality": 5
-  }
-]}
+{
+  "dataArray": [
+    {
+      "id": 1,
+      "name": "钻石",
+      "type": 1,
+      "obtain": "2",
+      "quality": 0
+    },
+    {
+      "id": 2,
+      "name": "hole_1",
+      "type": 2,
+      "obtain": "1",
+      "quality": 100
+    },
+    {
+      "id": 3,
+      "name": "hole_2",
+      "type": 2,
+      "obtain": "1",
+      "quality": 80
+    },
+    {
+      "id": 4,
+      "name": "hole_3",
+      "type": 2,
+      "obtain": "1",
+      "quality": 60
+    },
+    {
+      "id": 5,
+      "name": "hole_4",
+      "type": 2,
+      "obtain": "1",
+      "quality": 50
+    },
+    {
+      "id": 6,
+      "name": "hole_5",
+      "type": 2,
+      "obtain": "1",
+      "quality": 40
+    },
+    {
+      "id": 7,
+      "name": "hole_6",
+      "type": 2,
+      "obtain": "1",
+      "quality": 30
+    },
+    {
+      "id": 8,
+      "name": "hole_7",
+      "type": 2,
+      "obtain": "1",
+      "quality": 20
+    },
+    {
+      "id": 9,
+      "name": "hole_8",
+      "type": 2,
+      "obtain": "1",
+      "quality": 10
+    },
+    {
+      "id": 10,
+      "name": "hole_9",
+      "type": 2,
+      "obtain": "1",
+      "quality": 5
+    }
+  ]
+}

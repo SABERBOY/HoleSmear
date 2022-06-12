@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System;
-
 using AnyThinkAds.Common;
 using AnyThinkAds.ThirdParty.LitJson;
 
@@ -19,34 +18,31 @@ namespace AnyThinkAds.Api
 
     public class ATNativeAd
     {
-
         private static readonly ATNativeAd instance = new ATNativeAd();
         private IATNativeAdClient client;
 
-        public ATNativeAd(){
+        public ATNativeAd()
+        {
             client = GetATNativeAdClient();
         }
 
-        public static ATNativeAd Instance
+        public static ATNativeAd Instance => instance;
+
+
+        public void loadNativeAd(string placementId, Dictionary<string, object> pairs)
         {
-            get
-            {
-                return instance;
-            }
-        }
-
-
-        public void loadNativeAd(string placementId, Dictionary<String,object> pairs){
             if (pairs != null && pairs.ContainsKey(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct))
             {
-                ATSize size = (ATSize)(pairs[ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct]);
+                var size = (ATSize)pairs[ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSizeStruct];
                 pairs.Add(ATNativeAdLoadingExtra.kATNativeAdLoadingExtraNativeAdSize, size.width + "x" + size.height);
                 pairs.Add(ATNativeAdLoadingExtra.kATNativeAdSizeUsesPixelFlagKey, size.usesPixel);
             }
-            client.loadNativeAd(placementId,JsonMapper.ToJson(pairs));
+
+            client.loadNativeAd(placementId, JsonMapper.ToJson(pairs));
         }
 
-        public bool hasAdReady(string placementId){
+        public bool hasAdReady(string placementId)
+        {
             return client.hasAdReady(placementId);
         }
 
@@ -60,45 +56,51 @@ namespace AnyThinkAds.Api
             return client.getValidAdCaches(placementId);
         }
 
-        public void setListener(ATNativeAdListener listener){
+        public void setListener(ATNativeAdListener listener)
+        {
             client.setListener(listener);
         }
-        
+
         public void entryScenarioWithPlacementID(string placementId, string scenarioID)
         {
-            client.entryScenarioWithPlacementID(placementId,scenarioID);
+            client.entryScenarioWithPlacementID(placementId, scenarioID);
         }
 
-        public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView){
+        public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView)
+        {
             client.renderAdToScene(placementId, anyThinkNativeAdView, "");
         }
 
-        public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView, Dictionary<string,string> pairs){
+        public void renderAdToScene(string placementId, ATNativeAdView anyThinkNativeAdView,
+            Dictionary<string, string> pairs)
+        {
             client.renderAdToScene(placementId, anyThinkNativeAdView, JsonMapper.ToJson(pairs));
         }
 
-        public void cleanAdView(string placementId, ATNativeAdView anyThinkNativeAdView){
+        public void cleanAdView(string placementId, ATNativeAdView anyThinkNativeAdView)
+        {
             client.cleanAdView(placementId, anyThinkNativeAdView);
         }
 
-        public void onApplicationForces(string placementId, ATNativeAdView anyThinkNativeAdView){
+        public void onApplicationForces(string placementId, ATNativeAdView anyThinkNativeAdView)
+        {
             client.onApplicationForces(placementId, anyThinkNativeAdView);
         }
 
-        public void onApplicationPasue(string placementId, ATNativeAdView anyThinkNativeAdView){
+        public void onApplicationPasue(string placementId, ATNativeAdView anyThinkNativeAdView)
+        {
             client.onApplicationPasue(placementId, anyThinkNativeAdView);
         }
 
-        public void cleanCache(string placementId){
+        public void cleanCache(string placementId)
+        {
             client.cleanCache(placementId);
         }
 
 
-
         public IATNativeAdClient GetATNativeAdClient()
         {
-            return AnyThinkAds.ATAdsClientFactory.BuildNativeAdClient();
+            return ATAdsClientFactory.BuildNativeAdClient();
         }
-
     }
 }

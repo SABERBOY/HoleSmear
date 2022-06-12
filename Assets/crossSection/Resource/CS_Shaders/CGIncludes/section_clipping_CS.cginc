@@ -17,19 +17,19 @@
 	uniform float3 _SectionPlane;
 	uniform float3 _SectionPoint;
 
-	#if CLIP_TWO_PLANES || CLIP_CUBE
+#if CLIP_TWO_PLANES || CLIP_CUBE
 	uniform float3 _SectionPlane2;
-	#endif
-	#if CLIP_SPHERE || CLIP_CUBE
+#endif
+#if CLIP_SPHERE || CLIP_CUBE
 	uniform float _Radius = 0;
 	fixed _inverse;
-	#endif
-	#if CLIP_PLANE
+#endif
+#if CLIP_PLANE
 	fixed _inverse;
-	#endif
-	#if CLIP_CUBE
+#endif
+#if CLIP_CUBE
 	static const float3 _SectionPlane3 = normalize(cross(_SectionPlane, _SectionPlane2));
-	#endif
+#endif
 #endif
 
 #if CLIP_TUBES
@@ -64,7 +64,7 @@
 	fixed4 _SectionDirX;
 	fixed4 _SectionDirY;
 	fixed4 _SectionDirZ;
-	#if CLIP_BOX
+#if CLIP_BOX
 	fixed4 _SectionScale;
 		static const float dotCamX = dot(_WorldSpaceCameraPos - _SectionCentre - _SectionDirX*0.5*_SectionScale.x, _SectionDirX);
 		static const float dotCamXback = dot(_WorldSpaceCameraPos - _SectionCentre + _SectionDirX*0.5*_SectionScale.x, -_SectionDirX);
@@ -72,13 +72,13 @@
 		static const float dotCamYback = dot(_WorldSpaceCameraPos - _SectionCentre + _SectionDirY*0.5*_SectionScale.y, -_SectionDirY);
 		static const float dotCamZ = dot(_WorldSpaceCameraPos - _SectionCentre - _SectionDirZ*0.5*_SectionScale.z, _SectionDirZ);
 		static const float dotCamZback = dot(_WorldSpaceCameraPos - _SectionCentre + _SectionDirZ*0.5*_SectionScale.z, -_SectionDirZ);
-	#endif
+#endif
 #endif
 
 
 	//discard drawing of a point in the world if it is behind any one of the planes.
 	void PlaneClip(float3 posWorld) {
-		#if CLIP_TWO_PLANES
+#if CLIP_TWO_PLANES
 		float3 vcross = cross(_SectionPlane,_SectionPlane2);
 		if(vcross.y>=0){//<180
 			bool _clip = false;
@@ -91,15 +91,15 @@
 			if((_SectionOffset - dot((posWorld - _SectionPoint),_SectionPlane)<0)&&(- dot((posWorld - _SectionPoint),_SectionPlane2)<0)) discard;
 		}
 		//#else //
-		#endif
-		#if CLIP_PLANE
+#endif
+#if CLIP_PLANE
 		if((_SectionOffset - dot((posWorld - _SectionPoint),_SectionPlane))*(1-2*_inverse)<0) discard;
-		#endif
-		#if CLIP_SPHERE
+#endif
+#if CLIP_SPHERE
 		if((1-2*_inverse)*(dot((posWorld - _SectionPoint),(posWorld - _SectionPoint)) - _Radius*_Radius)<0) discard; //_inverse = 1 : negative to clip the outside of the sphere
-		#endif
+#endif
 
-		#if CLIP_CUBE
+#if CLIP_CUBE
 		//if(_SectionOffset - dot((posWorld - _SectionPoint),_SectionPlane)<0) discard;
 		//if(frac((posWorld - _SectionPoint),_SectionPlane) - 0.5>0) discard;
 		fixed _sign = 1-2*_inverse;
@@ -108,10 +108,10 @@
 		&&(_SectionOffset - dot((posWorld - _SectionPoint -_Radius*_SectionPlane3),-_SectionPlane3)*_sign<0)&&(_SectionOffset - dot((posWorld - _SectionPoint +_Radius*_SectionPlane3),-_SectionPlane3)*_sign>0))
 		discard;
 		//if((_SectionOffset - dot((posWorld - _SectionPoint -_Radius*_SectionPlane2),-_SectionPlane2)<0)&&(_SectionOffset - dot((posWorld - _SectionPoint +_Radius*_SectionPlane2),-_SectionPlane2)>0)) discard;
-		#endif
+#endif
 
 
-		#if CLIP_TUBES
+#if CLIP_TUBES
 		//float3 posRel = posWorld - _SectionPoint;
 		//float3 posCylinderRel = posRel - _AxisDir * dot(_AxisDir, posRel);
 		//if ((dot(posCylinderRel,posCylinderRel) - _Radius*_Radius)<0) discard;
@@ -124,9 +124,9 @@
 		if(_hitCount>4) _clip = _clip || ((dot(posWorld - _hitPoint4 - _AxisDir4 * dot(_AxisDir4, posWorld - _hitPoint4),posWorld - _hitPoint4 - _AxisDir4 * dot(_AxisDir4, posWorld - _hitPoint3)) - _Rad4*_Rad4)<0) ;
 		//}
 		if(_clip) discard;
-		#endif
+#endif
 
-		#if CLIP_BOX
+#if CLIP_BOX
 		float dotProdX = dot(posWorld - _SectionCentre - _SectionDirX*0.5*_SectionScale.x, _SectionDirX);
 		float dotProdXback = dot(posWorld - _SectionCentre + _SectionDirX*0.5*_SectionScale.x, -_SectionDirX);
 		float dotProdY = dot(posWorld - _SectionCentre - _SectionDirY*0.5*_SectionScale.y, _SectionDirY);
@@ -135,18 +135,18 @@
 		float dotProdZback = dot(posWorld - _SectionCentre + _SectionDirZ*0.5*_SectionScale.z, -_SectionDirZ);
 		bool _clip = dotProdX > 0 || dotProdXback > 0 || dotProdY > 0 || dotProdYback > 0 || dotProdZ > 0 || dotProdZback > 0;
 		if(_clip) discard;
-		#endif
+#endif
 
-		#if CLIP_CORNER
+#if CLIP_CORNER
 		float dotProdX = dot(posWorld - _SectionCentre, _SectionDirX);
 		float dotProdY = dot(posWorld - _SectionCentre, _SectionDirY);
 		float dotProdZ = dot(posWorld - _SectionCentre, _SectionDirZ);
 		bool _clip = dotProdX > 0 && dotProdY > 0 && dotProdZ > 0;
 		if(_clip) discard;
-		#endif
+#endif
 
 	}
-	#if CLIP_BOX
+#if CLIP_BOX
 	void PlaneClipWithCaps(float3 posWorld) {
 		
 		float dotProdX = dot(posWorld - _SectionCentre - _SectionDirX*0.5*_SectionScale.x, _SectionDirX);
@@ -160,7 +160,7 @@
 		if(_clip) discard;
 	}
 	#define PLANE_CLIPWITHCAPS(posWorld) PlaneClipWithCaps(posWorld); //preprocessor macro that will produce an empty block if no clipping planes are used.
-	#endif
+#endif
 
 //preprocessor macro that will produce an empty block if no clipping planes are used.
 #define PLANE_CLIP(posWorld) PlaneClip(posWorld);

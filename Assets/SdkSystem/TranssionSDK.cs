@@ -25,7 +25,7 @@ namespace SDK
             // adUnityPlayer.Call("Init", unityPlayerActivity);
             // unityAdPlayerActivity = adUnityPlayer;
 #endif
-            this.Init();
+            Init();
         }
 
         public void Init()
@@ -53,7 +53,7 @@ namespace SDK
         {
 #if TRANSSIONAD
             return TranssionAdMain.RewardIsLoaded;
-  #endif
+#endif
 /*#if UNITY_EDITOR
             return true;
 #else
@@ -72,7 +72,7 @@ namespace SDK
 #else
             return this.unityAdPlayerActivity != null && this.unityAdPlayerActivity.Call<bool>("isInterstitialLoaded");
 #endif*/
-return false;
+            return false;
         }
 
         public void ShowVideo(Action success, Action fail)
@@ -138,7 +138,6 @@ return false;
             var androidJavaObject = this.unityAdPlayerActivity;
             androidJavaObject?.Call("SetFloatActive", show, hight);*/
 #if TRANSSIONAD
-
             if (show)
             {
                 TranssionAdMain.ShowFloat(startMargin, endMargin, bottomMargin);

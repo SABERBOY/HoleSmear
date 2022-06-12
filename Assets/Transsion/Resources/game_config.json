@@ -1,44 +1,44 @@
 [
-    {
-        "aries_pay_status": 1,
-        "online_pay_status": 2,
-        "game_app_key": "3571617",
-        "product": [
-            {
-                "id": "1653",
-                "cp_id": "scpmbc1",
-                "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack1",
-                "gear_type": "4",
-                "amount": "0.05"
-            },
-            {
-                "id": "1654",
-                "cp_id": "scpmbc2",
-                "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack2",
-                "gear_type": "1",
-                "amount": "0.1"
-            },
-            {
-                "id": "1655",
-                "cp_id": "scpmbc3",
-                "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack3",
-                "gear_type": "2",
-                "amount": "0.5"
-            },
-            {
-                "id": "1656",
-                "cp_id": "scpmbc4",
-                "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack4",
-                "gear_type": "3",
-                "amount": "1"
-            },
-            {
-                "id": "1657",
-                "cp_id": "scpmbc5",
-                "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack5",
-                "gear_type": "5",
-                "amount": "2"
-            }
-        ]
-    }
+  {
+    "aries_pay_status": 1,
+    "online_pay_status": 2,
+    "game_app_key": "3571617",
+    "product": [
+      {
+        "id": "1653",
+        "cp_id": "scpmbc1",
+        "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack1",
+        "gear_type": "4",
+        "amount": "0.05"
+      },
+      {
+        "id": "1654",
+        "cp_id": "scpmbc2",
+        "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack2",
+        "gear_type": "1",
+        "amount": "0.1"
+      },
+      {
+        "id": "1655",
+        "cp_id": "scpmbc3",
+        "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack3",
+        "gear_type": "2",
+        "amount": "0.5"
+      },
+      {
+        "id": "1656",
+        "cp_id": "scpmbc4",
+        "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack4",
+        "gear_type": "3",
+        "amount": "1"
+      },
+      {
+        "id": "1657",
+        "cp_id": "scpmbc5",
+        "name": "com.saberlove.CandyPuzzleMatchBlast.coinspack5",
+        "gear_type": "5",
+        "amount": "2"
+      }
+    ]
+  }
 ]

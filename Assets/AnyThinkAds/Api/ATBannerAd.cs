@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System;
-
 using AnyThinkAds.Common;
 using AnyThinkAds.ThirdParty.LitJson;
 
@@ -22,6 +21,7 @@ namespace AnyThinkAds.Api
         public static readonly string kATBannerAdLoadingExtraInlineAdaptiveOrientation = "inline_adaptive_orientation";
         public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationCurrent = 0;
         public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationPortrait = 1;
+
         public static readonly int kATBannerAdLoadingExtraInlineAdaptiveOrientationLandscape = 2;
         //Deprecated in v5.7.3
 
@@ -30,38 +30,33 @@ namespace AnyThinkAds.Api
         public static readonly int kATBannerAdLoadingExtraAdaptiveOrientationCurrent = 0;
         public static readonly int kATBannerAdLoadingExtraAdaptiveOrientationPortrait = 1;
         public static readonly int kATBannerAdLoadingExtraAdaptiveOrientationLandscape = 2;
-
     }
-    public class ATBannerAd 
-	{
-		private static readonly ATBannerAd instance = new ATBannerAd();
-		private IATBannerAdClient client;
 
-		private ATBannerAd() 
-		{
+    public class ATBannerAd
+    {
+        private static readonly ATBannerAd instance = new ATBannerAd();
+        private IATBannerAdClient client;
+
+        private ATBannerAd()
+        {
             client = GetATBannerAdClient();
-		}
+        }
 
-		public static ATBannerAd Instance 
-		{
-			get 
-			{
-				return instance;
-			}
-		}
+        public static ATBannerAd Instance => instance;
 
-		/**
+        /**
 		API
 		*/
-		public void loadBannerAd(string placementId, Dictionary<string,object> pairs)
-		{   
+        public void loadBannerAd(string placementId, Dictionary<string, object> pairs)
+        {
             if (pairs != null && pairs.ContainsKey(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize))
             {
                 client.loadBannerAd(placementId, JsonMapper.ToJson(pairs));
             }
-            else if (pairs != null && pairs.ContainsKey(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct))
+            else if (pairs != null &&
+                     pairs.ContainsKey(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct))
             {
-                ATSize size = (ATSize)(pairs[ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct]);
+                var size = (ATSize)pairs[ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSizeStruct];
                 pairs.Add(ATBannerAdLoadingExtra.kATBannerAdLoadingExtraBannerAdSize, size.width + "x" + size.height);
                 pairs.Add(ATBannerAdLoadingExtra.kATBannerAdSizeUsesPixelFlagKey, size.usesPixel);
 
@@ -72,8 +67,7 @@ namespace AnyThinkAds.Api
             {
                 client.loadBannerAd(placementId, JsonMapper.ToJson(pairs));
             }
-			
-		}
+        }
 
         public string checkAdStatus(string placementId)
         {
@@ -96,7 +90,7 @@ namespace AnyThinkAds.Api
             client.showBannerAd(placementId, rect, "");
         }
 
-        public void showBannerAd(string placementId, ATRect rect, Dictionary<string,string> pairs)
+        public void showBannerAd(string placementId, ATRect rect, Dictionary<string, string> pairs)
         {
             client.showBannerAd(placementId, rect, JsonMapper.ToJson(pairs));
         }
@@ -106,7 +100,7 @@ namespace AnyThinkAds.Api
             client.showBannerAd(placementId, position, "");
         }
 
-        public void showBannerAd(string placementId, string position, Dictionary<string,string> pairs)
+        public void showBannerAd(string placementId, string position, Dictionary<string, string> pairs)
         {
             client.showBannerAd(placementId, position, JsonMapper.ToJson(pairs));
         }
@@ -128,7 +122,7 @@ namespace AnyThinkAds.Api
 
         public IATBannerAdClient GetATBannerAdClient()
         {
-            return AnyThinkAds.ATAdsClientFactory.BuildBannerAdClient();
+            return ATAdsClientFactory.BuildBannerAdClient();
         }
-	}
+    }
 }

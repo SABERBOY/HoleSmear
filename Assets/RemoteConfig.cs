@@ -49,7 +49,7 @@ namespace DefaultNamespace
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
             AnalyticsEvent.GameStart(new Dictionary<string, object> { { "PS", "PS" } });
             // Invoke(nameof(ShowInterstitialAd), 3);
-            this.OnInitializationComplete();
+            OnInitializationComplete();
         }
 
         private string _adUnitId = "bannerAndroid";
@@ -97,7 +97,7 @@ namespace DefaultNamespace
 #endif
         }
 
-        void ApplyRemoteSettings(ConfigResponse configResponse)
+        private void ApplyRemoteSettings(ConfigResponse configResponse)
         {
             // You will implement this in the final step.
             switch (configResponse.requestOrigin)
@@ -148,14 +148,14 @@ namespace DefaultNamespace
 
         public void RewardSuccess()
         {
-            this.RewardSuccessAction?.Invoke();
-            this.RewardSuccessAction = null;
+            RewardSuccessAction?.Invoke();
+            RewardSuccessAction = null;
         }
 
         public void RewardFail()
         {
-            this.RewardFailAction?.Invoke();
-            this.RewardFailAction = null;
+            RewardFailAction?.Invoke();
+            RewardFailAction = null;
         }
     }
 }

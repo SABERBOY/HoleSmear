@@ -31,7 +31,7 @@ public enum REASON
 
 public interface LoadListener
 {
-    void onAdFailedToLoad(REASON reason, String message);
+    void onAdFailedToLoad(REASON reason, string message);
 
     void onAdLoaded();
 }
@@ -49,10 +49,10 @@ public interface ShowListener
 {
     void onShow();
     void onClose();
-    void onShowFailed(REASON reason, String message);
+    void onShowFailed(REASON reason, string message);
 }
 
 public interface RewardShowListener : ShowListener
 {
-    void onUserEarnedReward(int amount, String type);
+    void onUserEarnedReward(int amount, string type);
 }

@@ -7,8 +7,10 @@ namespace AnyThinkAds.Android
 {
     public class ATAreaListener : AndroidJavaProxy
     {
-        ATGetAreaListener mListener;
-        public ATAreaListener(ATGetAreaListener listener): base("com.anythink.unitybridge.sdkinit.AreaCallbackListener")
+        private ATGetAreaListener mListener;
+
+        public ATAreaListener(ATGetAreaListener listener) : base(
+            "com.anythink.unitybridge.sdkinit.AreaCallbackListener")
         {
             mListener = listener;
         }
@@ -16,18 +18,12 @@ namespace AnyThinkAds.Android
 
         public void onResultCallback(string area)
         {
-            if (mListener != null)
-            {
-                mListener.onArea(area);   
-            }
+            if (mListener != null) mListener.onArea(area);
         }
 
         public void onErrorCallback(string s)
         {
-            if (mListener != null)
-            {
-               mListener.onError(s);
-            }
+            if (mListener != null) mListener.onError(s);
         }
     }
 }

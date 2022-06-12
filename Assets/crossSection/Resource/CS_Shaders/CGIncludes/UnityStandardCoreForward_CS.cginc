@@ -14,15 +14,15 @@
 	half4 fragBase (VertexOutputBaseSimple i) : SV_Target { return fragForwardBaseSimpleInternal(i); }
 	half4 fragAdd (VertexOutputForwardAddSimple i) : SV_Target { return fragForwardAddSimpleInternal(i); }
 #else
-	#include "CGIncludes/standard_CS.cginc"
-	VertexOutputForwardClipBase vertBase (VertexInput v) { return vertForwardClipBase(v); }
-	VertexOutputForwardClipAdd vertAdd (VertexInput v) { return vertForwardClipAdd(v); }
-	#if (SHADER_TARGET >= 30)
+#include "CGIncludes/standard_CS.cginc"
+VertexOutputForwardClipBase vertBase(VertexInput v) { return vertForwardClipBase(v); }
+VertexOutputForwardClipAdd vertAdd(VertexInput v) { return vertForwardClipAdd(v); }
+#if (SHADER_TARGET >= 30)
 		half4 fragBase (VertexOutputForwardClipBase i, fixed facing : VFACE) : SV_Target { return fragForwardClipBaseInternal(i, facing); }//for use by ps 3.0
-	#else
-		half4 fragBase (VertexOutputForwardClipBase i) : SV_Target { return fragForwardClipBaseInternal(i); }//for use by ps 2.0
-	#endif // SHADER_TARGET > 30
-	half4 fragAdd (VertexOutputForwardClipAdd i) : SV_Target { return fragForwardClipAddInternal(i); }
+#else
+half4 fragBase(VertexOutputForwardClipBase i) : SV_Target { return fragForwardClipBaseInternal(i); } //for use by ps 2.0
+#endif // SHADER_TARGET > 30
+half4 fragAdd(VertexOutputForwardClipAdd i) : SV_Target { return fragForwardClipAddInternal(i); }
 #endif
 
 #endif // UNITY_STANDARD_CORE_FORWARD_INCLUDED

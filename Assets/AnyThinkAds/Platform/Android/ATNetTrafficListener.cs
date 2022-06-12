@@ -7,8 +7,10 @@ namespace AnyThinkAds.Android
 {
     public class ATNetTrafficListener : AndroidJavaProxy
     {
-        ATGetUserLocationListener mListener;
-        public ATNetTrafficListener(ATGetUserLocationListener listener): base("com.anythink.unitybridge.sdkinit.SDKEUCallbackListener")
+        private ATGetUserLocationListener mListener;
+
+        public ATNetTrafficListener(ATGetUserLocationListener listener) : base(
+            "com.anythink.unitybridge.sdkinit.SDKEUCallbackListener")
         {
             mListener = listener;
         }
@@ -19,22 +21,15 @@ namespace AnyThinkAds.Android
             if (mListener != null)
             {
                 if (isEu)
-                {
                     mListener.didGetUserLocation(ATSDKAPI.kATUserLocationInEU);
-                }
                 else
-                {
                     mListener.didGetUserLocation(ATSDKAPI.kATUserLocationOutOfEU);
-                }
             }
         }
 
         public void onErrorCallback(string s)
         {
-            if (mListener != null)
-            {
-               mListener.didGetUserLocation(ATSDKAPI.kATUserLocationUnknown);
-            }
+            if (mListener != null) mListener.didGetUserLocation(ATSDKAPI.kATUserLocationUnknown);
         }
     }
 }

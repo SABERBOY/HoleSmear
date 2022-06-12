@@ -5,9 +5,10 @@ using System.Text;
 
 namespace AnyThinkAds.Api
 {
-    public class ATNativeAdView 
+    public class ATNativeAdView
     {
         public ATNativeConfig config;
+
         public ATNativeAdView(ATNativeConfig config)
         {
             this.config = config;
@@ -25,23 +26,25 @@ namespace AnyThinkAds.Api
 
         public string toJSON()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.Append("{");
-            if(config.parentProperty != null)
+            if (config.parentProperty != null)
             {
                 builder.Append("\"").Append(parentKey).Append("\"");
                 builder.Append(":");
                 builder.Append(JsonUtility.ToJson(config.parentProperty));
                 builder.Append(",");
             }
-            if(config.appIconProperty != null){
+
+            if (config.appIconProperty != null)
+            {
                 builder.Append("\"").Append(appIconKey).Append("\"");
                 builder.Append(":");
                 builder.Append(JsonUtility.ToJson(config.appIconProperty));
                 builder.Append(",");
             }
-           
-            if(config.mainImageProperty != null)
+
+            if (config.mainImageProperty != null)
             {
                 builder.Append("\"").Append(mainImageKey).Append("\"");
                 builder.Append(":");
@@ -49,14 +52,15 @@ namespace AnyThinkAds.Api
                 builder.Append(",");
             }
 
-            if(config.titleProperty != null)
+            if (config.titleProperty != null)
             {
                 builder.Append("\"").Append(titleKey).Append("\"");
                 builder.Append(":");
                 builder.Append(JsonUtility.ToJson(config.titleProperty));
                 builder.Append(",");
             }
-            if(config.descProperty != null)
+
+            if (config.descProperty != null)
             {
                 builder.Append("\"").Append(descKey).Append("\"");
                 builder.Append(":");
@@ -64,7 +68,7 @@ namespace AnyThinkAds.Api
                 builder.Append(",");
             }
 
-            if(config.adLogoProperty != null)
+            if (config.adLogoProperty != null)
             {
                 builder.Append("\"").Append(adLogoKey).Append("\"");
                 builder.Append(":");
@@ -72,7 +76,7 @@ namespace AnyThinkAds.Api
                 builder.Append(",");
             }
 
-            if(config.ctaButtonProperty != null)
+            if (config.ctaButtonProperty != null)
             {
                 builder.Append("\"").Append(ctaButtonKey).Append("\"");
                 builder.Append(":");
@@ -80,24 +84,20 @@ namespace AnyThinkAds.Api
                 builder.Append(",");
             }
 
-            if(config.dislikeButtonProperty != null)
+            if (config.dislikeButtonProperty != null)
             {
                 builder.Append("\"").Append(dislikeButtonKey).Append("\"");
                 builder.Append(":");
                 builder.Append(JsonUtility.ToJson(config.dislikeButtonProperty));
             }
 
-            string temp = builder.ToString();
+            var temp = builder.ToString();
 
-            if (temp.EndsWith(","))
-            {
-                temp = temp.Substring(0, temp.Length - 1);
-            }
+            if (temp.EndsWith(",")) temp = temp.Substring(0, temp.Length - 1);
 
             temp = temp + "}";
 
             return temp;
-
         }
     }
 }

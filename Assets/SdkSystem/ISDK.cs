@@ -38,6 +38,5 @@ namespace SDK
         void OnApplicationPause(bool pause);
 
         void ShowBanner(bool show);
-
     }
 }

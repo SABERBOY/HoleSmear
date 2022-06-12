@@ -1,6 +1,6 @@
 ﻿namespace Transsion.UtilitiesCrowd
 {
-    class Constants
+    internal class Constants
     {
         /*public static readonly string KEY_APPKEY = "appkey";
         public static readonly string KEY_SESSION = "session";
@@ -93,12 +93,13 @@
 
     public interface IGameAnalytics
     {
-         void Track(params object[] args);
+        void Track(params object[] args);
     }
 
     public class CrowdGameAnalytics
     {
         private static IGameAnalytics _analytics;
+
         private static IGameAnalytics Analytics
         {
             get
@@ -107,15 +108,17 @@
 #if TRANSSIONAD
                     new TranssionGameAnalytics();
 #endif*/
-                if (_analytics==null)
+                if (_analytics == null)
                 {
 #if TRANSSIONAD
-                    _analytics=new TranssionGameAnalytics();
+                    _analytics = new TranssionGameAnalytics();
 #endif
                 }
+
                 return _analytics;
             }
         }
+
         public static void Track(params object[] args)
         {
             Analytics?.Track(args);

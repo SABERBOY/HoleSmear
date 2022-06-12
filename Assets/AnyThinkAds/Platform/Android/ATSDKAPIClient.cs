@@ -8,17 +8,18 @@ namespace AnyThinkAds.Android
 {
     public class ATSDKAPIClient : AndroidJavaProxy, IATSDKAPIClient
     {
-		private AndroidJavaObject sdkInitHelper;
+        private AndroidJavaObject sdkInitHelper;
         private ATSDKInitListener sdkInitListener;
-        public ATSDKAPIClient () : base("com.anythink.unitybridge.sdkinit.SDKInitListener")
+
+        public ATSDKAPIClient() : base("com.anythink.unitybridge.sdkinit.SDKInitListener")
         {
-            this.sdkInitHelper = new AndroidJavaObject(
+            sdkInitHelper = new AndroidJavaObject(
                 "com.anythink.unitybridge.sdkinit.SDKInitHelper", this);
-		}
+        }
 
         public void initSDK(string appId, string appKey)
         {
-            this.initSDK(appId, appKey, null);
+            initSDK(appId, appKey, null);
         }
 
         public void initSDK(string appId, string appKey, ATSDKInitListener listener)
@@ -27,27 +28,21 @@ namespace AnyThinkAds.Android
             sdkInitListener = listener;
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("initAppliction", appId, appKey);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("initAppliction", appId, appKey);
             }
             catch (System.Exception e)
             {
                 System.Console.WriteLine("Exception caught: {0}", e);
-				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
             }
         }
 
         public void getUserLocation(ATGetUserLocationListener listener)
         {
-            ATNetTrafficListener netTrafficListener = new ATNetTrafficListener(listener);
+            var netTrafficListener = new ATNetTrafficListener(listener);
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("checkIsEuTraffic", netTrafficListener);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("checkIsEuTraffic", netTrafficListener);
             }
             catch (System.Exception e)
             {
@@ -59,30 +54,30 @@ namespace AnyThinkAds.Android
 
         public void setGDPRLevel(int level)
         {
-			Debug.Log ("setGDPRLevel....");
-			try{
-				if (this.sdkInitHelper != null) {
-					this.sdkInitHelper.Call ("setGDPRLevel",level);
-				}
-			}catch(System.Exception e){
-				System.Console.WriteLine("Exception caught: {0}", e);
-				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
-			}
-           
+            Debug.Log("setGDPRLevel....");
+            try
+            {
+                if (sdkInitHelper != null) sdkInitHelper.Call("setGDPRLevel", level);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
         }
 
         public void showGDPRAuth()
         {
-			Debug.Log ("showGDPRAuth....");
-			try{
-				if (this.sdkInitHelper != null) {
-					this.sdkInitHelper.Call ("showGDPRAuth");
-				}
-			}catch(System.Exception e){
-				System.Console.WriteLine("Exception caught: {0}", e);
-				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
-
-			}
+            Debug.Log("showGDPRAuth....");
+            try
+            {
+                if (sdkInitHelper != null) sdkInitHelper.Call("showGDPRAuth");
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine("Exception caught: {0}", e);
+                Debug.Log("ATSDKAPIClient :  error." + e.Message);
+            }
         }
 
         public void setChannel(string channel)
@@ -90,10 +85,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setChannel....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setChannel", channel);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setChannel", channel);
             }
             catch (System.Exception e)
             {
@@ -107,10 +99,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setSubChannel....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setSubChannel", subchannel);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setSubChannel", subchannel);
             }
             catch (System.Exception e)
             {
@@ -124,10 +113,7 @@ namespace AnyThinkAds.Android
             Debug.Log("initCustomMap....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("initCustomMap", jsonMap);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("initCustomMap", jsonMap);
             }
             catch (System.Exception e)
             {
@@ -141,10 +127,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setCustomDataForPlacementID....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("initPlacementCustomMap", placementID, customData);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("initPlacementCustomMap", placementID, customData);
             }
             catch (System.Exception e)
             {
@@ -158,10 +141,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setLogDebug....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setDebugLogOpen", isDebug);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setDebugLogOpen", isDebug);
             }
             catch (System.Exception e)
             {
@@ -181,24 +161,18 @@ namespace AnyThinkAds.Android
 //				System.Console.WriteLine("Exception caught: {0}", e);
 //				Debug.Log ("ATSDKAPIClient :  error."+e.Message);
 //			}
-
         }
 
         public void initSDKSuccess(string appid)
         {
             Debug.Log("initSDKSuccess...unity3d.");
-            if(sdkInitListener != null){
-                sdkInitListener.initSuccess();
-            }
+            if (sdkInitListener != null) sdkInitListener.initSuccess();
         }
 
         public void initSDKError(string appid, string message)
         {
             Debug.Log("initSDKError..unity3d..");
-            if (sdkInitListener != null)
-            {
-                sdkInitListener.initFail(message);
-            }
+            if (sdkInitListener != null) sdkInitListener.initFail(message);
         }
 
         public int getGDPRLevel()
@@ -206,16 +180,14 @@ namespace AnyThinkAds.Android
             Debug.Log("getGDPRLevel....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    return this.sdkInitHelper.Call<int>("getGDPRLevel");
-                }
+                if (sdkInitHelper != null) return sdkInitHelper.Call<int>("getGDPRLevel");
             }
             catch (System.Exception e)
             {
                 System.Console.WriteLine("Exception caught: {0}", e);
                 Debug.Log("ATSDKAPIClient :  error." + e.Message);
             }
+
             return 2; //UNKNOW
         }
 
@@ -224,16 +196,14 @@ namespace AnyThinkAds.Android
             Debug.Log("isEUTraffic....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    return this.sdkInitHelper.Call<bool>("isEUTraffic");
-                }
+                if (sdkInitHelper != null) return sdkInitHelper.Call<bool>("isEUTraffic");
             }
             catch (System.Exception e)
             {
                 System.Console.WriteLine("Exception caught: {0}", e);
                 Debug.Log("ATSDKAPIClient :  error." + e.Message);
             }
+
             return false;
         }
 
@@ -242,10 +212,7 @@ namespace AnyThinkAds.Android
             Debug.Log("deniedUploadDeviceInfo....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("deniedUploadDeviceInfo", deniedInfoString);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("deniedUploadDeviceInfo", deniedInfoString);
             }
             catch (System.Exception e)
             {
@@ -259,10 +226,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setExcludeBundleIdArray....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setExcludeBundleIdArray", bundleIds);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setExcludeBundleIdArray", bundleIds);
             }
             catch (System.Exception e)
             {
@@ -276,10 +240,8 @@ namespace AnyThinkAds.Android
             Debug.Log("setExcludeAdSourceIdArrayForPlacementID....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setExcludeAdSourceIdArrayForPlacementID", placementID, adsourceIds);
-                }
+                if (sdkInitHelper != null)
+                    sdkInitHelper.Call("setExcludeAdSourceIdArrayForPlacementID", placementID, adsourceIds);
             }
             catch (System.Exception e)
             {
@@ -293,10 +255,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setSDKArea....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setSDKArea", area);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setSDKArea", area);
             }
             catch (System.Exception e)
             {
@@ -308,13 +267,10 @@ namespace AnyThinkAds.Android
         public void getArea(ATGetAreaListener listener)
         {
             Debug.Log("getArea....");
-            ATAreaListener areaListener = new ATAreaListener(listener);
+            var areaListener = new ATAreaListener(listener);
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("getArea", areaListener);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("getArea", areaListener);
             }
             catch (System.Exception e)
             {
@@ -328,10 +284,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setWXStatus....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setWXStatus", install);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setWXStatus", install);
             }
             catch (System.Exception e)
             {
@@ -345,10 +298,7 @@ namespace AnyThinkAds.Android
             Debug.Log("setLocation....");
             try
             {
-                if (this.sdkInitHelper != null)
-                {
-                    this.sdkInitHelper.Call("setLocation", longitude, latitude);
-                }
+                if (sdkInitHelper != null) sdkInitHelper.Call("setLocation", longitude, latitude);
             }
             catch (System.Exception e)
             {
@@ -356,6 +306,5 @@ namespace AnyThinkAds.Android
                 Debug.Log("ATSDKAPIClient :  error." + e.Message);
             }
         }
-
     }
 }

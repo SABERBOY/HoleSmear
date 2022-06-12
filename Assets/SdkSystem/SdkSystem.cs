@@ -17,10 +17,7 @@ namespace SDK
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new SdkSystem();
-                }
+                if (_instance == null) _instance = new SdkSystem();
 
                 return _instance;
             }
@@ -39,8 +36,8 @@ namespace SDK
         public void Initialize()
         {
 #if UNITY_EDITOR
-            this._sdk = new TopOnSdk();
-            this._sdk.Init();
+            _sdk = new TopOnSdk();
+            _sdk.Init();
 #elif UNITY_ANDROID
             this._sdk = new TopOnSdk();
             this._sdk.Init();
@@ -57,7 +54,7 @@ namespace SDK
         /// <returns></returns>
         public bool IsRewardAdLoaded()
         {
-            var adLoaded = this._sdk.VideoLoaded();
+            var adLoaded = _sdk.VideoLoaded();
             AnalyticsEvent.Custom("Reward", new Dictionary<string, object> { { "IsRewardAdLoaded", adLoaded } });
             return adLoaded;
         }
@@ -69,10 +66,10 @@ namespace SDK
         /// <returns></returns>
         public bool IsInterstitialLoaded()
         {
-            var adLoaded = this._sdk.InterstitialLoaded();
+            var adLoaded = _sdk.InterstitialLoaded();
             AnalyticsEvent.Custom("Interstitial",
                 new Dictionary<string, object> { { "IsInterstitialLoaded", adLoaded } });
-            return this._sdk.InterstitialLoaded();
+            return _sdk.InterstitialLoaded();
         }
 
 
@@ -83,15 +80,15 @@ namespace SDK
         {
             AnalyticsEvent.AdStart(false, AdvertisingNetwork.UnityAds, "ShowRewardVideoAd");
             /* tGSDKController.ShowRewardVideoAd(); */
-            this._sdk.ShowVideo((() =>
+            _sdk.ShowVideo(() =>
             {
                 success?.Invoke();
                 AnalyticsEvent.AdComplete(true, AdvertisingNetwork.UnityAds, "ShowRewardVideoAd");
-            }), (() =>
+            }, () =>
             {
                 fail?.Invoke();
                 AnalyticsEvent.AdComplete(false, AdvertisingNetwork.UnityAds, "ShowRewardVideoAd");
-            }));
+            });
         }
 
 
@@ -102,30 +99,27 @@ namespace SDK
         {
             /* tGSDKController.ShowRewardVideoAd(); */
             AnalyticsEvent.AdStart(false, AdvertisingNetwork.UnityAds, "ShowInterstitial");
-            this._sdk.ShowInterstitialAd((() =>
+            _sdk.ShowInterstitialAd(() =>
             {
                 interactionAdCompleted?.Invoke();
                 AnalyticsEvent.AdStart(true, AdvertisingNetwork.UnityAds, "ShowInterstitial");
-            }), (() =>
+            }, () =>
             {
                 hold?.Invoke();
                 AnalyticsEvent.AdStart(false, AdvertisingNetwork.UnityAds, "ShowInterstitial");
-            }));
+            });
         }
 
         public void ShowFloatingWindow(bool show, int hight)
         {
 #if !UNITY_WEBGL
-            if (this._sdk is ADMob sdk)
-            {
-                sdk?.ShowFloatingWindow(show, hight);
-            }
+            if (_sdk is ADMob sdk) sdk?.ShowFloatingWindow(show, hight);
 #endif
         }
 
         public void ShowBanner(bool active)
         {
-            this._sdk.ShowBanner(active);
+            _sdk.ShowBanner(active);
         }
     }
 }

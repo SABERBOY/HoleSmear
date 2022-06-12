@@ -9,14 +9,10 @@ namespace Transsion.Editor
     {
         private readonly string configPath = "Assets/Transsion/Resources/";
 
-        public int callbackOrder
-        {
-            get { return 999; }
-        }
+        public int callbackOrder => 999;
 
         void IPostGenerateGradleAndroidProject.OnPostGenerateGradleAndroidProject(string path)
         {
-
             Debug.Log("Bulid path : " + path);
 
             path = path.Replace("unityLibrary", "launcher");
@@ -24,11 +20,8 @@ namespace Transsion.Editor
             File.Delete(googleConfig);
             File.Copy($"{configPath}google-services.json", googleConfig);
 
-            String directoryPath = path + "/src/main/assets";
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
+            var directoryPath = path + "/src/main/assets";
+            if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
 
             var transsionConfig = directoryPath + "/game_sdk_config.json";
             File.Delete(transsionConfig);

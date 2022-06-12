@@ -3,37 +3,36 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MyCanvasSetting : MonoBehaviour {
-
-	// Use this for initialization
-	void Start ()
+public class MyCanvasSetting : MonoBehaviour
+{
+    // Use this for initialization
+    private void Start()
     {
-#if UNITY_ANDROID      
+#if UNITY_ANDROID
         mySetting();
 #endif
     }
 
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-#if UNITY_ANDROID      
+#if UNITY_ANDROID
         mySetting();
 #endif
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
-    void mySetting()
+    private void mySetting()
     {
-        CanvasScaler[] canv = FindObjectsOfType(typeof(CanvasScaler)) as CanvasScaler[];
-        foreach (CanvasScaler cns in canv) cns.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        var canv = FindObjectsOfType(typeof(CanvasScaler)) as CanvasScaler[];
+        foreach (var cns in canv) cns.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
     }
-
 }

@@ -1,59 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GizmoHover : MonoBehaviour {
-
-	public Color hovercolor;
-	private Color original;
-	private Renderer rend;
-	private bool selected;
+public class GizmoHover : MonoBehaviour
+{
+    public Color hovercolor;
+    private Color original;
+    private Renderer rend;
+    private bool selected;
     private float t = 0;
 
 
-	void Start(){
+    private void Start()
+    {
+        rend = transform.GetComponent<Renderer>();
+        original = rend.material.color;
+    }
 
-		rend = transform.GetComponent<Renderer>();
-		original = rend.material.color;
-	}
+    private void OnMouseEnter()
+    {
+        SetHovered();
+    }
 
-	void OnMouseEnter () {
-	
-		SetHovered();
-	}
+    private void OnMouseExit()
+    {
+        if (!selected)
+            SetOriginal();
+    }
 
-	void OnMouseExit () {
-	
-		if(!selected)
-			SetOriginal();
-	}
+    private void SetHovered()
+    {
+        rend.material.color = hovercolor;
+    }
 
-	void SetHovered(){
+    private void SetOriginal()
+    {
+        rend.material.color = original;
+    }
 
-		rend.material.color = hovercolor;
-	}
-
-	void SetOriginal(){
-
-		rend.material.color = original;
-	}
-
-	void OnMouseDown(){
-
-		selected=true;
+    private void OnMouseDown()
+    {
+        selected = true;
         if (Time.time - t < 0.3f)
         {
             SendMessageUpwards("ChangeMode");
             SetOriginal();
         }
+
         t = Time.time;
-	}
+    }
 
-	void Update(){
-
-		if(selected && Input.GetMouseButtonUp(0)){
-			SetOriginal();
-			selected = false;
-		}
-	}
-
+    private void Update()
+    {
+        if (selected && Input.GetMouseButtonUp(0))
+        {
+            SetOriginal();
+            selected = false;
+        }
+    }
 }

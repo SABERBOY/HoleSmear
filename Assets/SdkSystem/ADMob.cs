@@ -151,13 +151,8 @@ namespace SDK
             if (!RemoteConfig.Instance.IsMagic)
             {
                 if (transsionSDK.VideoLoaded())
-                {
                     transsionSDK.ShowVideo(success, fail);
-                }
-                else if (transsionSDK.InterstitialLoaded())
-                {
-                    transsionSDK.ShowInterstitialAd(success, fail);
-                }
+                else if (transsionSDK.InterstitialLoaded()) transsionSDK.ShowInterstitialAd(success, fail);
 
                 return;
             }
@@ -196,13 +191,9 @@ namespace SDK
             if (!RemoteConfig.Instance.IsMagic)
             {
                 if (transsionSDK.VideoLoaded())
-                {
                     transsionSDK.ShowVideo(interactionAdCompleted, hold);
-                }
                 else if (transsionSDK.InterstitialLoaded())
-                {
                     transsionSDK.ShowInterstitialAd(interactionAdCompleted, hold);
-                }
 
                 return;
             }

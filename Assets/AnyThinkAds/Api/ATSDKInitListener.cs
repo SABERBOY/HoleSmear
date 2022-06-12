@@ -6,7 +6,6 @@ namespace AnyThinkAds.Api
 {
     public interface ATSDKInitListener
     {
-
         void initSuccess();
         void initFail(string message);
     }

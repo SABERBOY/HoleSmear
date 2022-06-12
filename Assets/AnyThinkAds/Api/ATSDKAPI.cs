@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System;
 using UnityEngine;
-
-
-
 using AnyThinkAds.Common;
 using AnyThinkAds.ThirdParty.LitJson;
 
@@ -69,7 +66,6 @@ namespace AnyThinkAds.Api
         public static readonly string IDFV = "idfv";
 
 
-
         private static readonly IATSDKAPIClient client = GetATSDKAPIClient();
 
         public static void initSDK(string appId, string appKey)
@@ -92,11 +88,13 @@ namespace AnyThinkAds.Api
             client.getUserLocation(listener);
         }
 
-        public static int getGDPRLevel() {
+        public static int getGDPRLevel()
+        {
             return client.getGDPRLevel();
         }
 
-        public static bool isEUTraffic() {
+        public static bool isEUTraffic()
+        {
             return client.isEUTraffic();
         }
 
@@ -130,7 +128,7 @@ namespace AnyThinkAds.Api
             client.setLogDebug(isDebug);
         }
 
-		public static void addNetworkGDPRInfo(int networkType, Dictionary<string,object> dictionary)
+        public static void addNetworkGDPRInfo(int networkType, Dictionary<string, object> dictionary)
         {
             client.addNetworkGDPRInfo(networkType, JsonMapper.ToJson(dictionary));
         }
@@ -139,7 +137,7 @@ namespace AnyThinkAds.Api
         {
             if (deniedInfo != null && deniedInfo.Length > 0)
             {
-                string deniedString = JsonMapper.ToJson(deniedInfo);
+                var deniedString = JsonMapper.ToJson(deniedInfo);
                 client.deniedUploadDeviceInfo(deniedString);
                 Debug.Log("deniedUploadDeviceInfo, deniedInfo === " + deniedString);
             }
@@ -147,44 +145,42 @@ namespace AnyThinkAds.Api
             {
                 Debug.Log("deniedUploadDeviceInfo, deniedInfo = null");
             }
-            
         }
 
-        private static IATSDKAPIClient GetATSDKAPIClient(){
+        private static IATSDKAPIClient GetATSDKAPIClient()
+        {
             Debug.Log("GetATSDKAPIClient");
-            return AnyThinkAds.ATAdsClientFactory.BuildSDKAPIClient();
+            return ATAdsClientFactory.BuildSDKAPIClient();
         }
 
         public static void setExcludeBundleIdArray(string[] bundleIds)
         {
             if (bundleIds != null && bundleIds.Length > 0)
             {
-                string bundleIdsString = JsonMapper.ToJson(bundleIds);
+                var bundleIdsString = JsonMapper.ToJson(bundleIds);
                 Debug.Log("setExcludeBundleIdArray, bundleIdsString === " + bundleIdsString);
 
-                client.setExcludeBundleIdArray(bundleIdsString);      
+                client.setExcludeBundleIdArray(bundleIdsString);
             }
             else
             {
                 Debug.Log("setExcludeBundleIdArray, bundleIdsString = null");
             }
-
         }
 
         public static void setExcludeAdSourceIdArrayForPlacementID(string placementID, string[] adSourceIds)
         {
             if (adSourceIds != null && adSourceIds.Length > 0)
             {
-                string adSourceIdsString = JsonMapper.ToJson(adSourceIds);
+                var adSourceIdsString = JsonMapper.ToJson(adSourceIds);
                 Debug.Log("setExcludeAdSourceIdArrayForPlacementID, adSourceIdsString === " + adSourceIdsString);
 
-                client.setExcludeAdSourceIdArrayForPlacementID(placementID, adSourceIdsString);   
+                client.setExcludeAdSourceIdArrayForPlacementID(placementID, adSourceIdsString);
             }
             else
             {
                 Debug.Log("setExcludeAdSourceIdArrayForPlacementID, adSourceIdsString = null");
             }
-
         }
 
         public static void setSDKArea(int area)
@@ -206,7 +202,5 @@ namespace AnyThinkAds.Api
         {
             client.setLocation(longitude, latitude);
         }
-
     }
 }
-
