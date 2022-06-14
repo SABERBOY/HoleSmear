@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using SDK;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -363,7 +364,10 @@ public class UIController : Base
         /*var go = Hole.instance.transform.parent.gameObject;
         Hole.instance.transform.parent = null;
         go.SetActive(false);*/
-        var map = gameCon.maps[a];
+        var op = Addressables.LoadAssetAsync<GameObject>($"Map{a}");
+        GameObject go = op.WaitForCompletion();
+        var map = Instantiate(go);//gameCon.maps[a];
+        // Addressables.Release(op);
         Hole.instance.SetPlaner(map.transform.Find("Plane"));
         map.SetActive(true);
         Hole.instance.transform.parent = map.transform;

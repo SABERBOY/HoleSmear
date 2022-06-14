@@ -13,13 +13,15 @@ public class HoleShader : Base
 
     private readonly int n = 1;
     public float[] radiuses;
+    private static readonly int HitCount = Shader.PropertyToID("_hitCount");
+    private static readonly int SectionColor = Shader.PropertyToID("_SectionColor");
 
     public static HoleShader instance => GameObject.Find("Map" + SceneData.skinID).GetComponentInChildren<HoleShader>();
 
     private void Awake()
     {
         //instance = this;
-        mr.material.SetColor("_SectionColor", mr.material.color * 0.9f);
+        mr.material.SetColor(SectionColor, mr.material.color * 0.9f);
     }
 
     private void Start()
@@ -27,7 +29,7 @@ public class HoleShader : Base
         hitPoints = new Vector3[n];
         AxisDir = new Vector3[n];
         radiuses = new float[n];
-        Shader.SetGlobalInt("_hitCount", 0);
+        Shader.SetGlobalInt(HitCount, 0);
         //Renderer[] allrenderers = gameObject.GetComponentsInChildren<Renderer>();
         //foreach (Renderer r in allrenderers)
         //{
