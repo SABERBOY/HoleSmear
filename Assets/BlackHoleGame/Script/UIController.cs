@@ -88,9 +88,6 @@ public class UIController : Base
         trigger.triggers.Add(entry);
     }
 
-    private void Update()
-    {
-    }
 
     /// <summary>
     ///     开始游戏
@@ -359,15 +356,18 @@ public class UIController : Base
     /// </summary>
     public void ChangeSkin(int a)
     {
+        Resources.UnloadUnusedAssets();
         SceneData.skinID = a;
         PlayerPrefs.SetInt(SceneData.skin, SceneData.skinID);
         /*var go = Hole.instance.transform.parent.gameObject;
         Hole.instance.transform.parent = null;
         go.SetActive(false);*/
-        var op = Addressables.LoadAssetAsync<GameObject>($"Map{a}");
-        GameObject go = op.WaitForCompletion();
-        var map = Instantiate(go);//gameCon.maps[a];
-        // Addressables.Release(op);
+        // var op = Addressables.LoadAssetAsync<GameObject>($"Map{a}");
+        var go = Resources.Load<GameObject>($"Maps/Map{a}"); //op.WaitForCompletion();
+        var map = Instantiate(go); //gameCon.maps[a];
+        GameController.instance.GameMap = map;
+        // Addressables.Release(go);
+        // Resources.UnloadAsset(go);
         Hole.instance.SetPlaner(map.transform.Find("Plane"));
         map.SetActive(true);
         Hole.instance.transform.parent = map.transform;

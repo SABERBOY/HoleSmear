@@ -203,6 +203,6 @@ public class Hole : Base
     /// <param name="_plane"></param>
     public void SetPlaner([NotNull] Transform _plane)
     {
-        this.plane = _plane ? _plane : throw new ArgumentNullException(nameof(_plane));
+        plane = _plane ? _plane : throw new ArgumentNullException(nameof(_plane));
     }
 }

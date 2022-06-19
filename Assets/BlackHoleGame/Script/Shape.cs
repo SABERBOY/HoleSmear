@@ -13,7 +13,7 @@ public class Shape : Base
     public static Shape CreateShape(Vector3 pos, Vector3 scale, Vector3 eul, string shapeStar, string colorID,
         string ID, string name)
     {
-        var go = Instantiate(Resources.Load<GameObject>("Prefabs/" + shapeStar));
+        var go = Instantiate(Resources.Load<GameObject>("Prefabs/" + shapeStar), GameController.instance.GameMain);
         go.transform.position = pos;
         go.transform.localScale = scale;
         go.transform.eulerAngles = eul;

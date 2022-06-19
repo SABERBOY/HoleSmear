@@ -16,7 +16,7 @@ public class HoleShader : Base
     private static readonly int HitCount = Shader.PropertyToID("_hitCount");
     private static readonly int SectionColor = Shader.PropertyToID("_SectionColor");
 
-    public static HoleShader instance => GameObject.Find("Map" + SceneData.skinID).GetComponentInChildren<HoleShader>();
+    public static HoleShader instance => GameController.instance.GameMap.GetComponentInChildren<HoleShader>();
 
     private void Awake()
     {
@@ -41,12 +41,12 @@ public class HoleShader : Base
 
     public void StartShader()
     {
-        StartCoroutine("IEShaderMove");
+        StartCoroutine(nameof(IEShaderMove));
     }
 
     public void StopShader()
     {
-        StopCoroutine("IEShaderMove");
+        StopCoroutine(nameof(IEShaderMove));
         Shader.DisableKeyword("CLIP_TUBES");
     }
 

@@ -27,7 +27,7 @@ public class Diamond : Base
             var z2 = Random.Range(-1f, 0);
             Vector3[] dirs =
                 { new Vector3(x1, 1, z1), new Vector3(x1, 1, z2), new Vector3(x2, 1, z2), new Vector3(x2, 1, z1) };
-            var go = Instantiate(Resources.Load<GameObject>("Prefabs/Diamond"));
+            var go = Instantiate(Resources.Load<GameObject>("Prefabs/Diamond"), GameController.instance.GameMain);
             go.transform.position = new Vector3(0, 0, 0) + dirs[i % 4];
             go.GetComponentInChildren<Rigidbody>().AddExplosionForce(600, new Vector3(0, 0, 0), 10, 3);
         }

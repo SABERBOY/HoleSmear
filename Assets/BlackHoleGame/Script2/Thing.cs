@@ -16,7 +16,7 @@ public class Thing : Base
 
     public static Thing CreateThing(int num, Vector3 pos)
     {
-        var go = Instantiate(Resources.Load<GameObject>("Prefabs/" + num));
+        var go = Instantiate(Resources.Load<GameObject>("Prefabs/" + num), GameController.instance.GameMain);
         var thing = go.AddComponent<Thing>();
         thing.pos = pos;
         thing.col.isTrigger = false;

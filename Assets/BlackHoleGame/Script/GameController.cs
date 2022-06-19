@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameController : Base
@@ -8,14 +11,44 @@ public class GameController : Base
     public static GameController instance;
     private bool _isDie;
     private bool _isWin;
+
+    [FormerlySerializedAs("GameMain")] [SerializeField]
+    private Transform gameMain;
+
+    public Transform GameMain => gameMain;
+
     public int addMoneyNum;
-    public ParticleSystem caizi;
+
+    public GameObject caizi;
+
+    // public AssetReference caizi;
     public GameObject[] gos;
     private Transform[] gosPos;
     public GameObject holeGo;
     public GameObject[] maps;
     public int skinMoneyNum;
     public int winMoneyNum;
+
+    private GameObject _gameMap;
+
+    public GameObject GameMap
+    {
+        get => _gameMap;
+        set
+        {
+            if (_gameMap != null)
+            {
+                _gameMap.SetActive(false);
+                Addressables.ReleaseInstance(_gameMap);
+                // Resources.UnloadAsset(_gameMap);
+                Destroy(_gameMap);
+                Resources.UnloadUnusedAssets();
+                _gameMap = null;
+            }
+
+            _gameMap = value;
+        }
+    }
 
     public bool isDie
     {
@@ -87,9 +120,27 @@ public class GameController : Base
         UI.starTextNum = addMoneyNum;
         anim.WinTextMove();
         UI.lvPanel.SetActive(false);
-        caizi.gameObject.SetActive(true);
-        caizi.Play();
+        // var cz = caizi.LoadAssetAsync<GameObject>();
+        var go = caizi;
+        var particleSystem = Instantiate(go, gameMain).GetComponent<ParticleSystem>();
+        // Addressables.Release(cz);
+        particleSystem.gameObject.SetActive(true);
+        particleSystem.Play();
+        StartCoroutine(ReleaseParticle(particleSystem));
+
         Diamond.CreateDia(addMoneyNum);
+    }
+
+    private IEnumerator ReleaseParticle(ParticleSystem particleSystem1)
+    {
+        yield return new WaitForSeconds(3.0f);
+        GameObject o;
+        (o = particleSystem1.gameObject).SetActive(false);
+        Addressables.ReleaseInstance(o);
+        // Resources.UnloadAsset(o);
+        Addressables.ReleaseInstance(o);
+        Destroy(o);
+        Resources.UnloadUnusedAssets();
     }
 
     public void Win()
@@ -149,7 +200,7 @@ public class GameController : Base
 
     private IEnumerator IEHoleImage()
     {
-        StopCoroutine("IEHoleBigger");
+        StopCoroutine(nameof(IEHoleBigger));
         while (true)
         {
             UI.holeImage.gameObject.SetActive(true);
@@ -199,7 +250,7 @@ public class GameController : Base
 
     private void StartSet()
     {
-        UI.moneyTextNum = PlayerPrefs.GetInt(SceneData.money);
+        UI.moneyTextNum = PlayerPrefs.GetInt(SceneData.money, 500);
         lang.flagNum = PlayerPrefs.GetInt(SceneData.flag);
         UI.ChangeSkin(PlayerPrefs.GetInt(SceneData.skin));
         UI.shockSwitch.isOn = Convert.ToBoolean(PlayerPrefs.GetInt(SceneData.isShock));
@@ -213,11 +264,7 @@ public class GameController : Base
     private void ReGos()
     {
         var games = Resources.LoadAll<GameObject>("Tree" + SceneData.skinID);
-        for (var i = 0; i < games.Length; i++)
-        {
-            var ob = Instantiate(games[i]);
-            ob.transform.SetParent(Hole.instance.transform.parent, false);
-        }
+        foreach (var t in games) Instantiate(t, Hole.instance.transform.parent, false);
 
         winMoneyNum = Random.Range(15, 26);
         addMoneyNum = winMoneyNum;

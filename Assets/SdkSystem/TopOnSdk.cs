@@ -80,6 +80,7 @@ namespace SDK
             mInterstitialScenes = new InterstitialScenes();
             mVideoScenes = new VideoScenes();
             // mNativeBannerScene = new NativeBannerScene();
+            this.ShowBanner(true);
         }
 
         public void initFail(string message)
@@ -95,6 +96,8 @@ namespace SDK
 
 #elif UNITY_IOS || UNITY_IPHONE
 		static string mPlacementId_native_all = "b5b0f555698607";
+#else
+        static string mPlacementId_native_all = "";
 
 #endif
         public NativeBannerScene()
@@ -200,7 +203,8 @@ namespace SDK
 #elif UNITY_IOS || UNITY_IPHONE
     static string mPlacementId_rewardvideo_all = "b5b44a0f115321";//"b5b44a0f115321";
     static string showingScenario = "f5e54970dc84e6";
-
+#else
+        static string mPlacementId_rewardvideo_all = "";
 #endif
 
         private ATRewardedVideo rewardedVideo;
@@ -403,6 +407,8 @@ namespace SDK
 #elif UNITY_IOS || UNITY_IPHONE
     static string mPlacementId_interstitial_all = "b5bacad26a752a";
     static string showingScenario = "f5e549727efc49";
+#else
+        static string mPlacementId_interstitial_all = "";
 
 #endif
 
@@ -586,6 +592,8 @@ namespace SDK
 	static string mPlacementId_banner_all = "b5bacaccb61c29";
     //static string mPlacementId_banner_all = "b5bacaccb61c29";
     static string showingScenario = "";
+#else
+        static string mPlacementId_banner_all = "";
 #endif
 
         private int screenWidth;

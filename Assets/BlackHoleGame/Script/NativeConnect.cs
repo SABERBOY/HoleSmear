@@ -44,7 +44,6 @@ public class NativeConnect : Base
 
     #region 安卓类名
 
-#if UNITY_ANDROID
     /// <summary>
     ///     安卓sdk连接类名字
     /// </summary>
@@ -71,9 +70,6 @@ public class NativeConnect : Base
     }
 
     #endregion
-
-
-#endif
 
     #endregion
 
