@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System;
+
 using AnyThinkAds.Common;
 using AnyThinkAds.ThirdParty.LitJson;
 
@@ -11,59 +12,53 @@ namespace AnyThinkAds.Api
     public class ATInterstitialAdLoadingExtra
     {
         public static readonly string kATInterstitialAdLoadingExtraInterstitialAdSize = "interstitial_ad_size";
-
-        public static readonly string kATInterstitialAdLoadingExtraInterstitialAdSizeStruct =
-            "interstitial_ad_size_struct";
-
+        public static readonly string kATInterstitialAdLoadingExtraInterstitialAdSizeStruct = "interstitial_ad_size_struct";
         public static readonly string kATInterstitialAdSizeUsesPixelFlagKey = "uses_pixel";
     }
 
     public class ATInterstitialAd
-    {
-        private static readonly ATInterstitialAd instance = new ATInterstitialAd();
-        private IATInterstitialAdClient client;
+	{
+		private static readonly ATInterstitialAd instance = new ATInterstitialAd();
+		public IATInterstitialAdClient client;
 
-        private ATInterstitialAd()
-        {
+		private ATInterstitialAd()
+		{
             client = GetATInterstitialAdClient();
-        }
+		}
 
-        public static ATInterstitialAd Instance => instance;
+		public static ATInterstitialAd Instance 
+		{
+			get
+			{
+				return instance;
+			}
+		}
 
-        public void loadInterstitialAd(string placementId, Dictionary<string, object> pairs)
+		public void loadInterstitialAd(string placementId, Dictionary<string,object> pairs)
         {
-            if (pairs != null &&
-                pairs.ContainsKey(ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSizeStruct))
+            if (pairs != null && pairs.ContainsKey(ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSizeStruct))
             {
-                var size = (ATSize)pairs[
-                    ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSizeStruct];
-                pairs.Add(ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSize,
-                    size.width + "x" + size.height);
+                ATSize size = (ATSize)(pairs[ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSizeStruct]);
+                pairs.Add(ATInterstitialAdLoadingExtra.kATInterstitialAdLoadingExtraInterstitialAdSize, size.width + "x" + size.height);
                 pairs.Add(ATInterstitialAdLoadingExtra.kATInterstitialAdSizeUsesPixelFlagKey, size.usesPixel);
 
                 client.loadInterstitialAd(placementId, JsonMapper.ToJson(pairs));
-            }
-            else
+            } else
             {
                 client.loadInterstitialAd(placementId, JsonMapper.ToJson(pairs));
             }
         }
-
-        public void setListener(ATInterstitialAdListener listener)
-        {
-            client.setListener(listener);
-        }
+        
 
         public bool hasInterstitialAdReady(string placementId)
         {
             return client.hasInterstitialAdReady(placementId);
         }
-
         public void entryScenarioWithPlacementID(string placementId, string scenarioID)
         {
-            client.entryScenarioWithPlacementID(placementId, scenarioID);
+            client.entryScenarioWithPlacementID(placementId,scenarioID);
         }
-
+        
 
         public string checkAdStatus(string placementId)
         {
@@ -87,7 +82,8 @@ namespace AnyThinkAds.Api
 
         public IATInterstitialAdClient GetATInterstitialAdClient()
         {
-            return ATAdsClientFactory.BuildInterstitialAdClient();
+            return AnyThinkAds.ATAdsClientFactory.BuildInterstitialAdClient();
         }
-    }
+
+	}
 }

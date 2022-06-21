@@ -1,4 +1,5 @@
-﻿using AnyThinkAds.Common;
+﻿
+using AnyThinkAds.Common;
 
 
 namespace AnyThinkAds.Api
@@ -13,16 +14,23 @@ namespace AnyThinkAds.Api
             client = GetATDownloadClient();
         }
 
-        public static ATDownloadManager Instance => instance;
-
-        public void setListener(ATDownloadAdListener listener)
+        public static ATDownloadManager Instance
         {
+            get
+            {
+                return instance;
+            }
+        }
+
+		public void setListener(ATDownloadAdListener listener)
+        {   
             client.setListener(listener);
         }
 
         public IATDownloadClient GetATDownloadClient()
         {
-            return ATAdsClientFactory.BuildDownloadClient();
+            return AnyThinkAds.ATAdsClientFactory.BuildDownloadClient();
         }
+
     }
 }

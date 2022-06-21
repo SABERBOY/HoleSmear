@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">66271912637</string>
+  <string name="google_storage_bucket" translatable="false">casual-games-in-aha-games5.appspot.com</string>
+  <string name="project_id" translatable="false">casual-games-in-aha-games5</string>
+  <string name="google_api_key" translatable="false">AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0</string>
+  <string name="google_app_id" translatable="false">1:66271912637:android:dc896c5f4cb831154b4dd4</string>
+  <string name="default_web_client_id" translatable="false">66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com</string>
+</resources>

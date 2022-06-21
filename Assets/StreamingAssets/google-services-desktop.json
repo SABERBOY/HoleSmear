@@ -1,0 +1,184 @@
+{
+  "project_info": {
+    "project_number": "66271912637",
+    "project_id": "casual-games-in-aha-games5",
+    "storage_bucket": "casual-games-in-aha-games5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66271912637:android:dc896c5f4cb831154b4dd4",
+        "android_client_info": {
+          "package_name": "com.HoleSenear.beijinghutoujing.gp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66271912637:android:f878327a56009c114b4dd4",
+        "android_client_info": {
+          "package_name": "com.Wigoal.FruitCrush.palm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66271912637:android:ebd38751edc8912a4b4dd4",
+        "android_client_info": {
+          "package_name": "com.airsupport.megatouch.palm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66271912637:android:5c6d75c75c6779174b4dd4",
+        "android_client_info": {
+          "package_name": "com.bowlingking.yanque.palm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66271912637:android:7f461e1bd9e9ec2f4b4dd4",
+        "android_client_info": {
+          "package_name": "com.empire.grow.rome.palm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66271912637:android:c5bc214186e960de4b4dd4",
+        "android_client_info": {
+          "package_name": "com.firstmove.parkingjam3d.palm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwe_p_LUsG2O376fdp1BQI1pjDx-SLF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66271912637-b6ukdap8g2iphf047rpq7j50q36kfu32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

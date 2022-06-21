@@ -81,6 +81,23 @@ namespace SDK
             mVideoScenes = new VideoScenes();
             // mNativeBannerScene = new NativeBannerScene();
             this.ShowBanner(true);
+            // ATSDKAPI.showGDPRAuth();
+            //判断是否在欧盟地区
+            ATSDKAPI.getUserLocation(new GetLocationListener());
+        }
+
+
+        //发布欧盟地区的开发者需使用以下授权代码，询问用户是否同意收集隐私数据
+        private class GetLocationListener : ATGetUserLocationListener
+        {
+            public void didGetUserLocation(int location)
+            {
+                Debug.Log("Developer callback didGetUserLocation(): " + location);
+                if (location == ATSDKAPI.kATUserLocationInEU && ATSDKAPI.getGDPRLevel() == ATSDKAPI.UNKNOWN)
+                {
+                    ATSDKAPI.showGDPRAuth();
+                }
+            }
         }
 
         public void initFail(string message)
@@ -261,7 +278,16 @@ namespace SDK
             // ATRewardedVideo.Instance.loadVideoAd(mPlacementId_rewardvideo_all, jsonmap);
 
 #if !UNITY_WEBGL
-            ATRewardedAutoVideo.Instance.setListener(callbackListener);
+            // ATRewardedAutoVideo.Instance.setListener(callbackListener);
+            ATRewardedAutoVideo.Instance.client.onAdLoadEvent += callbackListener.onAdLoad;
+            ATRewardedAutoVideo.Instance.client.onAdLoadFailureEvent += callbackListener.onAdLoadFail;
+            ATRewardedAutoVideo.Instance.client.onAdVideoStartEvent += callbackListener.onAdVideoStartEvent;
+            ATRewardedAutoVideo.Instance.client.onAdVideoEndEvent += callbackListener.onAdVideoEndEvent;
+            ATRewardedAutoVideo.Instance.client.onAdVideoFailureEvent += callbackListener.onAdVideoPlayFail;
+            ATRewardedAutoVideo.Instance.client.onAdClickEvent += callbackListener.onAdClick;
+            ATRewardedAutoVideo.Instance.client.onRewardEvent += callbackListener.onReward;
+
+            ATRewardedAutoVideo.Instance.client.onAdVideoCloseEvent += callbackListener.onAdVideoClosedEvent;
             ATRewardedAutoVideo.Instance.addAutoLoadAdPlacementID(new[] { mPlacementId_rewardvideo_all });
 #endif
         }
@@ -312,25 +338,25 @@ namespace SDK
 
             public void onRewardedVideoAdLoaded(string placementId)
             {
-                Debug.Log("ATCallbackListener Developer onRewardedVideoAdLoaded------");
+                /*Debug.Log("ATCallbackListener Developer onRewardedVideoAdLoaded------");*/
             }
 
             public void onRewardedVideoAdLoadFail(string placementId, string code, string message)
             {
-                Debug.Log("ATCallbackListener Developer onRewardedVideoAdLoadFail------:code" + code + "--message:" +
-                          message);
+                /*Debug.Log("ATCallbackListener Developer onRewardedVideoAdLoadFail------:code" + code + "--message:" +
+                          message);*/
             }
 
             public void onRewardedVideoAdPlayStart(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayStart------" + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayStart------" + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void onRewardedVideoAdPlayEnd(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayEnd------" + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayEnd------" + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void onRewardedVideoAdPlayFail(string placementId, string code, string message)
@@ -342,8 +368,8 @@ namespace SDK
 
             public void onRewardedVideoAdPlayClosed(string placementId, bool isReward, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayClosed------isReward:" + isReward + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayClosed------isReward:" + isReward + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void onRewardedVideoAdPlayClicked(string placementId, ATCallbackInfo callbackInfo)
@@ -361,14 +387,14 @@ namespace SDK
 
             public void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("ATCallbackListener Developer startLoadingADSource------" + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("ATCallbackListener Developer startLoadingADSource------" + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void finishLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("ATCallbackListener Developer finishLoadingADSource------" + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("ATCallbackListener Developer finishLoadingADSource------" + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void failToLoadADSource(string placementId, ATCallbackInfo callbackInfo, string code, string message)
@@ -394,6 +420,41 @@ namespace SDK
             {
                 /*Debug.Log(
                     "ATCallbackListener Developer failBiddingADSource------code:" + code + "---message:" + message);*/
+            }
+
+            public void onAdLoad(object sender, ATAdEventArgs e)
+            {
+                /*Debug.Log("onAdLoad:" + e.placementId);*/
+            }
+
+            public void onAdLoadFail(object sender, ATAdErrorEventArgs e)
+            {
+            }
+
+            public void onAdVideoStartEvent(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void onReward(object sender, ATAdEventArgs e)
+            {
+                this.onReward("", e.callbackInfo);
+            }
+
+            public void onAdVideoEndEvent(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void onAdClick(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void onAdVideoPlayFail(object sender, ATAdErrorEventArgs e)
+            {
+                this.onRewardedVideoAdPlayFail(e.placementId, e.errorCode, e.errorMessage);
+            }
+
+            public void onAdVideoClosedEvent(object sender, ATAdRewardEventArgs e)
+            {
             }
         }
     }
@@ -438,7 +499,16 @@ namespace SDK
             //
             // ATInterstitialAd.Instance.loadInterstitialAd(mPlacementId_interstitial_all, jsonmap);
 #if !UNITY_WEBGL
-            ATInterstitialAutoAd.Instance.setListener(callback);
+            // ATInterstitialAutoAd.Instance.setListener(callback);
+            ATInterstitialAutoAd.Instance.client.onAdLoadEvent += callback.onAdLoad;
+            ATInterstitialAutoAd.Instance.client.onAdLoadFailureEvent += callback.onAdLoadFail;
+            ATInterstitialAutoAd.Instance.client.onAdShowEvent += callback.onShow;
+            ATInterstitialAutoAd.Instance.client.onAdClickEvent += callback.onAdClick;
+            ATInterstitialAutoAd.Instance.client.onAdCloseEvent += callback.onAdClose;
+            ATInterstitialAutoAd.Instance.client.onAdShowFailureEvent += callback.onAdShowFail;
+            ATInterstitialAutoAd.Instance.client.onAdVideoStartEvent += callback.startVideoPlayback;
+            ATInterstitialAutoAd.Instance.client.onAdVideoEndEvent += callback.endVideoPlayback;
+            ATInterstitialAutoAd.Instance.client.onAdVideoFailureEvent += callback.failVideoPlayback;
             ATInterstitialAutoAd.Instance.addAutoLoadAdPlacementID(new[] { mPlacementId_interstitial_all });
 #endif
         }
@@ -505,28 +575,28 @@ namespace SDK
 
             public void onInterstitialAdFailedToPlayVideo(string placementId, string code, string message)
             {
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdFailedToPlayVideo :" + placementId +
+                /*Debug.Log("InterstitalCallback Developer callback onInterstitialAdFailedToPlayVideo :" + placementId +
                           "--code:" + code +
-                          "--msg:" + message);
+                          "--msg:" + message);*/
             }
 
             public void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("InterstitalCallback Developer callback startLoadingADSource :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("InterstitalCallback Developer callback startLoadingADSource :" + placementId + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void finishLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("InterstitalCallback Developer callback finishLoadingADSource :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("InterstitalCallback Developer callback finishLoadingADSource :" + placementId + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void failToLoadADSource(string placementId, ATCallbackInfo callbackInfo, string code, string message)
             {
-                Debug.Log("InterstitalCallback Developer callback failToLoadADSource :" + placementId + "--code:" +
+                /*Debug.Log("InterstitalCallback Developer callback failToLoadADSource :" + placementId + "--code:" +
                           code + "--msg:" +
-                          message);
+                          message);*/
             }
 
             public void startBiddingADSource(string placementId, ATCallbackInfo callbackInfo)
@@ -551,33 +621,71 @@ namespace SDK
 
             public void onInterstitialAdLoad(string placementId)
             {
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdLoad :" + placementId);
+                /*Debug.Log("InterstitalCallback Developer callback onInterstitialAdLoad :" + placementId);*/
             }
 
             public void onInterstitialAdLoadFail(string placementId, string code, string message)
             {
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdLoadFail :" + placementId +
+                /*Debug.Log("InterstitalCallback Developer callback onInterstitialAdLoadFail :" + placementId +
                           "--code:" + code + "--msg:" +
-                          message);
+                          message);*/
             }
 
             public void onInterstitialAdShow(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdShow :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                /*Debug.Log("InterstitalCallback Developer callback onInterstitialAdShow :" + placementId + "->" +
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void onInterstitialAdStartPlayingVideo(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdStartPlayingVideo :" + placementId +
+                /*Debug.Log("InterstitalCallback Developer callback onInterstitialAdStartPlayingVideo :" + placementId +
                           "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                          JsonUtility.ToJson(callbackInfo.toDictionary()));*/
             }
 
             public void onInterstitialAdFailedToShow(string placementId)
             {
                 failCallback?.Invoke();
                 Debug.Log("InterstitalCallback Developer callback onInterstitialAdFailedToShow :" + placementId);
+            }
+
+            public void onAdLoad(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void onAdLoadFail(object sender, ATAdErrorEventArgs e)
+            {
+            }
+
+            public void onShow(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void onAdClick(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void onAdClose(object sender, ATAdEventArgs e)
+            {
+                this.onInterstitialAdClose(e.placementId, e.callbackInfo);
+            }
+
+            public void onAdShowFail(object sender, ATAdErrorEventArgs e)
+            {
+                this.onInterstitialAdFailedToShow(e.placementId);
+            }
+
+            public void startVideoPlayback(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void endVideoPlayback(object sender, ATAdEventArgs e)
+            {
+            }
+
+            public void failVideoPlayback(object sender, ATAdErrorEventArgs e)
+            {
             }
         }
     }
@@ -629,7 +737,7 @@ namespace SDK
             if (bannerCallback == null)
             {
                 bannerCallback = new BannerCallback();
-                ATBannerAd.Instance.setListener(bannerCallback);
+                // ATBannerAd.Instance.setListener(bannerCallback);
             }
 
             var jsonmap = new Dictionary<string, object>();

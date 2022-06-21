@@ -7,6 +7,7 @@ namespace AnyThinkAds.Api
 {
     public class ATCallbackInfo
     {
+
         public readonly int network_firm_id;
         public readonly string adsource_id;
         public readonly int adsource_index;
@@ -45,29 +46,20 @@ namespace AnyThinkAds.Api
                 this.callbackJson = callbackJson;
 
 
-                var jsonData = JsonMapper.ToObject(callbackJson);
+                JsonData jsonData = JsonMapper.ToObject(callbackJson);
 
-                network_firm_id = int.Parse(jsonData.ContainsKey("network_firm_id")
-                    ? jsonData["network_firm_id"].ToString()
-                    : "0");
+                network_firm_id = int.Parse(jsonData.ContainsKey("network_firm_id") ? jsonData["network_firm_id"].ToString() : "0");
                 adsource_id = jsonData.ContainsKey("adsource_id") ? (string)jsonData["adsource_id"] : "";
-                adsource_index = int.Parse(jsonData.ContainsKey("adsource_index")
-                    ? jsonData["adsource_index"].ToString()
-                    : "-1");
-                adsource_price = double.Parse(jsonData.ContainsKey("adsource_price")
-                    ? jsonData["adsource_price"].ToString()
-                    : "0");
+                adsource_index = int.Parse(jsonData.ContainsKey("adsource_index") ? jsonData["adsource_index"].ToString() : "-1");
+                adsource_price = double.Parse(jsonData.ContainsKey("adsource_price") ? jsonData["adsource_price"].ToString() : "0");
 
                 adsource_isheaderbidding = 0;
-                if (jsonData.ContainsKey("adsource_isheaderbidding"))
-                    adsource_isheaderbidding = int.Parse(jsonData.ContainsKey("adsource_isheaderbidding")
-                        ? jsonData["adsource_isheaderbidding"].ToString()
-                        : "0");
+                if (jsonData.ContainsKey("adsource_isheaderbidding")) {
+                    adsource_isheaderbidding = int.Parse(jsonData.ContainsKey("adsource_isheaderbidding") ? jsonData["adsource_isheaderbidding"].ToString() : "0");
+                }
 
                 id = jsonData.ContainsKey("id") ? (string)jsonData["id"] : "";
-                publisher_revenue = double.Parse(jsonData.ContainsKey("publisher_revenue")
-                    ? jsonData["publisher_revenue"].ToString()
-                    : "0");
+                publisher_revenue = double.Parse(jsonData.ContainsKey("publisher_revenue") ? jsonData["publisher_revenue"].ToString() : "0");
                 currency = jsonData.ContainsKey("currency") ? (string)jsonData["currency"] : "";
                 country = jsonData.ContainsKey("country") ? (string)jsonData["country"] : "";
 
@@ -78,62 +70,50 @@ namespace AnyThinkAds.Api
 
                 network_type = jsonData.ContainsKey("network_type") ? (string)jsonData["network_type"] : "";
 
-                network_placement_id = jsonData.ContainsKey("network_placement_id")
-                    ? (string)jsonData["network_placement_id"]
-                    : "";
+                network_placement_id = jsonData.ContainsKey("network_placement_id") ? (string)jsonData["network_placement_id"] : "";
                 ecpm_level = int.Parse(jsonData.ContainsKey("ecpm_level") ? jsonData["ecpm_level"].ToString() : "0");
                 segment_id = int.Parse(jsonData.ContainsKey("segment_id") ? jsonData["segment_id"].ToString() : "0");
-                scenario_id =
-                    jsonData.ContainsKey("scenario_id")
-                        ? (string)jsonData["scenario_id"]
-                        : ""; // RewardVideo & Interstitial
+                scenario_id = jsonData.ContainsKey("scenario_id") ? (string)jsonData["scenario_id"] : "";// RewardVideo & Interstitial
 
-                scenario_reward_name = jsonData.ContainsKey("scenario_reward_name")
-                    ? (string)jsonData["scenario_reward_name"]
-                    : "";
-                scenario_reward_number = int.Parse(jsonData.ContainsKey("scenario_reward_number")
-                    ? jsonData["scenario_reward_number"].ToString()
-                    : "0");
+                scenario_reward_name = jsonData.ContainsKey("scenario_reward_name") ? (string)jsonData["scenario_reward_name"] : "";
+                scenario_reward_number = int.Parse(jsonData.ContainsKey("scenario_reward_number") ? jsonData["scenario_reward_number"].ToString() : "0");
 
                 channel = jsonData.ContainsKey("channel") ? (string)jsonData["channel"] : "";
                 sub_channel = jsonData.ContainsKey("sub_channel") ? (string)jsonData["sub_channel"] : "";
-                custom_rule = jsonData.ContainsKey("custom_rule")
-                    ? JsonMapper.ToObject<Dictionary<string, object>>(jsonData["custom_rule"].ToJson())
-                    : null;
+                custom_rule = jsonData.ContainsKey("custom_rule") ? JsonMapper.ToObject<Dictionary<string, object>>(jsonData["custom_rule"].ToJson()) : null;
 
-                reward_custom_data = jsonData.ContainsKey("reward_custom_data")
-                    ? (string)jsonData["reward_custom_data"]
-                    : "";
+                reward_custom_data = jsonData.ContainsKey("reward_custom_data") ? (string)jsonData["reward_custom_data"] : "";
+
             }
-            catch (System.Exception e)
-            {
+            catch (System.Exception e) {
                 System.Console.WriteLine("Exception caught: {0}", e);
             }
         }
 
         public string getOriginJSONString()
-        {
+                {
             return callbackJson;
         }
 
         public Dictionary<string, object> toAdsourceDictionary()
         {
-            var dataDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> dataDictionary = new Dictionary<string, object>();
 
             dataDictionary.Add("adsource_id", adsource_id);
             dataDictionary.Add("adsource_price", adsource_price);
             dataDictionary.Add("adunit_id", adunit_id);
             dataDictionary.Add("currency", currency);
-            dataDictionary.Add("network_firm_id", network_firm_id);
-            dataDictionary.Add("network_placement_id", network_placement_id);
+            dataDictionary.Add("network_firm_id",network_firm_id);
+            dataDictionary.Add("network_placement_id",network_placement_id);
             return dataDictionary;
+
         }
 
         public Dictionary<string, object> toDictionary()
         {
-            var dataDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> dataDictionary = new Dictionary<string, object>();
 
-            dataDictionary.Add("network_firm_id", network_firm_id);
+            dataDictionary.Add("network_firm_id",network_firm_id);
             dataDictionary.Add("adsource_id", adsource_id);
             dataDictionary.Add("adsource_index", adsource_index);
             dataDictionary.Add("adsource_price", adsource_price);
@@ -146,7 +126,7 @@ namespace AnyThinkAds.Api
             dataDictionary.Add("adunit_format", adunit_format);
             dataDictionary.Add("precision", precision);
             dataDictionary.Add("network_type", network_type);
-            dataDictionary.Add("network_placement_id", network_placement_id);
+            dataDictionary.Add("network_placement_id",network_placement_id);
             dataDictionary.Add("ecpm_level", ecpm_level);
             dataDictionary.Add("segment_id", segment_id);
             dataDictionary.Add("scenario_id", scenario_id);
@@ -160,5 +140,7 @@ namespace AnyThinkAds.Api
 
             return dataDictionary;
         }
+
+
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Firebase;
+using Firebase.Analytics;
+using Firebase.Extensions;
 using Unity.RemoteConfig;
 using UnityEngine;
 using UnityEngine.Advertisements;
@@ -16,6 +19,8 @@ namespace DefaultNamespace
         public Action RewardSuccessAction = null;
         public Action RewardFailAction = null;
         public static RemoteConfig Instance => _instance;
+        DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+        protected bool firebaseInitialized = false;
 
         public struct userAttributes
         {
@@ -35,6 +40,19 @@ namespace DefaultNamespace
         {
             DontDestroyOnLoad(this);
             NativeConnect.Connect.Init();
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            {
+                dependencyStatus = task.Result;
+                if (dependencyStatus == DependencyStatus.Available)
+                {
+                    InitializeFirebase();
+                }
+                else
+                {
+                    Debug.LogError(
+                        "Could not resolve all Firebase dependencies: " + dependencyStatus);
+                }
+            });
             _instance = this;
             // Add a listener to apply settings when successfully retrieved:
             // ConfigManager.FetchCompleted += ApplyRemoteSettings;
@@ -50,6 +68,24 @@ namespace DefaultNamespace
             AnalyticsEvent.GameStart(new Dictionary<string, object> { { "PS", "PS" } });
             // Invoke(nameof(ShowInterstitialAd), 3);
             OnInitializationComplete();
+        }
+
+        void InitializeFirebase()
+        {
+            Debug.Log("Enabling data collection.");
+            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+
+            Debug.Log("Set user properties.");
+            // Set the user's sign up method.
+            FirebaseAnalytics.SetUserProperty(
+                FirebaseAnalytics.UserPropertySignUpMethod,
+                "Google");
+            // Set the user ID.
+            FirebaseAnalytics.SetUserId("uber_user_510");
+            // Set default session duration values.
+            FirebaseAnalytics.SetSessionTimeoutDuration(new TimeSpan(0, 30, 0));
+            firebaseInitialized = true;
+            FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLogin);
         }
 
         private string _adUnitId = "bannerAndroid";
