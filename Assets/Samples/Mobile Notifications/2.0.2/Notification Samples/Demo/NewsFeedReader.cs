@@ -33,7 +33,7 @@ namespace NotificationSamples.Demo
         // Get the first news item from the RSS URL.
         private IEnumerator GetFirstItemInternal(string url, Action<NewsItem> doneAction)
         {
-            var www = UnityWebRequest.Get(url);
+            UnityWebRequest www = UnityWebRequest.Get(url);
             yield return www.SendWebRequest();
 
 #pragma warning disable 0618
@@ -45,7 +45,7 @@ namespace NotificationSamples.Demo
                 yield break;
             }
 
-            var document = new XmlDocument();
+            XmlDocument document = new XmlDocument();
             try
             {
                 document.LoadXml(www.downloadHandler.text);
@@ -57,7 +57,7 @@ namespace NotificationSamples.Demo
                 yield break;
             }
 
-            var channel = FindNode(document.FirstChild, "channel");
+            XmlNode channel = FindNode(document.FirstChild, "channel");
             if (channel == null || !channel.HasChildNodes)
             {
                 Debug.LogError("XML does not have a channel node.");
@@ -65,17 +65,16 @@ namespace NotificationSamples.Demo
                 yield break;
             }
 
-            var channelTitle = FindNode(channel.FirstChild, "title");
-            var item = FindNode(channel.FirstChild, "item");
+            XmlNode channelTitle = FindNode(channel.FirstChild, "title");
+            XmlNode item = FindNode(channel.FirstChild, "item");
             if (item == null || !item.HasChildNodes)
             {
                 Debug.LogError("First item is null or has no children.");
                 doneAction?.Invoke(null);
                 yield break;
             }
-
-            var title = FindNode(item.FirstChild, "title");
-            var description = FindNode(item.FirstChild, "description");
+            XmlNode title = FindNode(item.FirstChild, "title");
+            XmlNode description = FindNode(item.FirstChild, "description");
             if (title == null || description == null)
             {
                 Debug.LogErrorFormat("Item ({0}) does not have a title or description.", item.Name);
@@ -83,7 +82,7 @@ namespace NotificationSamples.Demo
                 yield break;
             }
 
-            var newsItem = new NewsItem
+            NewsItem newsItem = new NewsItem
             {
                 Title = channelTitle != null ? channelTitle.InnerText : title.InnerText,
                 Description = title.InnerText
@@ -95,21 +94,26 @@ namespace NotificationSamples.Demo
         // siblings and children's siblings.
         private XmlNode FindNode(XmlNode firstNode, string nodeName)
         {
-            var result = firstNode;
+            XmlNode result = firstNode;
             while (result != null)
             {
-                if (result.Name == nodeName) return result;
+                if (result.Name == nodeName)
+                {
+                    return result;
+                }
 
                 // Check children
                 if (result.HasChildNodes)
                 {
-                    var childNode = FindNode(result.FirstChild, nodeName);
-                    if (childNode != null) return childNode;
+                    XmlNode childNode = FindNode(result.FirstChild, nodeName);
+                    if (childNode != null)
+                    {
+                        return childNode;
+                    }
                 }
 
                 result = result.NextSibling;
             }
-
             return null;
         }
     }

@@ -40,13 +40,16 @@ namespace NotificationSamples
                         writer.Write(notifications.Count);
 
                         // Write each item
-                        foreach (var notificationToSave in notifications)
+                        foreach (PendingNotification notificationToSave in notifications)
                         {
-                            var notification = notificationToSave.Notification;
+                            IGameNotification notification = notificationToSave.Notification;
 
                             // ID
                             writer.Write(notification.Id.HasValue);
-                            if (notification.Id.HasValue) writer.Write(notification.Id.Value);
+                            if (notification.Id.HasValue)
+                            {
+                                writer.Write(notification.Id.Value);
+                            }
 
                             // Title
                             writer.Write(notification.Title ?? "");
@@ -65,7 +68,10 @@ namespace NotificationSamples
 
                             // Badge
                             writer.Write(notification.BadgeNumber.HasValue);
-                            if (notification.BadgeNumber.HasValue) writer.Write(notification.BadgeNumber.Value);
+                            if (notification.BadgeNumber.HasValue)
+                            {
+                                writer.Write(notification.BadgeNumber.Value);
+                            }
 
                             // Time (must have a value)
                             writer.Write(notification.DeliveryTime.Value.Ticks);
@@ -84,7 +90,10 @@ namespace NotificationSamples
         /// <inheritdoc />
         public IList<IGameNotification> Deserialize(IGameNotificationsPlatform platform)
         {
-            if (!File.Exists(filename)) return null;
+            if (!File.Exists(filename))
+            {
+                return null;
+            }
 
             try
             {
@@ -96,17 +105,20 @@ namespace NotificationSamples
                         var version = reader.ReadByte();
 
                         // Length
-                        var numElements = reader.ReadInt32();
+                        int numElements = reader.ReadInt32();
 
                         var result = new List<IGameNotification>(numElements);
                         for (var i = 0; i < numElements; ++i)
                         {
-                            var notification = platform.CreateNotification();
+                            IGameNotification notification = platform.CreateNotification();
                             bool hasValue;
 
                             // ID
                             hasValue = reader.ReadBoolean();
-                            if (hasValue) notification.Id = reader.ReadInt32();
+                            if (hasValue)
+                            {
+                                notification.Id = reader.ReadInt32();
+                            }
 
                             // Title
                             notification.Title = reader.ReadString();
@@ -126,7 +138,10 @@ namespace NotificationSamples
 
                             // Badge
                             hasValue = reader.ReadBoolean();
-                            if (hasValue) notification.BadgeNumber = reader.ReadInt32();
+                            if (hasValue)
+                            {
+                                notification.BadgeNumber = reader.ReadInt32();
+                            }
 
                             // Time
                             notification.DeliveryTime = new DateTime(reader.ReadInt64(), DateTimeKind.Local);

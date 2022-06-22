@@ -16,7 +16,10 @@ namespace NotificationSamples.Android
         /// </summary>
         public static bool Initialize()
         {
-            if (s_Initialized) return true;
+            if (s_Initialized)
+            {
+                return true;
+            }
 
 #if UNITY_EDITOR
             s_AndroidNotificationExtensions = null;
@@ -26,17 +29,12 @@ namespace NotificationSamples.Android
             AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
             AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
 
-            AndroidJavaClass managerClass =
- new AndroidJavaClass("com.unity.androidnotifications.UnityNotificationManager");
-            AndroidJavaObject notificationManagerImpl =
- managerClass.CallStatic<AndroidJavaObject>("getNotificationManagerImpl", context, activity);
-            AndroidJavaObject notificationManager =
- notificationManagerImpl.Call<AndroidJavaObject>("getNotificationManager");
+            AndroidJavaClass managerClass = new AndroidJavaClass("com.unity.androidnotifications.UnityNotificationManager");
+            AndroidJavaObject notificationManagerImpl = managerClass.CallStatic<AndroidJavaObject>("getNotificationManagerImpl", context, activity);
+            AndroidJavaObject notificationManager = notificationManagerImpl.Call<AndroidJavaObject>("getNotificationManager");
 
-            AndroidJavaClass pluginClass =
- new AndroidJavaClass("com.unity.androidnotifications.AndroidNotificationCenterExtensions");
-            s_AndroidNotificationExtensions =
- pluginClass.CallStatic<AndroidJavaObject>("getExtensionsImpl", context, notificationManager);
+            AndroidJavaClass pluginClass = new AndroidJavaClass("com.unity.androidnotifications.AndroidNotificationCenterExtensions");
+            s_AndroidNotificationExtensions = pluginClass.CallStatic<AndroidJavaObject>("getExtensionsImpl", context, notificationManager);
 
             s_Initialized = true;
 #endif
@@ -49,8 +47,10 @@ namespace NotificationSamples.Android
         public static bool AreNotificationsEnabled()
         {
             if (!s_Initialized)
+            {
                 // By default notifications are enabled
                 return true;
+            }
 
             return s_AndroidNotificationExtensions.Call<bool>("areNotificationsEnabled");
         }
@@ -62,8 +62,10 @@ namespace NotificationSamples.Android
         public static bool AreNotificationsEnabled(string channelId)
         {
             if (!s_Initialized)
+            {
                 // By default notifications are enabled
                 return true;
+            }
 
             return s_AndroidNotificationExtensions.Call<bool>("areNotificationsEnabled", channelId);
         }

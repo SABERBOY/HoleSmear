@@ -1,7 +1,7 @@
 <dependencies>
     <androidPackages>
         <repositories>
-            <repository>https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea</repository>
+            <!--<repository>https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea</repository>-->
         </repositories>
         <!--<androidPackage spec="com.mbridge.msdk.oversea:reward:16.1.11"/>
         <androidPackage spec="com.mbridge.msdk.oversea:newinterstitial:16.1.11"/>

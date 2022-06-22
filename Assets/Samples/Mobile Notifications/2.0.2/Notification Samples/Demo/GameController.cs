@@ -40,67 +40,69 @@ namespace NotificationSamples.Demo
             {
                 get
                 {
-                    var timeSpan = DeliveryTime - DateTime.Now;
+                    TimeSpan timeSpan = DeliveryTime - DateTime.Now;
                     return Mathf.Max((float)timeSpan.TotalSeconds, 0.0f);
                 }
             }
         }
 
-        [SerializeField] [Tooltip("Reference to the notification console.")]
+        [SerializeField, Tooltip("Reference to the notification console.")]
         protected NotificationConsole console;
 
-        [SerializeField] [Tooltip("Reference to the notification manager.")]
+        [SerializeField, Tooltip("Reference to the notification manager.")]
         protected GameNotificationsManager notificationsManager;
 
-        [SerializeField] [Tooltip("For reading the news feed items.")]
+        [SerializeField, Tooltip("For reading the news feed items.")]
         protected NewsFeedReader newsFeedReader;
 
-        [SerializeField] [Tooltip("Buy item prefab to clone.")]
+        [SerializeField, Tooltip("Buy item prefab to clone.")]
         protected BuyInventoryItem buyItemPrefab;
 
-        [SerializeField] [Tooltip("Parent to hold the items to buy.")]
+        [SerializeField, Tooltip("Parent to hold the items to buy.")]
         protected Transform buyContentHolder;
 
-        [SerializeField] [Tooltip("Prefab of bought items.")]
+        [SerializeField, Tooltip("Prefab of bought items.")]
         protected InventoryItem itemPrefab;
 
-        [SerializeField] [Tooltip("Parent to hold the bought items.")]
+        [SerializeField, Tooltip("Parent to hold the bought items.")]
         protected Transform contentHolder;
 
-        [SerializeField] [Tooltip("Label to display the currency.")]
+        [SerializeField, Tooltip("Label to display the currency.")]
         protected TextMeshProUGUI currencyLabel;
 
-        [SerializeField] [Tooltip("Label to display the currency bonus.")]
+        [SerializeField, Tooltip("Label to display the currency bonus.")]
         protected TextMeshProUGUI bonusLabel;
 
-        [SerializeField] [Tooltip("Label to display the current time.")]
+        [SerializeField, Tooltip("Label to display the current time.")]
         protected TextMeshProUGUI timeLabel;
 
-        [SerializeField] [Tooltip("Label to display log messages.")]
+        [SerializeField, Tooltip("Label to display log messages.")]
         protected TextMeshProUGUI logLabel;
 
-        [SerializeField] [Tooltip("Loading icon to show the news feed is being loaded.")]
+        [SerializeField, Tooltip("Loading icon to show the news feed is being loaded.")]
         protected GameObject newsFeedLoadingIcon;
 
-        [SerializeField] [Tooltip("Turn speed of the news feed loading icon.")]
+        [SerializeField, Tooltip("Turn speed of the news feed loading icon.")]
         protected float newsFeedLoadingIconTurnSpeed = 100.0f;
 
-        [SerializeField] [Tooltip("News feed button.")]
+        [SerializeField, Tooltip("News feed button.")]
         protected Button newsFeedButton;
 
-        [Space(DefaultInspectorSpace)] [SerializeField] [Tooltip("Start the game with this currency.")]
+        [Space(DefaultInspectorSpace)]
+        [SerializeField, Tooltip("Start the game with this currency.")]
         protected float initialCurrency = 100.0f;
 
-        [SerializeField] [Tooltip("Get the news feed (RSS) from this url.")]
+        [SerializeField, Tooltip("Get the news feed (RSS) from this url.")]
         protected string newsFeedUrl = "https://unity3d.com/news.rss";
 
-        [SerializeField] [Tooltip("Schedule news feed notifications this time in the future (minutes).")]
+        [SerializeField, Tooltip("Schedule news feed notifications this time in the future (minutes).")]
         protected float newsNotificationTime = 5.0f;
 
-        [SerializeField] [Tooltip("Schedule a reminder to play the game at this hour (e.g. 6:00, 13:00, etc.).")]
+        [SerializeField, Tooltip("Schedule a reminder to play the game at this hour (e.g. 6:00, 13:00, etc.).")]
         protected int playReminderHour = 6;
 
-        [Space(DefaultInspectorSpace)] [SerializeField] [Tooltip("Inventory items data to use in the game.")]
+        [Space(DefaultInspectorSpace)]
+        [SerializeField, Tooltip("Inventory items data to use in the game.")]
         protected InventoryItemData[] itemsData;
 
         // Current currency.
@@ -116,8 +118,7 @@ namespace NotificationSamples.Demo
         private readonly List<PendingInventoryItem> pendingItems = new List<PendingInventoryItem>();
 
         // Bought items displayed in the status area
-        private readonly Dictionary<InventoryItemData, InventoryItem> items =
-            new Dictionary<InventoryItemData, InventoryItem>();
+        private readonly Dictionary<InventoryItemData, InventoryItem> items = new Dictionary<InventoryItemData, InventoryItem>();
 
         // Keep track of the items to buy
         private readonly List<BuyInventoryItem> buyItems = new List<BuyInventoryItem>();
@@ -127,8 +128,8 @@ namespace NotificationSamples.Demo
             // Create the buy items
             for (int i = 0, len = itemsData.Length; i < len; i++)
             {
-                var data = itemsData[i];
-                var item = Instantiate(buyItemPrefab, buyContentHolder);
+                InventoryItemData data = itemsData[i];
+                BuyInventoryItem item = Instantiate(buyItemPrefab, buyContentHolder);
                 item.Initialise(data, OnBuy);
                 buyItems.Add(item);
             }
@@ -147,8 +148,8 @@ namespace NotificationSamples.Demo
             else if (applicationPausedTime != null)
             {
                 // Award currency bonus which accumulated while the app was paused
-                var timeSpan = DateTime.Now - applicationPausedTime.Value;
-                var pausedTime = Mathf.Max((float)timeSpan.TotalSeconds, 0.0f);
+                TimeSpan timeSpan = DateTime.Now - applicationPausedTime.Value;
+                float pausedTime = Mathf.Max((float)timeSpan.TotalSeconds, 0.0f);
                 applicationPausedTime = null;
                 AwardCurrencyBonus(pausedTime);
             }
@@ -156,7 +157,7 @@ namespace NotificationSamples.Demo
 
         private void Update()
         {
-            var dt = Time.deltaTime;
+            float dt = Time.deltaTime;
             UpdatePendingItems();
             AwardCurrencyBonus(dt);
             UpdateControls();
@@ -178,7 +179,7 @@ namespace NotificationSamples.Demo
         public void OnPlayReminder()
         {
             // Schedule a reminder to play the game. Schedule it for the next day.
-            var deliveryTime = DateTime.Now.ToLocalTime().AddDays(1);
+            DateTime deliveryTime = DateTime.Now.ToLocalTime().AddDays(1);
             deliveryTime = new DateTime(deliveryTime.Year, deliveryTime.Month, deliveryTime.Day, playReminderHour, 0, 0,
                 DateTimeKind.Local);
 
@@ -212,9 +213,12 @@ namespace NotificationSamples.Demo
         // Called when an item's buy button is clicked.
         private void OnBuy(BuyInventoryItem item)
         {
-            if (currency < item.Cost) return;
+            if (currency < item.Cost)
+            {
+                return;
+            }
 
-            var deliveryTime = DateTime.Now.ToLocalTime() + TimeSpan.FromMinutes(item.Minutes);
+            DateTime deliveryTime = DateTime.Now.ToLocalTime() + TimeSpan.FromMinutes(item.Minutes);
             console.SendNotification(item.Title, item.Description, deliveryTime, reschedule: true,
                 smallIcon: item.ItemData.IconId, largeIcon: item.ItemData.IconId);
 
@@ -225,7 +229,7 @@ namespace NotificationSamples.Demo
             });
 
             // Store the item's cost before deducting it, so item can be updated in SetCurrency based on its new cost
-            var cost = item.Cost;
+            int cost = item.Cost;
             item.Cost += item.ItemData.CostIncrease;
             item.Minutes += item.ItemData.CreationTimeIncrease;
             item.OnBuySuccess(deliveryTime);
@@ -237,7 +241,7 @@ namespace NotificationSamples.Demo
         // Update UI controls
         private void UpdateControls()
         {
-            var currencyInt = (int)currency;
+            int currencyInt = (int)currency;
             currencyLabel.text = currencyInt.ToString("N0");
             bonusLabel.text = $"(+{currencyBonus:f1}/s)";
             timeLabel.text = DateTime.Now.ToString("yy-MM-dd HH:mm:ss");
@@ -246,10 +250,13 @@ namespace NotificationSamples.Demo
         // Check if pending items must be received
         private void UpdatePendingItems()
         {
-            for (var i = pendingItems.Count - 1; i >= 0; i--)
+            for (int i = pendingItems.Count - 1; i >= 0; i--)
             {
-                var pendingItem = pendingItems[i];
-                if (pendingItem == null || pendingItem.TimeRemaining > 0.0f) continue;
+                PendingInventoryItem pendingItem = pendingItems[i];
+                if (pendingItem == null || pendingItem.TimeRemaining > 0.0f)
+                {
+                    continue;
+                }
                 currencyBonus += pendingItem.ItemData.CurrencyBonus;
                 OnDeliveredItem(pendingItem.ItemData);
                 pendingItems.RemoveAt(i);
@@ -258,7 +265,10 @@ namespace NotificationSamples.Demo
 
         private void UpdateNewsFeedLoadingIcon(float dt)
         {
-            if (newsFeedLoadingIcon == null || !newsFeedLoadingIcon.activeInHierarchy) return;
+            if (newsFeedLoadingIcon == null || !newsFeedLoadingIcon.activeInHierarchy)
+            {
+                return;
+            }
             newsFeedLoadingIcon.transform.Rotate(0.0f, 0.0f, -newsFeedLoadingIconTurnSpeed * dt);
         }
 
@@ -266,7 +276,7 @@ namespace NotificationSamples.Demo
         private void OnDeliveredItem(InventoryItemData itemData)
         {
             // Add the item to the stats area.
-            if (items.TryGetValue(itemData, out var item))
+            if (items.TryGetValue(itemData, out InventoryItem item))
             {
                 // Update existing item of the same type
                 item.OnReceivedItem();
@@ -281,24 +291,33 @@ namespace NotificationSamples.Demo
             // Let buy items know an item was delivered
             for (int i = 0, len = buyItems.Count; i < len; i++)
             {
-                var buyItem = buyItems[i];
-                if (buyItem == null) continue;
+                BuyInventoryItem buyItem = buyItems[i];
+                if (buyItem == null)
+                {
+                    continue;
+                }
                 buyItem.OnDeliveredItem(itemData);
             }
         }
 
         private void SetCurrency(float newCurrency)
         {
-            var oldCurrency = (int)currency;
+            int oldCurrency = (int)currency;
             currency = newCurrency;
-            if (oldCurrency == (int)currency || buyItems.Count <= 0) return;
+            if (oldCurrency == (int)currency || buyItems.Count <= 0)
+            {
+                return;
+            }
 
             // Let buy items know the currency changed
-            var changedCurrency = (int)currency;
+            int changedCurrency = (int)currency;
             for (int i = 0, len = buyItems.Count; i < len; i++)
             {
-                var item = buyItems[i];
-                if (item == null) continue;
+                BuyInventoryItem item = buyItems[i];
+                if (item == null)
+                {
+                    continue;
+                }
                 item.OnCurrencyChanged(changedCurrency);
             }
         }
@@ -320,14 +339,18 @@ namespace NotificationSamples.Demo
                 return;
             }
 
-            var title = newsItem.Title;
-            var body = newsItem.Description;
+            string title = newsItem.Title;
+            string body = newsItem.Description;
             if (!string.IsNullOrEmpty(title) && title.Length > MaxNewsFeedTitleLength)
+            {
                 title = title.Substring(0, MaxNewsFeedTitleLength);
+            }
             if (!string.IsNullOrEmpty(body) && body.Length > MaxNewsFeedSummaryLength)
+            {
                 body = body.Substring(0, MaxNewsFeedSummaryLength);
+            }
 
-            var deliveryTime = DateTime.Now.ToLocalTime() + TimeSpan.FromMinutes(newsNotificationTime);
+            DateTime deliveryTime = DateTime.Now.ToLocalTime() + TimeSpan.FromMinutes(newsNotificationTime);
             console.SendNotification(title, body, deliveryTime, channelId: NotificationConsole.NewsChannelId);
         }
     }

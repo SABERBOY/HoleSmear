@@ -9,10 +9,10 @@ namespace NotificationSamples.Demo
     /// </summary>
     public class InventoryItem : MonoBehaviour
     {
-        [SerializeField] [Tooltip("Label to store the quantity bought.")]
+        [SerializeField, Tooltip("Label to store the quantity bought.")]
         protected TextMeshProUGUI quantityLabel;
-
-        [SerializeField] protected Image icon;
+        [SerializeField]
+        protected Image icon;
 
         // Quantity of items bought.
         private int quantity;

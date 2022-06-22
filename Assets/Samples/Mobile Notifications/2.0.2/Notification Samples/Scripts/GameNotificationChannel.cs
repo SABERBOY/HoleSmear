@@ -22,17 +22,14 @@ namespace NotificationSamples
             /// Notification does not appear in the status bar.
             /// </summary>
             None = 0,
-
             /// <summary>
             /// Notification makes no sound.
             /// </summary>
             NoSound = 2,
-
             /// <summary>
             /// Notification plays sound.
             /// </summary>
             Default = 3,
-
             /// <summary>
             /// Notification also displays a heads-up popup.
             /// </summary>
@@ -48,12 +45,10 @@ namespace NotificationSamples
             /// Notifications aren't shown on secure lock screens.
             /// </summary>
             Secret = -1,
-
             /// <summary>
             /// Notifications display an icon, but content is concealed on secure lock screens.
             /// </summary>
             Private = 0,
-
             /// <summary>
             /// Notifications display on all lock screens.
             /// </summary>
@@ -133,9 +128,7 @@ namespace NotificationSamples
         /// Initialize a new instance of <see cref="GameNotificationChannel"/>, providing the notification style
         /// and optionally all other settings.
         /// </summary>
-        public GameNotificationChannel(string id, string name, string description, NotificationStyle style,
-            bool showsBadge = true, bool showLights = false, bool vibrates = true, bool highPriority = false,
-            PrivacyMode privacy = PrivacyMode.Public, long[] vibrationPattern = null)
+        public GameNotificationChannel(string id, string name, string description, NotificationStyle style, bool showsBadge = true, bool showLights = false, bool vibrates = true, bool highPriority = false, PrivacyMode privacy = PrivacyMode.Public, long[] vibrationPattern = null)
         {
             Id = id;
             Name = name;

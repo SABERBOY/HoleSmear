@@ -24,34 +24,18 @@ namespace NotificationSamples.Android
         public int? Id { get; set; }
 
         /// <inheritdoc />
-        public string Title
-        {
-            get => InternalNotification.Title;
-            set => internalNotification.Title = value;
-        }
+        public string Title { get => InternalNotification.Title; set => internalNotification.Title = value; }
 
         /// <inheritdoc />
-        public string Body
-        {
-            get => InternalNotification.Text;
-            set => internalNotification.Text = value;
-        }
+        public string Body { get => InternalNotification.Text; set => internalNotification.Text = value; }
 
         /// <summary>
         /// Does nothing on Android.
         /// </summary>
-        public string Subtitle
-        {
-            get => null;
-            set { }
-        }
+        public string Subtitle { get => null; set {} }
 
         /// <inheritdoc />
-        public string Data
-        {
-            get => InternalNotification.IntentData;
-            set => internalNotification.IntentData = value;
-        }
+        public string Data { get => InternalNotification.IntentData; set => internalNotification.IntentData = value; }
 
         /// <inheritdoc />
         /// <remarks>
@@ -59,11 +43,7 @@ namespace NotificationSamples.Android
         /// <see cref="AndroidNotificationsPlatform"/> if <see cref="AndroidNotificationsPlatform.DefaultChannelId"/> is set
         /// </remarks>
         /// <value>The value of <see cref="DeliveredChannel"/>.</value>
-        public string Group
-        {
-            get => DeliveredChannel;
-            set => DeliveredChannel = value;
-        }
+        public string Group { get => DeliveredChannel; set => DeliveredChannel = value; }
 
         /// <inheritdoc />
         public int? BadgeNumber
@@ -95,18 +75,10 @@ namespace NotificationSamples.Android
         public bool Scheduled { get; private set; }
 
         /// <inheritdoc />
-        public string SmallIcon
-        {
-            get => InternalNotification.SmallIcon;
-            set => internalNotification.SmallIcon = value;
-        }
+        public string SmallIcon { get => InternalNotification.SmallIcon; set => internalNotification.SmallIcon = value; }
 
         /// <inheritdoc />
-        public string LargeIcon
-        {
-            get => InternalNotification.LargeIcon;
-            set => internalNotification.LargeIcon = value;
-        }
+        public string LargeIcon { get => InternalNotification.LargeIcon; set => internalNotification.LargeIcon = value; }
 
         /// <summary>
         /// Instantiate a new instance of <see cref="AndroidGameNotification"/>.
@@ -123,7 +95,7 @@ namespace NotificationSamples.Android
         /// <param name="deliveredId">The ID of the delivered notification.</param>
         /// <param name="deliveredChannel">The channel the notification was delivered to.</param>
         internal AndroidGameNotification(AndroidNotification deliveredNotification, int deliveredId,
-            string deliveredChannel)
+                                         string deliveredChannel)
         {
             internalNotification = deliveredNotification;
             Id = deliveredId;

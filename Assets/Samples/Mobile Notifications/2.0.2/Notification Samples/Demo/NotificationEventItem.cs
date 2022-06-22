@@ -5,7 +5,8 @@ namespace NotificationSamples.Demo
 {
     public class NotificationEventItem : MonoBehaviour
     {
-        [SerializeField] protected TextMeshProUGUI eventLabel;
+        [SerializeField]
+        protected TextMeshProUGUI eventLabel;
 
         public void Show(string eventText)
         {

@@ -71,14 +71,13 @@ namespace NotificationSamples
             /// Ensures that messages will never be displayed while the application is in the foreground.
             /// </para>
             /// </summary>
-            QueueClearAndReschedule = Queue | ClearOnForegrounding | RescheduleAfterClearing
+            QueueClearAndReschedule = Queue | ClearOnForegrounding | RescheduleAfterClearing,
         }
 
-        [SerializeField] [Tooltip("The operating mode for the notifications manager.")]
+        [SerializeField, Tooltip("The operating mode for the notifications manager.")]
         private OperatingMode mode = OperatingMode.QueueClearAndReschedule;
 
-        [SerializeField]
-        [Tooltip(
+        [SerializeField, Tooltip(
             "Check to make the notifications manager automatically set badge numbers so that they increment.\n" +
             "Schedule notifications with no numbers manually set to make use of this feature.")]
         private bool autoBadging = true;
@@ -135,10 +134,16 @@ namespace NotificationSamples
         /// </summary>
         protected virtual void OnDestroy()
         {
-            if (Platform == null) return;
+            if (Platform == null)
+            {
+                return;
+            }
 
             Platform.NotificationReceived -= OnNotificationReceived;
-            if (Platform is IDisposable disposable) disposable.Dispose();
+            if (Platform is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
 
             inForeground = false;
         }
@@ -149,14 +154,16 @@ namespace NotificationSamples
         protected virtual void Update()
         {
             if (PendingNotifications == null || !PendingNotifications.Any()
-                                             || (mode & OperatingMode.Queue) != OperatingMode.Queue)
+                || (mode & OperatingMode.Queue) != OperatingMode.Queue)
+            {
                 return;
+            }
 
             // Check each pending notification for expiry, then remove it
-            for (var i = PendingNotifications.Count - 1; i >= 0; --i)
+            for (int i = PendingNotifications.Count - 1; i >= 0; --i)
             {
-                var queuedNotification = PendingNotifications[i];
-                var time = queuedNotification.Notification.DeliveryTime;
+                PendingNotification queuedNotification = PendingNotifications[i];
+                DateTime? time = queuedNotification.Notification.DeliveryTime;
                 if (time != null && time < DateTime.Now)
                 {
                     PendingNotifications.RemoveAt(i);
@@ -170,7 +177,10 @@ namespace NotificationSamples
         /// </summary>
         protected void OnApplicationFocus(bool hasFocus)
         {
-            if (Platform == null || !Initialized) return;
+            if (Platform == null || !Initialized)
+            {
+                return;
+            }
 
             inForeground = hasFocus;
 
@@ -190,45 +200,63 @@ namespace NotificationSamples
                 // Filter out past events
                 for (var i = PendingNotifications.Count - 1; i >= 0; i--)
                 {
-                    var pendingNotification = PendingNotifications[i];
+                    PendingNotification pendingNotification = PendingNotifications[i];
                     // Ignore already scheduled ones
-                    if (pendingNotification.Notification.Scheduled) continue;
+                    if (pendingNotification.Notification.Scheduled)
+                    {
+                        continue;
+                    }
 
                     // If a non-scheduled notification is in the past (or not within our threshold)
                     // just remove it immediately
                     if (pendingNotification.Notification.DeliveryTime != null &&
                         pendingNotification.Notification.DeliveryTime - DateTime.Now < MinimumNotificationTime)
+                    {
                         PendingNotifications.RemoveAt(i);
+                    }
                 }
 
                 // Sort notifications by delivery time, if no notifications have a badge number set
-                var noBadgeNumbersSet =
+                bool noBadgeNumbersSet =
                     PendingNotifications.All(notification => notification.Notification.BadgeNumber == null);
 
                 if (noBadgeNumbersSet && AutoBadging)
                 {
                     PendingNotifications.Sort((a, b) =>
                     {
-                        if (!a.Notification.DeliveryTime.HasValue) return 1;
+                        if (!a.Notification.DeliveryTime.HasValue)
+                        {
+                            return 1;
+                        }
 
-                        if (!b.Notification.DeliveryTime.HasValue) return -1;
+                        if (!b.Notification.DeliveryTime.HasValue)
+                        {
+                            return -1;
+                        }
 
                         return a.Notification.DeliveryTime.Value.CompareTo(b.Notification.DeliveryTime.Value);
                     });
 
                     // Set badge numbers incrementally
                     var badgeNum = 1;
-                    foreach (var pendingNotification in PendingNotifications)
+                    foreach (PendingNotification pendingNotification in PendingNotifications)
+                    {
                         if (pendingNotification.Notification.DeliveryTime.HasValue &&
                             !pendingNotification.Notification.Scheduled)
+                        {
                             pendingNotification.Notification.BadgeNumber = badgeNum++;
+                        }
+                    }
                 }
 
-                for (var i = PendingNotifications.Count - 1; i >= 0; i--)
+                for (int i = PendingNotifications.Count - 1; i >= 0; i--)
                 {
-                    var pendingNotification = PendingNotifications[i];
+                    PendingNotification pendingNotification = PendingNotifications[i];
                     // Ignore already scheduled ones
-                    if (pendingNotification.Notification.Scheduled) continue;
+                    if (pendingNotification.Notification.Scheduled)
+                    {
+                        continue;
+                    }
 
                     // Schedule it now
                     Platform.ScheduleNotification(pendingNotification.Notification);
@@ -236,33 +264,48 @@ namespace NotificationSamples
 
                 // Clear badge numbers again (for saving)
                 if (noBadgeNumbersSet && AutoBadging)
-                    foreach (var pendingNotification in PendingNotifications)
+                {
+                    foreach (PendingNotification pendingNotification in PendingNotifications)
+                    {
                         if (pendingNotification.Notification.DeliveryTime.HasValue)
+                        {
                             pendingNotification.Notification.BadgeNumber = null;
+                        }
+                    }
+                }
             }
 
             // Calculate notifications to save
             var notificationsToSave = new List<PendingNotification>(PendingNotifications.Count);
-            foreach (var pendingNotification in PendingNotifications)
+            foreach (PendingNotification pendingNotification in PendingNotifications)
+            {
                 // If we're in clear mode, add nothing unless we're in rescheduling mode
                 // Otherwise add everything
                 if ((mode & OperatingMode.ClearOnForegrounding) == OperatingMode.ClearOnForegrounding)
                 {
-                    if ((mode & OperatingMode.RescheduleAfterClearing) !=
-                        OperatingMode.RescheduleAfterClearing) continue;
+                    if ((mode & OperatingMode.RescheduleAfterClearing) != OperatingMode.RescheduleAfterClearing)
+                    {
+                        continue;
+                    }
 
                     // In reschedule mode, add ones that have been scheduled, are marked for
                     // rescheduling, and that have a time
                     if (pendingNotification.Reschedule &&
                         pendingNotification.Notification.Scheduled &&
                         pendingNotification.Notification.DeliveryTime.HasValue)
+                    {
                         notificationsToSave.Add(pendingNotification);
+                    }
                 }
                 else
                 {
                     // In non-clear mode, just add all scheduled notifications
-                    if (pendingNotification.Notification.Scheduled) notificationsToSave.Add(pendingNotification);
+                    if (pendingNotification.Notification.Scheduled)
+                    {
+                        notificationsToSave.Add(pendingNotification);
+                    }
                 }
+            }
 
             // Save to disk
             Serializer.Serialize(notificationsToSave);
@@ -275,7 +318,10 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"><see cref="Initialize"/> has already been called.</exception>
         public void Initialize(params GameNotificationChannel[] channels)
         {
-            if (Initialized) throw new InvalidOperationException("NotificationsManager already initialized.");
+            if (Initialized)
+            {
+                throw new InvalidOperationException("NotificationsManager already initialized.");
+            }
 
             Initialized = true;
 
@@ -284,7 +330,7 @@ namespace NotificationSamples
 
             // Register the notification channels
             var doneDefault = false;
-            foreach (var notificationChannel in channels)
+            foreach (GameNotificationChannel notificationChannel in channels)
             {
                 if (!doneDefault)
                 {
@@ -315,14 +361,19 @@ namespace NotificationSamples
             Platform = new iOSNotificationsPlatform();
 #endif
 
-            if (Platform == null) return;
+            if (Platform == null)
+            {
+                return;
+            }
 
             PendingNotifications = new List<PendingNotification>();
             Platform.NotificationReceived += OnNotificationReceived;
 
             // Check serializer
             if (Serializer == null)
+            {
                 Serializer = new DefaultSerializer(Path.Combine(Application.persistentDataPath, DefaultFilename));
+            }
 
             OnForegrounding();
         }
@@ -334,7 +385,10 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"><see cref="Initialize"/> has not been called.</exception>
         public IGameNotification CreateNotification()
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
             return Platform?.CreateNotification();
         }
@@ -345,9 +399,15 @@ namespace NotificationSamples
         /// <param name="notification">The notification to deliver.</param>
         public PendingNotification ScheduleNotification(IGameNotification notification)
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
-            if (notification == null || Platform == null) return null;
+            if (notification == null || Platform == null)
+            {
+                return null;
+            }
 
             // If we queue, don't schedule immediately.
             // Also immediately schedule non-time based deliveries (for iOS)
@@ -359,7 +419,7 @@ namespace NotificationSamples
             else if (!notification.Id.HasValue)
             {
                 // Generate an ID for items that don't have one (just so they can be identified later)
-                var id = Math.Abs(DateTime.Now.ToString("yyMMddHHmmssffffff").GetHashCode());
+                int id = Math.Abs(DateTime.Now.ToString("yyMMddHHmmssffffff").GetHashCode());
                 notification.Id = id;
             }
 
@@ -377,17 +437,26 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"><see cref="Initialize"/> has not been called.</exception>
         public void CancelNotification(int notificationId)
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
-            if (Platform == null) return;
+            if (Platform == null)
+            {
+                return;
+            }
 
             Platform.CancelNotification(notificationId);
 
             // Remove the cancelled notification from scheduled list
-            var index = PendingNotifications.FindIndex(scheduledNotification =>
+            int index = PendingNotifications.FindIndex(scheduledNotification =>
                 scheduledNotification.Notification.Id == notificationId);
 
-            if (index >= 0) PendingNotifications.RemoveAt(index);
+            if (index >= 0)
+            {
+                PendingNotifications.RemoveAt(index);
+            }
         }
 
         /// <summary>
@@ -396,9 +465,15 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"><see cref="Initialize"/> has not been called.</exception>
         public void CancelAllNotifications()
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
-            if (Platform == null) return;
+            if (Platform == null)
+            {
+                return;
+            }
 
             Platform.CancelAllScheduledNotifications();
 
@@ -412,7 +487,10 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"><see cref="Initialize"/> has not been called.</exception>
         public void DismissNotification(int notificationId)
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
             Platform?.DismissNotification(notificationId);
         }
@@ -423,7 +501,10 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"><see cref="Initialize"/> has not been called.</exception>
         public void DismissAllNotifications()
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
             Platform?.DismissAllDisplayedNotifications();
         }
@@ -435,7 +516,10 @@ namespace NotificationSamples
         /// <exception cref="InvalidOperationException"></exception>
         public IGameNotification GetLastNotification()
         {
-            if (!Initialized) throw new InvalidOperationException("Must call Initialize() first.");
+            if (!Initialized)
+            {
+                throw new InvalidOperationException("Must call Initialize() first.");
+            }
 
             return Platform?.GetLastNotification();
         }
@@ -446,10 +530,13 @@ namespace NotificationSamples
         private void OnNotificationReceived(IGameNotification deliveredNotification)
         {
             // Ignore for background messages (this happens on Android sometimes)
-            if (!inForeground) return;
+            if (!inForeground)
+            {
+                return;
+            }
 
             // Find in pending list
-            var deliveredIndex =
+            int deliveredIndex =
                 PendingNotifications.FindIndex(scheduledNotification =>
                     scheduledNotification.Notification.Id == deliveredNotification.Id);
             if (deliveredIndex >= 0)
@@ -468,7 +555,7 @@ namespace NotificationSamples
             Platform.OnForeground();
 
             // Deserialize saved items
-            var loaded = Serializer?.Deserialize(Platform);
+            IList<IGameNotification> loaded = Serializer?.Deserialize(Platform);
 
             // Foregrounding
             if ((mode & OperatingMode.ClearOnForegrounding) == OperatingMode.ClearOnForegrounding)
@@ -479,25 +566,36 @@ namespace NotificationSamples
                 // Only reschedule in reschedule mode, and if we loaded any items
                 if (loaded == null ||
                     (mode & OperatingMode.RescheduleAfterClearing) != OperatingMode.RescheduleAfterClearing)
+                {
                     return;
+                }
 
                 // Reschedule notifications from deserialization
-                foreach (var savedNotification in loaded)
+                foreach (IGameNotification savedNotification in loaded)
+                {
                     if (savedNotification.DeliveryTime > DateTime.Now)
                     {
-                        var pendingNotification = ScheduleNotification(savedNotification);
+                        PendingNotification pendingNotification = ScheduleNotification(savedNotification);
                         pendingNotification.Reschedule = true;
                     }
+                }
             }
             else
             {
                 // Just create PendingNotification wrappers for all deserialized items.
                 // We're not rescheduling them because they were not cleared
-                if (loaded == null) return;
+                if (loaded == null)
+                {
+                    return;
+                }
 
-                foreach (var savedNotification in loaded)
+                foreach (IGameNotification savedNotification in loaded)
+                {
                     if (savedNotification.DeliveryTime > DateTime.Now)
+                    {
                         PendingNotifications.Add(new PendingNotification(savedNotification));
+                    }
+                }
             }
         }
     }

@@ -19,36 +19,53 @@ namespace NotificationSamples.Demo
         public const string ReminderChannelId = "reminder_channel1";
         public const string NewsChannelId = "news_channel2";
 
-        [SerializeField] protected Button sendButton;
+        [SerializeField]
+        protected Button sendButton;
 
-        [SerializeField] protected Button clearEventButton;
+        [SerializeField]
+        protected Button clearEventButton;
 
-        [SerializeField] protected TMP_InputField titleField;
+        [SerializeField]
+        protected TMP_InputField titleField;
 
-        [SerializeField] protected TMP_InputField bodyField;
+        [SerializeField]
+        protected TMP_InputField bodyField;
 
-        [SerializeField] protected TMP_InputField timeField;
+        [SerializeField]
+        protected TMP_InputField timeField;
 
-        [SerializeField] protected TMP_InputField badgeField;
+        [SerializeField]
+        protected TMP_InputField badgeField;
 
-        [SerializeField] protected GameNotificationsManager manager;
+        [SerializeField]
+        protected GameNotificationsManager manager;
 
-        [SerializeField] protected Transform pendingNotificationsListParent;
+        [SerializeField]
+        protected Transform pendingNotificationsListParent;
 
-        [SerializeField] protected PendingNotificationItem pendingNotificationPrefab;
+        [SerializeField]
+        protected PendingNotificationItem pendingNotificationPrefab;
 
-        [SerializeField] protected Transform pendingEventParent;
+        [SerializeField]
+        protected Transform pendingEventParent;
 
-        [SerializeField] protected NotificationEventItem eventPrefab;
+        [SerializeField]
+        protected NotificationEventItem eventPrefab;
 
         // Update pending notifications in the next update.
         private bool updatePendingNotifications;
 
         private void Awake()
         {
-            if (sendButton != null) sendButton.onClick.AddListener(SendNotificationFromUi);
+            if (sendButton != null)
+            {
+                sendButton.onClick.AddListener(SendNotificationFromUi);
+            }
 
-            if (clearEventButton != null) clearEventButton.onClick.AddListener(ClearEvents);
+            if (clearEventButton != null)
+            {
+                clearEventButton.onClick.AddListener(ClearEvents);
+            }
         }
 
         private void Start()
@@ -64,9 +81,15 @@ namespace NotificationSamples.Demo
 
         private void OnDestroy()
         {
-            if (sendButton != null) sendButton.onClick.RemoveListener(SendNotificationFromUi);
+            if (sendButton != null)
+            {
+                sendButton.onClick.RemoveListener(SendNotificationFromUi);
+            }
 
-            if (clearEventButton != null) clearEventButton.onClick.RemoveListener(ClearEvents);
+            if (clearEventButton != null)
+            {
+                clearEventButton.onClick.RemoveListener(ClearEvents);
+            }
         }
 
         private void OnEnable()
@@ -105,9 +128,12 @@ namespace NotificationSamples.Demo
             bool reschedule = false, string channelId = null,
             string smallIcon = null, string largeIcon = null)
         {
-            var notification = manager.CreateNotification();
+            IGameNotification notification = manager.CreateNotification();
 
-            if (notification == null) return;
+            if (notification == null)
+            {
+                return;
+            }
 
             notification.Title = title;
             notification.Body = body;
@@ -115,9 +141,12 @@ namespace NotificationSamples.Demo
             notification.DeliveryTime = deliveryTime;
             notification.SmallIcon = smallIcon;
             notification.LargeIcon = largeIcon;
-            if (badgeNumber != null) notification.BadgeNumber = badgeNumber;
+            if (badgeNumber != null)
+            {
+                notification.BadgeNumber = badgeNumber;
+            }
 
-            var notificationToDisplay = manager.ScheduleNotification(notification);
+            PendingNotification notificationToDisplay = manager.ScheduleNotification(notification);
             notificationToDisplay.Reschedule = reschedule;
             updatePendingNotifications = true;
 
@@ -138,20 +167,27 @@ namespace NotificationSamples.Demo
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            if (hasFocus) StartCoroutine(UpdatePendingNotificationsNextFrame());
+            if (hasFocus)
+            {
+                StartCoroutine(UpdatePendingNotificationsNextFrame());
+            }
         }
 
         private void SendNotificationFromUi()
         {
-            var badgeNumber = int.TryParse(badgeField.text, out var parsedBadgeNumber)
+            int? badgeNumber = int.TryParse(badgeField.text, out int parsedBadgeNumber)
                 ? parsedBadgeNumber
                 : (int?)null;
 
             DateTime deliveryTime;
-            if (float.TryParse(timeField.text, out var minutes))
+            if (float.TryParse(timeField.text, out float minutes))
+            {
                 deliveryTime = DateTime.Now.ToLocalTime() + TimeSpan.FromMinutes(minutes);
+            }
             else
+            {
                 deliveryTime = DateTime.Now.ToLocalTime() + TimeSpan.FromMinutes(1);
+            }
 
             SendNotification(titleField.text, bodyField.text, deliveryTime, badgeNumber);
         }
@@ -184,7 +220,10 @@ namespace NotificationSamples.Demo
 
         private void Update()
         {
-            if (updatePendingNotifications) UpdatePendingNotifications();
+            if (updatePendingNotifications)
+            {
+                UpdatePendingNotifications();
+            }
         }
 
         private void UpdatePendingNotifications()
@@ -194,18 +233,22 @@ namespace NotificationSamples.Demo
             updatePendingNotifications = false;
 
             // Clear all existing ones
-            foreach (var child in pendingNotificationsListParent.transform)
+            foreach (object child in pendingNotificationsListParent.transform)
+            {
                 if (child is Transform childTransform)
+                {
                     Destroy(childTransform.gameObject);
+                }
+            }
 
             if (manager?.PendingNotifications == null)
                 return;
 
             // Recreate based on currently pending list
             // Note: Using ToArray because the list can change during the loop.
-            foreach (var scheduledNotification in manager.PendingNotifications.ToArray())
+            foreach (PendingNotification scheduledNotification in manager.PendingNotifications.ToArray())
             {
-                var newItem =
+                PendingNotificationItem newItem =
                     Instantiate(pendingNotificationPrefab, pendingNotificationsListParent);
                 newItem.Show(scheduledNotification, this);
             }
@@ -215,15 +258,19 @@ namespace NotificationSamples.Demo
         {
             Debug.Log($"Queueing event with text \"{eventText}\"");
 
-            var newItem = Instantiate(eventPrefab, pendingEventParent);
+            NotificationEventItem newItem = Instantiate(eventPrefab, pendingEventParent);
             newItem.Show(eventText);
         }
 
         private void ClearEvents()
         {
-            foreach (var child in pendingEventParent.transform)
+            foreach (object child in pendingEventParent.transform)
+            {
                 if (child is Transform childTransform)
+                {
                     Destroy(childTransform.gameObject);
+                }
+            }
         }
     }
 }

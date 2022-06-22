@@ -144,7 +144,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2.0.3
+  bundleVersion: 2.0.4
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -190,7 +190,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.HoleSenear.beijinghutoujing.gp
   buildNumber: {}
-  AndroidBundleVersionCode: 203
+  AndroidBundleVersionCode: 204
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -290,7 +290,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: d873b51f9227c6744ad8d56bcf2324b9, type: 3}
+      m_Icon: {fileID: 2800000, guid: 5b885c84390bbba4eaf50dcb6738b947, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -814,7 +814,7 @@ PlayerSettings:
     Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 0
+    UNet: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 

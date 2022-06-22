@@ -5,9 +5,12 @@ namespace NotificationSamples.Demo
 {
     public class PendingNotificationItem : MonoBehaviour
     {
-        [SerializeField] protected TextMeshProUGUI idLabel;
-        [SerializeField] protected TextMeshProUGUI titleLabel;
-        [SerializeField] protected TextMeshProUGUI timeLabel;
+        [SerializeField]
+        protected TextMeshProUGUI idLabel;
+        [SerializeField]
+        protected TextMeshProUGUI titleLabel;
+        [SerializeField]
+        protected TextMeshProUGUI timeLabel;
 
         // Reference to pending notification
         private NotificationConsole console;
@@ -22,12 +25,19 @@ namespace NotificationSamples.Demo
             console = containingConsole;
 
             if (idLabel != null && notificationToDisplay.Notification.Id.HasValue)
+            {
                 idLabel.text = notificationToDisplay.Notification.Id.Value.ToString();
+            }
 
-            if (titleLabel != null) titleLabel.text = notificationToDisplay.Notification.Title;
+            if (titleLabel != null)
+            {
+                titleLabel.text = notificationToDisplay.Notification.Title;
+            }
 
             if (timeLabel != null && notificationToDisplay.Notification.DeliveryTime.HasValue)
+            {
                 timeLabel.text = notificationToDisplay.Notification.DeliveryTime.Value.ToString("yy-MM-dd HH:mm:ss");
+            }
         }
 
         /// <summary>

@@ -33,7 +33,10 @@ namespace NotificationSamples.Android
         /// </remarks>
         public void ScheduleNotification(AndroidGameNotification gameNotification)
         {
-            if (gameNotification == null) throw new ArgumentNullException(nameof(gameNotification));
+            if (gameNotification == null)
+            {
+                throw new ArgumentNullException(nameof(gameNotification));
+            }
 
             if (gameNotification.Id.HasValue)
             {
@@ -43,7 +46,7 @@ namespace NotificationSamples.Android
             }
             else
             {
-                var notificationId = AndroidNotificationCenter.SendNotification(gameNotification.InternalNotification,
+                int notificationId = AndroidNotificationCenter.SendNotification(gameNotification.InternalNotification,
                     gameNotification.DeliveredChannel);
                 gameNotification.Id = notificationId;
             }
@@ -57,11 +60,16 @@ namespace NotificationSamples.Android
         /// </remarks>
         public void ScheduleNotification(IGameNotification gameNotification)
         {
-            if (gameNotification == null) throw new ArgumentNullException(nameof(gameNotification));
+            if (gameNotification == null)
+            {
+                throw new ArgumentNullException(nameof(gameNotification));
+            }
 
             if (!(gameNotification is AndroidGameNotification androidNotification))
+            {
                 throw new InvalidOperationException(
                     "Notification provided to ScheduleNotification isn't an AndroidGameNotification.");
+            }
 
             ScheduleNotification(androidNotification);
         }
@@ -127,7 +135,10 @@ namespace NotificationSamples.Android
         {
             var data = AndroidNotificationCenter.GetLastNotificationIntent();
 
-            if (data != null) return new AndroidGameNotification(data.Notification, data.Id, data.Channel);
+            if (data != null)
+            {
+                return new AndroidGameNotification(data.Notification, data.Id, data.Channel);
+            }
 
             return null;
         }
@@ -135,16 +146,12 @@ namespace NotificationSamples.Android
         /// <summary>
         /// Does nothing on Android.
         /// </summary>
-        public void OnForeground()
-        {
-        }
+        public void OnForeground() {}
 
         /// <summary>
         /// Does nothing on Android.
         /// </summary>
-        public void OnBackground()
-        {
-        }
+        public void OnBackground() {}
 
         /// <summary>
         /// Unregister delegates.

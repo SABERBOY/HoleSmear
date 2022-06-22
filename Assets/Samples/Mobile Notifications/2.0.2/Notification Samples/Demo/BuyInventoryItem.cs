@@ -10,12 +10,18 @@ namespace NotificationSamples.Demo
     /// </summary>
     public class BuyInventoryItem : MonoBehaviour
     {
-        [SerializeField] protected TextMeshProUGUI titleLabel;
-        [SerializeField] protected TextMeshProUGUI timeLabel;
-        [SerializeField] protected TextMeshProUGUI costLabel;
-        [SerializeField] protected Image icon;
-        [SerializeField] protected Button buyButton;
-        [SerializeField] protected Image progressImage;
+        [SerializeField]
+        protected TextMeshProUGUI titleLabel;
+        [SerializeField]
+        protected TextMeshProUGUI timeLabel;
+        [SerializeField]
+        protected TextMeshProUGUI costLabel;
+        [SerializeField]
+        protected Image icon;
+        [SerializeField]
+        protected Button buyButton;
+        [SerializeField]
+        protected Image progressImage;
 
         // Fired when the buy button is pressed.
         private Action<BuyInventoryItem> bought;
@@ -96,8 +102,10 @@ namespace NotificationSamples.Demo
         public void UpdateControls()
         {
             if (deliveryTime != null)
+            {
                 // Do not update the labels (i.e. show the old values until the item is delivered).
                 return;
+            }
             costLabel.text = Cost.ToString("N0");
             timeLabel.text = $"Takes {Minutes:F1} minute(s)";
         }
@@ -116,14 +124,20 @@ namespace NotificationSamples.Demo
         /// </summary>
         public void OnDeliveredItem(InventoryItemData itemData)
         {
-            if (itemData == ItemData) UpdateBuyButton();
+            if (itemData == ItemData)
+            {
+                UpdateBuyButton();
+            }
         }
 
         // Time remaining until the last bought item is delivered.
         private float GetTimeRemaining()
         {
-            if (deliveryTime == null) return 0.0f;
-            var timeSpan = deliveryTime.Value - DateTime.Now;
+            if (deliveryTime == null)
+            {
+                return 0.0f;
+            }
+            TimeSpan timeSpan = deliveryTime.Value - DateTime.Now;
             return Mathf.Max((float)timeSpan.TotalSeconds, 0.0f);
         }
 
@@ -141,14 +155,16 @@ namespace NotificationSamples.Demo
         // Update an item's delivery progress, and update the progress bar.
         private void UpdateProgress()
         {
-            if (deliveryTime == null) return;
-            var timeRemaining = GetTimeRemaining();
+            if (deliveryTime == null)
+            {
+                return;
+            }
+            float timeRemaining = GetTimeRemaining();
             if (timeRemaining > 0.0f)
             {
                 progressImage.fillAmount = 1.0f - Mathf.Clamp01(timeRemaining / initialTimeRemaining);
                 return;
             }
-
             progressImage.fillAmount = 0.0f;
             deliveryTime = null;
             UpdateControls();

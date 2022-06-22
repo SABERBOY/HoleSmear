@@ -8,9 +8,6 @@
             url "https://maven.google.com"
         }
         maven {
-            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" // Assets/AnyThinkAds/Plugins/Android/NonChina/mediation/mintegral/Editor/Dependencies.xml:5
-        }
-        maven {
             url "https://s01.oss.sonatype.org/content/groups/staging/" // Assets/AnyThinkAds/Plugins/Android/NonChina/mediation/vungle/Editor/Dependencies.xml:5
         }
         maven {
