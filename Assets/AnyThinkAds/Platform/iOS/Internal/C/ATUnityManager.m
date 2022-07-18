@@ -148,6 +148,7 @@ char * at_get_string_message_for_unity(const char *msg, void(*callback)(const ch
 
 -(BOOL) startSDKWithAppID:(NSString*)appID appKey:(NSString*)appKey {
     [ATAPI setLogEnabled:YES];
+    [[ATAPI sharedInstance]setSystemPlatformType:ATSystemPlatformTypeUnity];
     return [[ATAPI sharedInstance] startWithAppID:appID appKey:appKey error:nil];
 }
 
@@ -230,7 +231,7 @@ char * at_get_string_message_for_unity(const char *msg, void(*callback)(const ch
  */
 -(void) setDataConsent:(NSString*)consentJsonString network:(NSNumber*)network {
     NSLog(@"constenJsonString = %@, network = %@", consentJsonString, network);
-    NSDictionary *networks = @{@1:kATNetworkNameFacebook, @2:kATNetworkNameAdmob, @3:kATNetworkNameInmobi, @4:kATNetworkNameFlurry, @5:kATNetworkNameApplovin, @6:kATNetworkNameMintegral, @7:kATNetworkNameMopub, @8:kATNetworkNameGDT, @9:kATNetworkNameChartboost, @10:kATNetworkNameTapjoy, @11:kATNetworkNameIronSource, @12:kATNetworkNameUnityAds, @13:kATNetworkNameVungle, @14:kATNetworkNameAdColony, @1:kATNetworkNameOneway, @18:kATNetworkNameMobPower, @20:kATNetworkNameYeahmobi, @21:kATNetworkNameAppnext, @22:kATNetworkNameBaidu};
+    NSDictionary *networks = @{@1:kATNetworkNameFacebook, @2:kATNetworkNameAdmob, @3:kATNetworkNameInmobi, @4:kATNetworkNameFlurry, @5:kATNetworkNameApplovin, @6:kATNetworkNameMintegral, @8:kATNetworkNameGDT, @9:kATNetworkNameChartboost, @10:kATNetworkNameTapjoy, @11:kATNetworkNameIronSource, @12:kATNetworkNameUnityAds, @13:kATNetworkNameVungle, @14:kATNetworkNameAdColony, @1:kATNetworkNameOneway, @18:kATNetworkNameMobPower, @20:kATNetworkNameYeahmobi, @21:kATNetworkNameAppnext, @22:kATNetworkNameBaidu};
     if ([networks containsObjectForKey:network]) {
         if (([consentJsonString isKindOfClass:[NSString class]] && [consentJsonString dataUsingEncoding:NSUTF8StringEncoding] != nil)) {
             NSDictionary *consentDict = [NSJSONSerialization JSONObjectWithData:[consentJsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
