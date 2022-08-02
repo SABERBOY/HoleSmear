@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using SDK;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -14,7 +12,7 @@ public class UIController : Base
     private char[] crr;
     public GameObject diePanel;
     public Image dieTimeImage;
-    public float dieTimeNum = 10;
+    [NonSerialized] public float dieTimeNum = GlobalConfig.RevivalTime;
     public Text dieTimeText;
     public Image[] flagImages;
     public Text FPSText;
@@ -39,8 +37,7 @@ public class UIController : Base
     public Button winButton;
     public GameObject winPanel;
 
-    private List<int> skinNeedMoney = new List<int>()
-        { (int)(1000 * 1.5F), (int)(2000 * 2F), (int)(3000 * 2.6F), (int)(4000 * 3.5F), (int)(5000 * 4.5F) };
+    private List<int> skinNeedMoney = new List<int> { 1000, 2500, 3800, 4900, 6000 };
 
     public int moneyTextNum
     {
@@ -79,7 +76,7 @@ public class UIController : Base
         var trigger = startPanel.GetComponent<EventTrigger>();
         var entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerDown;
-        entry.callback.AddListener((data) =>
+        entry.callback.AddListener(data =>
         {
             // Debug.Log("Entering");
             NativeConnect.Connect.ShowFloatingWindow(false);
@@ -188,7 +185,7 @@ public class UIController : Base
         {
             if (dieTimeNum <= 0) gameCon.DieNewGame();
             dieTimeNum -= Time.deltaTime;
-            dieTimeImage.fillAmount = dieTimeNum / 10;
+            dieTimeImage.fillAmount = dieTimeNum / GlobalConfig.RevivalTime;
             dieTimeText.text = ((int)(dieTimeNum + 1)).ToString();
             yield return new WaitForSeconds(0.02f);
         }

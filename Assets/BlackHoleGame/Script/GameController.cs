@@ -64,7 +64,7 @@ public class GameController : Base
             else
             {
                 UI.diePanel.gameObject.SetActive(false);
-                UI.dieTimeNum = 10;
+                UI.dieTimeNum = GlobalConfig.RevivalTime;
                 Hole.instance.StartMove();
                 UI.lvPanel.SetActive(true);
             }

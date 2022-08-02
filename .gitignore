@@ -76,3 +76,6 @@
 /ExportProjects/
 /Export/
 /.vscode/
+
+/[Aa]ssets/[Pp]lugins/[Ee]ditor/JetBrains.RiderFlow/
+/[Aa]ssets/[Pp]lugins/[Ee]ditor/JetBrains.RiderFlow.meta
