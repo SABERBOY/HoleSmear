@@ -94,6 +94,13 @@ namespace BlackHoleGame.Script
             StartCoroutine(nameof(Iefps));
             anim.RotaImage();
             crr = new[] { '0', '0', '0', '0', '0', '0' };
+            var str = PlayerPrefs.GetString(SceneData.skinState);
+            if (string.IsNullOrEmpty(str))
+            {
+                str = new string(crr);
+                PlayerPrefs.SetString(SceneData.skinState, str);
+            }
+
             var trigger = startPanel.GetComponent<EventTrigger>();
             var entry = new EventTrigger.Entry
             {
@@ -363,8 +370,8 @@ namespace BlackHoleGame.Script
                                     // anim.ShowHints(anim.videoHintsText);
                                     this.testSkinIndex = i1;
                                     // tryButton.gameObject.SetActive(false);
+                                    StartCoroutine(ChangeSkinLater(i1));
                                     this.CloseSkinPanel();
-                                    ChangeSkin(this.testSkinIndex, true);
                                 },
                                 () =>
                                 {
@@ -379,6 +386,12 @@ namespace BlackHoleGame.Script
             var pos = tick.transform.localPosition;
             tick.transform.SetParent(go.transform, false);
             tick.transform.localPosition = pos;
+        }
+
+        private IEnumerator ChangeSkinLater(int i1)
+        {
+            yield return new WaitForSeconds(0.1F);
+            ChangeSkin(this.testSkinIndex, true);
         }
 
         /// <summary>

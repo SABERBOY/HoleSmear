@@ -1,4 +1,6 @@
-﻿namespace BlackHoleGame.Script
+﻿using UnityEngine;
+
+namespace BlackHoleGame.Script
 {
     public class UnityCallAndroid
     {
