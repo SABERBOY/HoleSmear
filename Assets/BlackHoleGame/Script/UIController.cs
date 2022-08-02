@@ -66,7 +66,7 @@ namespace BlackHoleGame.Script
             }
         }
 
-        public int skinNum
+        private int skinNum
         {
             get => moneyTextNum;
             set => OnDiamondChanged(value);
@@ -115,6 +115,7 @@ namespace BlackHoleGame.Script
             trigger.triggers.Add(entry);
             // SceneData.onOnDiamondChanged += OnDiamondChanged;
             // StartCoroutine(BindDiamondLater());
+            Hole.instance.LoadMap();
         }
 
         private IEnumerator BindDiamondLater()

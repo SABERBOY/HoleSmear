@@ -42,6 +42,14 @@ namespace BlackHoleGame.Script
             lizi.gameObject.SetActive(true);
             lizi.Stop();
             if (attract == null) attract = StartCoroutine(nameof(IEAttract));
+            // LoadMap();
+
+            //StartMove();
+            UI.lvPanel.SetActive(true);
+        }
+
+        public void LoadMap()
+        {
             var a = PlayerPrefs.GetString(SceneData.level);
             if (string.IsNullOrEmpty(a))
             {
@@ -54,9 +62,6 @@ namespace BlackHoleGame.Script
                 UI.lvTextLeft.text = (DataController.sceneNum / 3 + 1).ToString();
                 UI.lvTextRight.text = (DataController.sceneNum / 3 + 2).ToString();
             }
-
-            //StartMove();
-            UI.lvPanel.SetActive(true);
         }
 
         /// <summary>
