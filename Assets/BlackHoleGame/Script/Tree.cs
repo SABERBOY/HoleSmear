@@ -1,22 +1,25 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class Tree : Base
+namespace BlackHoleGame.Script
 {
-    private bool IsDoScaleIng;
-
-    // Start is called before the first frame update
-    private void Start()
+    public class Tree : Base
     {
-    }
+        private bool IsDoScaleIng;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if (!IsDoScaleIng && rig.isKinematic == false)
+        // Start is called before the first frame update
+        private void Start()
         {
-            IsDoScaleIng = true;
-            transform.DOScale(Vector3.one * 0.5f, 1f);
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (!IsDoScaleIng && rig.isKinematic == false)
+            {
+                IsDoScaleIng = true;
+                transform.DOScale(Vector3.one * 0.5f, 1f);
+            }
         }
     }
 }

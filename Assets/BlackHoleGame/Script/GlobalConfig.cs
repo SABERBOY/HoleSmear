@@ -1,10 +1,13 @@
-/// <summary>
-/// Global  Config
-/// </summary>
-public class GlobalConfig {
+namespace BlackHoleGame.Script
+{
     /// <summary>
-    /// 复活时间
+    /// Global  Config
     /// </summary>
-    public static readonly int RevivalTime = 5;
-
+    public class GlobalConfig
+    {
+        /// <summary>
+        /// 复活时间
+        /// </summary>
+        public static readonly int RevivalTime = 5;
+    }
 }

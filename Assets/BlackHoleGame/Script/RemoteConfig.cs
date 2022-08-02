@@ -5,10 +5,9 @@ using Firebase.Analytics;
 using Firebase.Extensions;
 using Unity.RemoteConfig;
 using UnityEngine;
-using UnityEngine.Advertisements;
 using UnityEngine.Analytics;
 
-namespace DefaultNamespace
+namespace BlackHoleGame.Script
 {
     public class RemoteConfig : MonoBehaviour
     {
@@ -19,7 +18,7 @@ namespace DefaultNamespace
         public Action RewardSuccessAction = null;
         public Action RewardFailAction = null;
         public static RemoteConfig Instance => _instance;
-        DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+        private DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
         protected bool firebaseInitialized = false;
 
         public struct userAttributes
@@ -44,14 +43,10 @@ namespace DefaultNamespace
             {
                 dependencyStatus = task.Result;
                 if (dependencyStatus == DependencyStatus.Available)
-                {
                     InitializeFirebase();
-                }
                 else
-                {
                     Debug.LogError(
                         "Could not resolve all Firebase dependencies: " + dependencyStatus);
-                }
             });
             _instance = this;
             // Add a listener to apply settings when successfully retrieved:
@@ -70,7 +65,7 @@ namespace DefaultNamespace
             OnInitializationComplete();
         }
 
-        void InitializeFirebase()
+        private void InitializeFirebase()
         {
             Debug.Log("Enabling data collection.");
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);

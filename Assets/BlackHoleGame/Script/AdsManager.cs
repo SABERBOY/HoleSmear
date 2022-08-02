@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AdsManager : MonoBehaviour
+namespace BlackHoleGame.Script
 {
-   
+    public class AdsManager : MonoBehaviour
+    {
+    }
 }

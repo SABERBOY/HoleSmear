@@ -4,7 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
+using BlackHoleGame.Script;
 #if ADMOB
 using GoogleMobileAds.Android;
 using GoogleMobileAds.Api;

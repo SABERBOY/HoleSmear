@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BlackHoleGame.Script;
 using UnityEngine;
 
 public class Test : Base
