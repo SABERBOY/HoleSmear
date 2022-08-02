@@ -41,7 +41,7 @@ namespace BlackHoleGame.Script
         {
             lizi.gameObject.SetActive(true);
             lizi.Stop();
-            if (attract == null) attract = StartCoroutine("IEAttract");
+            if (attract == null) attract = StartCoroutine(nameof(IEAttract));
             var a = PlayerPrefs.GetString(SceneData.level);
             if (string.IsNullOrEmpty(a))
             {
@@ -92,7 +92,7 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void StartMove()
         {
-            StartCoroutine("IEMove");
+            StartCoroutine(nameof(IEMove));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void StopMove()
         {
-            StopCoroutine("IEMove");
+            StopCoroutine(nameof(IEMove));
         }
 
         /// <summary>

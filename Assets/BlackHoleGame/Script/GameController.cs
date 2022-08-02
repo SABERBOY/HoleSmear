@@ -95,7 +95,7 @@ namespace BlackHoleGame.Script
                         //    Invoke("WinLiZiPanel", 1f);
                         //    break;
                         default:
-                            StartCoroutine("IEHoleBigger");
+                            StartCoroutine(nameof(IEHoleBigger));
                             break;
                     }
 
@@ -119,7 +119,8 @@ namespace BlackHoleGame.Script
             // anim.SpinShowVideo();
             UI.winPanel.gameObject.SetActive(true);
             UI.starTextNum = addMoneyNum;
-            anim.WinTextMove();
+            StartCoroutine(anim.WinTextMove());
+            // anim.WinTextMove();
             UI.lvPanel.SetActive(false);
             // var cz = caizi.LoadAssetAsync<GameObject>();
             var go = caizi;
@@ -184,7 +185,7 @@ namespace BlackHoleGame.Script
 
         private void Smaller()
         {
-            StartCoroutine("IEHoleImage");
+            StartCoroutine(nameof(IEHoleImage));
             UI.winPanel.gameObject.SetActive(false);
             Hole.instance.ResetPos();
             HoleShader.instance.StopShader();
@@ -201,6 +202,11 @@ namespace BlackHoleGame.Script
 
         private IEnumerator IEHoleImage()
         {
+            if (DataController.sceneNum % 3 == 0)
+            {
+                UIController.instance.ResetAndNext();
+            }
+
             StopCoroutine(nameof(IEHoleBigger));
             while (true)
             {
@@ -211,7 +217,7 @@ namespace BlackHoleGame.Script
                     UI.holeImage.gameObject.SetActive(false);
                     UI.holeImage.transform.localScale = new Vector3(18, 18, 1);
                     isWin = false;
-                    StopCoroutine("IEHoleImage");
+                    StopCoroutine(nameof(IEHoleImage));
                     Hole.instance.lizi.gameObject.SetActive(true);
                     Hole.instance.lizi.Stop();
                     if (DataController.sceneNum % 3 == 0)
@@ -251,7 +257,8 @@ namespace BlackHoleGame.Script
 
         private void StartSet()
         {
-            UI.moneyTextNum = PlayerPrefs.GetInt(SceneData.money, 500);
+            UI.moneyTextNum = SceneData.DiamondNum;
+            SceneData.DiamondNum = SceneData.DiamondNum;
             lang.flagNum = PlayerPrefs.GetInt(SceneData.flag);
             UI.ChangeSkin(PlayerPrefs.GetInt(SceneData.skin));
             UI.shockSwitch.isOn = Convert.ToBoolean(PlayerPrefs.GetInt(SceneData.isShock));
@@ -265,7 +272,7 @@ namespace BlackHoleGame.Script
         private void ReGos()
         {
             var games = Resources.LoadAll<GameObject>("Tree" + SceneData.skinID);
-            foreach (var t in games) Instantiate(t, Hole.instance.transform.parent, false);
+            foreach (var t in games) Instantiate(t, GameController.instance.GameMap.transform, false);
 
             winMoneyNum = Random.Range(15, 26);
             addMoneyNum = winMoneyNum;
@@ -277,6 +284,7 @@ namespace BlackHoleGame.Script
             var num = int.Parse(UI.levelNum.text);
             DataController.bigLevel = (num - 1) / 3;
             DataController.sceneNum = num - 1;
+            Debug.Log("DataController.bigLevel:" + DataController.bigLevel);
         }
 
         /// <summary>
@@ -333,7 +341,7 @@ namespace BlackHoleGame.Script
                         UI.StartAddStarNum();
                         Diamond.CreateDia(addMoneyNum);
                         addMoneyNum *= 2;
-                        Invoke("WinNextLevel", 1f);
+                        Invoke(nameof(WinNextLevel), 1f);
                     }
                     else if (str.Equals("Close"))
                     {
@@ -355,7 +363,7 @@ namespace BlackHoleGame.Script
         public void WinNextLevel()
         {
             UI.winPanel.SetActive(false);
-            StartCoroutine("IEHoleBigger");
+            StartCoroutine(nameof(IEHoleBigger));
             UI.StartAddMoney();
             anim.ReSetWinPanel();
         }
@@ -365,7 +373,7 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void WinSpinNextLevel()
         {
-            StartCoroutine("IEHoleBigger");
+            StartCoroutine(nameof(IEHoleBigger));
             anim.ReSetWinPanel();
         }
 

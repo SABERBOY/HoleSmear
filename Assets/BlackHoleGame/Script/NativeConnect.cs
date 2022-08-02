@@ -24,14 +24,14 @@ namespace BlackHoleGame.Script
         {
             get
             {
-                if (_connect == null)
+                if (_connect != null) return _connect;
+                var go = new GameObject
                 {
-                    var go = new GameObject();
-                    go.name = "NativeConnect";
-                    _connect = go.AddComponent<NativeConnect>();
-                    DontDestroyOnLoad(go);
-                    // _connect.Init();
-                }
+                    name = "NativeConnect"
+                };
+                _connect = go.AddComponent<NativeConnect>();
+                DontDestroyOnLoad(go);
+                // _connect.Init();
 
                 return _connect;
             }

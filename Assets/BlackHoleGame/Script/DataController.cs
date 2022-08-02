@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using Random = UnityEngine.Random;
 
 namespace BlackHoleGame.Script
 {
@@ -104,7 +106,7 @@ namespace BlackHoleGame.Script
 
         private void Awake()
         {
-            StartCoroutine("IEData");
+            StartCoroutine(nameof(IEData));
             GetLanguageData();
         }
 
@@ -278,7 +280,7 @@ namespace BlackHoleGame.Script
         /// <summary>
         ///     礼物条增加数量
         /// </summary>
-        public static float giftBarAddNum = 1.0f;
+        public static float giftBarAddNum = 0.51f;
 
         public static float holeSize
         {
@@ -287,6 +289,18 @@ namespace BlackHoleGame.Script
             {
                 Hole.instance.scale = new Vector3(value / 2, value / 2, 2);
                 _holeSize = value;
+            }
+        }
+
+        public static event Action<int> onOnDiamondChanged;
+
+        public static int DiamondNum
+        {
+            get => PlayerPrefs.GetInt(SceneData.money, 500);
+            set
+            {
+                PlayerPrefs.SetInt(SceneData.money, value);
+                onOnDiamondChanged?.Invoke(value);
             }
         }
     }

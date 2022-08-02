@@ -73,7 +73,7 @@ namespace BlackHoleGame.Script
                 Shader.SetGlobalVector("_AxisDir" + i % n, AxisDir[i % n]);
                 Shader.SetGlobalFloat("_Rad" + i % n, radiuses[i % n]);
                 i++;
-                Shader.SetGlobalInt("_hitCount", Mathf.Min(i, n));
+                Shader.SetGlobalInt(HitCount, Mathf.Min(i, n));
                 yield return new WaitForSeconds(0.01f);
             }
         }

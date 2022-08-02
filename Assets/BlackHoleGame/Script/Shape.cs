@@ -22,25 +22,25 @@ namespace BlackHoleGame.Script
             var gos = go.GetComponentsInChildren<Shape>();
             go.name = name;
             var shape = go.GetComponent<Shape>();
-            for (var i = 0; i < gos.Length; i++)
+            foreach (var t in gos)
             {
-                gos[i].transform.parent = null;
-                gos[i].gameObject.layer = 4;
-                if (!colorID.Equals("-1")) gos[i].mr.material = Resources.Load<Material>("Material/" + colorID);
+                t.transform.parent = GameController.instance.GameMain;
+                t.gameObject.layer = 4;
+                if (!colorID.Equals("-1")) t.mr.material = Resources.Load<Material>("Material/" + colorID);
                 if (ID.Equals("0"))
                 {
-                    gos[i].tag = "Shape";
-                    shapeList.Add(gos[i].gameObject);
+                    t.tag = "Shape";
+                    shapeList.Add(t.gameObject);
                 }
                 else if (ID.Equals("1"))
                 {
-                    gos[i].tag = "DieShape";
-                    dieShapeList.Add(gos[i].gameObject);
+                    t.tag = "DieShape";
+                    dieShapeList.Add(t.gameObject);
                 }
 
-                gos[i].col.isTrigger = false;
-                gos[i].rig.useGravity = true;
-                gos[i].rig.isKinematic = true;
+                t.col.isTrigger = false;
+                t.rig.useGravity = true;
+                t.rig.isKinematic = true;
             }
 
             return shape;

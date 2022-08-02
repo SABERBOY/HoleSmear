@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using DG.Tweening;
+using SDK;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,8 +26,10 @@ namespace BlackHoleGame.Script
         public Image lv2Image;
         public GameObject lvPanel;
         public Text lvTextLeft;
+
         public Text lvTextRight;
-        public Text moneyText;
+
+        // public Text moneyText;
         public Button payButton;
         public GameObject setPanel;
         public GameObject shock;
@@ -39,18 +43,33 @@ namespace BlackHoleGame.Script
         public Button winButton;
         public GameObject winPanel;
 
-        private List<int> skinNeedMoney = new List<int> { 1000, 2500, 3800, 4900, 6000 };
+        /// <summary>
+        /// diamond number
+        /// </summary>
+        [SerializeField] private Text diamondText;
+
+
+        private List<int> skinNeedMoney = GlobalConfig.SkinCastMoneyList;
+
+        /// <summary>
+        /// 试用皮肤的名称
+        /// </summary>
+        private int testSkinIndex = 0;
 
         public int moneyTextNum
         {
-            get => int.Parse(moneyText.text);
-            set => moneyText.text = value.ToString();
+            get => SceneData.DiamondNum;
+            set
+            {
+                SceneData.DiamondNum = value;
+                OnDiamondChanged(value);
+            }
         }
 
         public int skinNum
         {
-            get => int.Parse(skinMoney.text);
-            set => skinMoney.text = value.ToString();
+            get => moneyTextNum;
+            set => OnDiamondChanged(value);
         }
 
         public int starTextNum
@@ -72,12 +91,14 @@ namespace BlackHoleGame.Script
 
         private void Start()
         {
-            StartCoroutine("IEFPS");
+            StartCoroutine(nameof(Iefps));
             anim.RotaImage();
             crr = new[] { '0', '0', '0', '0', '0', '0' };
             var trigger = startPanel.GetComponent<EventTrigger>();
-            var entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerDown;
+            var entry = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerDown
+            };
             entry.callback.AddListener(data =>
             {
                 // Debug.Log("Entering");
@@ -85,8 +106,27 @@ namespace BlackHoleGame.Script
                 StartGame();
             });
             trigger.triggers.Add(entry);
+            // SceneData.onOnDiamondChanged += OnDiamondChanged;
+            // StartCoroutine(BindDiamondLater());
         }
 
+        private IEnumerator BindDiamondLater()
+        {
+            yield return new WaitForEndOfFrame();
+            // SceneData.onOnDiamondChanged += OnDiamondChanged;
+        }
+
+        private void OnDiamondChanged(int obj)
+        {
+            diamondText.text = obj.ToString("N0");
+            skinMoney.text = obj.ToString("N0");
+        }
+
+
+        private void OnDestroy()
+        {
+            SceneData.onOnDiamondChanged -= OnDiamondChanged;
+        }
 
         /// <summary>
         ///     开始游戏
@@ -99,11 +139,11 @@ namespace BlackHoleGame.Script
             Hole.instance.StartMove();
         }
 
-        private IEnumerator IEFPS()
+        private IEnumerator Iefps()
         {
             while (true)
             {
-                FPSText.text = (1 / Time.deltaTime).ToString();
+                FPSText.text = (1 / Time.deltaTime).ToString(CultureInfo.InvariantCulture);
                 yield return new WaitForSeconds(1);
             }
         }
@@ -144,7 +184,8 @@ namespace BlackHoleGame.Script
             }
 
             moneyTextNum = startMoneyNum + gameCon.addMoneyNum;
-            PlayerPrefs.SetInt(SceneData.money, moneyTextNum);
+            // PlayerPrefs.SetInt(SceneData.money, moneyTextNum);
+            SceneData.DiamondNum = moneyTextNum;
             gameCon.addMoneyNum = gameCon.winMoneyNum;
         }
 
@@ -165,7 +206,8 @@ namespace BlackHoleGame.Script
 
             moneyTextNum = startMoneyNum - gameCon.skinMoneyNum;
             skinNum = moneyTextNum;
-            PlayerPrefs.SetInt(SceneData.money, moneyTextNum);
+            // PlayerPrefs.SetInt(SceneData.money, moneyTextNum);
+            SceneData.DiamondNum = moneyTextNum;
         }
 
         /// <summary>
@@ -173,9 +215,9 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void StartAddMoney()
         {
-            StartCoroutine("IEAddMoney");
-            for (var i = 0; i < anim.addDiasImage.Length; i++)
-                anim.addDiasImage[i].transform.localPosition = Vector3.zero;
+            StartCoroutine(nameof(IEAddMoney));
+            foreach (var t in anim.addDiasImage)
+                t.transform.localPosition = Vector3.zero;
         }
 
         /// <summary>
@@ -199,7 +241,7 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void StopCountDown()
         {
-            StopCoroutine("IECountDown");
+            StopCoroutine(nameof(IECountDown));
         }
 
         /// <summary>
@@ -209,7 +251,7 @@ namespace BlackHoleGame.Script
         {
             diePanel.gameObject.SetActive(true);
             lvPanel.SetActive(false);
-            StartCoroutine("IECountDown");
+            StartCoroutine(nameof(IECountDown));
         }
 
         /// <summary>
@@ -278,13 +320,13 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void OpenSkinPanel()
         {
-            NativeConnect.Connect.showBlock(s => { });
-            skinMoney.text = moneyText.text;
+            // NativeConnect.Connect.showBlock(s => { });
+            skinMoney.text = diamondText.text;
             Hole.instance.enabled = false;
             for (var i = 0; i < SkinGameObjects.Count; i++)
             {
                 var o = SkinGameObjects[i];
-                o.GetComponentInChildren<Text>().text = skinNeedMoney[i].ToString();
+                o.transform.GetChild(0).GetComponentInChildren<Text>().text = skinNeedMoney[i].ToString();
             }
 
             skinPanel.SetActive(true);
@@ -294,15 +336,44 @@ namespace BlackHoleGame.Script
             {
                 crr = str.ToCharArray();
                 for (var i = 1; i < crr.Length; i++)
+                {
+                    var button = GameObject.Find("S" + i);
+                    var tryButton = button.transform.GetChild(1).GetComponent<Button>();
                     if (crr[i] == '1')
                     {
-                        var button = GameObject.Find("S" + i);
                         var im = button.GetComponentsInChildren<Image>();
-                        for (var j = 0; j < im.Length; j++)
-                            if (im[j].name.Contains("Image"))
-                                im[j].gameObject.SetActive(false);
+                        foreach (var t in im)
+                            if (t.name.Contains("Image"))
+                                t.gameObject.SetActive(false);
+
                         button.GetComponent<Image>().color = Color.white;
+                        tryButton.gameObject.SetActive(false);
                     }
+                    else
+                    {
+                        tryButton.gameObject.SetActive(true);
+                        tryButton.onClick.RemoveAllListeners();
+                        var i2 = i;
+                        tryButton.onClick.AddListener((() =>
+                        {
+                            var i1 = i2;
+                            SdkSystem.Instance.ShowRewardVideoAd(() =>
+                                {
+                                    Debug.Log("视频广告播放完成");
+                                    // anim.ShowHints(anim.videoHintsText);
+                                    this.testSkinIndex = i1;
+                                    // tryButton.gameObject.SetActive(false);
+                                    this.CloseSkinPanel();
+                                    ChangeSkin(this.testSkinIndex, true);
+                                },
+                                () =>
+                                {
+                                    Debug.Log("视频广告播放失败");
+                                    anim.ShowHints(anim.videoHintsText);
+                                });
+                        }));
+                    }
+                }
             }
 
             var pos = tick.transform.localPosition;
@@ -339,7 +410,7 @@ namespace BlackHoleGame.Script
                 var im = go.GetComponentsInChildren<Image>();
                 im[1].gameObject.SetActive(false);
                 image.color = Color.white;
-                StartCoroutine("IESpendMoney");
+                StartCoroutine(nameof(IESpendMoney));
                 crr[num] = '1';
                 var str = new string(crr);
                 PlayerPrefs.SetString(SceneData.skinState, str);
@@ -351,14 +422,31 @@ namespace BlackHoleGame.Script
             tick.transform.localPosition = pos;
         }
 
+
+        public void TrySelectSkin()
+        {
+            var go = EventSystem.current.currentSelectedGameObject.transform;
+            Debug.Log(go.name);
+        }
+
         /// <summary>
-        ///     改变皮肤
+        /// 改变皮肤
         /// </summary>
-        public void ChangeSkin(int a)
+        /// <param name="a">皮肤下标</param>
+        /// <param name="isTry">是否是试用</param>
+        public void ChangeSkin(int a, bool isTry = false)
         {
             Resources.UnloadUnusedAssets();
-            SceneData.skinID = a;
-            PlayerPrefs.SetInt(SceneData.skin, SceneData.skinID);
+            if (!isTry)
+            {
+                SceneData.skinID = a;
+                PlayerPrefs.SetInt(SceneData.skin, SceneData.skinID);
+            }
+            else
+            {
+                SceneData.skinID = a;
+            }
+
             /*var go = Hole.instance.transform.parent.gameObject;
         Hole.instance.transform.parent = null;
         go.SetActive(false);*/
@@ -370,7 +458,20 @@ namespace BlackHoleGame.Script
             // Resources.UnloadAsset(go);
             Hole.instance.SetPlaner(map.transform.Find("Plane"));
             map.SetActive(true);
-            Hole.instance.transform.parent = map.transform;
+            // Hole.instance.transform.parent = map.transform;
+            // StartGame();
+        }
+
+        /// <summary>
+        /// 开始下一关
+        /// </summary>
+        public void ResetAndNext()
+        {
+            if (this.testSkinIndex != 0)
+            {
+                UI.ChangeSkin(PlayerPrefs.GetInt(SceneData.skin));
+                this.testSkinIndex = 0;
+            }
         }
     }
 }
