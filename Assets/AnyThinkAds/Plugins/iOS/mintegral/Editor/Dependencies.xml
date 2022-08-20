@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><dependencies>
     <iosPods>
-        <iosPod name="AnyThinkMintegralAdapter" version="5.9.80.1" />
+        <iosPod name="AnyThinkiOS/AnyThinkMintegralAdapter" version="5.9.82" />
     </iosPods>
 </dependencies>
