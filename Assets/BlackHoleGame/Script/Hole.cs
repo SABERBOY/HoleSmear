@@ -2,6 +2,7 @@
 using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
+using static BlackHoleGame.Script.HoleSkinLoadManager;
 
 namespace BlackHoleGame.Script
 {
@@ -19,7 +20,7 @@ namespace BlackHoleGame.Script
         {
             instance = this;
             // plane = GameObject.Find("Plane").transform;
-            enabled = false;
+            // enabled = false;
         }
 
         private void OnEnable()
@@ -30,8 +31,17 @@ namespace BlackHoleGame.Script
 
         private void Start()
         {
-            // NativeConnect.Connect.showBanner();
-            //StartCoroutine("IEShockTime");
+            StartCoroutine(PreLoadSkin<GameObject>(new[] { "skinParticles" }, (oList) =>
+            {
+                HoleSkinLoadManager.AddSkin(oList);
+                 SceneData.SetSkinList();
+                 if (GetSkin(0, out var skin))
+                 {
+                     var picSkin = Instantiate(skin, this.transform.GetChild(0), false);
+                     picSkin.transform.localPosition = Vector3.zero;
+                     picSkin.transform.localRotation = Quaternion.Euler(-180, 0, 0);
+                 }
+            }));
         }
 
         /// <summary>
@@ -45,7 +55,7 @@ namespace BlackHoleGame.Script
             // LoadMap();
 
             //StartMove();
-            UI.lvPanel.SetActive(true);
+            // UI.lvPanel.SetActive(true);
         }
 
         public void LoadMap()

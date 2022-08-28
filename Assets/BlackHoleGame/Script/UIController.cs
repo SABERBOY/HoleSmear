@@ -116,6 +116,7 @@ namespace BlackHoleGame.Script
             // SceneData.onOnDiamondChanged += OnDiamondChanged;
             // StartCoroutine(BindDiamondLater());
             Hole.instance.LoadMap();
+            this.lvPanel.SetActive(true);
         }
 
         private IEnumerator BindDiamondLater()

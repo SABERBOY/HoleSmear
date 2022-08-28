@@ -16,7 +16,127 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: ec513a7b882856c43b9f1c6476f36c15
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: e48588c4acb5ef244ba26fb31fb75f43
+    m_Address: Assets/BlackHoleGame/HoleSkins
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skinParticles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24091865cb7dd704f833cf6cac48063e
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/Circle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5eb0ffc82e594a24e833ec3080486612
+    m_Address: Assets/Fantasy Portal FX/Textures/circle.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1d58cee40236ae46a06ec75cc46da32
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/LineNofade.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3732d1664c7eca743bf9636506bf701c
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/PortalBackdropPrecise.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26a8335b916a9cf4894b8f8559f4c51b
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/Glow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7758dcd5b2c04c41a82845d9162daf3
+    m_Address: Assets/Fantasy Portal FX/Textures/glow.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b230e8e1dc71904aaa14ffc08f642d6
+    m_Address: Assets/Fantasy Portal FX/Textures/circle_blurred.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 353090645b5c7aa4887f9b020b5bfdac
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/Ripple.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5481a62566427034dbf65c438b2b4bbd
+    m_Address: Assets/Fantasy Portal FX/Textures/ripple_n.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70f2130f8e6163d42ab112f1757509af
+    m_Address: Assets/Fantasy Portal FX/Textures/ripple.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64def841b90485745a81ab2221e764da
+    m_Address: Assets/Fantasy Portal FX/Textures/skull_evil.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 790de56517cc6cd498a6e44b08ee490e
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/Skull.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c350c3a95f1ca04994a3c26197d3cc0
+    m_Address: Assets/Fantasy Portal FX/Textures/ripple_rect2x2_n.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0841a8ebd4db59045b9da6c14945629a
+    m_Address: Assets/Fantasy Portal FX/Textures/ripple_rect2x2.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bced16bd5e6fdb749ab4e681d30321a2
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/RippleRectangular2x2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a1a07262cdf47640b9ef1004e66331f
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/DirectionalGlow.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - materials
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0958f92bb236da84abee1ce3236e31ee
+    m_Address: Assets/Fantasy Portal FX/Textures/directionalglow.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e8e9727278a8d64580a3d1459597f26
+    m_Address: Assets/Fantasy Portal FX/Textures/box_blurred.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b702dd6fc8f80e645883e2f088d87658
+    m_Address: Assets/Fantasy Portal FX/Materials/Sprites/PortalBackdropPreciseBox.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - textures
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d413d1e44da131e488afec4dd4d7c158, type: 2}
   m_SchemaSet:

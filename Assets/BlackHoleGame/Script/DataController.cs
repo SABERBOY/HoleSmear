@@ -303,5 +303,93 @@ namespace BlackHoleGame.Script
                 onOnDiamondChanged?.Invoke(value);
             }
         }
+
+        private static string holeSkin = "HoleSkinID";
+
+        private static HoleSkinDataList holeSkinDataList;
+
+        public static HoleSkinDataList GetSkinDataLists()
+        {
+            holeSkinDataList = JsonUtility.FromJson<HoleSkinDataList>(SkinData);
+            return holeSkinDataList;
+        }
+
+        public static void SetSkinDataLists(HoleSkinDataList value)
+        {
+            holeSkinDataList = value;
+            SkinData=JsonUtility.ToJson(holeSkinDataList);
+        }
+
+        public static void SetSkinList()
+        {
+            var skinDataList = SkinData;
+            // var json = JsonUtility.ToJson(skinDataList);
+            // var jsonObject = JsonUtility.FromJson<HoleSkinDataList>(json);
+        }
+
+        /// <summary>
+        ///    获取默认皮肤数据
+        /// </summary>
+        /// <returns></returns>
+        private static HoleSkinDataList GetDefaultSkinDataList()
+        {
+            var skinIDList = new List<HoleSkinData>(HoleSkinLoadManager.SkinLength);
+            for (var i = 0; i < HoleSkinLoadManager.SkinLength; i++)
+            {
+                skinIDList.Add(new HoleSkinData
+                {
+                    skinID = i,
+                    skinState = false,
+                    skinType = EHoleSkinType.Common
+                });
+            }
+
+            var skinDataList = new HoleSkinDataList { data = skinIDList.ToArray() };
+            return skinDataList;
+        }
+
+        private static string SkinData
+        {
+            get => PlayerPrefs.GetString(SceneData.holeSkin, JsonUtility.ToJson(GetDefaultSkinDataList()));
+            set { PlayerPrefs.SetString(SceneData.holeSkin, value); }
+        }
+
+        [Serializable]
+        public struct HoleSkinData
+        {
+            [SerializeField] public int skinID;
+            [SerializeField] public bool skinState;
+            [SerializeField] public EHoleSkinType skinType;
+        }
+
+        [Serializable]
+        public struct HoleSkinDataList
+        {
+            [SerializeField] public HoleSkinData[] data;
+        }
+
+        [Serializable]
+        public enum EHoleSkinType
+        {
+            /// <summary>
+            ///    普通皮肤
+            /// </summary>
+            Common,
+
+            /// <summary>
+            ///    精英皮肤
+            /// </summary>
+            Rare,
+
+            /// <summary>
+            ///   卓越皮肤
+            /// </summary>
+            Epic,
+
+            /// <summary>
+            /// 稀有皮肤
+            /// </summary>
+            Legendary,
+        }
     }
 }

@@ -43,6 +43,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 376178fb286c4f24e84eaa0170ee409a, type: 2}
   - {fileID: 11400000, guid: 57005d423486bdb4c919db2bbdca30e2, type: 2}
+  - {fileID: 11400000, guid: 2dcb3670709a99b4086346434196a5fa, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -84,7 +85,9 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - ps
+    - skinParticles
+    - materials
+    - textures
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 2d46948140e1bac409a0501522cf8cbf, type: 2}
