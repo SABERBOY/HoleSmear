@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 612202175340154997}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   - {fileID: 517173145680424427}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &612202177353816830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,6 +42,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpherePortalFloating
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104407334769276682, guid: 7c5e7912025033e42b3b493ab9085bed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1104407334769276693, guid: 7c5e7912025033e42b3b493ab9085bed,
         type: 3}
@@ -106,6 +111,16 @@ PrefabInstance:
     - target: {fileID: 2226492365651607824, guid: 7c5e7912025033e42b3b493ab9085bed,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226492365651607826, guid: 7c5e7912025033e42b3b493ab9085bed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528271707955560973, guid: 7c5e7912025033e42b3b493ab9085bed,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

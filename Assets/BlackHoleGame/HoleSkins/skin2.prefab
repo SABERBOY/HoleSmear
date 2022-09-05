@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9089457634469898485}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 1646568479447101903}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &9089457632537772020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,6 +63,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VertexStreams.Array.data[2]
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004444912710228474, guid: 951b8c58e712f104ca70b7e3f238d52e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3004444913085057203, guid: 951b8c58e712f104ca70b7e3f238d52e,
         type: 3}
@@ -124,6 +129,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldPortalOpen
       objectReference: {fileID: 0}
+    - target: {fileID: 3004444913085057212, guid: 951b8c58e712f104ca70b7e3f238d52e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3004444913085057213, guid: 951b8c58e712f104ca70b7e3f238d52e,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -167,6 +177,11 @@ PrefabInstance:
     - target: {fileID: 3240939946940502372, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240939946940502374, guid: 402bac92ff075924ea20e71eaa5efeec,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7565472061148163851, guid: 402bac92ff075924ea20e71eaa5efeec,
@@ -228,6 +243,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GoldPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565472061148163854, guid: 402bac92ff075924ea20e71eaa5efeec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565472061720194069, guid: 402bac92ff075924ea20e71eaa5efeec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7565472061720194071, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}

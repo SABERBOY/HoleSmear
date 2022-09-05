@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4108425624038492274}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 9097470725818794352}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &4108425622141736148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44,6 +44,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RectNoisePortal3Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715730241043262705, guid: 5cc620476d918b041ade01274c5bcf75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4715730241043262718, guid: 5cc620476d918b041ade01274c5bcf75,
         type: 3}
@@ -105,6 +110,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4715730241397194167, guid: 5cc620476d918b041ade01274c5bcf75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cc620476d918b041ade01274c5bcf75, type: 3}
 --- !u!4 &8680034060798294058 stripped
@@ -123,6 +133,16 @@ PrefabInstance:
     - target: {fileID: 1291873190635295005, guid: 4cea31c6a4483d343ace1b5550653953,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291873190635295006, guid: 4cea31c6a4483d343ace1b5550653953,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319526330798068229, guid: 4cea31c6a4483d343ace1b5550653953,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1680790783658918760, guid: 4cea31c6a4483d343ace1b5550653953,
@@ -184,6 +204,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RectVortexEvilPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680790783658918763, guid: 4cea31c6a4483d343ace1b5550653953,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7106205805883724508, guid: 4cea31c6a4483d343ace1b5550653953,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7106205805883724510, guid: 4cea31c6a4483d343ace1b5550653953,
         type: 3}
@@ -270,9 +300,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: RectEvilPortalRectOpen
       objectReference: {fileID: 0}
+    - target: {fileID: 5135434236806329053, guid: c1df4f25f296a974db08ce54277c01fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5135434237587022745, guid: c1df4f25f296a974db08ce54277c01fa,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135434237587022747, guid: c1df4f25f296a974db08ce54277c01fa,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

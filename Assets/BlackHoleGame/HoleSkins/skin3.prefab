@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1739946343834917354}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 8465894836312508146}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &1739946343537416523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43,6 +43,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoisePortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879436246096879526, guid: 22331ed815dca31409fedc4c85dbc31b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7879436246096879527, guid: 22331ed815dca31409fedc4c85dbc31b,
         type: 3}
@@ -223,6 +228,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoisePortalOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681742474034516363, guid: cc630b0a4cec8514e978a361729b1ffd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681742474815144141, guid: cc630b0a4cec8514e978a361729b1ffd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8681742474815144143, guid: cc630b0a4cec8514e978a361729b1ffd,
         type: 3}

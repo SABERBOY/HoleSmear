@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7837610228581167766}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 4608644489593171407}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &7837610228591131036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +99,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShimmerPortalOpen
       objectReference: {fileID: 0}
+    - target: {fileID: 5994846653107360860, guid: a2cfbea1a19be434385abd062509b818,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5994846653107360861, guid: a2cfbea1a19be434385abd062509b818,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -107,6 +112,11 @@ PrefabInstance:
     - target: {fileID: 5994846653480158488, guid: a2cfbea1a19be434385abd062509b818,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994846653480158490, guid: a2cfbea1a19be434385abd062509b818,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -129,9 +139,24 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3322737553294898712, guid: bdc0cf8acda0eaf4ba069c99328d407d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686365001160680858, guid: bdc0cf8acda0eaf4ba069c99328d407d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4686365001823387773, guid: bdc0cf8acda0eaf4ba069c99328d407d,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686365001823387775, guid: bdc0cf8acda0eaf4ba069c99328d407d,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4686365002617945306, guid: bdc0cf8acda0eaf4ba069c99328d407d,
@@ -193,6 +218,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShimmerPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686365002617945311, guid: bdc0cf8acda0eaf4ba069c99328d407d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027145473826275760, guid: bdc0cf8acda0eaf4ba069c99328d407d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6027145473826275762, guid: bdc0cf8acda0eaf4ba069c99328d407d,
         type: 3}

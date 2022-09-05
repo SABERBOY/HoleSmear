@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Packed Assets
+  m_Name: UIPanel
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: UIPanel
   m_Data:
     m_SerializedData: []
   m_GUID: f83f22bbc1cfdf540b0ad17f5d804b71
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 074a2fd158b49ca4a9524532ba493f2b
+    m_Address: HoleSkinSelectPanel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ui
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d413d1e44da131e488afec4dd4d7c158, type: 2}
   m_SchemaSet:

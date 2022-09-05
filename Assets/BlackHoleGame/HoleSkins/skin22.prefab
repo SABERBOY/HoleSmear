@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1535104408327100758}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   - {fileID: 1379915338314042162}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &1535104407983047467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,14 +98,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: StrangePortalFloating
       objectReference: {fileID: 0}
+    - target: {fileID: 462666672011282458, guid: 45eefc4030d33984c9ed95d58bda8183,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462666673134508684, guid: 45eefc4030d33984c9ed95d58bda8183,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 462666673200251525, guid: 45eefc4030d33984c9ed95d58bda8183,
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 462666673200251526, guid: 45eefc4030d33984c9ed95d58bda8183,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 462666673606976236, guid: 45eefc4030d33984c9ed95d58bda8183,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462666673606976238, guid: 45eefc4030d33984c9ed95d58bda8183,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1584287213430570617}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 7708128992289879274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &1584287213161543002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,6 +39,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1584287213430570617}
     m_Modifications:
+    - target: {fileID: 9152513636340895993, guid: b5a2f6d8dfd402548b56a023a89f92fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9152513636340895995, guid: b5a2f6d8dfd402548b56a023a89f92fa,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -108,6 +113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RainbowPortalOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152513637263081919, guid: b5a2f6d8dfd402548b56a023a89f92fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5a2f6d8dfd402548b56a023a89f92fa, type: 3}
@@ -184,9 +194,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: RainbowPortal
       objectReference: {fileID: 0}
+    - target: {fileID: 1513352717489462226, guid: 08780032074660440b534f8d461fff23,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8666470614647571097, guid: 08780032074660440b534f8d461fff23,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666470614647571099, guid: 08780032074660440b534f8d461fff23,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

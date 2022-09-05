@@ -16,9 +16,12 @@ namespace BlackHoleGame.Script
         private Vector3 startPos2;
         private Vector3 startPos3;
 
+        private Transform skinParent;
+
         private void Awake()
         {
             instance = this;
+            skinParent = this.transform.GetChild(0);
             // plane = GameObject.Find("Plane").transform;
             // enabled = false;
         }
@@ -33,15 +36,34 @@ namespace BlackHoleGame.Script
         {
             StartCoroutine(PreLoadSkin<GameObject>(new[] { "skinParticles" }, (oList) =>
             {
-                HoleSkinLoadManager.AddSkin(oList);
-                 SceneData.SetSkinList();
-                 if (GetSkin(0, out var skin))
-                 {
-                     var picSkin = Instantiate(skin, this.transform.GetChild(0), false);
-                     picSkin.transform.localPosition = Vector3.zero;
-                     picSkin.transform.localRotation = Quaternion.Euler(-180, 0, 0);
-                 }
+                AddSkin(oList);
+                SceneData.SetSkinList();
+                // if (GetSkin(0, out var skin))
+                // {
+                //     var picSkin = Instantiate(skin, this.transform.GetChild(0), false);
+                //     picSkin.transform.localPosition = Vector3.zero;
+                //     picSkin.transform.localRotation = Quaternion.Euler(-180, 0, 0);
+                // }
             }));
+        }
+
+        public void RemoveSkin()
+        {
+            for (var i = 0; i < skinParent.childCount; i++)
+            {
+                Destroy(skinParent.GetChild(i).gameObject);
+            }
+        }
+
+        public void SetSkin(int index)
+        {
+            if (GetSkin(index, out var skin))
+            {
+                var picSkin = Instantiate(skin, skinParent, false);
+                picSkin.transform.localPosition = Vector3.zero;
+                picSkin.transform.localScale = Vector3.one * 2;
+                picSkin.transform.localRotation = Quaternion.Euler(-180, 0, 0);
+            }
         }
 
         /// <summary>

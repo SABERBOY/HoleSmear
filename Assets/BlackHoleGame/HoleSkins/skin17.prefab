@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 587942292037373492}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 5285371968612579983}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &587942291730519665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,6 +63,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RectNoisePortal3Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715730241043262705, guid: 5cc620476d918b041ade01274c5bcf75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4715730241043262718, guid: 5cc620476d918b041ade01274c5bcf75,
         type: 3}
@@ -143,6 +148,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VertexStreams.Array.data[2]
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715730241397194167, guid: 5cc620476d918b041ade01274c5bcf75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cc620476d918b041ade01274c5bcf75, type: 3}
@@ -238,6 +248,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RectNoisePortal3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391570870065739123, guid: 1907e26b421c59242836d0c1385d767a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1907e26b421c59242836d0c1385d767a, type: 3}

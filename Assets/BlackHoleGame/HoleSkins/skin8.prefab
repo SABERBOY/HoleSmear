@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8877587961553439879}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 7171454888194901585}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &8877587961942877862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +99,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RipplePortal2Open
       objectReference: {fileID: 0}
+    - target: {fileID: 1780512909629792504, guid: d3b93f8befac9c24eb2fc8be347c423d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1780512909629792505, guid: d3b93f8befac9c24eb2fc8be347c423d,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -107,6 +112,11 @@ PrefabInstance:
     - target: {fileID: 1780512910536323516, guid: d3b93f8befac9c24eb2fc8be347c423d,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780512910536323518, guid: d3b93f8befac9c24eb2fc8be347c423d,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -189,14 +199,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: RipplePortal2
       objectReference: {fileID: 0}
+    - target: {fileID: 9175715160139354289, guid: 89cbf6691478dec4383112f4e5b125a8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9175715160449117005, guid: 89cbf6691478dec4383112f4e5b125a8,
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9175715160449117007, guid: 89cbf6691478dec4383112f4e5b125a8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9175715160952796689, guid: 89cbf6691478dec4383112f4e5b125a8,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175715160952796691, guid: 89cbf6691478dec4383112f4e5b125a8,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7367144761486704982}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   - {fileID: 6972557113028569699}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &7367144761042357356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,6 +42,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SparkPortalFloating
+      objectReference: {fileID: 0}
+    - target: {fileID: 503880753088538122, guid: 446c8574de391b340aabafdacb9bc751,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 503880753088538127, guid: 446c8574de391b340aabafdacb9bc751,
         type: 3}
@@ -103,10 +108,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 503880753367702186, guid: 446c8574de391b340aabafdacb9bc751,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 503880754852511566, guid: 446c8574de391b340aabafdacb9bc751,
         type: 3}
       propertyPath: TrailModule.lifetime.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 503880754852511567, guid: 446c8574de391b340aabafdacb9bc751,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 446c8574de391b340aabafdacb9bc751, type: 3}

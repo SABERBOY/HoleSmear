@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888544471128975470}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 2717829522882132132}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &1888544470268685559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,6 +39,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1888544471128975470}
     m_Modifications:
+    - target: {fileID: 2949211521703959641, guid: 9ff2cf20feec49045908bb35749a2566,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2949211521703959643, guid: 9ff2cf20feec49045908bb35749a2566,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -109,6 +114,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RipplePortalOpen
       objectReference: {fileID: 0}
+    - target: {fileID: 2949211521867042079, guid: 9ff2cf20feec49045908bb35749a2566,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ff2cf20feec49045908bb35749a2566, type: 3}
 --- !u!4 &3663890985739051495 stripped
@@ -129,9 +139,19 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4576465076900954139, guid: 782ac8884ad5f8140835ea83e0a85eb4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4576465077407063365, guid: 782ac8884ad5f8140835ea83e0a85eb4,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576465077407063367, guid: 782ac8884ad5f8140835ea83e0a85eb4,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4576465078235014820, guid: 782ac8884ad5f8140835ea83e0a85eb4,
@@ -199,9 +219,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: RipplePortal
       objectReference: {fileID: 0}
+    - target: {fileID: 4576465078235014841, guid: 782ac8884ad5f8140835ea83e0a85eb4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576465078304584197, guid: 782ac8884ad5f8140835ea83e0a85eb4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4576465078740234524, guid: 782ac8884ad5f8140835ea83e0a85eb4,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576465078740234526, guid: 782ac8884ad5f8140835ea83e0a85eb4,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

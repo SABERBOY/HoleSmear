@@ -270,6 +270,11 @@ namespace BlackHoleGame.Script
 #endif
         }
 
+        public void ShowVideo(Action success, Action fail)
+        {
+            SdkSystem.Instance.ShowRewardVideoAd((() => success?.Invoke()), (() => fail?.Invoke()));
+        }
+
         #endregion
 
         public void postEvent(string category, string action, string label)

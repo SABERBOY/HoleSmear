@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5912360951564745125}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   - {fileID: 3059710630798342822}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &5912360950063245894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,6 +38,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5912360951564745125}
     m_Modifications:
+    - target: {fileID: 6761294392825283177, guid: e73060e9dc9c043469f436f5307c9173,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6761294392825283178, guid: e73060e9dc9c043469f436f5307c9173,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -123,6 +128,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightningPortalFloating
       objectReference: {fileID: 0}
+    - target: {fileID: 8681438621474066659, guid: e73060e9dc9c043469f436f5307c9173,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8681438622466431612, guid: e73060e9dc9c043469f436f5307c9173,
         type: 3}
       propertyPath: m_UseCustomVertexStreams
@@ -142,6 +152,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VertexStreams.Array.data[2]
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681438622466431615, guid: e73060e9dc9c043469f436f5307c9173,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681438622532797045, guid: e73060e9dc9c043469f436f5307c9173,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e73060e9dc9c043469f436f5307c9173, type: 3}

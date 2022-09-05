@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3934737358759723728}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 6030561917542940843}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &3934737357918826951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,6 +39,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3934737358759723728}
     m_Modifications:
+    - target: {fileID: 7289677272102477861, guid: 36c440f7ad845e94dbe0e08dc93293f1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7289677272102477863, guid: 36c440f7ad845e94dbe0e08dc93293f1,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -53,6 +58,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoisePortal2Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289677272927220067, guid: 36c440f7ad845e94dbe0e08dc93293f1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7289677272927220076, guid: 36c440f7ad845e94dbe0e08dc93293f1,
         type: 3}
@@ -129,6 +139,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2646589210117799675, guid: be31f1efc9b84404f84a40266f2e86d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6133579937301875115, guid: be31f1efc9b84404f84a40266f2e86d7,
         type: 3}
       propertyPath: m_RootOrder
@@ -189,9 +204,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoisePortal2
       objectReference: {fileID: 0}
+    - target: {fileID: 6133579937301875124, guid: be31f1efc9b84404f84a40266f2e86d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6133579937301875125, guid: be31f1efc9b84404f84a40266f2e86d7,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252758393765060880, guid: be31f1efc9b84404f84a40266f2e86d7,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6252758393765060882, guid: be31f1efc9b84404f84a40266f2e86d7,

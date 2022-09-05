@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5343716514516904341}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: skin11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   - {fileID: 7347972563521985782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -270, y: 0, z: -90.00001}
 --- !u!1001 &5343716514327594961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43,6 +43,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPortalOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034580302757348419, guid: 25d09535687176b44b57b80a02b6360b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9034580302757348428, guid: 25d09535687176b44b57b80a02b6360b,
         type: 3}
@@ -98,6 +103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9034580303660668165, guid: 25d09535687176b44b57b80a02b6360b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9034580303660668167, guid: 25d09535687176b44b57b80a02b6360b,
         type: 3}
@@ -179,9 +189,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPortal
       objectReference: {fileID: 0}
+    - target: {fileID: 3445693270746096808, guid: 71542b238ff41c548a1c81013f57cd17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3445693271715155497, guid: 71542b238ff41c548a1c81013f57cd17,
         type: 3}
       propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445693271715155499, guid: 71542b238ff41c548a1c81013f57cd17,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445693271808872998, guid: 71542b238ff41c548a1c81013f57cd17,
+        type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
