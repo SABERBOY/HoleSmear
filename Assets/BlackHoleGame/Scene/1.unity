@@ -5108,6 +5108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 701615279}
   - component: {fileID: 701615278}
+  - component: {fileID: 701615280}
   m_Layer: 0
   m_Name: PS
   m_TagString: Untagged
@@ -5141,6 +5142,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701615280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701615277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3cb8b3f2a3b45e5909624558d7fa087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutomaticallyUnparentOnAwake: 1
+  HoleSkinSelectPanel:
+    m_AssetGUID: 074a2fd158b49ca4a9524532ba493f2b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
 --- !u!1 &713302756
 GameObject:
   m_ObjectHideFlags: 0
@@ -10422,7 +10441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1391960247
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12519,7 +12538,7 @@ Camera:
   m_GameObject: {fileID: 1697550943}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.27687788, g: 0.29394108, b: 0.3207547, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

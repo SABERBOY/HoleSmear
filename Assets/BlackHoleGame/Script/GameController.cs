@@ -226,7 +226,7 @@ namespace BlackHoleGame.Script
                         anim.SetAndSkinButtonCome();
                         Hole.instance.enabled = false;
                         Hole.instance.RemoveSkin();
-                        HoleSkinSelectModel.Show();
+                        StartCoroutine(HoleSkinSelectModel.Show());
                     }
 
                     UI.startPanel.SetActive(true);

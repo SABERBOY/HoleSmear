@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -91,24 +93,66 @@ namespace BlackHoleGame.Script
     public class HoleSkinSelectModel
     {
         private static Dictionary<string, GameObject> _skinDict = new Dictionary<string, GameObject>();
-        private static readonly string path = "HoleSkinSelectPanel";
 
-        public static void Show()
+        // private static readonly string path = "HoleSkinSelectPanel";
+        /*public string address;
+        AsyncOperationHandle<GameObject> opHandle;
+
+        public IEnumerator Start()
         {
+            opHandle = Addressables.LoadAssetAsync<GameObject>(address);
+
+            // yielding when already done still waits until the next frame
+            // so don't yield if done.
+            if (!opHandle.IsDone)
+                yield return opHandle;
+
+            if (opHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                Instantiate(opHandle.Result, transform);
+            }
+            else
+            {
+                Addressables.Release(opHandle);
+            }
+        }
+
+        void OnDestroy()
+        {
+            Addressables.Release(opHandle);
+        }*/
+
+        public static IEnumerator Show()
+        {
+            var path = AssetReferenceManager.Instance.HoleSkinSelectPanel.AssetGUID;
             if (_skinDict.ContainsKey(path))
             {
                 _skinDict[path].GetComponent<HoleSkinSelectPanel>().Show();
                 _skinDict[path].SetActive(true);
-                return;
+                yield break;
             }
 
-            var panelPrefab = Addressables
-                .LoadAssetAsync<GameObject>(path).WaitForCompletion();
-            var panelGameObject = GameObject.Instantiate(panelPrefab, UIController.instance.transform, false);
-            _skinDict.Add(path, panelGameObject);
-            panelGameObject.transform.SetAsLastSibling();
-            panelGameObject.GetComponent<HoleSkinSelectPanel>().Show();
-            panelGameObject.SetActive(true);
+            var panelPrefabHandle =
+                Addressables.LoadAssetAsync<GameObject>(AssetReferenceManager.Instance.HoleSkinSelectPanel);
+
+            if (!panelPrefabHandle.IsDone)
+                yield return panelPrefabHandle;
+
+            if (panelPrefabHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                var panelGameObject =
+                    GameObject.Instantiate(panelPrefabHandle.Result, UIController.instance.transform, false);
+                _skinDict.Add(path, panelGameObject);
+                panelGameObject.transform.SetAsLastSibling();
+                panelGameObject.GetComponent<HoleSkinSelectPanel>().Show();
+                panelGameObject.SetActive(true);
+            }
+            else
+            {
+                Addressables.Release(panelPrefabHandle);
+            }
+
+
             // Addressables.Release(panelGameObject);
         }
     }
