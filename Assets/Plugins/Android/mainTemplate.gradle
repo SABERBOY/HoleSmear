@@ -8,14 +8,14 @@
             url "https://maven.google.com"
         }
         maven {
-            url "https://artifact.bytedance.com/repository/pangle" // Assets/AnyThinkAds/Plugins/Android/NonChina/mediation/pangle/Editor/Dependencies.xml:5
+            url "https://artifact.bytedance.com/repository/pangle" // Assets/AnyThinkAds/Plugins/android/NonChina/mediation/pangle/Editor/Dependencies.xml:5
         }
         maven {
-            url "https://s01.oss.sonatype.org/content/groups/staging/" // Assets/AnyThinkAds/Plugins/Android/NonChina/mediation/vungle/Editor/Dependencies.xml:5
+            url "https://s01.oss.sonatype.org/content/groups/staging/" // Assets/AnyThinkAds/Plugins/android/NonChina/mediation/vungle/Editor/Dependencies.xml:5
         }
-//         maven {
-//             url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22
-//         }
+        maven {
+            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22
+        }
         mavenLocal()
         mavenCentral()
     }
@@ -72,7 +72,8 @@ android {
 }
 // Android Resolver Exclusions End
 android {
-    compileSdkVersion **APIVERSION**
+    compileSdkVersion 31
+    // **APIVERSION**
     buildToolsVersion '**BUILDTOOLS**'
 
     compileOptions {
@@ -82,7 +83,8 @@ android {
 
     defaultConfig {
         minSdkVersion **MINSDKVERSION**
-        targetSdkVersion **TARGETSDKVERSION**
+        targetSdkVersion 31
+        // **TARGETSDKVERSION**
         ndk {
             abiFilters **ABIFILTERS**
         }
@@ -103,3 +105,18 @@ android {
 **IL_CPP_BUILD_SETUP**
 **SOURCE_BUILD_SETUP**
 **EXTERNAL_SOURCES**
+configurations.all {
+    // def work_version = "2.6.0"
+    // def ktx_version = "1.6.0"
+    resolutionStrategy {
+        force 'androidx.core:core-ktx:1.6.0'
+        force 'androidx.work:work-runtime-ktx:2.6.0'
+    }
+    // Force WorkManager 2.6.0 for transitive dependency
+    // implementation("androidx.work:work-runtime-ktx:$work_version") {
+    //     force = true
+    // }
+    // implementation("androidx.core:core-ktx:$ktx_version") {
+    //     force = true
+    // }
+}

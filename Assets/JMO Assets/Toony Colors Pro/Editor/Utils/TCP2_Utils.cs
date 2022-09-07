@@ -243,7 +243,7 @@ public static class TCP2_Utils
 #if UNITY_EDITOR_WIN
             readmePath = readmePath.Replace(ToSystemSlashPath(Application.dataPath), "").Replace(@"\", "/");
 #else
-			readmePath = readmePath.Replace(UnityToSystemPath(Application.dataPath), "");
+			// readmePath = readmePath.Replace(UnityToSystemPath(Application.dataPath), "");
 #endif
         }
 
