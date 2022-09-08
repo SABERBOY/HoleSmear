@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 132364493}
   - component: {fileID: 132364495}
-  - component: {fileID: 132364494}
   m_Layer: 5
   m_Name: SkinRawImage
   m_TagString: Untagged
@@ -34,9 +33,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 584}
+  m_AnchoredPosition: {x: 0, y: 256}
   m_SizeDelta: {x: 512, y: 512}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &132364495
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -45,32 +44,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132364492}
   m_CullTransparentMesh: 0
---- !u!114 &132364494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132364492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 9a55d814e2769044fb941c61d8127d69, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 8400000, guid: f7f012f59227199438fd0ed5a7063d0d, type: 2}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1 &589270124
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11400856, g: 0.13207549, b: 0.12879059, a: 0.5176471}
+  m_Color: {r: 0.11400856, g: 0.13207549, b: 0.12879059, a: 0.8}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -961,7 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743c07f36f0d401fbda4f1668ddc97de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinRawImage: {fileID: 132364494}
+  skinRawImageTransform: {fileID: 132364493}
   selectButton: {fileID: 780096124}
   leftButton: {fileID: 5590495509904485273}
   rightButton: {fileID: 3862125371099943444}

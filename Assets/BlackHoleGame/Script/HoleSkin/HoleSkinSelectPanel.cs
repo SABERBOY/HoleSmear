@@ -12,8 +12,8 @@ namespace BlackHoleGame.Script
 {
     public class HoleSkinSelectPanel : MonoBehaviour
     {
-        [FormerlySerializedAs("_skinRawImage")] [SerializeField]
-        private RawImage skinRawImage;
+        [FormerlySerializedAs("_skinRawImageTransform")] [SerializeField]
+        private Transform skinRawImageTransform;
 
         [FormerlySerializedAs("_selectButton")] [SerializeField]
         private Button selectButton;

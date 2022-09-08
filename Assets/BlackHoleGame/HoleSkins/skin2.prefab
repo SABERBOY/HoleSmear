@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9089457634469898485}
-  m_Layer: 1
+  m_Layer: 5
   m_Name: skin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 3004444912710228474, guid: 951b8c58e712f104ca70b7e3f238d52e,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3004444913085057203, guid: 951b8c58e712f104ca70b7e3f238d52e,
         type: 3}
@@ -132,7 +132,7 @@ PrefabInstance:
     - target: {fileID: 3004444913085057212, guid: 951b8c58e712f104ca70b7e3f238d52e,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3004444913085057213, guid: 951b8c58e712f104ca70b7e3f238d52e,
         type: 3}
@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: 3240939946940502374, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7565472061148163851, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}
@@ -247,12 +247,12 @@ PrefabInstance:
     - target: {fileID: 7565472061148163854, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7565472061720194069, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7565472061720194071, guid: 402bac92ff075924ea20e71eaa5efeec,
         type: 3}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 587942292037373492}
-  m_Layer: 1
+  m_Layer: 5
   m_Name: skin17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 4715730241043262705, guid: 5cc620476d918b041ade01274c5bcf75,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4715730241043262718, guid: 5cc620476d918b041ade01274c5bcf75,
         type: 3}
@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 4715730241397194167, guid: 5cc620476d918b041ade01274c5bcf75,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cc620476d918b041ade01274c5bcf75, type: 3}
@@ -252,7 +252,7 @@ PrefabInstance:
     - target: {fileID: 6391570870065739123, guid: 1907e26b421c59242836d0c1385d767a,
         type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1907e26b421c59242836d0c1385d767a, type: 3}
