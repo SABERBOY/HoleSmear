@@ -43,7 +43,8 @@ namespace SDK
         //插屏广告ca-app-pub-2898660159223218/9067425051
         public void Init()
         {
-#if TRANSITION
+            // Debug.Log("ADMob init!!");
+#if TRANSSIONAD
             transsionSDK = new TranssionSDK();
 #endif
             return;
@@ -236,11 +237,13 @@ namespace SDK
 
         public void ShowFloatingWindow(bool show, int hight)
         {
+            // Debug.Log("ShowFloatingWindow:" + show);
 #if TRANSSIONAD
-            if (!RemoteConfig.Instance.IsMagic)
+            // if (!RemoteConfig.Instance.IsMagic)
             {
                 if (this.transsionSDK is TranssionSDK sdk)
                 {
+                    // Debug.Log("ShowFloatingWindow:" + show);
                     sdk.ShowFloatingWindow(show, 0, 0, hight);
                 }
             }

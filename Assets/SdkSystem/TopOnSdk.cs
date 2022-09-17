@@ -75,7 +75,7 @@ namespace SDK
 
         public void initSuccess()
         {
-            Debug.Log("initSuccess");
+            // Debug.Log("initSuccess");
             mBannerScenes = new BannerScenes();
             mInterstitialScenes = new InterstitialScenes();
             mVideoScenes = new VideoScenes();
@@ -92,7 +92,7 @@ namespace SDK
         {
             public void didGetUserLocation(int location)
             {
-                Debug.Log("Developer callback didGetUserLocation(): " + location);
+                // Debug.Log("Developer callback didGetUserLocation(): " + location);
                 if (location == ATSDKAPI.kATUserLocationInEU && ATSDKAPI.getGDPRLevel() == ATSDKAPI.UNKNOWN)
                 {
                     ATSDKAPI.showGDPRAuth();
@@ -102,7 +102,7 @@ namespace SDK
 
         public void initFail(string message)
         {
-            Debug.Log($"initFail:{message}");
+            // Debug.Log($"initFail:{message}");
         }
     }
 
@@ -130,12 +130,12 @@ namespace SDK
 
         public void gotoMainScene()
         {
-            Debug.Log("NativeBannerScene::gotoMainScene");
+            // Debug.Log("NativeBannerScene::gotoMainScene");
         }
 
         public void loadAd()
         {
-            Debug.Log("NativeBannerScene::loadAd");
+            // Debug.Log("NativeBannerScene::loadAd");
 #if !UNITY_WEBGL
             ATNativeBannerAd.Instance.loadAd(mPlacementId_native_all, null);
 #endif
@@ -144,8 +144,8 @@ namespace SDK
         public void showAd()
         {
 #if !UNITY_WEBGL
-            Debug.Log("NativeBannerScene::showAd");
-            Debug.Log("Screen Width : " + Screen.width + ", Screen dpi: " + Screen.dpi);
+            // Debug.Log("NativeBannerScene::showAd");
+            // Debug.Log("Screen Width : " + Screen.width + ", Screen dpi: " + Screen.dpi);
             var arpuRect = new ATRect(0, 100, 414, 200);
             ATNativeBannerAd.Instance.showAd(mPlacementId_native_all, arpuRect,
                 new Dictionary<string, string>
@@ -159,7 +159,7 @@ namespace SDK
         public void removeAd()
         {
 #if !UNITY_WEBGL
-            Debug.Log("NativeBannerScene::removeAd");
+            // Debug.Log("NativeBannerScene::removeAd");
             ATNativeBannerAd.Instance.removeAd(mPlacementId_native_all);
 #endif
         }
@@ -167,48 +167,48 @@ namespace SDK
         public void adReady()
         {
 #if !UNITY_WEBGL
-            Debug.Log("ATNativeBannerAdListener Developer NativeBannerScene::adReady:" +
-                      (ATNativeBannerAd.Instance.adReady(mPlacementId_native_all) ? "yes" : "no"));
+            // Debug.Log("ATNativeBannerAdListener Developer NativeBannerScene::adReady:" +
+            //           (ATNativeBannerAd.Instance.adReady(mPlacementId_native_all) ? "yes" : "no"));
 #endif
         }
 
         public void onAdLoaded(string placementId)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdLoaded------:" + placementId);
+            // Debug.Log("ATNativeBannerAdListener Developer onAdLoaded------:" + placementId);
         }
 
         public void onAdLoadFail(string placementId, string code, string message)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdLoadFail------:" + placementId + ", " + code + ", " +
-                      message);
+            // Debug.Log("ATNativeBannerAdListener Developer onAdLoadFail------:" + placementId + ", " + code + ", " +
+            // message);
         }
 
         public void onAdImpressed(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdImpressed------:" + placementId + "->" +
-                      JsonUtility.ToJson(callbackInfo.toDictionary()));
+            // Debug.Log("ATNativeBannerAdListener Developer onAdImpressed------:" + placementId + "->" +
+            // JsonUtility.ToJson(callbackInfo.toDictionary()));
         }
 
         public void onAdClicked(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdClicked------:" + placementId + "->" +
-                      JsonUtility.ToJson(callbackInfo.toDictionary()));
+            // Debug.Log("ATNativeBannerAdListener Developer onAdClicked------:" + placementId + "->" +
+            // JsonUtility.ToJson(callbackInfo.toDictionary()));
         }
 
         public void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdAutoRefresh------:" + placementId + "->" +
-                      JsonUtility.ToJson(callbackInfo.toDictionary()));
+            // Debug.Log("ATNativeBannerAdListener Developer onAdAutoRefresh------:" + placementId + "->" +
+            // JsonUtility.ToJson(callbackInfo.toDictionary()));
         }
 
         public void onAdAutoRefreshFailure(string placementId, string code, string message)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdAutoRefreshFailure------:" + placementId);
+            // Debug.Log("ATNativeBannerAdListener Developer onAdAutoRefreshFailure------:" + placementId);
         }
 
         public void onAdCloseButtonClicked(string placementId)
         {
-            Debug.Log("ATNativeBannerAdListener Developer onAdCloseButtonClicked------:" + placementId);
+            // Debug.Log("ATNativeBannerAdListener Developer onAdCloseButtonClicked------:" + placementId);
         }
     }
 
@@ -244,14 +244,14 @@ namespace SDK
 
         public void gotoMainScenes()
         {
-            Debug.Log("Developer gotoMainScenes");
+            // Debug.Log("Developer gotoMainScenes");
             // AnyThinkAds.Demo.ATManager.printLogI ("gotoMainScenes....");
             // SceneManager.LoadScene ("demoMainScenes");
         }
 
         public void gotoNativeScenes()
         {
-            Debug.Log(" Developer gotoNativeScenes");
+            // Debug.Log(" Developer gotoNativeScenes");
             // AnyThinkAds.Demo.ATManager.printLogI ("gotoNativeScenes....");
             // SceneManager.LoadScene ("nativeMainScenes");
         }
@@ -362,8 +362,8 @@ namespace SDK
             public void onRewardedVideoAdPlayFail(string placementId, string code, string message)
             {
                 failCallback?.Invoke();
-                Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayFail------code:" + code + "---message:" +
-                          message);
+                // Debug.Log("ATCallbackListener Developer onRewardedVideoAdPlayFail------code:" + code + "---message:" +
+                // message);
             }
 
             public void onRewardedVideoAdPlayClosed(string placementId, bool isReward, ATCallbackInfo callbackInfo)
@@ -381,8 +381,8 @@ namespace SDK
             public void onReward(string placementId, ATCallbackInfo callbackInfo)
             {
                 successCallback?.Invoke();
-                Debug.Log("ATCallbackListener Developer onReward------" + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                // Debug.Log("ATCallbackListener Developer onReward------" + "->" +
+                // JsonUtility.ToJson(callbackInfo.toDictionary()));
             }
 
             public void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
@@ -399,8 +399,8 @@ namespace SDK
 
             public void failToLoadADSource(string placementId, ATCallbackInfo callbackInfo, string code, string message)
             {
-                Debug.Log("ATCallbackListener Developer failToLoadADSource------code:" + code + "---message:" +
-                          message);
+                // Debug.Log("ATCallbackListener Developer failToLoadADSource------code:" + code + "---message:" +
+                // message);
             }
 
             public void startBiddingADSource(string placementId, ATCallbackInfo callbackInfo)
@@ -562,8 +562,8 @@ namespace SDK
             public void onInterstitialAdClose(string placementId, ATCallbackInfo callbackInfo)
             {
                 successCallback?.Invoke();
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdClose :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                // Debug.Log("InterstitalCallback Developer callback onInterstitialAdClose :" + placementId + "->" +
+                // JsonUtility.ToJson(callbackInfo.toDictionary()));
             }
 
             public void onInterstitialAdEndPlayingVideo(string placementId, ATCallbackInfo callbackInfo)
@@ -647,7 +647,7 @@ namespace SDK
             public void onInterstitialAdFailedToShow(string placementId)
             {
                 failCallback?.Invoke();
-                Debug.Log("InterstitalCallback Developer callback onInterstitialAdFailedToShow :" + placementId);
+                // Debug.Log("InterstitalCallback Developer callback onInterstitialAdFailedToShow :" + placementId);
             }
 
             public void onAdLoad(object sender, ATAdEventArgs e)
@@ -725,7 +725,7 @@ namespace SDK
 
         public void gotoMainScenes()
         {
-            Debug.Log("Developer gotoMainScenes");
+            // Debug.Log("Developer gotoMainScenes");
             // AnyThinkAds.Demo.ATManager.printLogI ("Developer gotoMainScenes....");
             // SceneManager.LoadScene ("demoMainScenes");
         }
@@ -813,26 +813,26 @@ namespace SDK
         {
             public void onAdAutoRefresh(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("BannerCallback Developer callback onAdAutoRefresh :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                // Debug.Log("BannerCallback Developer callback onAdAutoRefresh :" + placementId + "->" +
+                // JsonUtility.ToJson(callbackInfo.toDictionary()));
             }
 
             public void onAdAutoRefreshFail(string placementId, string code, string message)
             {
-                Debug.Log("BannerCallback Developer callback onAdAutoRefreshFail : " + placementId + "--code:" + code +
-                          "--msg:" +
-                          message);
+                // Debug.Log("BannerCallback Developer callback onAdAutoRefreshFail : " + placementId + "--code:" + code +
+                // "--msg:" +
+                // message);
             }
 
             public void onAdClick(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("BannerCallback Developer callback onAdClick :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                // Debug.Log("BannerCallback Developer callback onAdClick :" + placementId + "->" +
+                // JsonUtility.ToJson(callbackInfo.toDictionary()));
             }
 
             public void onAdClose(string placementId)
             {
-                Debug.Log("BannerCallback Developer callback onAdClose :" + placementId);
+                // Debug.Log("BannerCallback Developer callback onAdClose :" + placementId);
             }
 
             public void onAdCloseButtonTapped(string placementId, ATCallbackInfo callbackInfo)
@@ -843,21 +843,21 @@ namespace SDK
 
             public void startLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("BannerCallback Developer callback startLoadingADSource :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                // Debug.Log("BannerCallback Developer callback startLoadingADSource :" + placementId + "->" +
+                // JsonUtility.ToJson(callbackInfo.toDictionary()));
             }
 
             public void finishLoadingADSource(string placementId, ATCallbackInfo callbackInfo)
             {
-                Debug.Log("BannerCallback Developer callback finishLoadingADSource :" + placementId + "->" +
-                          JsonUtility.ToJson(callbackInfo.toDictionary()));
+                // Debug.Log("BannerCallback Developer callback finishLoadingADSource :" + placementId + "->" +
+                // JsonUtility.ToJson(callbackInfo.toDictionary()));
             }
 
             public void failToLoadADSource(string placementId, ATCallbackInfo callbackInfo, string code, string message)
             {
-                Debug.Log("BannerCallback Developer callback failToLoadADSource :" + placementId + "--code:" + code +
-                          "--msg:" +
-                          message);
+                // Debug.Log("BannerCallback Developer callback failToLoadADSource :" + placementId + "--code:" + code +
+                // "--msg:" +
+                // message);
             }
 
             public void startBiddingADSource(string placementId, ATCallbackInfo callbackInfo)
@@ -888,13 +888,13 @@ namespace SDK
 
             public void onAdLoad(string placementId)
             {
-                Debug.Log("BannerCallback Developer callback onAdLoad :" + placementId);
+                // Debug.Log("BannerCallback Developer callback onAdLoad :" + placementId);
             }
 
             public void onAdLoadFail(string placementId, string code, string message)
             {
-                Debug.Log("BannerCallback Developer callback onAdLoadFail : : " + placementId + "--code:" + code +
-                          "--msg:" + message);
+                // Debug.Log("BannerCallback Developer callback onAdLoadFail : : " + placementId + "--code:" + code +
+                // "--msg:" + message);
             }
         }
     }

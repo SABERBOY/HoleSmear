@@ -67,10 +67,10 @@ namespace BlackHoleGame.Script
 
         private void InitializeFirebase()
         {
-            Debug.Log("Enabling data collection.");
+            // Debug.Log("Enabling data collection.");
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
 
-            Debug.Log("Set user properties.");
+            // Debug.Log("Set user properties.");
             // Set the user's sign up method.
             FirebaseAnalytics.SetUserProperty(
                 FirebaseAnalytics.UserPropertySignUpMethod,

@@ -8,11 +8,21 @@
         <activity android:name="com.unity3d.player.UnityPlayerActivity"
                   android:exported="true"
                   android:theme="@style/UnityThemeSelector">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN"/>-->
+<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
+<!--            </intent-filter>-->
             <meta-data android:name="unityplayer.UnityActivity" android:value="true"/>
+        </activity>
+        <activity
+                android:name="com.unity3d.player.SplashAdShowActivity"
+                android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize|screenLayout"
+                android:exported="true"
+                android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <service
                 android:name=".MyFirebaseMessagingService"

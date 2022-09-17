@@ -14,7 +14,7 @@
             url "https://s01.oss.sonatype.org/content/groups/staging/" // Assets/AnyThinkAds/Plugins/Android/NonChina/mediation/vungle/Editor/Dependencies.xml:5
         }
         maven {
-            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22
+            url "file:///E:/Projects/TTY/HoleSmear/Assets/GeneratedLocalRepo/Firebase/m2repository" // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22
         }
         mavenLocal()
         mavenCentral()
@@ -52,10 +52,16 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.2'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.0.8'
     //implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
 //     implementation"com.transsion.game:analytics:3.3.2.0"
+
+    implementation "com.transsion.game:refer:4.3.0.1"
+    implementation "com.transsion.api:athena-ga:2.3.3.6"
+    implementation "com.transsion.game:analytics:4.3.0.1"
+    implementation 'com.transsion.game.unity:ad:3.3.3.1'
+    implementation "com.transsion.game:ad:4.3.0.1"
 
 **DEPS**}
 
@@ -72,7 +78,7 @@ android {
 }
 // Android Resolver Exclusions End
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     // **APIVERSION**
     buildToolsVersion '**BUILDTOOLS**'
 
@@ -83,7 +89,7 @@ android {
 
     defaultConfig {
         minSdkVersion **MINSDKVERSION**
-        targetSdkVersion 31
+        targetSdkVersion 32
         // **TARGETSDKVERSION**
         ndk {
             abiFilters **ABIFILTERS**
@@ -95,6 +101,7 @@ android {
 
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
 
     aaptOptions {

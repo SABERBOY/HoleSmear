@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Firebase;
 #endif
 using SDK;
+using UnityEngine;
 using UnityEngine.Analytics;
 
 namespace SDK
@@ -26,6 +27,8 @@ namespace SDK
         private static SdkSystem _instance = null;
         private ISDK _sdk;
 
+        private ISDK _admobSdk;
+
         private SdkSystem()
         {
         }
@@ -38,9 +41,13 @@ namespace SDK
 #if UNITY_EDITOR
             _sdk = new TopOnSdk();
             _sdk.Init();
+            _admobSdk = new ADMob();
+            _admobSdk.Init();
 #elif UNITY_ANDROID
             this._sdk = new TopOnSdk();
             this._sdk.Init();
+            _admobSdk = new ADMob();
+            _admobSdk.Init();
 #elif UNITY_IOS
             // this._sdk = new IOSSDK();
             // this._sdk.Init();
@@ -112,8 +119,9 @@ namespace SDK
 
         public void ShowFloatingWindow(bool show, int hight)
         {
+            // Debug.Log( "ShowFloatingWindow:" + show);
 #if !UNITY_WEBGL && UNITY_ANDROID
-            if (_sdk is ADMob sdk) sdk?.ShowFloatingWindow(show, hight);
+            if (_admobSdk is ADMob sdk) sdk?.ShowFloatingWindow(show, hight);
 #endif
         }
 

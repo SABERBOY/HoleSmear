@@ -368,7 +368,7 @@ namespace BlackHoleGame.Script
                             var i1 = i2;
                             SdkSystem.Instance.ShowRewardVideoAd(() =>
                                 {
-                                    Debug.Log("视频广告播放完成");
+                                    // Debug.Log("视频广告播放完成");
                                     // anim.ShowHints(anim.videoHintsText);
                                     this.testSkinIndex = i1;
                                     // tryButton.gameObject.SetActive(false);
@@ -377,7 +377,7 @@ namespace BlackHoleGame.Script
                                 },
                                 () =>
                                 {
-                                    Debug.Log("视频广告播放失败");
+                                    // Debug.Log("视频广告播放失败");
                                     anim.ShowHints(anim.videoHintsText);
                                 });
                         }));
@@ -415,7 +415,7 @@ namespace BlackHoleGame.Script
             if (image.color != Color.white)
             {
                 gameCon.skinMoneyNum = skinNeedMoney[num - 1];
-                Debug.Log(gameCon.skinMoneyNum);
+                // Debug.Log(gameCon.skinMoneyNum);
                 if (moneyTextNum < gameCon.skinMoneyNum)
                 {
                     anim.ShowHints(anim.moneyHintsText);
@@ -441,7 +441,7 @@ namespace BlackHoleGame.Script
         public void TrySelectSkin()
         {
             var go = EventSystem.current.currentSelectedGameObject.transform;
-            Debug.Log(go.name);
+            // Debug.Log(go.name);
         }
 
         /// <summary>

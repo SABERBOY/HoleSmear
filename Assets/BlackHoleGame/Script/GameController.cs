@@ -149,7 +149,7 @@ namespace BlackHoleGame.Script
         {
             if (Shape.shapeList.Count == 0 && isWin == false && isDie == false)
             {
-                ShowBlock(DataController.sceneNum % 3 != 2);
+                ShowBlock(DataController.sceneNum % 3 == 1);
                 /*if (DataController.sceneNum % 3 == 2)
             {u
                 ShowBlock();
@@ -286,7 +286,7 @@ namespace BlackHoleGame.Script
             var num = int.Parse(UI.levelNum.text);
             DataController.bigLevel = (num - 1) / 3;
             DataController.sceneNum = num - 1;
-            Debug.Log("DataController.bigLevel:" + DataController.bigLevel);
+            // Debug.Log("DataController.bigLevel:" + DataController.bigLevel);
         }
 
         /// <summary>

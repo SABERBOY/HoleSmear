@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -24,6 +25,8 @@ namespace BlackHoleGame.Script
         [FormerlySerializedAs("_rightButton")] [SerializeField]
         private Button rightButton;
 
+        [SerializeField] private Sprite[] skins;
+
         [SerializeField] private Transform noThanksButton;
         private int randomSkinIndex = -1;
 
@@ -40,6 +43,8 @@ namespace BlackHoleGame.Script
             this.leftButton.onClick.AddListener(this.OnLeftButtonClick);
             this.rightButton.onClick.AddListener(this.OnRightButtonClick);
             this.noThanksButton.GetComponent<Button>().onClick.AddListener(this.OnNoThanksButtonClick);
+            // this.skinRawImageTransform.DOLocalRotate(new Vector3(0, 0, -360), 1f, RotateMode.FastBeyond360)
+            //     .SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
         }
 
         private void OnNoThanksButtonClick()
@@ -49,31 +54,43 @@ namespace BlackHoleGame.Script
 
         private void OnRightButtonClick()
         {
-            Debug.Log("OnRightButtonClick");
+            // Debug.Log("OnRightButtonClick");
         }
 
         private void OnLeftButtonClick()
         {
-            Debug.Log("OnLeftButtonClick");
+            // Debug.Log("OnLeftButtonClick");
         }
 
         private void OnSelectButtonClick()
         {
-            Debug.Log("OnSelectButtonClick");
+            // Debug.Log("OnSelectButtonClick");
             NativeConnect.Connect.ShowVideo((() =>
                 {
-                    Debug.Log("OnRightButtonClick ShowVideo success");
+                    // Debug.Log("OnRightButtonClick ShowVideo success");
                     Hole.instance.SetSkin(this.randomSkinIndex);
                     this.OnCloseButtonClick();
                 }),
-                () => { Debug.Log("OnRightButtonClick ShowVideo error"); });
+                () =>
+                {
+                    // Debug.Log("OnRightButtonClick ShowVideo error");
+                });
         }
 
         public void Show()
         {
+            this.noThanksButton.gameObject.SetActive(false);
             this.gameObject.SetActive(true);
             this.randomSkinIndex = Random.Range(0, HoleSkinLoadManager.SkinLength);
-            FXSelectManager.Instance.SpawnFXWithIndex(this.randomSkinIndex);
+            // FXSelectManager.Instance.SpawnFXWithIndex(this.randomSkinIndex);
+            /*if (HoleSkinLoadManager.GetSkinUI(this.randomSkinIndex, out var skinUI))
+            {
+                this.skinRawImageTransform.GetComponent<Image>().sprite = skinUI;
+                // this.skinRawImageTransform.DOKill();
+                // this.skinRawImageTransform.localRotation = Quaternion.Euler(0, 0, 0);
+            }*/
+            this.skinRawImageTransform.GetComponent<Image>().sprite = this.skins[this.randomSkinIndex];
+
             Invoke(nameof(ShowNoThanksButton), 3f);
         }
 

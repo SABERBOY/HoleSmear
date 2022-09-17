@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using SDK;
 using UnityEngine;
+using Random = UnityEngine.Random;
 #if UNITY_IOS
 using System.Runtime.InteropServices; //引入此程序集可以调用IOS代码了
 #endif
@@ -325,8 +326,11 @@ namespace BlackHoleGame.Script
                 adPos = left_top;
             }
 
-            var hight = 400;
-            if (adPos.y != 0) hight = (int)(Screen.height - adPos.y);
+            Debug.Log("Screen.width:" + Screen.width + " Screen.height:" + Screen.height);
+            // int[] pos = { 0, Screen.height / 1, Screen.height / 2, Screen.height / 3 };
+            var hight = 0;
+            // if (adPos.y != 0) hight = (int)(Screen.height - adPos.y);
+            // Debug.Log("ShowFloatingWindow: " + show + " " + hight);
             SdkSystem.Instance.ShowFloatingWindow(show, hight);
         }
     }

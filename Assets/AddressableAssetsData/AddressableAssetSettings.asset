@@ -89,6 +89,7 @@ MonoBehaviour:
     - materials
     - textures
     - ui
+    - skinUI
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 2d46948140e1bac409a0501522cf8cbf, type: 2}

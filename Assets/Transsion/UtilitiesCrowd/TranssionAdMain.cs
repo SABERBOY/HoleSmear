@@ -26,17 +26,19 @@ namespace Transsion.UtilitiesCrowd
 
         public static void Init()
         {
-            // AdHelper.init("4D617A80F25BE57BF11002FB22B39D7D");
+            // Debug.Log("TranssionAdMain Init");
+            // AdHelper.init("83C0EECDFE32F56622BF2A7B4C6A0AEF");
             AdHelper.init(null);
             LoadFloat();
-            LoadInterstitial();
-            LoadReward();
-            _bannerAd = new BannerAd();
+            // LoadInterstitial();
+            // LoadReward();
+            // _bannerAd = new BannerAd();
             CrowdGameAnalytics.EventAppStart();
         }
 
         public static void LoadFloat()
         {
+            // Debug.Log("LoadFloat");
             _floatAd = new FloatAd();
         }
 
@@ -72,7 +74,7 @@ namespace Transsion.UtilitiesCrowd
 
         public static void ShowBanner()
         {
-            _bannerAd.Show(0,0,0);
+            _bannerAd.Show(0, 0, 0);
         }
 
         public static void CloseBanner()
@@ -85,35 +87,36 @@ namespace Transsion.UtilitiesCrowd
     {
         public FloatAd()
         {
+            // Debug.Log(" FloatAd load   ");
             this.IsLoaded = false;
             AdHelper.loadFloat(this);
         }
 
         public void onAdFailedToLoad(REASON reason, string message)
         {
-            Debug.Log($"{nameof(FloatAd)} onAdFailedToLoad:{reason},{message}");
+            // Debug.Log($"{nameof(FloatAd)} onAdFailedToLoad:{reason},{message}");
         }
 
         public void onAdLoaded()
         {
             this.IsLoaded = true;
-            Debug.Log($"{nameof(FloatAd)} onAdLoaded!");
+            // Debug.Log($"{nameof(FloatAd)} onAdLoaded!");
         }
 
         public void onShow()
         {
-            Debug.Log($"{nameof(FloatAd)} onShow!");
+            // Debug.Log($"{nameof(FloatAd)} onShow!");
         }
 
         public void onClose()
         {
-            Debug.Log($"{nameof(FloatAd)} onClose!");
+            // Debug.Log($"{nameof(FloatAd)} onClose!");
             this.IsLoaded = false;
         }
 
         public void onShowFailed(REASON reason, string message)
         {
-            Debug.Log($"{nameof(FloatAd)} onShowFailed:{reason},{message}");
+            // Debug.Log($"{nameof(FloatAd)} onShowFailed:{reason},{message}");
             this.IsLoaded = false;
         }
 
@@ -127,7 +130,7 @@ namespace Transsion.UtilitiesCrowd
         public void Show(int startMargin, int endMargin, int bottomMargin)
         {
             // if (this.CanShow)
-            AdHelper.showFloat(this, startMargin, endMargin, bottomMargin,AdHelper.Horizon.HORIZ_MODEL_LEFT);
+            AdHelper.showFloat(this, startMargin, endMargin, bottomMargin);
         }
 
         public void Hide()
@@ -150,31 +153,31 @@ namespace Transsion.UtilitiesCrowd
         public void onAdFailedToLoad(REASON reason, string message)
         {
             this.IsLoaded = false;
-            Debug.Log($"{nameof(InterstitialAd)} onAdFailedToLoad:{reason},{message}");
+            // Debug.Log($"{nameof(InterstitialAd)} onAdFailedToLoad:{reason},{message}");
         }
 
         public void onAdLoaded()
         {
             this.IsLoaded = true;
-            Debug.Log($"{nameof(InterstitialAd)} onAdLoaded!");
+            // Debug.Log($"{nameof(InterstitialAd)} onAdLoaded!");
         }
 
         public void onShow()
         {
-            Debug.Log($"{nameof(InterstitialAd)} onShow!");
+            // Debug.Log($"{nameof(InterstitialAd)} onShow!");
         }
 
         public void onClose()
         {
             this.IsLoaded = false;
-            Debug.Log($"{nameof(InterstitialAd)} onClose!");
+            // Debug.Log($"{nameof(InterstitialAd)} onClose!");
             this._success?.Invoke();
         }
 
         public void onShowFailed(REASON reason, string message)
         {
             this.IsLoaded = false;
-            Debug.Log($"{nameof(InterstitialAd)} onShowFailed:{reason},{message}");
+            // Debug.Log($"{nameof(InterstitialAd)} onShowFailed:{reason},{message}");
             this._fail?.Invoke();
         }
 
@@ -212,35 +215,35 @@ namespace Transsion.UtilitiesCrowd
         public void onAdFailedToLoad(REASON reason, string message)
         {
             this.IsLoaded = false;
-            Debug.Log($"{nameof(RewardAd)} onAdFailedToLoad:{reason},{message}");
+            // Debug.Log($"{nameof(RewardAd)} onAdFailedToLoad:{reason},{message}");
         }
 
         public void onAdLoaded()
         {
             this.IsLoaded = true;
-            Debug.Log($"{nameof(RewardAd)} onAdLoaded!");
+            // Debug.Log($"{nameof(RewardAd)} onAdLoaded!");
         }
 
         public void onShow()
         {
-            Debug.Log($"{nameof(RewardAd)} onShow!");
+            // Debug.Log($"{nameof(RewardAd)} onShow!");
         }
 
         public void onClose()
         {
-            Debug.Log($"{nameof(RewardAd)} onClose!");
+            // Debug.Log($"{nameof(RewardAd)} onClose!");
         }
 
         public void onShowFailed(REASON reason, string message)
         {
             this.IsLoaded = false;
-            Debug.Log($"{nameof(RewardAd)} onShowFailed:{reason},{message}");
+            // Debug.Log($"{nameof(RewardAd)} onShowFailed:{reason},{message}");
             this._fail?.Invoke();
         }
 
         public void onUserEarnedReward(int amount, string type)
         {
-            Debug.Log($"{nameof(RewardAd)} onUserEarnedReward:{amount},{type}");
+            // Debug.Log($"{nameof(RewardAd)} onUserEarnedReward:{amount},{type}");
             this._success?.Invoke();
             this.IsLoaded = false;
         }
@@ -357,7 +360,7 @@ namespace Transsion.UtilitiesCrowd
 
         public static void StartPurchase(string productId, Action success = null, Action fail = null)
         {
-            Debug.Log($"{productId}");
+            // Debug.Log($"{productId}");
 #if UNITY_EDITOR
             success?.Invoke();
 #elif UNITY_ANDROID && !UNITY_EDITOR

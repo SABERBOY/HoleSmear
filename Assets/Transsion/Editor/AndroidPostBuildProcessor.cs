@@ -13,7 +13,7 @@ namespace Transsion.Editor
 
         void IPostGenerateGradleAndroidProject.OnPostGenerateGradleAndroidProject(string path)
         {
-            Debug.Log("Bulid path : " + path);
+            // Debug.Log("Bulid path : " + path);
 
             path = path.Replace("unityLibrary", "launcher");
             var googleConfig = path + "/google-services.json";

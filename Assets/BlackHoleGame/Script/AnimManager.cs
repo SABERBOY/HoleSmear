@@ -318,7 +318,7 @@ namespace BlackHoleGame.Script
             giftButton2.enabled = false;
             // if (NativeConnect.Connect.VideoState)
             {
-                Debug.Log($"SPIN:{DataController.sceneNum % 3 == 2}");
+                // Debug.Log($"SPIN:{DataController.sceneNum % 3 == 2}");
                 NativeConnect.Connect.showVideo("Rvdoublediamond", delegate(string str)
                 {
                     if (str.Equals("True"))

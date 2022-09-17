@@ -30,9 +30,8 @@ namespace SDK
         public void Init()
         {
 #if TRANSSIONAD
-            Debug.Log($"{nameof(TranssionSDK)} Init");
             TranssionAdMain.Init();
-            this.ShowBanner(true);
+            // this.ShowBanner(true);
 #endif
 #if UNITY_EDITOR
 #else

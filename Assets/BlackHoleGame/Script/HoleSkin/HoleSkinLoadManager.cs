@@ -16,6 +16,7 @@ namespace BlackHoleGame.Script
     {
         private static int _skinLength;
         private const string SKIN_NAME = "skin";
+        private const string SKIN_UI_NAME = "skin";
 
         public static int SkinLength
         {
@@ -45,7 +46,7 @@ namespace BlackHoleGame.Script
             foreach (var sprite in loadedSprites)
             {
                 // AllSprites.Add(sprite.name, sprite);
-                Debug.Log(sprite);
+                // Debug.Log(sprite);
             }
         }
 
@@ -72,11 +73,47 @@ namespace BlackHoleGame.Script
             {
                 Addressables.Release(op);
             }*/
+            yield return PreLoadSkinUI<Sprite>("skinUI", (handles =>
+            {
+                foreach (var o in handles)
+                {
+                    SkinUIList.Add(o.Key, o.Value.Result);
+                }
+            }));
+            ready?.Invoke(oList);
+        }
+
+        public static IEnumerator PreLoadSkinUI
+            <T>(string assetLabel, Action<Dictionary<string, AsyncOperationHandle<T>>> ready)
+            where T : Object
+        {
+            var locations = Addressables.LoadResourceLocationsAsync(assetLabel, typeof(T));
+            yield return locations;
+            // SkinLength = locations.Result.Count;
+            Dictionary<string, AsyncOperationHandle<T>> oList = new Dictionary<string, AsyncOperationHandle<T>>();
+            var loadOps = new List<AsyncOperationHandle>(locations.Result.Count);
+            foreach (IResourceLocation location in locations.Result)
+            {
+                AsyncOperationHandle<T> handle =
+                    Addressables.LoadAssetAsync<T>(location);
+                handle.Completed += obj => { oList.Add(location.PrimaryKey, obj); };
+                loadOps.Add(handle);
+            }
+
+            yield return Addressables.ResourceManager.CreateGenericGroupOperation(loadOps, true);
+            Addressables.Release(locations);
+            /*foreach (var op in loadOps)
+            {
+                Addressables.Release(op);
+            }*/
             ready?.Invoke(oList);
         }
 
         private static readonly Dictionary<string, GameObject> ObjectsList =
             new Dictionary<string, GameObject>();
+
+        private static readonly Dictionary<string, Sprite> SkinUIList =
+            new Dictionary<string, Sprite>();
 
         public static bool GetSkin(int index, out GameObject skin)
         {
@@ -92,6 +129,19 @@ namespace BlackHoleGame.Script
 
             return false;
         }
+        
+        public static bool GetSkinUI(int index, out Sprite skin)
+        {
+            skin = null;
+            string uiName = $"{SKIN_UI_NAME}{index}";
+            if (SkinUIList.ContainsKey(uiName))
+            {
+                skin = SkinUIList[uiName];
+                return true;
+            }
+
+            return false;
+        }
 
         public static void AddSkin(Dictionary<string, AsyncOperationHandle<GameObject>> oList)
         {
@@ -100,7 +150,7 @@ namespace BlackHoleGame.Script
                 ObjectsList.Add(o.Key, o.Value.Result);
             }
 
-            Debug.Log(ObjectsList.Count);
+            // Debug.Log(ObjectsList.Count);
         }
     }
 }

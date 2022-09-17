@@ -72,7 +72,7 @@ public class AdHelper
     //
     public static void TestCallAndroid2Unity()
     {
-        Debug.Log("TestCallAndroid2Unity");
+        // Debug.Log("TestCallAndroid2Unity");
         _androidObject.Call("testCallback");
     }
     //
@@ -140,6 +140,7 @@ public class AdHelper
     public static void showFloat(ShowListener listener, int startMargin, int endMargin, int bottomMargin,
         Horizon horizMode = Horizon.HORIZ_MODEL_CENTER, bool showWhenLoaded = true)
     {
+        // Debug.Log("showFloat _androidObject:" + _androidObject);
         _instance.showListeners[(int)AdType.AD_FLOAT - 1] = listener;
         _androidObject.Call("showFloat", startMargin, endMargin, bottomMargin, (int)horizMode, showWhenLoaded);
     }
@@ -149,6 +150,7 @@ public class AdHelper
      */
     public static void closeFloat()
     {
+        // Debug.Log("closeFloat _androidObject:" + _androidObject);
         _androidObject.Call("closeFloat");
     }
 
@@ -163,6 +165,7 @@ public class AdHelper
      */
     public static void loadFloat(LoadListener listener)
     {
+        // Debug.Log("loadFloat _androidObject:" + _androidObject);
         _androidObject.Call("loadAd", (int)AdType.AD_FLOAT);
         _instance.loadListeners[(int)AdType.AD_FLOAT - 1] = listener;
     }
