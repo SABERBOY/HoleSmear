@@ -16,6 +16,8 @@ namespace BlackHoleGame.Script
         [FormerlySerializedAs("_skinRawImageTransform")] [SerializeField]
         private Transform skinRawImageTransform;
 
+        [SerializeField] private RawImage skinRawImage;
+
         [FormerlySerializedAs("_selectButton")] [SerializeField]
         private Button selectButton;
 
@@ -141,6 +143,7 @@ namespace BlackHoleGame.Script
 
         public static IEnumerator Show()
         {
+            NativeConnect.Connect.ShowFloatingWindow(false);
             var path = AssetReferenceManager.Instance.HoleSkinSelectPanel.AssetGUID;
             if (_skinDict.ContainsKey(path))
             {

@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,6 +34,51 @@ namespace BlackHoleGame.Script
             SaveRenderTexture(rt, Application.dataPath + $"/../{index}.png");
             camera.targetTexture = prev;
             Object.DestroyImmediate(rt);
+        }
+
+        public static void SpriteToPNG(Sprite sprite, string path)
+        {
+            var tex = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height, TextureFormat.ARGB32, false);
+            var pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
+                (int)sprite.textureRect.y,
+                (int)sprite.textureRect.width,
+                (int)sprite.textureRect.height);
+            tex.SetPixels(pixels);
+            tex.Apply();
+            var bytes = tex.EncodeToPNG();
+            System.IO.File.WriteAllBytes(path, bytes);
+            AssetDatabase.ImportAsset(path);
+            Debug.Log($"Saved texture: {tex.width}x{tex.height} - " + path);
+        }
+
+        // select sprite and save to png
+
+        // [MenuItem("Assets/PS")]
+        public static void SpriteToPNG()
+        {
+            var sprite = (Selection.activeObject as GameObject)?.GetComponent<SpriteRenderer>().sprite;
+            if (sprite != null)
+            {
+                var path = EditorUtility.SaveFilePanel("Save Sprite to PNG", "", sprite.name, "png");
+                SpriteToPNG(sprite, path);
+            }
+        }
+
+        public static string GetSelectedPathOrFallback()
+        {
+            string path = "Assets";
+
+            foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
+            {
+                path = AssetDatabase.GetAssetPath(obj);
+                if (!string.IsNullOrEmpty(path) && File.Exists(path))
+                {
+                    path = Path.GetDirectoryName(path);
+                    break;
+                }
+            }
+
+            return path;
         }
     }
 }

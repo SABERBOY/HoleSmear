@@ -237,13 +237,11 @@ namespace SDK
 
         public void ShowFloatingWindow(bool show, int hight)
         {
-            // Debug.Log("ShowFloatingWindow:" + show);
 #if TRANSSIONAD
             // if (!RemoteConfig.Instance.IsMagic)
             {
                 if (this.transsionSDK is TranssionSDK sdk)
                 {
-                    // Debug.Log("ShowFloatingWindow:" + show);
                     sdk.ShowFloatingWindow(show, 0, 0, hight);
                 }
             }

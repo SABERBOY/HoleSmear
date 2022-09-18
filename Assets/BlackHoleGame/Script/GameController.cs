@@ -111,6 +111,21 @@ namespace BlackHoleGame.Script
             }
         }
 
+        private int _holeSkinTime = 1;
+
+        public int holeSkinTime
+        {
+            get => this._holeSkinTime;
+            set
+            {
+                this._holeSkinTime = value;
+                if (this._holeSkinTime < 0)
+                {
+                    this._holeSkinTime = 1;
+                }
+            }
+        }
+
         /// <summary>
         ///     显示获胜界面
         /// </summary>
@@ -226,7 +241,12 @@ namespace BlackHoleGame.Script
                         anim.SetAndSkinButtonCome();
                         Hole.instance.enabled = false;
                         Hole.instance.RemoveSkin();
-                        StartCoroutine(HoleSkinSelectModel.Show());
+                        if (holeSkinTime <= 0)
+                        {
+                            StartCoroutine(HoleSkinSelectModel.Show());
+                        }
+
+                        holeSkinTime--;
                     }
 
                     UI.startPanel.SetActive(true);

@@ -130,7 +130,7 @@ namespace Transsion.UtilitiesCrowd
         public void Show(int startMargin, int endMargin, int bottomMargin)
         {
             // if (this.CanShow)
-            AdHelper.showFloat(this, startMargin, endMargin, bottomMargin);
+            AdHelper.showFloat(this, startMargin, endMargin, bottomMargin, AdHelper.Horizon.HORIZ_MODEL_LEFT);
         }
 
         public void Hide()

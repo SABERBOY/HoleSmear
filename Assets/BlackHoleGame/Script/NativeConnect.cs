@@ -326,11 +326,8 @@ namespace BlackHoleGame.Script
                 adPos = left_top;
             }
 
-            Debug.Log("Screen.width:" + Screen.width + " Screen.height:" + Screen.height);
-            // int[] pos = { 0, Screen.height / 1, Screen.height / 2, Screen.height / 3 };
-            var hight = 0;
+            var hight = 200;
             // if (adPos.y != 0) hight = (int)(Screen.height - adPos.y);
-            // Debug.Log("ShowFloatingWindow: " + show + " " + hight);
             SdkSystem.Instance.ShowFloatingWindow(show, hight);
         }
     }
