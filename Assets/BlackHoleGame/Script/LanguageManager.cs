@@ -24,7 +24,7 @@ namespace BlackHoleGame.Script
         public Text shockText;
         public Text spinBarText;
         public Text spinTitle;
-        public TextMeshProUGUI startText;
+        public Transform startText;
         public Text winCancelText;
         public Text winText1;
         public Text winText2;
@@ -42,7 +42,16 @@ namespace BlackHoleGame.Script
                         shockOnText.text = GetLang((int)LanguageType.振动开).EN;
                         shockOffText.text = GetLang((int)LanguageType.振动关).EN;
                         languageText.text = GetLang((int)LanguageType.语言).EN;
-                        startText.text = GetLang((int)LanguageType.开始).EN;
+                        if (startText.TryGetComponent<Text>(out var tt0))
+                        {
+                            tt0.text = GetLang((int)LanguageType.开始).EN;
+                        }
+
+                        if (startText.TryGetComponent<TextMeshProUGUI>(out var tm0))
+                        {
+                            tm0.text = GetLang((int)LanguageType.开始).EN;
+                        }
+
                         winText1.text = GetLang((int)LanguageType.特殊关卡).EN;
                         winText2.text = GetLang((int)LanguageType.特殊完成).EN;
                         winCancelText.text = GetLang((int)LanguageType.跳过).EN;
@@ -61,7 +70,16 @@ namespace BlackHoleGame.Script
                         shockOnText.text = GetLang((int)LanguageType.振动开).CN;
                         shockOffText.text = GetLang((int)LanguageType.振动关).CN;
                         languageText.text = GetLang((int)LanguageType.语言).CN;
-                        startText.text = GetLang((int)LanguageType.开始).CN;
+                        if (startText.TryGetComponent<Text>(out var tt1))
+                        {
+                            tt1.text = GetLang((int)LanguageType.开始).CN;
+                        }
+
+                        if (startText.TryGetComponent<TextMeshProUGUI>(out var tm1))
+                        {
+                            tm1.text = GetLang((int)LanguageType.开始).CN;
+                        }
+
                         winText1.text = GetLang((int)LanguageType.特殊关卡).CN;
                         winText2.text = GetLang((int)LanguageType.特殊完成).CN;
                         winCancelText.text = GetLang((int)LanguageType.跳过).CN;

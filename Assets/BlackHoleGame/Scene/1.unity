@@ -6968,7 +6968,7 @@ MonoBehaviour:
   shockText: {fileID: 1705540535}
   spinBarText: {fileID: 957257449}
   spinTitle: {fileID: 456146065}
-  startText: {fileID: 1991578986}
+  startText: {fileID: 1991578985}
   winCancelText: {fileID: 480488789}
   winText1: {fileID: 1938906464}
   winText2: {fileID: 1512959475}
@@ -20470,7 +20470,7 @@ Canvas:
   m_GameObject: {fileID: 2079926384}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 657672486}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -20490,8 +20490,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079926384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalScale: {x: 0.060140654, y: 0.060140654, z: 0.060140654}
   m_Children:
   - {fileID: 204044733}
   - {fileID: 1824526924}
@@ -20501,8 +20501,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 1080, y: 1920}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079926390
 MonoBehaviour:
   m_ObjectHideFlags: 0
