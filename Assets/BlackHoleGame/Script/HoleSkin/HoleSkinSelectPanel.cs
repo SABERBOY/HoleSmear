@@ -30,7 +30,7 @@ namespace BlackHoleGame.Script
         [SerializeField] private Sprite[] skins;
 
         [SerializeField] private Transform noThanksButton;
-        private int randomSkinIndex = -1;
+        private string randomSkinIndex = string.Empty;
 
         private void Start()
         {
@@ -83,16 +83,8 @@ namespace BlackHoleGame.Script
         {
             this.noThanksButton.gameObject.SetActive(false);
             this.gameObject.SetActive(true);
-            this.randomSkinIndex = Random.Range(0, HoleSkinLoadManager.SkinLength);
-            // FXSelectManager.Instance.SpawnFXWithIndex(this.randomSkinIndex);
-            /*if (HoleSkinLoadManager.GetSkinUI(this.randomSkinIndex, out var skinUI))
-            {
-                this.skinRawImageTransform.GetComponent<Image>().sprite = skinUI;
-                // this.skinRawImageTransform.DOKill();
-                // this.skinRawImageTransform.localRotation = Quaternion.Euler(0, 0, 0);
-            }*/
-            this.skinRawImageTransform.GetComponent<Image>().sprite = this.skins[this.randomSkinIndex];
-
+            this.randomSkinIndex =HoleSkinLoadManager.GetRandomSkin();
+            FXSelectManager.Instance.SpawnFXWithIndex(this.randomSkinIndex);
             Invoke(nameof(ShowNoThanksButton), 3f);
         }
 
@@ -103,6 +95,7 @@ namespace BlackHoleGame.Script
 
         private void OnCloseButtonClick()
         {
+            // NativeConnect.Connect.ShowFloatingWindow(false);
             this.gameObject.SetActive(false);
             this.noThanksButton.gameObject.SetActive(false);
             FXSelectManager.Instance.HideAllFX();
@@ -143,7 +136,7 @@ namespace BlackHoleGame.Script
 
         public static IEnumerator Show()
         {
-            NativeConnect.Connect.ShowFloatingWindow(false);
+            // NativeConnect.Connect.ShowFloatingWindow(true);
             var path = AssetReferenceManager.Instance.HoleSkinSelectPanel.AssetGUID;
             if (_skinDict.ContainsKey(path))
             {

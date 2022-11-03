@@ -7,9 +7,9 @@ namespace BlackHoleGame.Script
     public class FXSelectManager : MMPersistentSingleton<FXSelectManager>
     {
         [SerializeField] private Transform fxParent;
-        private Dictionary<int, GameObject> _skinDict = new Dictionary<int, GameObject>();
+        private Dictionary<string, GameObject> _skinDict = new Dictionary<string, GameObject>();
 
-        public void SpawnFXWithIndex(int index)
+        public void SpawnFXWithIndex(string index)
         {
             if (_skinDict.ContainsKey(index))
             {

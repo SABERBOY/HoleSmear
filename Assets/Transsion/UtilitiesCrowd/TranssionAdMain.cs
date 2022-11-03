@@ -130,7 +130,7 @@ namespace Transsion.UtilitiesCrowd
         public void Show(int startMargin, int endMargin, int bottomMargin)
         {
             // if (this.CanShow)
-            AdHelper.showFloat(this, startMargin, endMargin, bottomMargin, AdHelper.Horizon.HORIZ_MODEL_LEFT);
+            AdHelper.showFloat(this, startMargin, endMargin, bottomMargin);
         }
 
         public void Hide()
@@ -314,7 +314,7 @@ namespace Transsion.UtilitiesCrowd
         private static readonly string GameAnalyticsClass = "com.transsion.game.analytics.GameAnalytics";
         private static AndroidJavaClass _androidJavaClass;
 
-        private static AndroidJavaClass AndroidJavaClass
+        private static AndroidJavaClass AndroidJavaGameAnalyticsClass
         {
             get
             {
@@ -329,20 +329,21 @@ namespace Transsion.UtilitiesCrowd
 
         public void Track(params object[] args)
         {
+            Debug.Log("Track:" + args[0]+","+AndroidJavaGameAnalyticsClass);
 #if UNITY_ANDROID
             if (args.Length >= 3)
             {
-                AndroidJavaClass.CallStatic("tracker", args[0], args[1], args[2]);
+                AndroidJavaGameAnalyticsClass.CallStatic("tracker", args[0], args[1], args[2]);
             }
             else
             {
                 switch (args.Length)
                 {
                     case 2:
-                        AndroidJavaClass.CallStatic("tracker", args[0], args[1], string.Empty);
+                        AndroidJavaGameAnalyticsClass.CallStatic("tracker", args[0], args[1], string.Empty);
                         break;
                     case 1:
-                        AndroidJavaClass.CallStatic("tracker", args[0], string.Empty, string.Empty);
+                        AndroidJavaGameAnalyticsClass.CallStatic("tracker", args[0], string.Empty, string.Empty);
                         break;
                     default:
                         Debug.LogWarning($"args is empty!!");

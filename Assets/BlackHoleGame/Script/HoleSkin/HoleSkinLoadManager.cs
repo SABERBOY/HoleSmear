@@ -9,6 +9,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace BlackHoleGame.Script
 {
@@ -115,21 +116,25 @@ namespace BlackHoleGame.Script
         private static readonly Dictionary<string, Sprite> SkinUIList =
             new Dictionary<string, Sprite>();
 
-        public static bool GetSkin(int index, out GameObject skin)
+        public static bool GetSkin(string index, out GameObject skin)
         {
             skin = null;
-            string prefabName = $"{SKIN_NAME}{index}";
-            List<string> objectList = ObjectsList.Keys.ToList();
-            var enumerable = objectList.FindAll((s => s.Contains(prefabName))).ToList();
-            if (enumerable.Count > 0)
+            if (ObjectsList.TryGetValue(index, out skin))
             {
-                skin = ObjectsList[enumerable[0]];
                 return true;
             }
 
             return false;
         }
-        
+
+        public static string GetRandomSkin()
+        {
+            List<string> objectList = ObjectsList.Keys.ToList();
+            return Random.Range(0, objectList.Count) < objectList.Count
+                ? objectList[Random.Range(0, objectList.Count)]
+                : objectList[0];
+        }
+
         public static bool GetSkinUI(int index, out Sprite skin)
         {
             skin = null;
@@ -147,10 +152,10 @@ namespace BlackHoleGame.Script
         {
             foreach (var o in oList)
             {
-                ObjectsList.Add(o.Key, o.Value.Result);
+                ObjectsList[o.Key] = o.Value.Result;
             }
 
-            // Debug.Log(ObjectsList.Count);
+            Debug.Log(ObjectsList.Count);
         }
     }
 }

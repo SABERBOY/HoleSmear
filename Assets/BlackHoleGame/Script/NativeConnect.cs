@@ -311,6 +311,10 @@ namespace BlackHoleGame.Script
         public void ShowFloatingWindow(bool show, RectTransform rectTrans = null)
         {
             var adPos = Vector2.zero;
+            if (rectTrans==null)
+            {
+                rectTrans=UIController.instance.floatTransform;
+            }
             if (rectTrans)
             {
                 var cam = rectTrans.root.GetComponentInChildren<Canvas>().worldCamera;
@@ -326,8 +330,9 @@ namespace BlackHoleGame.Script
                 adPos = left_top;
             }
 
-            var hight = 200;
-            // if (adPos.y != 0) hight = (int)(Screen.height - adPos.y);
+            var hight = 450;
+            if (adPos.y != 0) hight = (int)(Screen.height - adPos.y);
+            Debug.Log(Screen.height + "  " + adPos.y + "  " + hight);
             SdkSystem.Instance.ShowFloatingWindow(show, hight);
         }
     }

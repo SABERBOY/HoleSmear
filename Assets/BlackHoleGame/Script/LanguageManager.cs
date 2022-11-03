@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ namespace BlackHoleGame.Script
         public Text shockText;
         public Text spinBarText;
         public Text spinTitle;
-        public Text startText;
+        public TextMeshProUGUI startText;
         public Text winCancelText;
         public Text winText1;
         public Text winText2;

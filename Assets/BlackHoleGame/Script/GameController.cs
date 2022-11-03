@@ -60,7 +60,7 @@ namespace BlackHoleGame.Script
                 {
                     Hole.instance.StopMove();
                     anim.DieSnake();
-                    NativeConnect.Connect.ShowFloatingWindow(true);
+                    // NativeConnect.Connect.ShowFloatingWindow(true);
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace BlackHoleGame.Script
                             break;
                     }
 
-                    NativeConnect.Connect.ShowFloatingWindow(true);
+                    // NativeConnect.Connect.ShowFloatingWindow(true);
                 }
                 else
                 {
@@ -245,6 +245,8 @@ namespace BlackHoleGame.Script
                         {
                             StartCoroutine(HoleSkinSelectModel.Show());
                         }
+
+                        // StartCoroutine(HoleSkinSelectModel.Show());
 
                         holeSkinTime--;
                     }

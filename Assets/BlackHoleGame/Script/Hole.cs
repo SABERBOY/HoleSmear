@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using static BlackHoleGame.Script.HoleSkinLoadManager;
 
 namespace BlackHoleGame.Script
@@ -55,7 +57,7 @@ namespace BlackHoleGame.Script
             }
         }
 
-        public void SetSkin(int index)
+        public void SetSkin(string index)
         {
             if (GetSkin(index, out var skin))
             {

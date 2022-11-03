@@ -69,7 +69,7 @@ namespace SDK
             }
             else
             {
-                if (mBannerScenes != null) mBannerScenes.reshowBannerAd();
+                if (mBannerScenes != null) mBannerScenes.removeBannerAd();
             }
         }
 

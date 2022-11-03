@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using DG.Tweening;
 using SDK;
+using Transsion.UtilitiesCrowd;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -42,6 +43,7 @@ namespace BlackHoleGame.Script
         public GameObject tick;
         public Button winButton;
         public GameObject winPanel;
+        public RectTransform floatTransform;
 
         /// <summary>
         /// diamond number
@@ -109,7 +111,7 @@ namespace BlackHoleGame.Script
             entry.callback.AddListener(data =>
             {
                 // Debug.Log("Entering");
-                NativeConnect.Connect.ShowFloatingWindow(false);
+                // NativeConnect.Connect.ShowFloatingWindow(false);
                 StartGame();
             });
             trigger.triggers.Add(entry);
@@ -146,6 +148,7 @@ namespace BlackHoleGame.Script
             startPanel.SetActive(false);
             Hole.instance.enabled = true;
             Hole.instance.StartMove();
+            CrowdGameAnalytics.EventLevelBegin(DataController.sceneNum);
         }
 
         private IEnumerator Iefps()
@@ -268,7 +271,8 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void OpenSetPanel()
         {
-            NativeConnect.Connect.showBlock(s => { });
+            // NativeConnect.Connect.showBlock(s => { });
+            NativeConnect.Connect.ShowFloatingWindow(true);
             Hole.instance.enabled = false;
             setPanel.SetActive(true);
         }
@@ -278,6 +282,7 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void CloseSetPanel()
         {
+            NativeConnect.Connect.ShowFloatingWindow(false);
             setPanel.SetActive(false);
             //Hole.instance.enabled = true;
         }
@@ -330,6 +335,7 @@ namespace BlackHoleGame.Script
         public void OpenSkinPanel()
         {
             // NativeConnect.Connect.showBlock(s => { });
+            NativeConnect.Connect.ShowFloatingWindow(true);
             skinMoney.text = diamondText.text;
             Hole.instance.enabled = false;
             for (var i = 0; i < SkinGameObjects.Count; i++)
@@ -402,6 +408,7 @@ namespace BlackHoleGame.Script
         public void CloseSkinPanel()
         {
             skinPanel.SetActive(false);
+            NativeConnect.Connect.ShowFloatingWindow(false);
         }
 
         /// <summary>
@@ -482,6 +489,7 @@ namespace BlackHoleGame.Script
         /// </summary>
         public void ResetAndNext()
         {
+            CrowdGameAnalytics.EventLevelEnd(DataController.sceneNum,true);
             if (this.testSkinIndex != 0)
             {
                 UI.ChangeSkin(PlayerPrefs.GetInt(SceneData.skin));

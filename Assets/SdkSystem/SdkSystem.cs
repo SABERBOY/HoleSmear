@@ -122,6 +122,7 @@ namespace SDK
             // Debug.Log( "ShowFloatingWindow:" + show);
 #if !UNITY_WEBGL && UNITY_ANDROID
             if (_admobSdk is ADMob sdk) sdk?.ShowFloatingWindow(show, hight);
+            this.ShowBanner(!show);
 #endif
         }
 
