@@ -5,7 +5,7 @@ using AnyThinkAds.Common;
 
 using System.Collections;
 using System.Collections.Generic;
-
+#pragma warning disable 0067
 namespace AnyThinkAds
 {
     public class ATAdsClientFactory
@@ -202,6 +202,7 @@ namespace AnyThinkAds
     class UnityInterstitialClient : IATInterstitialAdClient
     {
        ATInterstitialAdListener listener;
+        #pragma warning disable 220
 
         public event EventHandler<ATAdEventArgs> onAdLoadEvent;
         public event EventHandler<ATAdErrorEventArgs> onAdLoadFailureEvent;

@@ -103,12 +103,6 @@
     self.logoImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self addSubview:self.logoImageView];
     
-    self.sponsorImageView = [[UIImageView alloc]init];
-    self.sponsorImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.sponsorImageView.userInteractionEnabled = YES;
-    self.sponsorImageView.translatesAutoresizingMaskIntoConstraints = false;
-    [self addSubview:self.sponsorImageView];
-    
     self.dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dislikeButton.translatesAutoresizingMaskIntoConstraints = false;
     UIImage *closeImg = [UIImage imageNamed:@"icon_webview_close" inBundle:[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"AnyThinkSDK" ofType:@"bundle"]] compatibleWithTraitCollection:nil];
@@ -165,7 +159,7 @@
     
     NSLog(@"🔥----logoUrl:%@",self.nativeAdOffer.nativeAd.logoUrl);
     
-    self.sponsorImageView.image = self.nativeAdOffer.nativeAd.sponsorImage;
+   
     
     self.advertiserLabel.text = self.nativeAdOffer.nativeAd.advertiser;
 
@@ -188,7 +182,7 @@
     self.textLabel.backgroundColor =  [UIColor clearColor];
 }
 -(void) configureMetrics:(NSDictionary *)metrics {
-    NSDictionary<NSString*, UIView*> *views = @{kNativeAssetTitle:_titleLabel, kNativeAssetText:_textLabel, kNativeAssetCta:_ctaLabel, kNativeAssetRating:_ratingLabel, kNativeAssetAdvertiser:_advertiserLabel, kNativeAssetIcon:_iconImageView, kNativeAssetMainImage:_mainImageView, kNativeAssetSponsorImage:_sponsorImageView, kNativeAssetDislike:_dislikeButton};
+    NSDictionary<NSString*, UIView*> *views = @{kNativeAssetTitle:_titleLabel, kNativeAssetText:_textLabel, kNativeAssetCta:_ctaLabel, kNativeAssetRating:_ratingLabel, kNativeAssetAdvertiser:_advertiserLabel, kNativeAssetIcon:_iconImageView, kNativeAssetMainImage:_mainImageView, kNativeAssetDislike:_dislikeButton};
     [views enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         CGRect frame = CGRectFromString(metrics[key][kParsedPropertiesFrameKey]);
         [self addConstraintsWithVisualFormat:[NSString stringWithFormat:@"|-x-[%@(w)]", key] options:0 metrics:@{@"x":@(frame.origin.x), @"w":@(frame.size.width)} views:views];

@@ -6,7 +6,7 @@ using AnyThinkAds.Common;
 using AnyThinkAds.Api;
 using AnyThinkAds.iOS;
 using AnyThinkAds.ThirdParty.LitJson;
-
+#pragma warning disable 0067
 namespace AnyThinkAds.iOS {
 	public class ATNativeAdClient : IATNativeAdClient {
 

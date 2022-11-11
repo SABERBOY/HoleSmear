@@ -13,7 +13,6 @@
 #import <CoreTelephony/CTCarrier.h>
 #import "ATBannerAdWrapper.h"
 #import "ATNativeAdWrapper.h"
-#import "ATNativeBannerAdWrapper.h"
 #import "ATInterstitialAdWrapper.h"
 #import "ATRewardedVideoWrapper.h"
 
@@ -147,7 +146,6 @@ char * at_get_string_message_for_unity(const char *msg, void(*callback)(const ch
 }
 
 -(BOOL) startSDKWithAppID:(NSString*)appID appKey:(NSString*)appKey {
-    [ATAPI setLogEnabled:YES];
     [[ATAPI sharedInstance]setSystemPlatformType:ATSystemPlatformTypeUnity];
     return [[ATAPI sharedInstance] startWithAppID:appID appKey:appKey error:nil];
 }

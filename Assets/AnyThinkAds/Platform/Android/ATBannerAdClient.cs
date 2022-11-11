@@ -5,6 +5,7 @@ using UnityEngine;
 
 using AnyThinkAds.Common;
 using AnyThinkAds.Api;
+#pragma warning disable 0067
 namespace AnyThinkAds.Android
 {
     public class ATBannerAdClient : AndroidJavaProxy, IATBannerAdClient
