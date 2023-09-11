@@ -27,7 +27,7 @@ namespace SDK
         private static SdkSystem _instance = null;
         private ISDK _sdk;
 
-        private ISDK _admobSdk;
+        // private ISDK _admobSdk;
 
         private SdkSystem()
         {
@@ -46,8 +46,8 @@ namespace SDK
 #elif UNITY_ANDROID
             this._sdk = new TopOnSdk();
             this._sdk.Init();
-            _admobSdk = new ADMob();
-            _admobSdk.Init();
+            // _admobSdk = new ADMob();
+            // _admobSdk.Init();
 #elif UNITY_IOS
             // this._sdk = new IOSSDK();
             // this._sdk.Init();
@@ -121,8 +121,8 @@ namespace SDK
         {
             // Debug.Log( "ShowFloatingWindow:" + show);
 #if !UNITY_WEBGL && UNITY_ANDROID
-            if (_admobSdk is ADMob sdk) sdk?.ShowFloatingWindow(show, hight);
-            this.ShowBanner(!show);
+            // if (_admobSdk is ADMob sdk) sdk?.ShowFloatingWindow(show, hight);
+            // this.ShowBanner(!show);
 #endif
         }
 
