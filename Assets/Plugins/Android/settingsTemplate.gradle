@@ -1,0 +1,72 @@
+pluginManagement {
+    repositories {
+        **ARTIFACTORYREPOSITORY**
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+include ':launcher', ':unityLibrary'
+**INCLUDES**
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        **ARTIFACTORYREPOSITORY**
+        google()
+        mavenCentral()
+// Android Resolver Repos Start
+        def unityProjectPath = $/file:///**DIR_UNITYPROJECT**/$.replace("\\", "/")
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" // Assets/AnyThinkAds/Plugins/android/NonChina/mediation/mintegral/Editor/Dependencies.xml:5, Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://artifact.bytedance.com/repository/pangle" // Assets/AnyThinkAds/Plugins/android/NonChina/mediation/pangle/Editor/Dependencies.xml:5, Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://s01.oss.sonatype.org/content/groups/staging/" // Assets/AnyThinkAds/Plugins/android/NonChina/mediation/vungle/Editor/Dependencies.xml:5, Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/public" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/gradle-plugin" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/central" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/google" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://jitpack.io" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://mvn.shalltry.com/repository/maven-public/" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://mvn.shalltry.com/repository/game-releases/" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://mvn.shalltry.com/repository/game-snapshots/" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://mvn.shalltry.com/repository/ad-releases/" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://android-sdk.is.com/" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url "https://anythink.jfrog.io/artifactory/android_sdk" // Assets/Transsion/Editor/Dependencies.xml:18
+        }
+        maven {
+            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22
+        }
+        mavenLocal()
+// Android Resolver Repos End
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
+    }
+}

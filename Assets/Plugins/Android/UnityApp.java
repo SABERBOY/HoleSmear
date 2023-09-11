@@ -59,7 +59,7 @@ public class UnityApp extends Application {
         ATSDK.init(this, appid, appKey);
 
         CoreUtil.init(this);
-        GameAnalytics.init(new GameAnalytics.Builder(this));
+//         GameAnalytics.init(new GameAnalytics.Builder(this));
         AdInitializer.init(
                 new AdInitializer.Builder(this)
                         //开启debuggable，设置测试环境，展示测试广告

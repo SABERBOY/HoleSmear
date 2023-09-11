@@ -1,0 +1,24 @@
+<dependencies>
+    <androidPackages>
+        <repositories>
+            <repository>https://maven.aliyun.com/repository/public</repository>
+            <repository>https://maven.aliyun.com/repository/gradle-plugin</repository>
+            <repository>https://maven.aliyun.com/repository/central</repository>
+            <repository>https://maven.aliyun.com/repository/google</repository>
+            <repository>https://jitpack.io</repository>
+            <repository>https://mvn.shalltry.com/repository/maven-public/</repository>
+            <repository>https://mvn.shalltry.com/repository/game-releases/</repository>
+            <repository>https://mvn.shalltry.com/repository/game-snapshots/</repository>
+            <repository>https://mvn.shalltry.com/repository/ad-releases/</repository>
+            <repository>https://android-sdk.is.com/</repository>
+            <repository>https://anythink.jfrog.io/artifactory/android_sdk</repository>
+            <repository>https://s01.oss.sonatype.org/content/groups/staging/</repository>
+            <repository>https://artifact.bytedance.com/repository/pangle</repository>
+            <repository>https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea</repository>
+        </repositories>
+<!--        <androidPackage spec="com.transsion.game:ad:5.0.0.0"/>-->
+<!--        <androidPackage spec="com.transsion.game:analytics:5.0.0.0"/>-->
+<!--        <androidPackage spec="com.transsion.game.unity:ad:3.5.0.5"/>-->
+<!--        <androidPackage spec="com.transsion.game:refer:4.9.1.1"/>-->
+    </androidPackages>
+</dependencies>
